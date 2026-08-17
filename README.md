@@ -85,6 +85,12 @@ server rules.
 If a vendor, teleport, quest step, or grid is wrong, please open a bug report
 with the zone, entry name, expected result, and a screenshot or exact `!pos`.
 
+## Related projects
+
+- [Nameplate for Ashita 4.30](https://github.com/SmithReact/Nameplate) restores
+  Shirk/BunnyBox Productions' GPL-3.0 nameplate rendering fix for the current
+  Ashita plugin interface.
+
 ## License and attribution
 
 The project is prepared under GPL-3.0 because its generated shop dataset is
