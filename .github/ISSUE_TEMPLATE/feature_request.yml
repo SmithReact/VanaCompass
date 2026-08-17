@@ -1,0 +1,23 @@
+name: Feature request
+description: Suggest a focused improvement to the in-game guide.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: Player need
+      description: What problem would this solve for a player?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Supporting references
+      description: Include current Driftwood behavior or verified game data when applicable.

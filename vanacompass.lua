@@ -1,0 +1,1591 @@
+-- VanaCompass: an in-game discovery guide for DriftwoodXI and Ashita 4.
+
+addon.name    = 'vanacompass';
+addon.author  = 'Unofficial DriftwoodXI community addon';
+addon.version = '0.11.0';
+addon.desc    = 'Find purchases, level-appropriate quests, story missions, job unlocks, and ports.';
+
+require('common');
+
+local chat       = require('chat');
+local imgui      = require('imgui');
+local theme      = require('dwtheme');
+local spellShops = require('data.vendors');
+local shops      = require('data.shops');
+local teleports  = require('data.teleports');
+local questStarts = require('data.quest_starts');
+local missionStarts = require('data.mission_starts');
+
+local QUEST_AREAS = {
+    require('data.quests.sandoria_quests'),
+    require('data.quests.bastok_quests'),
+    require('data.quests.windurst_quests'),
+    require('data.quests.jeuno_quests'),
+    require('data.quests.otherareas_quests'),
+    require('data.quests.outlands_quests'),
+};
+
+local MISSION_AREAS = {
+    require('data.missions.sandoria_missions'),
+    require('data.missions.bastok_missions'),
+    require('data.missions.windurst_missions'),
+    require('data.missions.zilart_missions'),
+};
+
+-- Ordered prerequisite chains for the advanced jobs supported by the current
+-- Driftwood quest data. References use the server's real quest log and id so
+-- active/completed tracker state remains authoritative.
+local JOB_UNLOCK_CHAINS = {
+    { jobId = 7, jobName = 'Paladin', quests = {
+        { 0, 10, grid = 'F-7' }, { 0, 19, grid = 'F-7' }, { 0, 29, grid = 'F-7' },
+    } },
+    { jobId = 8, jobName = 'Dark Knight', quests = { { 1, 28, grid = 'J-7' } } },
+    { jobId = 9, jobName = 'Beastmaster', quests = {
+        { 3, 4, grid = 'G-7' }, { 3, 5, grid = 'G-11' }, { 3, 19, grid = 'G-7' },
+    } },
+    { jobId = 10, jobName = 'Bard', quests = {
+        { 3, 11, grid = 'I-8' }, { 3, 12, grid = 'G-9' }, { 3, 20, grid = 'B-7' },
+    } },
+    { jobId = 11, jobName = 'Ranger', quests = { { 2, 31, grid = 'K-7' } } },
+    { jobId = 12, jobName = 'Samurai', quests = { { 5, 129, grid = 'K-8' } } },
+    { jobId = 13, jobName = 'Ninja', quests = { { 1, 60, grid = 'J-5' } } },
+    {
+        jobId = 14,
+        jobName = 'Dragoon',
+        quests = {
+            {
+                0,
+                93,
+                grid = 'I-9',
+                start = { contact = 'Ceraulian', kind = 'NPC', location = "Port San d'Oria (!pos 0 -8 -122)" },
+                steps = {
+                    { text = 'Speak with Ceraulian in Cargo Room A to hear about the wyvern egg, then find Novalmauge.', pos = "Port San d'Oria (!pos 0 -8 -122)" },
+                    { text = 'Speak with Novalmauge for the history behind the egg.', pos = 'Bostaunieux Oubliette (!pos 30 -24 20)' },
+                    { text = 'Speak with Morjean in the Cathedral manuscript room to formally begin The Holy Crest.', pos = "Northern San d'Oria (!pos 99 0 114)" },
+                    { text = 'Bring Pickaxes to the Maze of Shakhrami and trade one to an Excavation Point until you receive a Wyvern Egg.', pos = 'Maze of Shakhrami' },
+                    { text = 'Return to Morjean with the Wyvern Egg.', pos = "Northern San d'Oria (!pos 99 0 114)" },
+                    { text = "Trade the Wyvern Egg to the ??? at the base of Drogaroga's Spine.", pos = 'Meriphataud Mountains (K-8)' },
+                    { text = 'Speak with Rahal to receive the Dragon Curse Remedy.', pos = "Chateau d'Oraguille (!pos -28 0 -6)" },
+                    { text = 'Examine the Hut Door and defeat Cyranuce M Cutauleon in the battlefield to unlock Dragoon.', pos = 'Ghelsba Outpost (F-10/G-10)' },
+                },
+            },
+        },
+    },
+    { jobId = 15, jobName = 'Summoner', quests = { { 2, 75, grid = 'G-3' } } },
+};
+
+local JOB_UNLOCK_BY_KEY = {};
+for jobOrder, chain in ipairs(JOB_UNLOCK_CHAINS) do
+    for chainStep, reference in ipairs(chain.quests) do
+        reference.jobId = chain.jobId;
+        reference.jobName = chain.jobName;
+        reference.jobOrder = jobOrder;
+        reference.chainStep = chainStep;
+        reference.chainCount = #chain.quests;
+        JOB_UNLOCK_BY_KEY[reference[1] .. ':' .. reference[2]] = reference;
+    end
+end
+
+local PORT_ZONE_ALIASES = {
+    ['Al Zahbi'] = 'Aht Urhgan Whitegate',
+    ['Windurst Waters North'] = 'Windurst Waters',
+    ['Windurst Waters South'] = 'Windurst Waters',
+};
+
+local SLOT_NAMES = {
+    [1] = 'Main', [2] = 'Sub', [3] = 'Ranged', [4] = 'Ammo',
+    [5] = 'Head', [6] = 'Body', [7] = 'Hands', [8] = 'Legs', [9] = 'Feet',
+    [10] = 'Neck', [11] = 'Waist', [12] = 'Ear', [13] = 'Ear',
+    [14] = 'Ring', [15] = 'Ring', [16] = 'Back',
+};
+
+local WEAPON_TYPES = {
+    [1] = 'Hand-to-Hand', [2] = 'Dagger', [3] = 'Sword', [4] = 'Great Sword',
+    [5] = 'Axe', [6] = 'Great Axe', [7] = 'Scythe', [8] = 'Polearm',
+    [9] = 'Katana', [10] = 'Great Katana', [11] = 'Club', [12] = 'Staff',
+    [25] = 'Archery', [26] = 'Marksmanship', [27] = 'Throwing',
+};
+
+local SPELL_TYPES = {
+    [2] = 'White Magic', [3] = 'Black Magic', [4] = 'Summoning',
+    [5] = 'Ninjutsu', [6] = 'Bard Song', [7] = 'Blue Magic',
+    [8] = 'Geomancy',
+};
+
+-- FFXI's labeled town-map cells are 40 world units wide. Vendor records pair
+-- verified grid cells with exact world positions, letting us solve each map's
+-- origin without hard-coding offsets. A calibration is accepted only when at
+-- least two independent anchors agree on both axes; split/multi-map zones fail
+-- that test and intentionally report their grid as unavailable.
+local GRID_CELL_SIZE = 40;
+
+local function buildGridCalibrations()
+    local candidates, seen = {}, {};
+
+    local function collect(catalog)
+        for _, product in pairs(catalog) do
+            for _, vendor in ipairs(product.vendors or {}) do
+                if vendor.zoneId ~= nil and vendor.x ~= nil and vendor.y ~= nil and
+                    vendor.wx ~= nil and vendor.wz ~= nil then
+                    local key = string.format('%d:%.3f:%.3f:%d:%d',
+                        vendor.zoneId, vendor.wx, vendor.wz, vendor.x, vendor.y);
+                    if not seen[key] then
+                        seen[key] = true;
+                        local row = candidates[vendor.zoneId] or {
+                            count = 0,
+                            xLow = -math.huge,
+                            xHigh = math.huge,
+                            zLow = -math.huge,
+                            zHigh = math.huge,
+                        };
+                        row.count = row.count + 1;
+                        row.xLow = math.max(row.xLow, vendor.wx - vendor.x * GRID_CELL_SIZE);
+                        row.xHigh = math.min(row.xHigh, vendor.wx - (vendor.x - 1) * GRID_CELL_SIZE);
+                        row.zLow = math.max(row.zLow, vendor.wz + (vendor.y - 1) * GRID_CELL_SIZE);
+                        row.zHigh = math.min(row.zHigh, vendor.wz + vendor.y * GRID_CELL_SIZE);
+                        candidates[vendor.zoneId] = row;
+                    end
+                end
+            end
+        end
+    end
+
+    collect(spellShops);
+    collect(shops);
+
+    local result = {};
+    for zoneId, row in pairs(candidates) do
+        if row.count >= 2 and row.xLow < row.xHigh and row.zLow < row.zHigh then
+            result[zoneId] = {
+                originX = (row.xLow + row.xHigh) / 2,
+                originZ = (row.zLow + row.zHigh) / 2,
+                anchors = row.count,
+            };
+        end
+    end
+    return result;
+end
+
+local GRID_CALIBRATIONS = buildGridCalibrations();
+
+-- Windurst Waters uses two different map images inside zone 238.  Their grid
+-- labels overlap, so one zone-wide transform can never be correct.  The maps
+-- occupy separate world-coordinate bands and use these clean 40-unit origins,
+-- verified against all four Home Points and the shop NPC anchors.
+local WINDURST_WATERS_GRIDS = {
+    north = { originX = -280, originZ = 400 },
+    south = { originX = -360, originZ = 120 },
+};
+
+-- Explicit single-map origins for zones whose published NPC grid labels land
+-- on opposite sides of a sub-unit boundary.  Lower Jeuno's shop anchors miss
+-- intersection by less than one world unit; both Home Points independently
+-- confirm this clean origin (#1 G-11 and #2 I-5).
+local GRID_OVERRIDES = {
+    [87]  = { originX = -520, originZ = 240 }, -- Bastok Markets [S]
+    [245] = { originX = -340, originZ = 240 }, -- Lower Jeuno
+    [246] = { originX = -380, originZ = 300 }, -- Port Jeuno
+    [247] = { originX = -260, originZ = 320 }, -- Rabao
+    [252] = { originX = -320, originZ = 300 }, -- Norg
+};
+
+local state = {
+    open = { false },
+    spellSearch = { '' },
+    itemSearch = { '' },
+    questSearch = { '' },
+    missionSearch = { '' },
+    spellMode = 1,
+    spellSort = 1,
+    spellTypeFilter = '',
+    showAllSpells = { false },
+    itemMode = 'weapon',
+    itemSorts = { weapon = 2, armor = 2, supply = 1 },
+    itemTypeFilters = { weapon = '', armor = '' },
+    myLevel = { false },
+    spells = {},
+    items = { weapon = {}, armor = {}, supply = {} },
+    quests = {},
+    missions = {},
+    questMode = 1,
+    storyMode = 0,
+    showAboveLevel = { false },
+    showOtherArtifactJobs = { false },
+    showCompletedQuests = { true },
+    questCompletionKnown = false,
+    completedQuestChunks = {},
+    activeQuestIds = {},
+    activeQuestSteps = {},
+    showCompletedMissions = { true },
+    missionCompletionKnown = false,
+    completedMissionChunks = {},
+    activeMissionIds = {},
+    activeMissionSteps = {},
+    missionSyncInbound = false,
+    missionSyncStatus = 'Completion status not synced.',
+    selectedSpell = nil,
+    selectedItems = { weapon = nil, armor = nil, supply = nil },
+    selectedQuest = nil,
+    selectedMission = nil,
+    currentLocation = nil,
+    locationUpdatedAt = -1,
+    showBrowserList = { true },
+    errorReported = false,
+};
+
+local lower;
+
+local function entryMinimumLevel(entry)
+    local first = entry.steps and entry.steps[1];
+    local text = lower(first and first.text or '');
+    local level = text:match('level%s+(%d+)')
+        or text:match('level%s+of%s+(%d+)')
+        or text:match('at%s+level%s+(%d+)');
+    return tonumber(level);
+end
+
+local function isArtifactQuest(entry)
+    if lower(entry.name):find('borghertz', 1, true) then return true; end
+    for _, step in ipairs(entry.steps or {}) do
+        local text = lower(step.text);
+        if (text:find('artifact', 1, true) and
+            (text:find('main job', 1, true) or text:find('gauntlet', 1, true))) then
+            return true;
+        end
+        if (text:find('borghertz', 1, true) and text:find('main job', 1, true)) then
+            return true;
+        end
+    end
+    return false;
+end
+
+lower = function (value)
+    return string.lower(value or '');
+end;
+
+local function pushSelectedButton(selected)
+    if not selected then return false; end
+    local color = theme.colors.hint;
+    imgui.PushStyleColor(ImGuiCol_Button, { color[1], color[2], color[3], 0.52 });
+    return true;
+end
+
+local function currentGrid(zoneId, x, groundY)
+    local calibration;
+    if zoneId == 238 or zoneId == 94 then
+        calibration = groundY < -80 and WINDURST_WATERS_GRIDS.south or WINDURST_WATERS_GRIDS.north;
+    else
+        calibration = GRID_OVERRIDES[zoneId] or GRID_CALIBRATIONS[zoneId];
+    end
+    if calibration == nil then return nil; end
+    local column = math.floor((x - calibration.originX) / GRID_CELL_SIZE) + 1;
+    local row = math.floor((calibration.originZ - groundY) / GRID_CELL_SIZE) + 1;
+    if column < 1 or column > 26 or row < 1 or row > 99 then return nil; end
+    return string.char(64 + column) .. '-' .. tostring(row);
+end
+
+local function refreshCurrentLocation()
+    local now = os.clock();
+    if state.locationUpdatedAt >= 0 and now - state.locationUpdatedAt < 0.20 then return; end
+    state.locationUpdatedAt = now;
+
+    local ok, location = pcall(function ()
+        local memory = AshitaCore:GetMemoryManager();
+        local player = memory:GetPlayer();
+        local party = memory:GetParty();
+        if player == nil or party == nil or player:GetLoginStatus() ~= 2 or player:GetIsZoning() ~= 0 then
+            return nil;
+        end
+        local index = party:GetMemberTargetIndex(0);
+        if index == nil or index <= 0 then return nil; end
+        local entity = memory:GetEntity();
+        local zoneId = party:GetMemberZone(0);
+        -- Ashita names X/Y as the ground plane and Z as height. FFXI's !pos
+        -- convention prints those in X, height, ground-Y order.
+        local x = entity:GetLocalPositionX(index);
+        local groundY = entity:GetLocalPositionY(index);
+        local height = entity:GetLocalPositionZ(index);
+        local zone = AshitaCore:GetResourceManager():GetString('zones.names', zoneId) or
+            ('Zone ' .. tostring(zoneId));
+        return {
+            zone = zone,
+            grid = currentGrid(zoneId, x, groundY),
+            pos = string.format('!pos %.1f %.1f %.1f', x, height, groundY),
+        };
+    end);
+    state.currentLocation = ok and location or nil;
+end
+
+local function renderCurrentLocation()
+    refreshCurrentLocation();
+    imgui.TextColored(theme.colors.hint, 'Current location:'); imgui.SameLine();
+    local location = state.currentLocation;
+    if location == nil then
+        imgui.TextDisabled('Unavailable while logging in or zoning.');
+        return;
+    end
+    imgui.Text(location.zone);
+    -- Keep navigation data readable when the window is narrowed.  A single
+    -- long line was clipped by ImGui, which made grid and !pos appear to
+    -- vanish even though the values were still updating.
+    if imgui.GetWindowWidth() >= 760 then imgui.SameLine(); end
+    imgui.TextDisabled('Grid:'); imgui.SameLine();
+    if location.grid ~= nil then
+        imgui.Text(location.grid);
+    else
+        imgui.TextDisabled('unavailable');
+        if imgui.IsItemHovered() then
+            imgui.SetTooltip('This zone has no unambiguous single-map calibration yet.');
+        end
+    end
+    if imgui.GetWindowWidth() >= 540 then imgui.SameLine(); end
+    imgui.TextDisabled(location.pos);
+end
+
+local QUEST_JOB_NAMES = {
+    [1] = 'warrior', [2] = 'monk', [3] = 'white mage', [4] = 'black mage',
+    [5] = 'red mage', [6] = 'thief', [7] = 'paladin', [8] = 'dark knight',
+    [9] = 'beastmaster', [10] = 'bard', [11] = 'ranger', [12] = 'samurai',
+    [13] = 'ninja', [14] = 'dragoon', [15] = 'summoner', [16] = 'blue mage',
+    [17] = 'corsair', [18] = 'puppetmaster', [19] = 'dancer', [20] = 'scholar',
+    [21] = 'geomancer', [22] = 'rune fencer',
+};
+
+local function entryJob(entry)
+    for _, step in ipairs(entry.steps or {}) do
+        local text = lower(step.text);
+        if text:find('main job', 1, true) then
+            for jobId, jobName in pairs(QUEST_JOB_NAMES) do
+                if text:find(jobName, 1, true) then return jobId; end
+            end
+        end
+    end
+    return nil;
+end
+
+local function splitFields(value, separator)
+    local parts = {};
+    for piece in string.gmatch((value or '') .. separator, '([^' .. separator .. ']*)' .. separator) do
+        parts[#parts + 1] = piece;
+    end
+    return parts;
+end
+
+local function completedMission(log, id)
+    local chunks = state.completedMissionChunks[log];
+    if chunks == nil then return false; end
+    local chunk = chunks[math.floor(id / 32)];
+    return chunk ~= nil and bit.band(chunk, bit.lshift(1, id % 32)) ~= 0;
+end
+
+local function completedQuest(log, id)
+    local chunks = state.completedQuestChunks[log];
+    if chunks == nil then return false; end
+    local chunk = chunks[math.floor(id / 32)];
+    return chunk ~= nil and bit.band(chunk, bit.lshift(1, id % 32)) ~= 0;
+end
+
+local function activeQuest(log, id)
+    return state.activeQuestIds[log] ~= nil and state.activeQuestIds[log][id] == true;
+end
+
+local function activeMission(log, id)
+    return state.activeMissionIds[log] == id;
+end
+
+local function questProgress(log, id)
+    return state.activeQuestSteps[log] ~= nil and state.activeQuestSteps[log][id] or nil;
+end
+
+local function missionProgress(log, id)
+    local row = state.activeMissionSteps[log];
+    return row ~= nil and row.id == id and row or nil;
+end
+
+local function requestMissionSync()
+    local player = AshitaCore:GetMemoryManager():GetPlayer();
+    if player == nil or player:GetLoginStatus() ~= 2 then
+        state.missionSyncStatus = 'Log in before syncing completion status.';
+        return;
+    end
+    state.missionSyncStatus = 'Syncing completion status...';
+    AshitaCore:GetChatManager():QueueCommand(1, '!dwt sync');
+end
+
+local function normalizeName(value)
+    return lower(value):gsub('[^%w]', '');
+end
+
+local function normalizeZone(value)
+    local zone = (value or ''):gsub('%[S%]', '(S)'):gsub('%s+', ' '):gsub('^%s+', ''):gsub('%s+$', '');
+    return PORT_ZONE_ALIASES[zone] or zone;
+end
+
+local spellVendorsByName = {};
+for name, rows in pairs(spellShops) do
+    spellVendorsByName[normalizeName(name)] = rows;
+end
+
+local teleportZoneNames = {};
+for zone in pairs(teleports) do
+    teleportZoneNames[#teleportZoneNames + 1] = zone;
+end
+table.sort(teleportZoneNames, function (a, b) return #a > #b; end);
+
+local function jobsText(mask)
+    local names = {};
+    local resources = AshitaCore:GetResourceManager();
+    for job = 1, 22 do
+        if bit.band(mask or 0, math.pow(2, job)) ~= 0 then
+            names[#names + 1] = resources:GetString('jobs.names_abbr', job) or tostring(job);
+        end
+    end
+    return table.concat(names, ' ');
+end
+
+local function slotsText(mask)
+    local names = {};
+    local added = {};
+    for slot = 1, 16 do
+        if bit.band(mask or 0, math.pow(2, slot - 1)) ~= 0 then
+            local name = SLOT_NAMES[slot] or tostring(slot);
+            if not added[name] then
+                names[#names + 1] = name;
+                added[name] = true;
+            end
+        end
+    end
+    return table.concat(names, ', ');
+end
+
+local function spellLevels(resource)
+    local parts = {};
+    local resources = AshitaCore:GetResourceManager();
+    for job = 1, 22 do
+        local level = resource.LevelRequired[job + 1];
+        if level ~= nil and level > 0 and level < 100 then
+            parts[#parts + 1] = string.format('%s %d', resources:GetString('jobs.names_abbr', job) or job, level);
+        end
+    end
+    return table.concat(parts, ', ');
+end
+
+local function rebuildCatalogs()
+    local resources = AshitaCore:GetResourceManager();
+    local player = AshitaCore:GetMemoryManager():GetPlayer();
+    local selectedSpellId = state.selectedSpell and state.selectedSpell.id or nil;
+    local selectedItemIds = {};
+    for category, selected in pairs(state.selectedItems) do
+        selectedItemIds[category] = selected and selected.id or nil;
+    end
+
+    state.spells = {};
+    state.items = { weapon = {}, armor = {}, supply = {} };
+    state.selectedSpell = nil;
+    state.selectedItems = { weapon = nil, armor = nil, supply = nil };
+
+    for id = 1, 1299 do
+        local resource = resources:GetSpellById(id);
+        if resource ~= nil and resource.Name ~= nil and resource.Name[1] ~= nil and resource.Name[1] ~= '' then
+            local rows = spellVendorsByName[normalizeName(resource.Name[1])];
+            if rows ~= nil and #rows > 0 then
+                local entry = {
+                    id = id,
+                    name = resource.Name[1],
+                    vendors = rows,
+                    learned = player ~= nil and player:HasSpell(id) or false,
+                    levels = spellLevels(resource),
+                    jobLevels = resource.LevelRequired,
+                    typeName = SPELL_TYPES[resource.Type] or 'Other magic',
+                };
+                state.spells[#state.spells + 1] = entry;
+                if selectedSpellId == id then state.selectedSpell = entry; end
+            end
+        end
+    end
+
+    for id, shop in pairs(shops) do
+        if state.items[shop.category] ~= nil then
+            local resource = resources:GetItemById(id);
+            if resource ~= nil and resource.Name ~= nil and resource.Name[1] ~= nil and resource.Name[1] ~= '' then
+                local entry = {
+                    id = id,
+                    name = resource.Name[1],
+                    description = resource.Description and resource.Description[1] or '',
+                    level = resource.Level or 0,
+                    jobs = resource.Jobs or 0,
+                    slots = resource.Slots or 0,
+                    skill = resource.Skill or 0,
+                    damage = resource.Damage or 0,
+                    delay = resource.Delay or 0,
+                    vendors = shop.vendors,
+                };
+                state.items[shop.category][#state.items[shop.category] + 1] = entry;
+                if selectedItemIds[shop.category] == id then state.selectedItems[shop.category] = entry; end
+            end
+        end
+    end
+
+    table.sort(state.spells, function (a, b) return lower(a.name) < lower(b.name); end);
+    for category, rows in pairs(state.items) do
+        table.sort(rows, function (a, b)
+            if a.level ~= b.level then return a.level < b.level; end
+            return lower(a.name) < lower(b.name);
+        end);
+        if state.selectedItems[category] == nil then state.selectedItems[category] = rows[1]; end
+    end
+    if state.selectedSpell == nil then state.selectedSpell = state.spells[1]; end
+end
+
+local function rebuildQuests()
+    state.quests = {};
+    for _, area in ipairs(QUEST_AREAS) do
+        for id, quest in pairs(area.entries) do
+            local unlock = JOB_UNLOCK_BY_KEY[area.log .. ':' .. id];
+            local steps = unlock ~= nil and unlock.steps or quest.steps;
+            if steps ~= nil and #steps > 0 then
+                local sourceStart = (unlock ~= nil and unlock.start) or
+                    (questStarts[area.log] and questStarts[area.log][id] or nil);
+                local start = sourceStart;
+                if sourceStart ~= nil and unlock ~= nil and unlock.grid ~= nil then
+                    start = {
+                        contact = sourceStart.contact,
+                        kind = sourceStart.kind,
+                        location = sourceStart.location,
+                        grid = unlock.grid,
+                    };
+                end
+                state.quests[#state.quests + 1] = {
+                    id = id,
+                    log = area.log,
+                    area = area.label,
+                    name = quest.name,
+                    steps = steps,
+                    start = start,
+                    minLevel = entryMinimumLevel({ steps = steps }),
+                    artifact = isArtifactQuest(quest),
+                    jobUnlock = unlock ~= nil,
+                    jobId = unlock ~= nil and unlock.jobId or entryJob(quest),
+                    jobName = unlock ~= nil and unlock.jobName or nil,
+                    jobOrder = unlock ~= nil and unlock.jobOrder or nil,
+                    chainStep = unlock ~= nil and unlock.chainStep or nil,
+                    chainCount = unlock ~= nil and unlock.chainCount or nil,
+                };
+            end
+        end
+    end
+    table.sort(state.quests, function (a, b)
+        if a.area ~= b.area then return a.area < b.area; end
+        return lower(a.name) < lower(b.name);
+    end);
+    if state.selectedQuest == nil then state.selectedQuest = state.quests[1]; end
+end
+
+local function rebuildMissions()
+    state.missions = {};
+    for areaIndex, area in ipairs(MISSION_AREAS) do
+        for id, mission in pairs(area.entries) do
+            if mission.steps ~= nil and #mission.steps > 0 then
+                state.missions[#state.missions + 1] = {
+                    id = id,
+                    log = area.log,
+                    area = area.label,
+                    areaIndex = areaIndex,
+                    name = mission.name,
+                    steps = mission.steps,
+                    repeatable = mission.repeatable == true,
+                    start = missionStarts[area.log] and
+                        ((missionStarts[area.log].entries and missionStarts[area.log].entries[id])
+                            or missionStarts[area.log].default) or nil,
+                };
+            end
+        end
+    end
+    table.sort(state.missions, function (a, b)
+        if a.areaIndex ~= b.areaIndex then return a.areaIndex < b.areaIndex; end
+        return a.id < b.id;
+    end);
+    if state.selectedMission == nil then state.selectedMission = state.missions[1]; end
+end
+
+local function closestTeleport(zone, x, y)
+    local requestedZone = (zone or ''):gsub('%[S%]', '(S)'):gsub('%s+', ' '):gsub('^%s+', ''):gsub('%s+$', '');
+    local choices = teleports[normalizeZone(requestedZone)];
+    if choices == nil then return nil; end
+
+    -- North and South share grid labels, so grid distance incorrectly treats
+    -- Windurst Waters #1 (North G-7) as adjacent to South-map vendors at G-7.
+    -- Home Point #3 is the only Home Point on the South map.
+    if requestedZone == 'Windurst Waters South' then
+        for _, destination in ipairs(choices) do
+            if destination.kind == 'hp' and destination.id == 103 then return destination; end
+        end
+    end
+
+    local best, bestDistance = nil, math.huge;
+    for _, destination in ipairs(choices) do
+        local distance;
+        if x ~= nil and y ~= nil and destination.x ~= nil and destination.y ~= nil then
+            local dx, dy = x - destination.x, y - destination.y;
+            distance = dx * dx + dy * dy;
+        elseif destination.kind == 'hp' then
+            distance = 1000000 + destination.id;
+        else
+            distance = 2000000 + destination.id;
+        end
+        if distance < bestDistance then best, bestDistance = destination, distance; end
+    end
+    return best;
+end
+
+local function zoneFromText(value)
+    local normalized = normalizeZone(value or '');
+    for _, zone in ipairs(teleportZoneNames) do
+        if normalized:find(normalizeZone(zone), 1, true) ~= nil then return zone; end
+    end
+    return nil;
+end
+
+local function issuePort(destination)
+    local player = AshitaCore:GetMemoryManager():GetPlayer();
+    if player == nil or player:GetLoginStatus() ~= 2 then
+        print(chat.header('vanacompass'):append(chat.error('You must be logged in to use Port.')));
+        return;
+    end
+    if player:GetIsZoning() ~= 0 then
+        print(chat.header('vanacompass'):append(chat.error('Wait until zoning has finished.')));
+        return;
+    end
+    AshitaCore:GetChatManager():QueueCommand(1, string.format('!port go %s %d', destination.kind, destination.id));
+    print(chat.header('vanacompass'):append(chat.message('Port requested: ' .. destination.name .. '.')));
+end
+
+local function portButton(destination, id)
+    if destination == nil then
+        imgui.TextDisabled('No direct port');
+        return;
+    end
+    if imgui.SmallButton('Port##' .. id) then issuePort(destination); end
+    if imgui.IsItemHovered() then imgui.SetTooltip('Travel to ' .. destination.name .. ' using !port.'); end
+    imgui.SameLine();
+    imgui.TextDisabled(destination.name);
+end
+
+local function vendorTable(rows, idPrefix)
+    if imgui.GetWindowWidth() < 620 then
+        for index, vendor in ipairs(rows) do
+            imgui.Text(vendor.npc);
+            local location = vendor.location or '';
+            imgui.TextWrapped(vendor.zone .. (location ~= '' and
+                (' (' .. location:gsub('^%(', ''):gsub('%)$', '') .. ')') or ''));
+            if vendor.notes ~= nil then
+                imgui.TextWrapped(vendor.notes ~= '' and vendor.notes or '-');
+            else
+                imgui.TextDisabled(string.format('%d gil%s', vendor.price or 0,
+                    vendor.tier and string.format(' (shop tier %d)', vendor.tier) or ''));
+            end
+            portButton(closestTeleport(vendor.zone, vendor.x, vendor.y), idPrefix .. '_' .. index);
+            if index < #rows then imgui.Separator(); end
+        end
+        return;
+    end
+    if not imgui.BeginTable('##vendors_' .. idPrefix, 4,
+        bit.bor(ImGuiTableFlags_Borders, ImGuiTableFlags_RowBg, ImGuiTableFlags_SizingStretchProp)) then return; end
+    imgui.TableSetupColumn('Vendor', ImGuiTableColumnFlags_WidthStretch, 1.0);
+    imgui.TableSetupColumn('Location', ImGuiTableColumnFlags_WidthStretch, 1.35);
+    imgui.TableSetupColumn('Price / requirements', ImGuiTableColumnFlags_WidthStretch, 1.25);
+    imgui.TableSetupColumn('Closest port', ImGuiTableColumnFlags_WidthStretch, 1.35);
+    imgui.TableHeadersRow();
+    for index, vendor in ipairs(rows) do
+        imgui.TableNextRow();
+        imgui.TableNextColumn(); imgui.Text(vendor.npc);
+        imgui.TableNextColumn();
+        local location = vendor.location or '';
+        imgui.Text(vendor.zone .. (location ~= '' and (' (' .. location:gsub('^%(', ''):gsub('%)$', '') .. ')') or ''));
+        imgui.TableNextColumn();
+        if vendor.notes ~= nil then
+            imgui.Text(vendor.notes ~= '' and vendor.notes or '-');
+        else
+            imgui.Text(string.format('%d gil%s', vendor.price or 0,
+                vendor.tier and string.format(' (shop tier %d)', vendor.tier) or ''));
+        end
+        imgui.TableNextColumn();
+        portButton(closestTeleport(vendor.zone, vendor.x, vendor.y), idPrefix .. '_' .. index);
+    end
+    imgui.EndTable();
+end
+
+local function browserListToggle()
+    local label = state.showBrowserList[1] and 'Hide list' or 'Show list';
+    if imgui.SmallButton(label .. '##browser_list') then
+        state.showBrowserList[1] = not state.showBrowserList[1];
+    end
+    if imgui.IsItemHovered() then
+        imgui.SetTooltip(state.showBrowserList[1]
+            and 'Collapse the results list and give the selected guide the full window.'
+            or 'Restore the searchable results list.');
+    end
+end
+
+local function searchHeader(buffer, hint)
+    imgui.PushItemWidth(300);
+    imgui.InputTextWithHint('##search_' .. hint, hint, buffer, 64);
+    imgui.PopItemWidth();
+end
+
+local function spellRequiredLevel(spell)
+    local player = AshitaCore:GetMemoryManager():GetPlayer();
+    if player == nil or spell.jobLevels == nil then return nil; end
+    return spell.jobLevels[player:GetMainJob() + 1];
+end
+
+local function spellMinimumLevel(spell)
+    local minimum = math.huge;
+    for job = 1, 22 do
+        local required = spell.jobLevels and spell.jobLevels[job + 1] or nil;
+        if required ~= nil and required > 0 and required < 100 and required < minimum then minimum = required; end
+    end
+    return minimum;
+end
+
+local function spellSortLevel(spell)
+    if state.showAllSpells[1] then return spellMinimumLevel(spell); end
+    local required = spellRequiredLevel(spell);
+    return required ~= nil and required > 0 and required < 100 and required or math.huge;
+end
+
+local function spellVisible(spell)
+    if state.spellMode == 2 and spell.learned then return false; end
+    if state.spellMode == 3 and not spell.learned then return false; end
+    if state.spellTypeFilter ~= '' and spell.typeName ~= state.spellTypeFilter then return false; end
+    if not state.showAllSpells[1] then
+        local player = AshitaCore:GetMemoryManager():GetPlayer();
+        if player ~= nil then
+            local required = spellRequiredLevel(spell);
+            if required == nil or required <= 0 or required >= 100 or required > player:GetMainJobLevel() then return false; end
+        end
+    end
+    local query = lower(state.spellSearch[1]);
+    if query == '' or lower(spell.name):find(query, 1, true) or lower(spell.typeName):find(query, 1, true) then return true; end
+    for _, vendor in ipairs(spell.vendors) do
+        if lower(vendor.npc):find(query, 1, true) or lower(vendor.zone):find(query, 1, true) then return true; end
+    end
+    return false;
+end
+
+local function renderSpells()
+    searchHeader(state.spellSearch, 'spell, vendor, or zone');
+    imgui.SameLine();
+    for index, label in ipairs({ 'All states', 'Missing', 'Learned' }) do
+        if index > 1 then imgui.SameLine(); end
+        local selected = pushSelectedButton(state.spellMode == index);
+        if imgui.Button(label .. '##spellmode_' .. index) then state.spellMode = index; end
+        if selected then imgui.PopStyleColor(); end
+    end
+    imgui.SameLine(); imgui.Checkbox('Show all jobs / levels', state.showAllSpells);
+    imgui.SameLine(); imgui.TextDisabled('Sort:');
+    for index, label in ipairs({ 'Name', 'Level' }) do
+        imgui.SameLine();
+        local selected = pushSelectedButton(state.spellSort == index);
+        if imgui.SmallButton(label .. '##spell_sort_' .. index) then state.spellSort = index; end
+        if selected then imgui.PopStyleColor(); end
+    end
+    local typeNames, seenTypes = {}, {};
+    for _, spell in ipairs(state.spells) do
+        if not seenTypes[spell.typeName] then
+            seenTypes[spell.typeName] = true;
+            typeNames[#typeNames + 1] = spell.typeName;
+        end
+    end
+    table.sort(typeNames, function (a, b) return lower(a) < lower(b); end);
+    imgui.TextDisabled('Magic type:'); imgui.SameLine();
+    imgui.PushItemWidth(170);
+    if imgui.BeginCombo('##spell_type_filter', state.spellTypeFilter ~= '' and state.spellTypeFilter or 'All magic types') then
+        if imgui.Selectable('All magic types', state.spellTypeFilter == '') then state.spellTypeFilter = ''; end
+        for _, typeName in ipairs(typeNames) do
+            if imgui.Selectable(typeName, state.spellTypeFilter == typeName) then state.spellTypeFilter = typeName; end
+        end
+        imgui.EndCombo();
+    end
+    imgui.PopItemWidth();
+    browserListToggle();
+    local player = AshitaCore:GetMemoryManager():GetPlayer();
+    if state.showAllSpells[1] then
+        imgui.TextDisabled('Showing vendor spells for every job and level.');
+    elseif player ~= nil then
+        local jobName = AshitaCore:GetResourceManager():GetString('jobs.names_abbr', player:GetMainJob()) or '?';
+        imgui.TextDisabled(string.format('Showing vendor spells usable by %s %d.', jobName, player:GetMainJobLevel()));
+    else
+        imgui.TextDisabled('Character job is unavailable; showing the vendor spell catalog.');
+    end
+    imgui.Separator();
+    if state.showBrowserList[1] and imgui.GetWindowWidth() >= 760 and
+        imgui.BeginTable('##spell_layout', 2, ImGuiTableFlags_SizingStretchProp) then
+        imgui.TableSetupColumn('Spells', ImGuiTableColumnFlags_WidthStretch, 0.75);
+        imgui.TableSetupColumn('Details', ImGuiTableColumnFlags_WidthStretch, 2.25);
+        imgui.TableNextRow(); imgui.TableNextColumn();
+        imgui.BeginChild('##spell_list', { 0, 0 }, ImGuiChildFlags_Borders);
+        local visibleSpells = {};
+        for _, spell in ipairs(state.spells) do
+            if spellVisible(spell) then visibleSpells[#visibleSpells + 1] = spell; end
+        end
+        table.sort(visibleSpells, function (a, b)
+            if state.spellSort == 2 then
+                local aLevel, bLevel = spellSortLevel(a), spellSortLevel(b);
+                if aLevel ~= bLevel then return aLevel < bLevel; end
+            end
+            return lower(a.name) < lower(b.name);
+        end);
+        local firstVisible = nil;
+        for _, spell in ipairs(visibleSpells) do
+            firstVisible = firstVisible or spell;
+            if imgui.Selectable((spell.learned and '[+] ' or '[-] ') .. spell.name .. '##s' .. spell.id,
+                state.selectedSpell == spell) then state.selectedSpell = spell; end
+            imgui.Indent(12);
+            imgui.PushStyleColor(ImGuiCol_Text, theme.colors.dim);
+            imgui.TextWrapped(spell.typeName .. '  |  ' ..
+                (spell.levels ~= '' and spell.levels or 'No valid job requirements'));
+            imgui.PopStyleColor();
+            imgui.Unindent(12);
+        end
+        if firstVisible == nil then
+            imgui.TextDisabled('No matching spells. Change the magic type, job/level, learned state, or search filter.');
+            state.selectedSpell = nil;
+        elseif state.selectedSpell == nil or not spellVisible(state.selectedSpell) then
+            state.selectedSpell = firstVisible;
+        end
+        imgui.EndChild();
+        imgui.TableNextColumn();
+        imgui.BeginChild('##spell_details', { 0, 0 }, ImGuiChildFlags_Borders);
+        local spell = state.selectedSpell;
+        if spell then
+            imgui.Text(spell.name); imgui.SameLine();
+            imgui.TextColored(spell.learned and theme.colors.ok or theme.colors.warn, spell.learned and 'Learned' or 'Missing');
+            imgui.TextDisabled('Magic type:'); imgui.SameLine(); imgui.Text(spell.typeName);
+            imgui.TextDisabled('Job requirements:');
+            imgui.TextWrapped(spell.levels ~= '' and spell.levels or 'No valid job requirements');
+            imgui.Separator();
+            vendorTable(spell.vendors, 'spell_' .. spell.id);
+        end
+        imgui.EndChild();
+        imgui.EndTable();
+    else
+        if state.showBrowserList[1] then
+            imgui.BeginChild('##spell_list_stacked', { 0, 180 }, ImGuiChildFlags_Borders);
+            local visibleSpells = {};
+            for _, spell in ipairs(state.spells) do if spellVisible(spell) then visibleSpells[#visibleSpells + 1] = spell; end end
+            table.sort(visibleSpells, function (a, b)
+                if state.spellSort == 2 then
+                    local aLevel, bLevel = spellSortLevel(a), spellSortLevel(b);
+                    if aLevel ~= bLevel then return aLevel < bLevel; end
+                end
+                return lower(a.name) < lower(b.name);
+            end);
+            for _, spell in ipairs(visibleSpells) do
+                if imgui.Selectable((spell.learned and '[+] ' or '[-] ') .. spell.name .. '##ss' .. spell.id,
+                    state.selectedSpell == spell) then state.selectedSpell = spell; end
+            end
+            if #visibleSpells == 0 then state.selectedSpell = nil;
+            elseif state.selectedSpell == nil or not spellVisible(state.selectedSpell) then state.selectedSpell = visibleSpells[1]; end
+            imgui.EndChild();
+        end
+        imgui.BeginChild('##spell_details_full', { 0, 0 }, ImGuiChildFlags_Borders);
+        local spell = state.selectedSpell;
+        if spell then
+            imgui.Text(spell.name); imgui.SameLine();
+            imgui.TextColored(spell.learned and theme.colors.ok or theme.colors.warn, spell.learned and 'Learned' or 'Missing');
+            imgui.TextDisabled('Magic type:'); imgui.SameLine(); imgui.Text(spell.typeName);
+            imgui.TextDisabled('Job requirements:'); imgui.TextWrapped(spell.levels ~= '' and spell.levels or 'No valid job requirements');
+            imgui.Separator(); vendorTable(spell.vendors, 'spell_full_' .. spell.id);
+        else imgui.TextDisabled('Select a spell from the list.'); end
+        imgui.EndChild();
+    end
+end
+
+local function itemUsableNow(item)
+    if not state.myLevel[1] then return true; end
+    local player = AshitaCore:GetMemoryManager():GetPlayer();
+    if player == nil then return true; end
+    if state.itemMode == 'supply' then return true; end
+    return bit.band(item.jobs, math.pow(2, player:GetMainJob())) ~= 0 and item.level <= player:GetMainJobLevel();
+end
+
+local function itemTypeName(item, category)
+    if category == 'weapon' then
+        return WEAPON_TYPES[item.skill] or 'Other weapon';
+    end
+    if category == 'armor' then
+        local slots = slotsText(item.slots);
+        return slots ~= '' and slots or 'Other armor';
+    end
+    return 'Supply';
+end
+
+local function itemVisible(item)
+    if not itemUsableNow(item) then return false; end
+    local typeFilter = state.itemTypeFilters[state.itemMode];
+    if typeFilter ~= nil and typeFilter ~= '' and itemTypeName(item, state.itemMode) ~= typeFilter then return false; end
+    local query = lower(state.itemSearch[1]);
+    if query == '' or lower(item.name):find(query, 1, true) or lower(item.description):find(query, 1, true) or
+        lower(itemTypeName(item, state.itemMode)):find(query, 1, true) then return true; end
+    for _, vendor in ipairs(item.vendors) do
+        if lower(vendor.npc):find(query, 1, true) or lower(vendor.zone):find(query, 1, true) then return true; end
+    end
+    return false;
+end
+
+local function renderItems(category)
+    state.itemMode = category;
+    searchHeader(state.itemSearch, 'item, description, vendor, or zone');
+    if category ~= 'supply' then
+        imgui.SameLine(); imgui.Checkbox('Usable by my current job and level', state.myLevel);
+    end
+    imgui.SameLine(); imgui.TextDisabled('Sort:');
+    local sortLabels = category == 'supply' and { 'Name' } or { 'Name', 'Level', 'Type' };
+    for index, label in ipairs(sortLabels) do
+        imgui.SameLine();
+        local selected = pushSelectedButton(state.itemSorts[category] == index);
+        if imgui.SmallButton(label .. '##item_sort_' .. category .. '_' .. index) then state.itemSorts[category] = index; end
+        if selected then imgui.PopStyleColor(); end
+    end
+    if category ~= 'supply' then
+        local currentType = state.itemTypeFilters[category] or '';
+        local typeNames, seenTypes = {}, {};
+        for _, item in ipairs(state.items[category]) do
+            local typeName = itemTypeName(item, category);
+            if not seenTypes[typeName] then
+                seenTypes[typeName] = true;
+                typeNames[#typeNames + 1] = typeName;
+            end
+        end
+        table.sort(typeNames, function (a, b) return lower(a) < lower(b); end);
+        imgui.SameLine(); imgui.TextDisabled('Filter:'); imgui.SameLine();
+        imgui.PushItemWidth(160);
+        if imgui.BeginCombo('##item_type_filter_' .. category, currentType ~= '' and currentType or 'All types') then
+            if imgui.Selectable('All types', currentType == '') then state.itemTypeFilters[category] = ''; end
+            for _, typeName in ipairs(typeNames) do
+                if imgui.Selectable(typeName, currentType == typeName) then state.itemTypeFilters[category] = typeName; end
+            end
+            imgui.EndCombo();
+        end
+        imgui.PopItemWidth();
+    end
+    browserListToggle();
+    imgui.Separator();
+    local itemStacked = imgui.GetWindowWidth() < 760;
+    if state.showBrowserList[1] and imgui.BeginTable('##item_layout_' .. category,
+        itemStacked and 1 or 2, ImGuiTableFlags_SizingStretchProp) then
+        imgui.TableSetupColumn('Items', ImGuiTableColumnFlags_WidthStretch, itemStacked and 1.0 or 1.0);
+        if not itemStacked then imgui.TableSetupColumn('Details', ImGuiTableColumnFlags_WidthStretch, 2.0); end
+        imgui.TableNextRow(); imgui.TableNextColumn();
+        imgui.BeginChild('##item_list_' .. category, { 0, itemStacked and 180 or 0 }, ImGuiChildFlags_Borders);
+        local visibleItems = {};
+        for _, item in ipairs(state.items[category]) do
+            if itemVisible(item) then visibleItems[#visibleItems + 1] = item; end
+        end
+        table.sort(visibleItems, function (a, b)
+            local sortMode = state.itemSorts[category];
+            if sortMode == 1 then return lower(a.name) < lower(b.name); end
+            if sortMode == 3 then
+                local aType, bType = lower(itemTypeName(a, category)), lower(itemTypeName(b, category));
+                if aType ~= bType then return aType < bType; end
+            end
+            if a.level ~= b.level then return a.level < b.level; end
+            return lower(a.name) < lower(b.name);
+        end);
+        local firstVisible = nil;
+        local lastType = nil;
+        for _, item in ipairs(visibleItems) do
+            firstVisible = firstVisible or item;
+            local typeName = itemTypeName(item, category);
+            if state.itemSorts[category] == 3 and typeName ~= lastType then
+                imgui.TextDisabled(typeName);
+                lastType = typeName;
+            end
+            local label;
+            if category == 'supply' then
+                label = item.name;
+            elseif state.itemSorts[category] == 3 then
+                label = string.format('Lv.%d  %s', item.level, item.name);
+            else
+                label = string.format('Lv.%d  [%s]  %s', item.level, typeName, item.name);
+            end
+            if imgui.Selectable(label .. '##i' .. item.id, state.selectedItems[category] == item) then
+                state.selectedItems[category] = item;
+            end
+        end
+        if firstVisible == nil then
+            imgui.TextDisabled('No matching items. Change the job, level, or search filter.');
+            state.selectedItems[category] = nil;
+        elseif state.selectedItems[category] == nil or not itemVisible(state.selectedItems[category]) then
+            state.selectedItems[category] = firstVisible;
+        end
+        imgui.EndChild();
+        if itemStacked then imgui.TableNextRow(); end
+        imgui.TableNextColumn();
+        imgui.BeginChild('##item_details_' .. category, { 0, 0 }, ImGuiChildFlags_Borders);
+        local item = state.selectedItems[category];
+        if item then
+            imgui.Text(item.name);
+            if category ~= 'supply' then
+                imgui.SameLine(); imgui.TextDisabled(string.format('Level %d', item.level));
+                imgui.TextDisabled(slotsText(item.slots) .. '   ' .. jobsText(item.jobs));
+                if category == 'weapon' then
+                    local skill = itemTypeName(item, category);
+                    imgui.TextDisabled(string.format('%s   DMG %d   Delay %d', skill, item.damage, item.delay));
+                end
+            end
+            if item.description ~= '' then imgui.TextWrapped(item.description); end
+            imgui.Separator(); vendorTable(item.vendors, category .. '_' .. item.id);
+        end
+        imgui.EndChild();
+        imgui.EndTable();
+    elseif not state.showBrowserList[1] then
+        imgui.BeginChild('##item_details_full_' .. category, { 0, 0 }, ImGuiChildFlags_Borders);
+        local item = state.selectedItems[category];
+        if item then
+            imgui.Text(item.name);
+            if category ~= 'supply' then
+                imgui.SameLine(); imgui.TextDisabled(string.format('Level %d', item.level));
+                imgui.TextDisabled(slotsText(item.slots) .. '   ' .. jobsText(item.jobs));
+                if category == 'weapon' then
+                    imgui.TextDisabled(string.format('%s   DMG %d   Delay %d', itemTypeName(item, category), item.damage, item.delay));
+                end
+            end
+            if item.description ~= '' then imgui.TextWrapped(item.description); end
+            imgui.Separator(); vendorTable(item.vendors, category .. '_full_' .. item.id);
+        else imgui.TextDisabled('Show the list and select an item.'); end
+        imgui.EndChild();
+    end
+end
+
+local function questVisible(quest)
+    if state.questMode == 2 and not quest.artifact then return false; end
+    if state.questMode == 3 and not quest.jobUnlock then return false; end
+    if state.questMode == 2 and not state.showOtherArtifactJobs[1] and quest.jobId ~= nil then
+        local player = AshitaCore:GetMemoryManager():GetPlayer();
+        if player ~= nil and quest.jobId ~= player:GetMainJob() then return false; end
+    end
+    if not state.showAboveLevel[1] and quest.minLevel ~= nil then
+        local player = AshitaCore:GetMemoryManager():GetPlayer();
+        if player ~= nil and quest.minLevel > player:GetMainJobLevel() then return false; end
+    end
+    if state.questCompletionKnown and not state.showCompletedQuests[1] and
+        completedQuest(quest.log, quest.id) and not activeQuest(quest.log, quest.id) then return false; end
+    local query = lower(state.questSearch[1]);
+    if query == '' or lower(quest.name):find(query, 1, true) or lower(quest.area):find(query, 1, true) or
+        lower(quest.jobName):find(query, 1, true) then return true; end
+    if quest.start ~= nil and
+        (lower(quest.start.contact):find(query, 1, true) or lower(quest.start.location):find(query, 1, true) or
+            lower(quest.start.grid):find(query, 1, true)) then return true; end
+    for _, step in ipairs(quest.steps) do
+        if lower(step.text):find(query, 1, true) or lower(step.pos):find(query, 1, true) then return true; end
+    end
+    return false;
+end
+
+local function renderGuideSteps(entry, prefix, firstIsStart, progress)
+    local progressMatches = progress ~= nil and not progress.unclear and progress.step > 0 and
+        progress.n == #entry.steps;
+    if progress ~= nil then
+        if progress.unclear then
+            imgui.TextColored(theme.colors.warn,
+                'Active, but DWTracker cannot determine one unique current objective.');
+        elseif progress.n ~= #entry.steps then
+            imgui.TextColored(theme.colors.warn,
+                string.format('Active, but guide data has %d steps while the server reports %d; no step is highlighted.',
+                    #entry.steps, progress.n));
+        elseif progress.step > 0 then
+            imgui.TextColored(theme.colors.hint,
+                string.format('CURRENT OBJECTIVE: STEP %d OF %d', progress.step, progress.n));
+        end
+        imgui.Separator();
+    end
+    for index, step in ipairs(entry.steps) do
+        local isCurrent = progressMatches and index == progress.step;
+        local isDone = progressMatches and index < progress.step;
+        if isCurrent then
+            imgui.TextColored(theme.colors.hint, 'CURRENT STEP ' .. tostring(index));
+        elseif isDone then
+            imgui.TextColored(theme.colors.dim, 'DONE - STEP ' .. tostring(index));
+        elseif index == 1 and firstIsStart then
+            imgui.TextColored(theme.colors.ok, 'START / FIRST OBJECTIVE');
+        else
+            imgui.TextColored(theme.colors.hint, 'STEP ' .. tostring(index));
+        end
+        if isCurrent then imgui.PushStyleColor(ImGuiCol_Text, theme.colors.hint);
+        elseif isDone then imgui.PushStyleColor(ImGuiCol_Text, theme.colors.dim); end
+        imgui.TextWrapped(step.text or '');
+        if isCurrent or isDone then imgui.PopStyleColor(); end
+        if step.pos ~= nil and step.pos ~= '' then
+            imgui.TextDisabled(step.pos); imgui.SameLine();
+            local zone = zoneFromText(step.pos);
+            portButton(zone and closestTeleport(zone) or nil, prefix .. '_' .. index);
+        end
+        if index < #entry.steps then imgui.Separator(); end
+    end
+end
+
+local function renderStartCard(entry, idPrefix)
+    local start = entry.start;
+    imgui.TextColored(theme.colors.ok, 'START');
+    if start == nil then
+        imgui.TextDisabled('Starter information is unavailable for this entry.');
+        return;
+    end
+    imgui.TextDisabled(start.kind .. ':'); imgui.SameLine(); imgui.Text(start.contact);
+    if start.grid ~= nil and start.grid ~= '' then
+        imgui.TextDisabled('Map grid:'); imgui.SameLine(); imgui.Text(start.grid);
+    end
+    imgui.TextDisabled('Exact location:'); imgui.SameLine(); imgui.TextWrapped(start.location);
+    local zone = zoneFromText(start.location);
+    portButton(zone and closestTeleport(zone) or nil, idPrefix);
+    imgui.Separator();
+    imgui.TextDisabled('Walkthrough');
+end
+
+local function renderQuests()
+    searchHeader(state.questSearch, 'quest, region, NPC, item, or zone');
+    imgui.SameLine();
+    if imgui.Button('Open active tracker') then AshitaCore:GetChatManager():QueueCommand(1, '/tracker'); end
+    if imgui.IsItemHovered() then imgui.SetTooltip('Open Driftwood\'s authoritative active/completed quest tracker.'); end
+    imgui.SameLine(); imgui.Checkbox('Show quests above my level', state.showAboveLevel);
+    imgui.SameLine(); imgui.Checkbox('Show completed', state.showCompletedQuests);
+    imgui.SameLine();
+    if imgui.Button('Sync completion##quests') then requestMissionSync(); end
+    for index, label in ipairs({ 'All quests', 'Artifact quests', 'Job unlocks' }) do
+        if index > 1 then imgui.SameLine(); end
+        local selected = pushSelectedButton(state.questMode == index);
+        if imgui.Button(label .. '##questmode_' .. index) then state.questMode = index; end
+        if selected then imgui.PopStyleColor(); end
+    end
+    if state.questMode == 2 then
+        imgui.SameLine(); imgui.Checkbox('Show other jobs', state.showOtherArtifactJobs);
+    end
+    imgui.SameLine();
+    local player = AshitaCore:GetMemoryManager():GetPlayer();
+    if player then
+        local jobName = AshitaCore:GetResourceManager():GetString('jobs.names_abbr', player:GetMainJob()) or '?';
+        imgui.TextDisabled(string.format('Current job: %s %d', jobName, player:GetMainJobLevel()));
+    else
+        imgui.TextDisabled('Current job unavailable');
+    end
+    if state.questMode == 3 then
+        imgui.TextDisabled('Advanced-job unlock chains are listed in prerequisite order. Reach level 30 on any job before starting the final unlock steps.');
+    end
+    imgui.TextDisabled('Level-appropriate entries are shown by default. Fame, job, nation, prior quests and other prerequisites still apply. ' .. state.missionSyncStatus);
+    browserListToggle();
+    imgui.Separator();
+    local questStacked = imgui.GetWindowWidth() < 760;
+    if state.showBrowserList[1] and imgui.BeginTable('##quest_layout', questStacked and 1 or 2, ImGuiTableFlags_SizingStretchProp) then
+        imgui.TableSetupColumn('Quests', ImGuiTableColumnFlags_WidthStretch, questStacked and 1.0 or 0.85);
+        if not questStacked then imgui.TableSetupColumn('Guide', ImGuiTableColumnFlags_WidthStretch, 2.15); end
+        imgui.TableNextRow(); imgui.TableNextColumn();
+        imgui.BeginChild('##quest_list', { 0, questStacked and 180 or 0 }, ImGuiChildFlags_Borders);
+        local visibleQuests = {};
+        for _, quest in ipairs(state.quests) do
+            if questVisible(quest) then visibleQuests[#visibleQuests + 1] = quest; end
+        end
+        if state.questMode == 3 then
+            table.sort(visibleQuests, function (a, b)
+                if a.jobOrder ~= b.jobOrder then return a.jobOrder < b.jobOrder; end
+                return a.chainStep < b.chainStep;
+            end);
+        end
+        local lastGroup = nil;
+        local firstVisible = nil;
+        for _, quest in ipairs(visibleQuests) do
+            firstVisible = firstVisible or quest;
+            local group = state.questMode == 3 and quest.jobName or quest.area;
+            if lastGroup ~= group then imgui.TextDisabled(group); lastGroup = group; end
+            local levelLabel = quest.minLevel and ('[Lv.' .. quest.minLevel .. '] ') or '';
+            local chainLabel = state.questMode == 3 and
+                string.format('[%d/%d] ', quest.chainStep, quest.chainCount) or '';
+            local progress = questProgress(quest.log, quest.id);
+            local statusLabel;
+            if progress ~= nil and not progress.unclear and progress.step > 0 then
+                statusLabel = string.format('[Active %d/%d] ', progress.step, progress.n);
+            elseif activeQuest(quest.log, quest.id) then
+                statusLabel = '[Active] ';
+            else
+                statusLabel = completedQuest(quest.log, quest.id) and '[Done] ' or '';
+            end
+            if imgui.Selectable(statusLabel .. chainLabel .. levelLabel .. quest.name .. '##q' .. quest.log .. '_' .. quest.id,
+                state.selectedQuest == quest) then
+                state.selectedQuest = quest;
+            end
+        end
+        if firstVisible == nil then
+            imgui.TextDisabled('No matching quests. Enable Show completed or change the job, level, or search filter.');
+            state.selectedQuest = nil;
+        elseif state.selectedQuest == nil or not questVisible(state.selectedQuest) then
+            state.selectedQuest = firstVisible;
+        end
+        imgui.EndChild();
+        if questStacked then imgui.TableNextRow(); end
+        imgui.TableNextColumn();
+        imgui.BeginChild('##quest_details', { 0, 0 }, ImGuiChildFlags_Borders);
+        local quest = state.selectedQuest;
+        if quest then
+            imgui.Text(quest.name); imgui.SameLine(); imgui.TextDisabled(quest.area);
+            if activeQuest(quest.log, quest.id) then
+                imgui.SameLine(); imgui.TextColored(theme.colors.info, 'Active');
+            elseif completedQuest(quest.log, quest.id) then
+                imgui.SameLine(); imgui.TextColored(theme.colors.ok, 'Completed');
+            end
+            imgui.Separator();
+            if quest.jobUnlock then
+                local stage = quest.chainStep == quest.chainCount and 'Final job-unlock quest' or
+                    string.format('Prerequisite %d of %d', quest.chainStep, quest.chainCount - 1);
+                imgui.TextColored(theme.colors.warn, quest.jobName .. ' - ' .. stage);
+            end
+            if quest.minLevel then imgui.TextDisabled('Stated minimum level: ' .. quest.minLevel); end
+            renderStartCard(quest, 'quest_start_' .. quest.log .. '_' .. quest.id);
+            renderGuideSteps(quest, 'quest_' .. quest.log .. '_' .. quest.id, false,
+                questProgress(quest.log, quest.id));
+        end
+        imgui.EndChild();
+        imgui.EndTable();
+    elseif not state.showBrowserList[1] then
+        imgui.BeginChild('##quest_details_full', { 0, 0 }, ImGuiChildFlags_Borders);
+        local quest = state.selectedQuest;
+        if quest then
+            imgui.Text(quest.name); imgui.SameLine(); imgui.TextDisabled(quest.area);
+            if activeQuest(quest.log, quest.id) then imgui.SameLine(); imgui.TextColored(theme.colors.info, 'Active');
+            elseif completedQuest(quest.log, quest.id) then imgui.SameLine(); imgui.TextColored(theme.colors.ok, 'Completed'); end
+            imgui.Separator();
+            if quest.jobUnlock then
+                local stage = quest.chainStep == quest.chainCount and 'Final job-unlock quest' or
+                    string.format('Prerequisite %d of %d', quest.chainStep, quest.chainCount - 1);
+                imgui.TextColored(theme.colors.warn, quest.jobName .. ' - ' .. stage);
+            end
+            if quest.minLevel then imgui.TextDisabled('Stated minimum level: ' .. quest.minLevel); end
+            renderStartCard(quest, 'quest_start_full_' .. quest.log .. '_' .. quest.id);
+            renderGuideSteps(quest, 'quest_full_' .. quest.log .. '_' .. quest.id, false,
+                questProgress(quest.log, quest.id));
+        else imgui.TextDisabled('Show the list and select a quest.'); end
+        imgui.EndChild();
+    end
+end
+
+local function missionVisible(mission)
+    if state.storyMode ~= 0 and mission.areaIndex ~= state.storyMode then return false; end
+    if state.missionCompletionKnown and not state.showCompletedMissions[1] and
+        completedMission(mission.log, mission.id) and not activeMission(mission.log, mission.id) then return false; end
+    local query = lower(state.missionSearch[1]);
+    if query == '' or lower(mission.name):find(query, 1, true) or lower(mission.area):find(query, 1, true) then return true; end
+    if mission.start ~= nil and
+        (lower(mission.start.contact):find(query, 1, true) or lower(mission.start.location):find(query, 1, true)) then return true; end
+    for _, step in ipairs(mission.steps) do
+        if lower(step.text):find(query, 1, true) or lower(step.pos):find(query, 1, true) then return true; end
+    end
+    return false;
+end
+
+local function renderMainStory()
+    searchHeader(state.missionSearch, 'mission, NPC, objective, or zone');
+    imgui.SameLine();
+    if imgui.Button('Open active tracker##missions') then AshitaCore:GetChatManager():QueueCommand(1, '/tracker'); end
+    imgui.SameLine(); imgui.Checkbox('Show completed', state.showCompletedMissions);
+    imgui.SameLine();
+    if imgui.Button('Sync completion') then requestMissionSync(); end
+    local labels = { 'All', "San d'Oria", 'Bastok', 'Windurst', 'Rise of the Zilart' };
+    for index, label in ipairs(labels) do
+        imgui.SameLine();
+        local mode = index - 1;
+        local selected = pushSelectedButton(state.storyMode == mode);
+        if imgui.SmallButton(label .. '##story_' .. mode) then state.storyMode = mode; end
+        if selected then imgui.PopStyleColor(); end
+    end
+    imgui.TextDisabled('Missions are listed in story-ID order within each line. ' .. state.missionSyncStatus);
+    browserListToggle();
+    imgui.Separator();
+    local storyStacked = imgui.GetWindowWidth() < 760;
+    if state.showBrowserList[1] and imgui.BeginTable('##story_layout', storyStacked and 1 or 2, ImGuiTableFlags_SizingStretchProp) then
+        imgui.TableSetupColumn('Mission chain', ImGuiTableColumnFlags_WidthStretch, storyStacked and 1.0 or 0.9);
+        if not storyStacked then imgui.TableSetupColumn('Guide', ImGuiTableColumnFlags_WidthStretch, 2.1); end
+        imgui.TableNextRow(); imgui.TableNextColumn();
+        imgui.BeginChild('##story_list', { 0, storyStacked and 180 or 0 }, ImGuiChildFlags_Borders);
+        local lastArea = nil;
+        local firstVisible = nil;
+        for _, mission in ipairs(state.missions) do
+            if missionVisible(mission) then
+                firstVisible = firstVisible or mission;
+                if lastArea ~= mission.area then imgui.TextDisabled(mission.area); lastArea = mission.area; end
+                local repeatLabel = mission.repeatable and ' [repeatable]' or '';
+                local progress = missionProgress(mission.log, mission.id);
+                local statusLabel = completedMission(mission.log, mission.id) and '[Done] ' or '';
+                if progress ~= nil and not progress.unclear and progress.step > 0 then
+                    statusLabel = string.format('[Active %d/%d] ', progress.step, progress.n);
+                elseif activeMission(mission.log, mission.id) then
+                    statusLabel = '[Active] ';
+                end
+                if imgui.Selectable(statusLabel .. mission.name .. repeatLabel .. '##m' .. mission.log .. '_' .. mission.id,
+                    state.selectedMission == mission) then state.selectedMission = mission; end
+            end
+        end
+        if firstVisible == nil then
+            imgui.TextDisabled('No matching missions. Enable Show completed or change the story filter.');
+            state.selectedMission = nil;
+        elseif state.selectedMission == nil or not missionVisible(state.selectedMission) then
+            state.selectedMission = firstVisible;
+        end
+        imgui.EndChild();
+        if storyStacked then imgui.TableNextRow(); end
+        imgui.TableNextColumn();
+        imgui.BeginChild('##story_details', { 0, 0 }, ImGuiChildFlags_Borders);
+        local mission = state.selectedMission;
+        if mission then
+            imgui.Text(mission.name); imgui.SameLine(); imgui.TextDisabled(mission.area);
+            if activeMission(mission.log, mission.id) then
+                imgui.SameLine(); imgui.TextColored(theme.colors.info, 'Active');
+            elseif completedMission(mission.log, mission.id) then
+                imgui.SameLine(); imgui.TextColored(theme.colors.ok, 'Completed');
+            end
+            imgui.Separator();
+            renderStartCard(mission, 'mission_start_' .. mission.log .. '_' .. mission.id);
+            renderGuideSteps(mission, 'mission_' .. mission.log .. '_' .. mission.id, false,
+                missionProgress(mission.log, mission.id));
+        end
+        imgui.EndChild();
+        imgui.EndTable();
+    elseif not state.showBrowserList[1] then
+        imgui.BeginChild('##story_details_full', { 0, 0 }, ImGuiChildFlags_Borders);
+        local mission = state.selectedMission;
+        if mission then
+            imgui.Text(mission.name); imgui.SameLine(); imgui.TextDisabled(mission.area);
+            if activeMission(mission.log, mission.id) then imgui.SameLine(); imgui.TextColored(theme.colors.info, 'Active');
+            elseif completedMission(mission.log, mission.id) then imgui.SameLine(); imgui.TextColored(theme.colors.ok, 'Completed'); end
+            imgui.Separator();
+            renderStartCard(mission, 'mission_start_full_' .. mission.log .. '_' .. mission.id);
+            renderGuideSteps(mission, 'mission_full_' .. mission.log .. '_' .. mission.id, false,
+                missionProgress(mission.log, mission.id));
+        else imgui.TextDisabled('Show the list and select a mission.'); end
+        imgui.EndChild();
+    end
+end
+
+local function renderWelcome()
+    if not imgui.BeginChild('##welcome_content', { 0, 0 }, ImGuiChildFlags_None) then
+        imgui.EndChild();
+        return;
+    end
+    imgui.Text('VanaCompass');
+    imgui.TextWrapped('A searchable in-game guide for finding useful purchases and figuring out where to go next. Every Port button uses Driftwood\'s normal travel command; the server still checks unlocks and travel rules.');
+    imgui.Separator();
+
+    imgui.TextColored(theme.colors.warn, 'NEW PLAYER ESSENTIAL: SIGNET AND EXP RINGS');
+    imgui.TextWrapped('Keep Signet active while adventuring in conquest regions. Defeating eligible enemies with Signet earns Conquest Points, which buy some of the most useful early progression rewards.');
+    imgui.Spacing();
+    imgui.TextColored(theme.colors.hint, '1. Cast Signet anywhere');
+    imgui.TextWrapped('Type !signet anywhere on DriftwoodXI to receive the Signet buff. Recast it whenever it expires or is removed.');
+    if imgui.Button('Cast Signet now##welcome_signet') then
+        AshitaCore:GetChatManager():QueueCommand(1, '!signet');
+    end
+    if imgui.IsItemHovered() then imgui.SetTooltip('Runs the DriftwoodXI !signet command.'); end
+    imgui.Spacing();
+    imgui.TextColored(theme.colors.hint, '2. Buy an EXP ring from a city Conquest guard');
+    imgui.TextWrapped('Return to your home nation and speak with a Conquest guard near a city gate or exit. San d\'Oria has guards in Southern and Northern San d\'Oria; Bastok has guards in Bastok Markets and Bastok Mines; Windurst has guards throughout its Waters, Woods, Walls, and Port districts.');
+    imgui.TextWrapped('Choose the option to spend Conquest Points, open Common rewards, and look for Chariot Band, Empress Band, or Emperor Band. Availability and cost still follow the server\'s conquest rules.');
+    imgui.Spacing();
+    imgui.TextColored(theme.colors.hint, '3. Use the ring while leveling');
+    imgui.TextWrapped('Equip the ring and use it from the item menu to activate its EXP bonus. These rings have limited charges and reuse restrictions, so keep one ready and refresh or replace it through a Conquest guard when allowed.');
+    imgui.Separator();
+
+    imgui.BulletText(string.format('%d purchasable spells with learned/missing state.', #state.spells));
+    imgui.BulletText(string.format('%d weapons and %d armor pieces sold by standard vendors.', #state.items.weapon, #state.items.armor));
+    imgui.BulletText(string.format('%d other vendor supplies.', #state.items.supply));
+    imgui.BulletText(string.format('%d implemented regional quest guides.', #state.quests));
+    imgui.BulletText(string.format('%d nation and Zilart main-story mission guides.', #state.missions));
+    imgui.Spacing();
+    imgui.TextDisabled('Vendor inventories are generated from standard LandSandBoat data. Quest steps are Driftwood\'s own guide data.');
+    imgui.EndChild();
+end
+
+local function renderWindow()
+    renderCurrentLocation();
+    imgui.Separator();
+    if imgui.Button('Refresh character state') then rebuildCatalogs(); end
+    imgui.SameLine(); imgui.TextDisabled('/vana toggles this window; /vana <text> searches all purchase tabs.');
+    imgui.Separator();
+    if imgui.BeginTabBar('##vanacompass_tabs') then
+        if imgui.BeginTabItem('Welcome') then renderWelcome(); imgui.EndTabItem(); end
+        if imgui.BeginTabItem('Spells') then renderSpells(); imgui.EndTabItem(); end
+        if imgui.BeginTabItem('Weapons') then renderItems('weapon'); imgui.EndTabItem(); end
+        if imgui.BeginTabItem('Armor') then renderItems('armor'); imgui.EndTabItem(); end
+        if imgui.BeginTabItem('Supplies') then renderItems('supply'); imgui.EndTabItem(); end
+        if imgui.BeginTabItem('Quests') then renderQuests(); imgui.EndTabItem(); end
+        if imgui.BeginTabItem('Main Story') then renderMainStory(); imgui.EndTabItem(); end
+        imgui.EndTabBar();
+    end
+end
+
+local function handleTrackerRecord(line)
+    local parts = splitFields(line, '|');
+    local kind = parts[1];
+    if kind == 'd' then
+        local version = tonumber(parts[2]) or 0;
+        if version ~= 1 then
+            state.missionSyncInbound = false;
+            state.missionSyncStatus = string.format('Tracker protocol %d is unsupported; update VanaCompass.', version);
+            return;
+        end
+        state.missionSyncInbound = parts[3] == 'sync';
+        if state.missionSyncInbound then
+            state.completedQuestChunks = {};
+            state.activeQuestIds = {};
+            state.activeQuestSteps = {};
+            state.completedMissionChunks = {};
+            state.activeMissionIds = {};
+            state.activeMissionSteps = {};
+        end
+        return;
+    end
+    if kind == 'm' or kind == 'e' then
+        state.missionSyncStatus = line:sub(3);
+        if kind == 'e' then state.missionSyncInbound = false; end
+        return;
+    end
+    if not state.missionSyncInbound then return; end
+    if kind == 'z' then
+        state.missionSyncInbound = false;
+        state.questCompletionKnown = true;
+        state.missionCompletionKnown = true;
+        state.missionSyncStatus = 'Completion status synced.';
+        return;
+    end
+    if kind == 'am' then
+        local log = tonumber(parts[2]);
+        local row = splitFields(parts[3], ':');
+        if log ~= nil and row[1] ~= nil then
+            local id = tonumber(row[1]);
+            state.activeMissionIds[log] = id;
+            if id ~= nil then
+                state.activeMissionSteps[log] = {
+                    id = id,
+                    step = tonumber(row[2]) or 0,
+                    n = tonumber(row[3]) or 0,
+                };
+            end
+        end
+        return;
+    end
+    if kind == 'aq' then
+        local log = tonumber(parts[2]);
+        if log == nil then return; end
+        state.activeQuestIds[log] = state.activeQuestIds[log] or {};
+        state.activeQuestSteps[log] = state.activeQuestSteps[log] or {};
+        for _, encoded in ipairs(splitFields(parts[3], ',')) do
+            local row = splitFields(encoded, ':');
+            local id = tonumber(row[1]);
+            if id ~= nil then
+                state.activeQuestIds[log][id] = true;
+                state.activeQuestSteps[log][id] = {
+                    step = tonumber(row[2]) or 0,
+                    n = tonumber(row[3]) or 0,
+                };
+            end
+        end
+        return;
+    end
+    if kind == 'u' and parts[2] == 'q' then
+        local log, id = tonumber(parts[3]), tonumber(parts[4]);
+        if log ~= nil and id ~= nil then
+            state.activeQuestIds[log] = state.activeQuestIds[log] or {};
+            state.activeQuestIds[log][id] = true;
+            state.activeQuestSteps[log] = state.activeQuestSteps[log] or {};
+            state.activeQuestSteps[log][id] = { step = 0, n = 0, unclear = true };
+        end
+        return;
+    end
+    if kind == 'u' and parts[2] == 'm' then
+        local log, id = tonumber(parts[3]), tonumber(parts[4]);
+        if log ~= nil and id ~= nil then
+            state.activeMissionIds[log] = id;
+            state.activeMissionSteps[log] = { id = id, step = 0, n = 0, unclear = true };
+        end
+        return;
+    end
+    if kind == 'cm' then
+        local log = tonumber(parts[2]);
+        if log == nil then return; end
+        state.completedMissionChunks[log] = state.completedMissionChunks[log] or {};
+        for _, encoded in ipairs(splitFields(parts[3], ',')) do
+            local row = splitFields(encoded, ':');
+            if row[1] ~= nil and row[2] ~= nil then
+                state.completedMissionChunks[log][tonumber(row[1]) or 0] = tonumber(row[2], 16) or 0;
+            end
+        end
+        return;
+    end
+    if kind == 'cq' then
+        local log = tonumber(parts[2]);
+        if log == nil then return; end
+        state.completedQuestChunks[log] = state.completedQuestChunks[log] or {};
+        for _, encoded in ipairs(splitFields(parts[3], ',')) do
+            local row = splitFields(encoded, ':');
+            if row[1] ~= nil and row[2] ~= nil then
+                state.completedQuestChunks[log][tonumber(row[1]) or 0] = tonumber(row[2], 16) or 0;
+            end
+        end
+    end
+end
+
+ashita.events.register('packet_in', 'vanacompass_tracker_packet', function (e)
+    if e.id ~= 0x0017 then return; end
+    local sender = e.data_modified:sub(0x09, 0x17):gsub('%z.*$', '');
+    if sender ~= '_DWTDATA' then return; end
+    e.blocked = true;
+    local message = e.data_modified:sub(0x18, e.size):gsub('%z.*$', '');
+    local ok, err = pcall(handleTrackerRecord, message);
+    if not ok then state.missionSyncStatus = 'Completion sync error: ' .. tostring(err); end
+end);
+
+ashita.events.register('load', 'vanacompass_load', function ()
+    rebuildCatalogs(); rebuildQuests(); rebuildMissions();
+    requestMissionSync();
+    print(chat.header('vanacompass'):append(chat.message('/vana opens VanaCompass. ScrollFinder remains available separately with /scrolls.')));
+end);
+
+ashita.events.register('command', 'vanacompass_command', function (e)
+    local args = e.command:args();
+    if #args == 0 or (args[1] ~= '/vana' and args[1] ~= '/vanacompass' and args[1] ~= '/vc') then return; end
+    e.blocked = true;
+    if #args >= 2 and lower(args[2]) == 'help' then
+        print(chat.header('vanacompass'):append(chat.message('/vana toggles; /vana <text> opens and searches purchases; /vana refresh rereads character state.')));
+        return;
+    elseif #args >= 2 and lower(args[2]) == 'refresh' then
+        rebuildCatalogs(); rebuildQuests(); rebuildMissions();
+        requestMissionSync();
+        print(chat.header('vanacompass'):append(chat.message('Catalog and character state refreshed.')));
+        return;
+    elseif #args >= 2 then
+        local terms = {};
+        for index = 2, #args do terms[#terms + 1] = args[index]; end
+        local query = table.concat(terms, ' ');
+        state.spellSearch[1], state.itemSearch[1], state.questSearch[1], state.missionSearch[1] = query, query, query, query;
+        state.open[1] = true;
+    else
+        state.open[1] = not state.open[1];
+    end
+end);
+
+ashita.events.register('d3d_present', 'vanacompass_present', function ()
+    if not state.open[1] then return; end
+    local pushed = theme.push();
+    imgui.SetNextWindowSize({ 1120, 650 }, ImGuiCond_FirstUseEver);
+    local visible = imgui.Begin('VanaCompass##vanacompass', state.open,
+        bit.bor(ImGuiWindowFlags_NoDocking, ImGuiWindowFlags_NoScrollbar));
+    if visible then
+        local ok, err = pcall(renderWindow);
+        if not ok then
+            state.open[1] = false;
+            if not state.errorReported then
+                state.errorReported = true;
+                print(chat.header('vanacompass'):append(chat.error('Window closed after an error: ' .. tostring(err))));
+            end
+        end
+    end
+    imgui.End();
+    theme.pop(pushed);
+end);

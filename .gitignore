@@ -1,0 +1,15 @@
+*.zip
+*.log
+*.tmp
+__pycache__/
+*.py[cod]
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store
+
+# Local banner concepts retained for comparison; only the approved banner ships.
+assets/vanacompass-banner-v*.png
+
+# Locally generated release packages and staging trees.
+release/

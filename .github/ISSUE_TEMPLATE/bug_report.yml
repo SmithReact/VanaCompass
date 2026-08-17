@@ -1,0 +1,30 @@
+name: Bug report
+description: Report incorrect data, layout problems, or runtime errors.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: VanaCompass version
+      placeholder: 0.11.0
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Include the affected zone, entry, and exact steps to reproduce.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What should happen instead?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Position, screenshot, or log
+      description: Exact !pos and map grid are especially helpful for navigation issues.
