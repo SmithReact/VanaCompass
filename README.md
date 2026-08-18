@@ -32,7 +32,9 @@ current map position without leaving the game.
 VanaCompass is designed to answer both **what do I need?** and **how do I get
 there?** Across Spells, Weapons, Armor, Supplies, Quests, and Main Story, the
 detail pane pairs an NPC or objective location with the closest safe Driftwood
-teleport it can identify. Clicking **Port** sends the normal `!port` request;
+teleport it can identify. Home Points and Survival Guides are preferred for the
+requested zone, with regional Outposts used as field-zone fallbacks. Clicking
+**Port** sends the normal `!port` request;
 the server still enforces unlocks and travel rules. If a map is ambiguous or
 has no suitable destination, VanaCompass shows **No direct port** instead of
 guessing.

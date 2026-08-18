@@ -22,7 +22,8 @@ build. It is not a substitute for the upstream projects' license files.
 
 ## DriftwoodXI local addons
 
-- `dwport/catalog.lua` supplies Driftwood's public teleport type and ID mapping.
+- `dwport/catalog.lua` supplies Driftwood's public Home Point, Survival Guide,
+  and regional Outpost type and ID mapping.
 - `dwtracker/data/*_quests.lua` and its supported nation/Zilart mission files
   supply the guide text copied into `data/quests/` and `data/missions/`.
 - `data/quest_starts.lua` is generated from each quest guide's introduction.

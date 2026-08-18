@@ -115,8 +115,14 @@ return {
     ['Dragons Aery'] = {
         { kind = 'sg', id = 49, name = 'Dragons Aery' },
     },
+    ['East Ronfaure'] = {
+        { kind = 'op', id = 0, name = 'Ronfaure Outpost' },
+    },
     ['East Ronfaure (S)'] = {
         { kind = 'sg', id = 78, name = 'East Ronfaure [S]' },
+    },
+    ['East Sarutabaruta'] = {
+        { kind = 'op', id = 5, name = 'Sarutabaruta Outpost' },
     },
     ['Eastern Adoulin'] = {
         { kind = 'hp', id = 45, name = 'Eastern Adoulin #1', x = 7, y = 6 },
@@ -386,6 +392,9 @@ return {
     ['Southern San d\'Oria (S)'] = {
         { kind = 'hp', id = 68, name = 'Southern San d\'Oria [S] #1', x = 7, y = 10 },
         { kind = 'sg', id = 77, name = 'Southern San d\'Oria [S]' },
+    },
+    ['South Gustaberg'] = {
+        { kind = 'op', id = 3, name = 'Gustaberg Outpost' },
     },
     ['Tahrongi Canyon'] = {
         { kind = 'sg', id = 32, name = 'Tahrongi Canyon' },

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.12.1
+
+- Added regional Outposts from Driftwood's `dwport` catalog as fallbacks when
+  a field zone has no direct Home Point or Survival Guide destination.
+- South Gustaberg drop sources now offer Gustaberg Outpost instead of showing
+  `No direct port`; East Ronfaure and East Sarutabaruta receive their regional
+  outposts as well.
+
 ## 0.12.0
 
 - Added a searchable Drops tab containing monster-dropped weapons and armor

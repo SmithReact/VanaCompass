@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate ScrollFinder's compact vendor and Driftwood teleport catalogs."""
+"""Generate VanaCompass's compact vendor and Driftwood teleport catalogs."""
 
 from __future__ import annotations
 
@@ -11,6 +11,30 @@ from pathlib import Path
 
 
 LUA_STRING = r"'((?:\\.|[^'])*)'"
+
+# Outposts are regional rather than zone-specific. Use them only as fallbacks
+# for the outdoor zones in their region; an existing Home Point or Survival
+# Guide in the requested zone remains preferable.
+OUTPOST_ZONES = {
+    'Ronfaure': ('East Ronfaure', 'West Ronfaure'),
+    'Zulkheim': ('La Theine Plateau', 'Valkurm Dunes', 'Konschtat Highlands'),
+    'Norvallen': ('Jugner Forest', 'Batallia Downs'),
+    'Gustaberg': ('North Gustaberg', 'South Gustaberg'),
+    'Derfland': ('Pashhow Marshlands', 'Rolanberry Fields'),
+    'Sarutabaruta': ('East Sarutabaruta', 'West Sarutabaruta'),
+    'Kolshushu': ('Tahrongi Canyon', 'Buburimu Peninsula'),
+    'Aragoneu': ('Meriphataud Mountains', 'Sauromugue Champaign'),
+    'Fauregandi': ('Beaucedine Glacier',),
+    'Valdeaunia': ('Xarcabard',),
+    'Qufim Island': ('Qufim Island',),
+    "Li'Telor": ("The Sanctuary of Zi'Tah",),
+    'Kuzotz': ('Eastern Altepa Desert', 'Western Altepa Desert'),
+    'Vollbow': ('Cape Teriggan', 'Valley of Sorrows'),
+    'Elshimo Lowlands': ('Yuhtunga Jungle',),
+    'Elshimo Uplands': ('Yhoator Jungle',),
+    "Tu'Lia": ("Ru'Aun Gardens",),
+    'Tavnazian Archipelago': ('Lufaise Meadows', 'Misareaux Coast'),
+}
 
 
 def lua_unescape(value: str) -> str:
@@ -123,14 +147,14 @@ def parse_dwport(path: Path, hp_coords: dict[tuple[str, int], tuple[int, int]]) 
     )
 
     for line in path.read_text(encoding='utf-8').splitlines():
-        section_match = re.match(r'^catalog\.(hp|sg)\s*=', line)
+        section_match = re.match(r'^catalog\.(hp|sg|op)\s*=', line)
         if section_match:
             section = section_match.group(1)
             continue
         if section and line == '}':
             section = None
             continue
-        if section not in {'hp', 'sg'}:
+        if section not in {'hp', 'sg', 'op'}:
             continue
         match = entry_re.match(line)
         if not match:
@@ -138,6 +162,19 @@ def parse_dwport(path: Path, hp_coords: dict[tuple[str, int], tuple[int, int]]) 
 
         entry_id = int(match.group(1))
         name = lua_unescape(match.group(2))
+        if section == 'op':
+            for zone in OUTPOST_ZONES.get(name, ()):
+                # Outposts are fallbacks, not competitors for a direct
+                # destination already present in the target zone.
+                if zone not in result:
+                    result[zone] = [{
+                        'kind': 'op',
+                        'id': entry_id,
+                        'name': f'{name} Outpost',
+                        'x': None,
+                        'y': None,
+                    }]
+            continue
         if section == 'hp':
             hp_match = re.match(r'^(.*) #(\d+)$', name)
             if not hp_match:

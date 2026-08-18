@@ -2,7 +2,7 @@
 
 addon.name    = 'vanacompass';
 addon.author  = 'Unofficial DriftwoodXI community addon';
-addon.version = '0.12.0';
+addon.version = '0.12.1';
 addon.desc    = 'Find purchases, level-appropriate quests, story missions, job unlocks, and ports.';
 
 require('common');
