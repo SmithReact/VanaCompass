@@ -1,14 +1,15 @@
 -- VanaCompass: an in-game discovery guide for DriftwoodXI and Ashita 4.
 
 addon.name    = 'vanacompass';
-addon.author  = 'Unofficial DriftwoodXI community addon';
-addon.version = '0.12.2';
+addon.author  = 'Elcatrin (Spacedandy)';
+addon.version = '0.12.3';
 addon.desc    = 'Find purchases, level-appropriate quests, story missions, job unlocks, and ports.';
 
 require('common');
 
 local chat       = require('chat');
 local imgui      = require('imgui');
+local settings   = require('settings');
 local theme      = require('dwtheme');
 local spellShops = require('data.vendors');
 local shops      = require('data.shops');
@@ -17,6 +18,47 @@ local questStarts = require('data.quest_starts');
 local missionStarts = require('data.mission_starts');
 local gridPages = require('data.grid_calibrations');
 local acquisition = require('data.acquisition');
+
+-- Welcome is intentionally omitted: it is the permanent settings surface
+-- used to restore any optional tab that a player has hidden.
+local TAB_DEFINITIONS = {
+    { key = 'spells', label = 'Spells' },
+    { key = 'weapons', label = 'Weapons' },
+    { key = 'armor', label = 'Armor' },
+    { key = 'supplies', label = 'Supplies' },
+    { key = 'drops', label = 'Drops' },
+    { key = 'quests', label = 'Quests' },
+    { key = 'mainStory', label = 'Main Story' },
+};
+
+local defaultConfig = T{
+    tabs = T{
+        spells = true,
+        weapons = true,
+        armor = true,
+        supplies = true,
+        drops = true,
+        quests = true,
+        mainStory = true,
+    },
+};
+
+local config = defaultConfig;
+local okSettings, loadedSettings = pcall(settings.load, defaultConfig);
+if okSettings and loadedSettings ~= nil then
+    config = loadedSettings;
+end
+
+local function normalizeConfig()
+    if type(config.tabs) ~= 'table' then config.tabs = T{}; end
+    for _, tab in ipairs(TAB_DEFINITIONS) do
+        if type(config.tabs[tab.key]) ~= 'boolean' then
+            config.tabs[tab.key] = true;
+        end
+    end
+end
+
+normalizeConfig();
 
 local QUEST_AREAS = {
     require('data.quests.sandoria_quests'),
@@ -272,7 +314,34 @@ local state = {
     showBrowserList = { true },
     sourcePages = {},
     errorReported = false,
+    visibleTabs = {},
 };
+
+for _, tab in ipairs(TAB_DEFINITIONS) do
+    state.visibleTabs[tab.key] = { config.tabs[tab.key] };
+end
+
+local function applyConfiguredTabs()
+    normalizeConfig();
+    for _, tab in ipairs(TAB_DEFINITIONS) do
+        state.visibleTabs[tab.key][1] = config.tabs[tab.key];
+    end
+end
+
+local function saveVisibleTabs()
+    normalizeConfig();
+    for _, tab in ipairs(TAB_DEFINITIONS) do
+        config.tabs[tab.key] = state.visibleTabs[tab.key][1];
+    end
+    pcall(settings.save);
+end
+
+pcall(settings.register, 'settings', 'vanacompass_settings_update', function(s)
+    if s ~= nil then
+        config = s;
+        applyConfiguredTabs();
+    end
+end);
 
 local lower;
 
@@ -1970,22 +2039,46 @@ local function renderWelcome()
     imgui.TextWrapped('A searchable in-game guide for finding useful purchases and figuring out where to go next. Every Port button uses Driftwood\'s normal travel command; the server still checks unlocks and travel rules.');
     imgui.Separator();
 
-    imgui.TextColored(theme.colors.warn, 'NEW PLAYER ESSENTIAL: SIGNET AND EXP RINGS');
-    imgui.TextWrapped('Keep Signet active while adventuring in conquest regions. Defeating eligible enemies with Signet earns Conquest Points, which buy some of the most useful early progression rewards.');
-    imgui.Spacing();
-    imgui.TextColored(theme.colors.hint, '1. Cast Signet anywhere');
-    imgui.TextWrapped('Type !signet anywhere on DriftwoodXI to receive the Signet buff. Recast it whenever it expires or is removed.');
-    if imgui.Button('Cast Signet now##welcome_signet') then
-        AshitaCore:GetChatManager():QueueCommand(1, '!signet');
+    imgui.TextColored(theme.colors.hint, 'TAB VISIBILITY');
+    imgui.TextWrapped('Choose which guide tabs appear above. Welcome always remains visible so you can change these settings later.');
+    local tabSettingsChanged = false;
+    if imgui.Button('Show all tabs##welcome_show_all_tabs') then
+        for _, tab in ipairs(TAB_DEFINITIONS) do state.visibleTabs[tab.key][1] = true; end
+        tabSettingsChanged = true;
     end
-    if imgui.IsItemHovered() then imgui.SetTooltip('Runs the DriftwoodXI !signet command.'); end
-    imgui.Spacing();
-    imgui.TextColored(theme.colors.hint, '2. Buy an EXP ring from a city Conquest guard');
-    imgui.TextWrapped('Return to your home nation and speak with a Conquest guard near a city gate or exit. San d\'Oria has guards in Southern and Northern San d\'Oria; Bastok has guards in Bastok Markets and Bastok Mines; Windurst has guards throughout its Waters, Woods, Walls, and Port districts.');
-    imgui.TextWrapped('Choose the option to spend Conquest Points, open Common rewards, and look for Chariot Band, Empress Band, or Emperor Band. Availability and cost still follow the server\'s conquest rules.');
-    imgui.Spacing();
-    imgui.TextColored(theme.colors.hint, '3. Use the ring while leveling');
-    imgui.TextWrapped('Equip the ring and use it from the item menu to activate its EXP bonus. These rings have limited charges and reuse restrictions, so keep one ready and refresh or replace it through a Conquest guard when allowed.');
+    imgui.SameLine();
+    if imgui.Button('Spells only##welcome_spells_only') then
+        for _, tab in ipairs(TAB_DEFINITIONS) do
+            state.visibleTabs[tab.key][1] = tab.key == 'spells';
+        end
+        tabSettingsChanged = true;
+    end
+    for _, tab in ipairs(TAB_DEFINITIONS) do
+        if imgui.Checkbox(tab.label .. '##welcome_tab_' .. tab.key, state.visibleTabs[tab.key]) then
+            tabSettingsChanged = true;
+        end
+    end
+    if tabSettingsChanged then saveVisibleTabs(); end
+    imgui.Separator();
+
+    if imgui.CollapsingHeader('NEW PLAYER###welcome_new_player') then
+        imgui.TextColored(theme.colors.warn, 'SIGNET, CONQUEST POINTS, AND EXP RINGS');
+        imgui.TextWrapped('Keep Signet active while adventuring in conquest regions. Defeating eligible enemies with Signet earns Conquest Points, which buy some of the most useful early progression rewards.');
+        imgui.Spacing();
+        imgui.TextColored(theme.colors.hint, '1. Cast Signet anywhere');
+        imgui.TextWrapped('Type !signet anywhere on DriftwoodXI to receive the Signet buff. Recast it whenever it expires or is removed.');
+        if imgui.Button('Cast Signet now##welcome_signet') then
+            AshitaCore:GetChatManager():QueueCommand(1, '!signet');
+        end
+        if imgui.IsItemHovered() then imgui.SetTooltip('Runs the DriftwoodXI !signet command.'); end
+        imgui.Spacing();
+        imgui.TextColored(theme.colors.hint, '2. Buy an EXP ring from a city Conquest guard');
+        imgui.TextWrapped('Return to your home nation and speak with a Conquest guard near a city gate or exit. San d\'Oria has guards in Southern and Northern San d\'Oria; Bastok has guards in Bastok Markets and Bastok Mines; Windurst has guards throughout its Waters, Woods, Walls, and Port districts.');
+        imgui.TextWrapped('Choose the option to spend Conquest Points, open Common rewards, and look for Chariot Band, Empress Band, or Emperor Band. Availability and cost still follow the server\'s conquest rules.');
+        imgui.Spacing();
+        imgui.TextColored(theme.colors.hint, '3. Use the ring while leveling');
+        imgui.TextWrapped('Equip the ring and use it from the item menu to activate its EXP bonus. These rings have limited charges and reuse restrictions, so keep one ready and refresh or replace it through a Conquest guard when allowed.');
+    end
     imgui.Separator();
 
     imgui.BulletText(string.format('%d purchasable spells with learned/missing state.', #state.spells));
@@ -2007,13 +2100,13 @@ local function renderWindow()
     imgui.Separator();
     if imgui.BeginTabBar('##vanacompass_tabs') then
         if imgui.BeginTabItem('Welcome') then renderWelcome(); imgui.EndTabItem(); end
-        if imgui.BeginTabItem('Spells') then renderSpells(); imgui.EndTabItem(); end
-        if imgui.BeginTabItem('Weapons') then renderItems('weapon'); imgui.EndTabItem(); end
-        if imgui.BeginTabItem('Armor') then renderItems('armor'); imgui.EndTabItem(); end
-        if imgui.BeginTabItem('Supplies') then renderItems('supply'); imgui.EndTabItem(); end
-        if imgui.BeginTabItem('Drops') then renderDrops(); imgui.EndTabItem(); end
-        if imgui.BeginTabItem('Quests') then renderQuests(); imgui.EndTabItem(); end
-        if imgui.BeginTabItem('Main Story') then renderMainStory(); imgui.EndTabItem(); end
+        if state.visibleTabs.spells[1] and imgui.BeginTabItem('Spells') then renderSpells(); imgui.EndTabItem(); end
+        if state.visibleTabs.weapons[1] and imgui.BeginTabItem('Weapons') then renderItems('weapon'); imgui.EndTabItem(); end
+        if state.visibleTabs.armor[1] and imgui.BeginTabItem('Armor') then renderItems('armor'); imgui.EndTabItem(); end
+        if state.visibleTabs.supplies[1] and imgui.BeginTabItem('Supplies') then renderItems('supply'); imgui.EndTabItem(); end
+        if state.visibleTabs.drops[1] and imgui.BeginTabItem('Drops') then renderDrops(); imgui.EndTabItem(); end
+        if state.visibleTabs.quests[1] and imgui.BeginTabItem('Quests') then renderQuests(); imgui.EndTabItem(); end
+        if state.visibleTabs.mainStory[1] and imgui.BeginTabItem('Main Story') then renderMainStory(); imgui.EndTabItem(); end
         imgui.EndTabBar();
     end
 end

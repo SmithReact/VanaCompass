@@ -9,6 +9,8 @@ VanaCompass helps new and returning players find spell scrolls, ordinary shop
 equipment, quest starters, story missions, job unlocks, teleports, and their
 current map position without leaving the game.
 
+**Author:** Elcatrin (Spacedandy)
+
 > Community project. Not affiliated with or endorsed by Square Enix, Ashita,
 > or the DriftwoodXI team. FINAL FANTASY XI is a trademark of Square Enix.
 
@@ -41,9 +43,12 @@ guessing.
 
 ### Welcome
 
-The Welcome tab is a quick-start page for new characters. It explains Signet,
+The Welcome tab is VanaCompass's settings and quick-start page. Its persistent
+checkboxes choose which guide tabs appear, with **Show all tabs** and **Spells
+only** shortcuts for common layouts. Welcome itself always stays visible so
+hidden tabs can be restored. The collapsed **NEW PLAYER** bar explains Signet,
 Conquest Points, and the EXP rings sold under **Common rewards** by home-nation
-Conquest guards. It also has a **Cast Signet now** button for Driftwood's
+Conquest guards, and includes a **Cast Signet now** button for Driftwood's
 `!signet` command. The persistent header reports your current zone, safe map
 grid when known, and exact `!pos` coordinates.
 
@@ -109,6 +114,8 @@ catalog does not create per-frame UI load. Drop rates are intentionally omitted.
 This baseline comes from LandSandBoat. Driftwood can customize NM rewards,
 locations, or progression, so server behavior remains authoritative.
 
+![VanaCompass Drops tab showing non-vendor equipment, Leaping Lizzy spawn guidance, monster level, map area, and nearest Outpost](docs/images/drops-tab.png)
+
 ### Quests, Artifact quests, and Job Unlocks
 
 The Quests tab shows level-appropriate entries by default, with toggles for
@@ -148,6 +155,14 @@ select a destination, leaving more room for the walkthrough, while independent
 scrollbars keep long lists and instructions usable. The current zone, grid,
 and `!pos` header remains available as the content layout changes.
 
+The Welcome settings page can also hide any optional guide tab. This allows a
+player to keep only the features they use—for example, Welcome and Spells—so
+the tab bar remains compact. Choices persist across addon reloads, and Welcome
+always remains visible so every hidden tab can be restored. **Show all tabs**
+and **Spells only** provide quick presets.
+
+![VanaCompass Welcome settings showing a compact Spells-only layout and persistent tab visibility toggles](docs/images/tab-visibility.png)
+
 ![Animated demonstration of VanaCompass switching filters and resizing between two-column and compact layouts](docs/images/resizable-interface.gif)
 
 ## Installation
@@ -166,8 +181,9 @@ and `!pos` header remains available as the content layout changes.
    /vana
    ```
 
-No separate libraries are required. Ashita 4 supplies `common`, `chat`, and
-`imgui`; all VanaCompass-specific Lua and data files are bundled here.
+No separate libraries are required. Ashita 4 supplies `common`, `chat`,
+`imgui`, and `settings`; all VanaCompass-specific Lua and data files are
+bundled here.
 
 ## Commands
 

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.12.3
+
+- Turned the Welcome tab into the addon's settings page with persistent
+  visibility toggles for Spells, Weapons, Armor, Supplies, Drops, Quests, and
+  Main Story. Welcome always remains visible so hidden tabs can be restored.
+- Added Show all tabs and Spells only presets for quick layout changes.
+- Moved the Signet, Conquest Point, and EXP ring guide into a NEW PLAYER bar
+  that is collapsed by default.
+
 ## 0.12.2
 
 - Added verified map grids and exact `!pos` values to NM monster sources when
