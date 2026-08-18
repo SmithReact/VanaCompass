@@ -874,10 +874,26 @@ local function rebuildCatalogs()
                         nm.dropIds[itemId] = true;
                         local item = resources:GetItemById(itemId);
                         local itemName = item ~= nil and item.Name ~= nil and item.Name[1] or nil;
-                        nm.drops[#nm.drops + 1] = {
+                        local equipmentCategory = acquisition.dropItems[itemId];
+                        if equipmentCategory == nil and shops[itemId] ~= nil then
+                            if shops[itemId].category == 'weapon' then equipmentCategory = 2;
+                            elseif shops[itemId].category == 'armor' then equipmentCategory = 3; end
+                        end
+                        local drop = {
                             id = itemId,
                             name = itemName ~= nil and itemName ~= '' and itemName or ('Item #' .. tostring(itemId)),
                         };
+                        if item ~= nil and (equipmentCategory == 2 or equipmentCategory == 3) then
+                            drop.equipmentCategory = equipmentCategory;
+                            drop.description = item.Description and item.Description[1] or '';
+                            drop.level = item.Level or 0;
+                            drop.jobs = item.Jobs or 0;
+                            drop.slots = item.Slots or 0;
+                            drop.skill = item.Skill or 0;
+                            drop.damage = item.Damage or 0;
+                            drop.delay = item.Delay or 0;
+                        end
+                        nm.drops[#nm.drops + 1] = drop;
                     end
                 end
             end
@@ -2168,6 +2184,25 @@ local function renderVirtualNmRows(view)
     imgui.Dummy({ 1, 1 });
 end
 
+local function nmEquipmentTooltip(drop)
+    local category = drop.equipmentCategory == 2 and 'Weapon' or 'Armor';
+    local lines = { drop.name };
+    if drop.description ~= nil and drop.description ~= '' then
+        lines[#lines + 1] = drop.description;
+    end
+    lines[#lines + 1] = '';
+    lines[#lines + 1] = string.format('%s   Level %d', category, drop.level);
+    if drop.equipmentCategory == 2 then
+        lines[#lines + 1] = string.format('%s   DMG %d   Delay %d',
+            WEAPON_TYPES[drop.skill] or 'Other weapon', drop.damage, drop.delay);
+    end
+    local slots = slotsText(drop.slots);
+    if slots ~= '' then lines[#lines + 1] = 'Slots: ' .. slots; end
+    local jobs = jobsText(drop.jobs);
+    if jobs ~= '' then lines[#lines + 1] = 'Jobs: ' .. jobs; end
+    return (table.concat(lines, '\n'):gsub('%%', '%%%%'));
+end
+
 local function renderNmDetails(nm, idPrefix)
     if nm == nil then
         imgui.TextDisabled('Select an NM from the list.');
@@ -2194,7 +2229,11 @@ local function renderNmDetails(nm, idPrefix)
         if imgui.CollapsingHeader(string.format('Tracked drops (%d)###nm_drops_%s', #nm.drops, nm.key)) then
             imgui.TextDisabled('Equipment and spell sources already tracked by VanaCompass. Drop rates are omitted.');
             for index = 1, math.min(#nm.drops, 50) do
-                imgui.Bullet(); imgui.SameLine(); imgui.TextWrapped(nm.drops[index].name);
+                local drop = nm.drops[index];
+                imgui.Bullet(); imgui.SameLine(); imgui.TextWrapped(drop.name);
+                if drop.equipmentCategory ~= nil and imgui.IsItemHovered() then
+                    imgui.SetTooltip(nmEquipmentTooltip(drop));
+                end
             end
             if #nm.drops > 50 then
                 imgui.TextDisabled(string.format('+ %d more tracked items', #nm.drops - 50));

@@ -14,6 +14,8 @@
 - Added hover tooltips to spell-list rows with the spell description, magic
   type, job requirements, learned state, MP cost, cast and recast times,
   vendor count, and cheapest listed Gil price.
+- Added matching stat tooltips to equipment names in the NM tab's tracked-drop
+  list. Spell-scroll drop names remain plain text.
 - Kept image support out of this release so a future optional screenshot pack
   can use original, properly attributed captures without adding network access.
 
