@@ -11,6 +11,14 @@ build. It is not a substitute for the upstream projects' license files.
 - Inputs: `scripts/zones/**`, `scripts/enum/item.lua`, `sql/item_weapon.sql`,
   `sql/item_equipment.sql`, `sql/npc_list.sql`, and `sql/zone_settings.sql`
 - Generated output: `data/shops.lua`
+- Additional inputs: `sql/item_basic.sql`, `sql/mob_droplist.sql`,
+  `sql/mob_groups.sql`, `sql/mob_spawn_points.sql`, and
+  `sql/synth_recipes.sql`
+- Additional generated output: `data/acquisition.lua`, containing normalized
+  item-to-monster locations, the non-vendor weapon/armor browser subset, and
+  synthesis recipes. Monster drop rates are not copied. Locations and recipes
+  reflect standard LandSandBoat data and may differ from Driftwood
+  customizations or current progression.
 
 ## DriftwoodXI local addons
 

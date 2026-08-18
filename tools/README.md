@@ -21,6 +21,8 @@ target server's era and rules before release.
   quest guide data.
 - `generate_shops.py` builds the general vendor inventory from a local
   LandSandBoat checkout.
+- `generate_acquisition.py` builds normalized non-vendor equipment,
+  alternate monster-source, and synthesis indexes.
 
 The generated catalogs retain the licensing and attribution requirements of
 their source data. See [`../DATA_SOURCES.md`](../DATA_SOURCES.md),

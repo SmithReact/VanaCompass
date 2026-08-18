@@ -17,6 +17,8 @@ current map position without leaving the game.
 - Purchasable spell scrolls filtered by job, level, learned state, and magic type
 - Weapons and armor filtered by equipment type, job, and level
 - Standard vendor supplies with NPC, location, price, and nearest teleport
+- Monster-drop locations and synthesis recipes for listed purchases
+- Searchable non-vendor weapon and armor drop browser
 - Quest and main-story guides with START NPCs, map grids, exact `!pos`, and ports
 - Server-synced active, completed, and current-step quest status
 - Artifact and advanced-job unlock filtering, including prerequisite chains
@@ -54,6 +56,9 @@ supported types.
 
 Selecting a spell shows every known vendor, the vendor's exact area, price or
 requirements, and a **Port** button for the closest destination to that NPC.
+When a scroll also drops from monsters, its collapsible drop section lists the
+monster, zone, level range, and closest supported port. Searching for a monster
+or drop zone finds matching scrolls as well.
 The filter-aware **Moogle's missing-scroll bill** totals each missing spell at
 its cheapest listed Gil vendor and identifies entries that require another
 currency or have no fixed Gil price.
@@ -68,8 +73,32 @@ Armor can be filtered by equipment slot; and Supplies collects other ordinary
 vendor goods. Job/level usability, item level, combat statistics, vendor,
 location, and price requirements remain visible in the detail pane. Every
 vendor row includes its closest available **Port** destination.
+The selected item's collapsible source sections also show available monster
+locations and synthesis recipes. Recipes include craft levels,
+crystal, ingredients, yield, and a warning when a synthesis key item is needed.
+Drop rates are intentionally omitted, and Driftwood-specific changes may differ
+from the standard LandSandBoat source data.
 
 ![VanaCompass Weapons tab using the weapon-type dropdown and showing the selected vendor's nearest port](docs/images/weapons-tab.png)
+
+### Monster Drops
+
+The Drops tab searches non-vendor equipment sources in both directions:
+enter an item such as **Bounding Boots**, or a monster such as **Leaping
+Lizzy**, to reach the same source details. The catalog contains only weapons
+and armor with a monster source that are absent from VanaCompass's standard
+vendor inventory; spells, materials, and quest-objective items are excluded.
+Filters isolate weapons or armor. Selecting a result shows every retained
+monster and zone, its standard level range, and the closest supported port.
+Both normal monsters and notorious monsters appear when they provide matching
+equipment, with notorious-monster sources tagged **NM**. Every result displays
+the lowest known monster level that can drop it, and the full catalog can be
+sorted by name or that level across both categories.
+Large lists are paged and the item browser is virtualized so the complete
+catalog does not create per-frame UI load. Drop rates are intentionally omitted.
+
+This baseline comes from LandSandBoat. Driftwood can customize NM rewards,
+locations, or progression, so server behavior remains authoritative.
 
 ### Quests, Artifact quests, and Job Unlocks
 

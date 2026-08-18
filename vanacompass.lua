@@ -2,7 +2,7 @@
 
 addon.name    = 'vanacompass';
 addon.author  = 'Unofficial DriftwoodXI community addon';
-addon.version = '0.11.2';
+addon.version = '0.12.0';
 addon.desc    = 'Find purchases, level-appropriate quests, story missions, job unlocks, and ports.';
 
 require('common');
@@ -16,6 +16,7 @@ local teleports  = require('data.teleports');
 local questStarts = require('data.quest_starts');
 local missionStarts = require('data.mission_starts');
 local gridPages = require('data.grid_calibrations');
+local acquisition = require('data.acquisition');
 
 local QUEST_AREAS = {
     require('data.quests.sandoria_quests'),
@@ -113,6 +114,11 @@ local SPELL_TYPES = {
     [1] = 'White Magic', [2] = 'Black Magic', [3] = 'Summoning',
     [4] = 'Ninjutsu', [5] = 'Bard Song', [6] = 'Blue Magic',
     [7] = 'Geomancy',
+};
+
+local DROP_CATEGORY_NAMES = {
+    [2] = 'Weapons',
+    [3] = 'Armor',
 };
 
 -- FFXI's labeled town-map cells are usually 40 world units wide. Vendor
@@ -218,6 +224,7 @@ local state = {
     open = { false },
     spellSearch = { '' },
     itemSearch = { '' },
+    dropSearch = { '' },
     questSearch = { '' },
     missionSearch = { '' },
     spellMode = 1,
@@ -228,6 +235,11 @@ local state = {
     spellTypeNames = {},
     spellViewCache = nil,
     itemMode = 'weapon',
+    dropCategory = 0,
+    dropSort = 1,
+    dropItems = {},
+    dropViewCache = nil,
+    selectedDropItem = nil,
     itemSorts = { weapon = 2, armor = 2, supply = 1 },
     itemTypeFilters = { weapon = '', armor = '' },
     myLevel = { false },
@@ -258,6 +270,7 @@ local state = {
     currentLocation = nil,
     locationUpdatedAt = -1,
     showBrowserList = { true },
+    sourcePages = {},
     errorReported = false,
 };
 
@@ -616,6 +629,31 @@ local function rebuildCatalogs()
         if state.selectedItems[category] == nil then state.selectedItems[category] = rows[1]; end
     end
     if state.selectedSpell == nil then state.selectedSpell = state.spells[1]; end
+
+    if #state.dropItems == 0 then
+        for itemId, category in pairs(acquisition.dropItems) do
+                local resource = resources:GetItemById(itemId);
+            if resource ~= nil and resource.Name ~= nil and resource.Name[1] ~= nil and resource.Name[1] ~= '' then
+                local sources = acquisition.drops[itemId] or {};
+                local minimumDropLevel = math.huge;
+                for _, source in ipairs(sources) do
+                    local level = source.minLevel or source[3];
+                    if level ~= nil and level > 0 and level < minimumDropLevel then minimumDropLevel = level; end
+                end
+                state.dropItems[#state.dropItems + 1] = {
+                    id = itemId,
+                    name = resource.Name[1],
+                    description = resource.Description and resource.Description[1] or '',
+                    category = category,
+                    sources = sources,
+                    minimumDropLevel = minimumDropLevel,
+                };
+            end
+        end
+        table.sort(state.dropItems, function (a, b) return lower(a.name) < lower(b.name); end);
+        state.selectedDropItem = state.dropItems[1];
+        state.dropViewCache = nil;
+    end
 end
 
 local function rebuildQuests()
@@ -798,6 +836,127 @@ local function vendorTable(rows, idPrefix)
     imgui.EndTable();
 end
 
+local function sourceZoneName(source)
+    local zoneId = source.zoneId or source[2];
+    return AshitaCore:GetResourceManager():GetString('zones.names', zoneId) or
+        acquisition.zones[zoneId] or string.format('Zone #%d', zoneId);
+end
+
+local function sourceMonsterName(source)
+    return source.monster or source[1];
+end
+
+local function sourceIsNm(source)
+    return source.isNm == true or source[5] == 1;
+end
+
+local function sourceZoneSearchName(source)
+    local zoneId = source.zoneId or source[2];
+    return source.zone or acquisition.zones[zoneId] or '';
+end
+
+local function itemResourceName(itemId)
+    local resource = AshitaCore:GetResourceManager():GetItemById(itemId);
+    if resource ~= nil and resource.Name ~= nil and resource.Name[1] ~= nil and resource.Name[1] ~= '' then
+        return resource.Name[1];
+    end
+    return string.format('Item #%d', itemId);
+end
+
+local function sourceLevelText(source)
+    local minimum, maximum = source.minLevel or source[3], source.maxLevel or source[4];
+    if minimum == nil or minimum <= 0 then return 'Level unknown'; end
+    if maximum == nil or maximum == minimum then
+        return string.format('Lv.%d', minimum);
+    end
+    return string.format('Lv.%d-%d', minimum, maximum);
+end
+
+local function renderDropSources(rows, idPrefix)
+    if rows == nil or #rows == 0 then return; end
+    if not imgui.CollapsingHeader(string.format('Monster sources (%d)###drops_%s', #rows, idPrefix)) then return; end
+    imgui.TextDisabled('Standard LandSandBoat locations; Driftwood customizations may differ.');
+    local pageSize = 25;
+    local pageCount = math.max(1, math.ceil(#rows / pageSize));
+    local page = math.max(1, math.min(state.sourcePages[idPrefix] or 1, pageCount));
+    state.sourcePages[idPrefix] = page;
+    if pageCount > 1 then
+        if imgui.SmallButton('< Previous##drop_page_prev_' .. idPrefix) and page > 1 then
+            page = page - 1;
+        end
+        imgui.SameLine();
+        imgui.Text(string.format('Page %d / %d', page, pageCount));
+        imgui.SameLine();
+        if imgui.SmallButton('Next >##drop_page_next_' .. idPrefix) and page < pageCount then
+            page = page + 1;
+        end
+        state.sourcePages[idPrefix] = page;
+    end
+    local first = (page - 1) * pageSize + 1;
+    local last = math.min(#rows, first + pageSize - 1);
+    if imgui.GetWindowWidth() < 620 then
+        for index = first, last do
+            local source = rows[index];
+            local zone = sourceZoneName(source);
+            imgui.TextWrapped((sourceIsNm(source) and '[NM] ' or '') ..
+                sourceMonsterName(source) .. '   ' .. sourceLevelText(source));
+            imgui.TextWrapped(zone);
+            portButton(closestTeleport(zone), 'drop_' .. idPrefix .. '_' .. index);
+            if index < last then imgui.Separator(); end
+        end
+        return;
+    end
+    if not imgui.BeginTable('##drops_' .. idPrefix, 3,
+        bit.bor(ImGuiTableFlags_Borders, ImGuiTableFlags_RowBg, ImGuiTableFlags_SizingStretchProp)) then return; end
+    imgui.TableSetupColumn('Monster', ImGuiTableColumnFlags_WidthStretch, 1.2);
+    imgui.TableSetupColumn('Zone / level', ImGuiTableColumnFlags_WidthStretch, 1.3);
+    imgui.TableSetupColumn('Closest port', ImGuiTableColumnFlags_WidthStretch, 1.1);
+    imgui.TableHeadersRow();
+    for index = first, last do
+        local source = rows[index];
+        local zone = sourceZoneName(source);
+        imgui.TableNextRow();
+        imgui.TableNextColumn(); imgui.TextWrapped((sourceIsNm(source) and '[NM] ' or '') .. sourceMonsterName(source));
+        imgui.TableNextColumn(); imgui.TextWrapped(zone .. '   ' .. sourceLevelText(source));
+        imgui.TableNextColumn(); portButton(closestTeleport(zone), 'drop_' .. idPrefix .. '_' .. index);
+    end
+    imgui.EndTable();
+end
+
+local function recipeIngredientsText(recipe)
+    local parts = {};
+    for _, ingredient in ipairs(recipe.ingredients or {}) do
+        local count = ingredient[2] or 1;
+        parts[#parts + 1] = itemResourceName(ingredient[1]) .. (count > 1 and (' x' .. count) or '');
+    end
+    return table.concat(parts, ', ');
+end
+
+local function renderCraftingSources(rows, idPrefix)
+    if rows == nil or #rows == 0 then return; end
+    if not imgui.CollapsingHeader(string.format('Crafting recipes (%d)###recipes_%s', #rows, idPrefix)) then return; end
+    for index, recipe in ipairs(rows) do
+        imgui.TextColored(theme.colors.hint, recipe.craft);
+        imgui.TextWrapped(string.format('%s   Yield: %d', itemResourceName(recipe.crystal), recipe.resultQty or 1));
+        imgui.TextDisabled('Ingredients:'); imgui.SameLine();
+        imgui.TextWrapped(recipeIngredientsText(recipe));
+        if recipe.keyItem ~= nil then
+            imgui.TextColored(theme.colors.warn, 'A synthesis key item is required.');
+        end
+        if index < #rows then imgui.Separator(); end
+    end
+end
+
+local function renderAcquisitionSources(itemId, idPrefix)
+    if itemId == nil then return; end
+    local drops = acquisition.drops[itemId];
+    local recipes = acquisition.recipes[itemId];
+    if (drops == nil or #drops == 0) and (recipes == nil or #recipes == 0) then return; end
+    imgui.Separator();
+    renderDropSources(drops, idPrefix);
+    renderCraftingSources(recipes, idPrefix);
+end
+
 local function browserListToggle()
     local label = state.showBrowserList[1] and 'Hide list' or 'Show list';
     if imgui.SmallButton(label .. '##browser_list') then
@@ -861,6 +1020,11 @@ local function spellVisible(spell, ignoreLearnedState, jobId, jobLevel)
     if query == '' or lower(spell.name):find(query, 1, true) or lower(spell.typeName):find(query, 1, true) then return true; end
     for _, vendor in ipairs(spell.vendors) do
         if lower(vendor.npc):find(query, 1, true) or lower(vendor.zone):find(query, 1, true) then return true; end
+    end
+    local itemId = acquisition.spellItems[normalizeName(spell.name)];
+    for _, source in ipairs(itemId ~= nil and acquisition.drops[itemId] or {}) do
+        if lower(sourceMonsterName(source)):find(query, 1, true) or
+            lower(sourceZoneSearchName(source)):find(query, 1, true) then return true; end
     end
     return false;
 end
@@ -1052,6 +1216,7 @@ local function renderSpells()
             imgui.TextWrapped(spell.levels ~= '' and spell.levels or 'No valid job requirements');
             imgui.Separator();
             vendorTable(spell.vendors, 'spell_' .. spell.id);
+            renderAcquisitionSources(acquisition.spellItems[normalizeName(spell.name)], 'spell_' .. spell.id);
         end
         imgui.EndChild();
         imgui.EndTable();
@@ -1072,6 +1237,7 @@ local function renderSpells()
             imgui.TextDisabled('Magic type:'); imgui.SameLine(); imgui.Text(spell.typeName);
             imgui.TextDisabled('Job requirements:'); imgui.TextWrapped(spell.levels ~= '' and spell.levels or 'No valid job requirements');
             imgui.Separator(); vendorTable(spell.vendors, 'spell_full_' .. spell.id);
+            renderAcquisitionSources(acquisition.spellItems[normalizeName(spell.name)], 'spell_full_' .. spell.id);
         else imgui.TextDisabled('Select a spell from the list.'); end
         imgui.EndChild();
     end
@@ -1105,6 +1271,10 @@ local function itemVisible(item)
         lower(itemTypeName(item, state.itemMode)):find(query, 1, true) then return true; end
     for _, vendor in ipairs(item.vendors) do
         if lower(vendor.npc):find(query, 1, true) or lower(vendor.zone):find(query, 1, true) then return true; end
+    end
+    for _, source in ipairs(acquisition.drops[item.id] or {}) do
+        if lower(sourceMonsterName(source)):find(query, 1, true) or
+            lower(sourceZoneSearchName(source)):find(query, 1, true) then return true; end
     end
     return false;
 end
@@ -1212,6 +1382,7 @@ local function renderItems(category)
             end
             if item.description ~= '' then imgui.TextWrapped(item.description); end
             imgui.Separator(); vendorTable(item.vendors, category .. '_' .. item.id);
+            renderAcquisitionSources(item.id, category .. '_' .. item.id);
         end
         imgui.EndChild();
         imgui.EndTable();
@@ -1229,7 +1400,158 @@ local function renderItems(category)
             end
             if item.description ~= '' then imgui.TextWrapped(item.description); end
             imgui.Separator(); vendorTable(item.vendors, category .. '_full_' .. item.id);
+            renderAcquisitionSources(item.id, category .. '_full_' .. item.id);
         else imgui.TextDisabled('Show the list and select an item.'); end
+        imgui.EndChild();
+    end
+end
+
+local function getDropView()
+    local query = lower(state.dropSearch[1]);
+    local cached = state.dropViewCache;
+    if cached ~= nil and cached.query == query and cached.category == state.dropCategory and
+        cached.sort == state.dropSort then
+        return cached;
+    end
+    local view = {
+        query = query,
+        category = state.dropCategory,
+        sort = state.dropSort,
+        items = {},
+        visibleIds = {},
+    };
+    for _, item in ipairs(state.dropItems) do
+        local visible = state.dropCategory == 0 or item.category == state.dropCategory;
+        if visible and query ~= '' then
+            visible = lower(item.name):find(query, 1, true) ~= nil or
+                lower(item.description):find(query, 1, true) ~= nil or
+                lower(DROP_CATEGORY_NAMES[item.category]):find(query, 1, true) ~= nil;
+            if not visible then
+                for _, source in ipairs(item.sources) do
+                    if lower(sourceMonsterName(source)):find(query, 1, true) or
+                        lower(sourceZoneSearchName(source)):find(query, 1, true) then
+                        visible = true;
+                        break
+                    end
+                end
+            end
+        end
+        if visible then
+            view.items[#view.items + 1] = item;
+            view.visibleIds[item.id] = true;
+        end
+    end
+    if state.dropSort == 2 then
+        table.sort(view.items, function (a, b)
+            if a.minimumDropLevel ~= b.minimumDropLevel then
+                return a.minimumDropLevel < b.minimumDropLevel;
+            end
+            return lower(a.name) < lower(b.name);
+        end);
+    end
+    state.dropViewCache = view;
+    return view;
+end
+
+local function renderVirtualDropRows(items)
+    if #items == 0 then return; end
+    local rowHeight = imgui.GetFrameHeightWithSpacing();
+    local originY = imgui.GetCursorPosY();
+    local scrollY = imgui.GetScrollY();
+    local viewportHeight = imgui.GetWindowHeight();
+    local first = math.max(1, math.floor(scrollY / rowHeight) + 1);
+    local last = math.min(#items, math.ceil((scrollY + viewportHeight) / rowHeight) + 2);
+    imgui.SetCursorPosY(originY + (first - 1) * rowHeight);
+    for index = first, last do
+        local item = items[index];
+        local rowY = imgui.GetCursorPosY();
+        local level = item.minimumDropLevel < math.huge and tostring(item.minimumDropLevel) or '?';
+        local label = string.format('Lv.%s  [%s]  %s##drop_item_%d',
+            level, DROP_CATEGORY_NAMES[item.category], item.name, item.id);
+        if imgui.Selectable(label, state.selectedDropItem == item) then state.selectedDropItem = item; end
+        imgui.SetCursorPosY(rowY + rowHeight);
+    end
+    imgui.SetCursorPosY(originY + #items * rowHeight);
+    imgui.Dummy({ 1, 1 });
+end
+
+local function renderDropItemDetails(item, idPrefix)
+    if item == nil then
+        imgui.TextDisabled('Select a dropped item from the list.');
+        return;
+    end
+    imgui.Text(item.name); imgui.SameLine();
+    imgui.TextDisabled(DROP_CATEGORY_NAMES[item.category]);
+    if item.minimumDropLevel < math.huge then
+        imgui.TextDisabled(string.format('Lowest listed monster level: %d', item.minimumDropLevel));
+    else
+        imgui.TextDisabled('Lowest listed monster level: unknown');
+    end
+    if item.description ~= '' then imgui.TextWrapped(item.description); end
+    renderDropSources(item.sources, idPrefix .. '_' .. item.id);
+    renderCraftingSources(acquisition.recipes[item.id], idPrefix .. '_' .. item.id);
+end
+
+local function renderDrops()
+    local toolbarWidth = imgui.GetWindowWidth();
+    searchHeader(state.dropSearch, 'item, monster, or zone');
+    if toolbarWidth >= 1050 then imgui.SameLine(); end
+    local filters = {
+        { label = 'All', category = 0 },
+        { label = 'Weapons', category = 2 },
+        { label = 'Armor', category = 3 },
+    };
+    for index, filter in ipairs(filters) do
+        if index > 1 then imgui.SameLine(); end
+        local category = filter.category;
+        local selected = pushSelectedButton(state.dropCategory == category);
+        if imgui.SmallButton(filter.label .. '##drop_category_' .. category) then state.dropCategory = category; end
+        if selected then imgui.PopStyleColor(); end
+    end
+    if toolbarWidth >= 720 then imgui.SameLine(); end
+    imgui.TextDisabled('Sort:');
+    for index, label in ipairs({ 'Name', 'Level' }) do
+        imgui.SameLine();
+        local selected = pushSelectedButton(state.dropSort == index);
+        if imgui.SmallButton(label .. '##drop_sort_' .. index) then state.dropSort = index; end
+        if selected then imgui.PopStyleColor(); end
+    end
+    browserListToggle();
+    local view = getDropView();
+    imgui.TextDisabled(string.format('%d non-vendor equipment item%s match. Drop rates are intentionally omitted.',
+        #view.items, #view.items == 1 and '' or 's'));
+    imgui.Separator();
+
+    local stacked = imgui.GetWindowWidth() < 760;
+    if state.showBrowserList[1] and not stacked and
+        imgui.BeginTable('##drop_layout', 2, ImGuiTableFlags_SizingStretchProp) then
+        imgui.TableSetupColumn('Dropped items', ImGuiTableColumnFlags_WidthStretch, 1.0);
+        imgui.TableSetupColumn('Sources', ImGuiTableColumnFlags_WidthStretch, 2.0);
+        imgui.TableNextRow(); imgui.TableNextColumn();
+        imgui.BeginChild('##drop_list', { 0, 0 }, ImGuiChildFlags_Borders);
+        renderVirtualDropRows(view.items);
+        if #view.items == 0 then state.selectedDropItem = nil;
+        elseif state.selectedDropItem == nil or not view.visibleIds[state.selectedDropItem.id] then
+            state.selectedDropItem = view.items[1];
+        end
+        imgui.EndChild();
+        imgui.TableNextColumn();
+        imgui.BeginChild('##drop_details', { 0, 0 }, ImGuiChildFlags_Borders);
+        renderDropItemDetails(state.selectedDropItem, 'wide');
+        imgui.EndChild();
+        imgui.EndTable();
+    else
+        if state.showBrowserList[1] then
+            imgui.BeginChild('##drop_list_stacked', { 0, 180 }, ImGuiChildFlags_Borders);
+            renderVirtualDropRows(view.items);
+            if #view.items == 0 then state.selectedDropItem = nil;
+            elseif state.selectedDropItem == nil or not view.visibleIds[state.selectedDropItem.id] then
+                state.selectedDropItem = view.items[1];
+            end
+            imgui.EndChild();
+        end
+        imgui.BeginChild('##drop_details_full', { 0, 0 }, ImGuiChildFlags_Borders);
+        renderDropItemDetails(state.selectedDropItem, 'full');
         imgui.EndChild();
     end
 end
@@ -1570,6 +1892,7 @@ local function renderWelcome()
     imgui.BulletText(string.format('%d purchasable spells with learned/missing state.', #state.spells));
     imgui.BulletText(string.format('%d weapons and %d armor pieces sold by standard vendors.', #state.items.weapon, #state.items.armor));
     imgui.BulletText(string.format('%d other vendor supplies.', #state.items.supply));
+    imgui.BulletText(string.format('%d non-vendor dropped weapons and armor.', #state.dropItems));
     imgui.BulletText(string.format('%d implemented regional quest guides.', #state.quests));
     imgui.BulletText(string.format('%d nation and Zilart main-story mission guides.', #state.missions));
     imgui.Spacing();
@@ -1589,6 +1912,7 @@ local function renderWindow()
         if imgui.BeginTabItem('Weapons') then renderItems('weapon'); imgui.EndTabItem(); end
         if imgui.BeginTabItem('Armor') then renderItems('armor'); imgui.EndTabItem(); end
         if imgui.BeginTabItem('Supplies') then renderItems('supply'); imgui.EndTabItem(); end
+        if imgui.BeginTabItem('Drops') then renderDrops(); imgui.EndTabItem(); end
         if imgui.BeginTabItem('Quests') then renderQuests(); imgui.EndTabItem(); end
         if imgui.BeginTabItem('Main Story') then renderMainStory(); imgui.EndTabItem(); end
         imgui.EndTabBar();

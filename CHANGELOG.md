@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.12.0
+
+- Added a searchable Drops tab containing monster-dropped weapons and armor
+  that are absent from VanaCompass's standard vendor catalog. Spells,
+  materials, and quest-objective items are intentionally excluded.
+- Added each item's lowest known monster level to every Drops category, with
+  Name and Level sorting.
+- Added collapsible monster locations to existing purchase details, with
+  monster levels and nearest safe ports. Large source lists are paged to keep
+  rendering cost bounded.
+- Added collapsible synthesis recipes with craft levels, crystals,
+  ingredients, yields, and key-item requirement warnings.
+- Extended purchase-tab searches so a monster or drop zone can locate the
+  relevant items and spell scrolls.
+- Added a reproducible, normalized LandSandBoat acquisition-data generator;
+  drop rates are intentionally omitted and server customizations are clearly
+  identified.
+
 ## 0.11.2
 
 - Made the Spells filter toolbar responsive so the Show all jobs / levels
