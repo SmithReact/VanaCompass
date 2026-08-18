@@ -46,14 +46,9 @@ guessing.
 
 ### Welcome
 
-The Welcome tab is VanaCompass's settings and quick-start page. Its persistent
-checkboxes choose which guide tabs appear, with **Show all tabs** and **Spells
-only** shortcuts for common layouts. Welcome itself always stays visible so
-hidden tabs can be restored. The collapsed **NEW PLAYER** bar explains Signet,
-Conquest Points, and the EXP rings sold under **Common rewards** by home-nation
-Conquest guards, and includes a **Cast Signet now** button. The persistent
-header reports your current zone, safe map grid when known, and exact world
-coordinates.
+The Welcome tab lets you toggle every optional module, with **Show all tabs**
+and **Spells only** shortcuts for common layouts. Welcome always remains visible
+so hidden modules can be restored at any time.
 
 ### Spells
 
