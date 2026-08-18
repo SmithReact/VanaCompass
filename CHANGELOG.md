@@ -16,6 +16,9 @@
   vendor count, and cheapest listed Gil price.
 - Added matching stat tooltips to equipment names in the NM tab's tracked-drop
   list. Spell-scroll drop names remain plain text.
+- Grouped the NM browser into collapsible zone sections. The current zone is
+  pinned first as `Current Zone - <name>` and opens by default; other zones
+  begin collapsed, while active searches automatically expose matching areas.
 - Kept image support out of this release so a future optional screenshot pack
   can use original, properly attributed captures without adding network access.
 

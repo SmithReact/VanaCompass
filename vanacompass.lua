@@ -2128,6 +2128,7 @@ local function getNmView()
         zoneId = zoneId,
         sort = state.nmSort,
         items = {},
+        sections = {},
         visibleKeys = {},
         currentCount = 0,
     };
@@ -2154,34 +2155,58 @@ local function getNmView()
     nmSortRows(current);
     nmSortRows(other);
     view.currentCount = #current;
-    for _, nm in ipairs(current) do view.items[#view.items + 1] = nm; end
-    for _, nm in ipairs(other) do view.items[#view.items + 1] = nm; end
+    if zoneId > 0 then
+        view.sections[#view.sections + 1] = {
+            zoneId = zoneId,
+            zone = state.currentLocation and state.currentLocation.zone or ('Zone #' .. tostring(zoneId)),
+            current = true,
+            items = current,
+        };
+    end
+    local sectionsByZone = {};
+    for _, nm in ipairs(other) do
+        local section = sectionsByZone[nm.zoneId];
+        if section == nil then
+            section = { zoneId = nm.zoneId, zone = nm.zone, current = false, items = {} };
+            sectionsByZone[nm.zoneId] = section;
+            view.sections[#view.sections + 1] = section;
+        end
+        section.items[#section.items + 1] = nm;
+    end
+    table.sort(view.sections, function (a, b)
+        if a.current ~= b.current then return a.current; end
+        return lower(a.zone) < lower(b.zone);
+    end);
+    for _, section in ipairs(view.sections) do
+        nmSortRows(section.items);
+        for _, nm in ipairs(section.items) do view.items[#view.items + 1] = nm; end
+    end
     state.nmViewCache = view;
     return view;
 end
 
-local function renderVirtualNmRows(view)
-    local items = view.items;
-    if #items == 0 then return; end
-    local rowHeight = imgui.GetFrameHeightWithSpacing();
-    local originY = imgui.GetCursorPosY();
-    local scrollY = imgui.GetScrollY();
-    local viewportHeight = imgui.GetWindowHeight();
-    local first = math.max(1, math.floor(scrollY / rowHeight) + 1);
-    local last = math.min(#items, math.ceil((scrollY + viewportHeight) / rowHeight) + 2);
-    imgui.SetCursorPosY(originY + (first - 1) * rowHeight);
-    for index = first, last do
-        local nm = items[index];
-        local rowY = imgui.GetCursorPosY();
-        local level = nm.minLevel > 0 and tostring(nm.minLevel) or '?';
-        local prefix = nm.zoneId == view.zoneId and '[Here] ' or '';
-        local label = string.format('%sLv.%s  %s  [%s]##nm_%s',
-            prefix, level, nm.monster, nm.zone, nm.key);
-        if imgui.Selectable(label, state.selectedNm == nm) then state.selectedNm = nm; end
-        imgui.SetCursorPosY(rowY + rowHeight);
+local function renderNmSections(view)
+    for _, section in ipairs(view.sections) do
+        local title;
+        if section.current then
+            title = string.format('Current Zone - %s (%d)', section.zone, #section.items);
+        else
+            title = string.format('%s (%d)', section.zone, #section.items);
+        end
+        if view.query ~= '' then imgui.SetNextItemOpen(true, ImGuiCond_Always); end
+        local flags = section.current and ImGuiTreeNodeFlags_DefaultOpen or 0;
+        if imgui.CollapsingHeader(title .. '###nm_zone_' .. tostring(section.zoneId), flags) then
+            if #section.items == 0 then
+                imgui.TextDisabled(view.query ~= '' and 'No matching NMs in this zone.' or
+                    'No cataloged NMs in this zone.');
+            end
+            for _, nm in ipairs(section.items) do
+                local level = nm.minLevel > 0 and tostring(nm.minLevel) or '?';
+                local label = string.format('Lv.%s  %s##nm_%s', level, nm.monster, nm.key);
+                if imgui.Selectable(label, state.selectedNm == nm) then state.selectedNm = nm; end
+            end
+        end
     end
-    imgui.SetCursorPosY(originY + #items * rowHeight);
-    imgui.Dummy({ 1, 1 });
 end
 
 local function nmEquipmentTooltip(drop)
@@ -2270,7 +2295,7 @@ local function renderNms()
         imgui.TableSetupColumn('NM guide', ImGuiTableColumnFlags_WidthStretch, 1.85);
         imgui.TableNextRow(); imgui.TableNextColumn();
         imgui.BeginChild('##nm_list', { 0, 0 }, ImGuiChildFlags_Borders);
-        renderVirtualNmRows(view);
+        renderNmSections(view);
         if #view.items == 0 then state.selectedNm = nil;
         elseif state.selectedNm == nil or not view.visibleKeys[state.selectedNm.key] then
             state.selectedNm = view.items[1];
@@ -2284,7 +2309,7 @@ local function renderNms()
     else
         if state.showBrowserList[1] then
             imgui.BeginChild('##nm_list_stacked', { 0, 180 }, ImGuiChildFlags_Borders);
-            renderVirtualNmRows(view);
+            renderNmSections(view);
             if #view.items == 0 then state.selectedNm = nil;
             elseif state.selectedNm == nil or not view.visibleKeys[state.selectedNm.key] then
                 state.selectedNm = view.items[1];
