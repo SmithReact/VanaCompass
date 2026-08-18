@@ -131,8 +131,8 @@ Three filters make the larger quest catalog easier to use:
 - **Artifact quests** isolates job artifact chains and can optionally show
   artifact quests for jobs other than the one currently equipped.
 - **Job Unlocks** shows every supported advanced-job unlock, not only the
-  current job. Multi-quest prerequisites—such as the Paladin lead-in chain—are
-  kept in required order, followed by the final job-unlock step. Reaching
+  current job. Multi-quest prerequisites, such as the Paladin lead-in chain,
+  are kept in required order, followed by the final job-unlock step. Reaching
   level 30 does not bypass fame, nation, or prerequisite requirements.
 
 ### Main Story
@@ -156,7 +156,7 @@ scrollbars keep long lists and instructions usable. The current zone, grid,
 and `!pos` header remains available as the content layout changes.
 
 The Welcome settings page can also hide any optional guide tab. This allows a
-player to keep only the features they use—for example, Welcome and Spells—so
+player to keep only the features they use, for example Welcome and Spells, so
 the tab bar remains compact. Choices persist across addon reloads, and Welcome
 always remains visible so every hidden tab can be restored. **Show all tabs**
 and **Spells only** provide quick presets.
