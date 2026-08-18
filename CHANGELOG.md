@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.14.0
+
+- Added an optional NMs tab containing every LandSandBoat-marked notorious
+  monster in the generated server catalog.
+- Pinned NMs from the player's current zone above the remaining results and
+  added Name, Level, and Zone sorting plus name, placeholder, and zone search.
+- Added NM detail guides with levels, known grid and `!pos` areas, closest
+  ports, script-exposed placeholder instructions, and already-tracked spell
+  and equipment drops.
+- Virtualized the 3,511-row NM list and cached filtered views so only visible
+  rows are submitted to ImGui each frame.
+- Kept image support out of this release so a future optional screenshot pack
+  can use original, properly attributed captures without adding network access.
+
 ## 0.13.1
 
 - Expanded the NEW PLAYER guide with `/quests`, daily and weekly Drift Board

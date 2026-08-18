@@ -2,8 +2,8 @@
 
 addon.name    = 'vanacompass';
 addon.author  = 'Elcatrin (Spacedandy)';
-addon.version = '0.13.1';
-addon.desc    = 'Find spells, crafting materials, gear, quests, missions, and ports.';
+addon.version = '0.14.0';
+addon.desc    = 'Find spells, crafting materials, gear, NMs, quests, missions, and ports.';
 
 require('common');
 
@@ -28,6 +28,7 @@ local TAB_DEFINITIONS = {
     { key = 'supplies', label = 'Supplies' },
     { key = 'materials', label = 'Materials' },
     { key = 'drops', label = 'Drops' },
+    { key = 'nms', label = 'NMs' },
     { key = 'quests', label = 'Quests' },
     { key = 'mainStory', label = 'Main Story' },
 };
@@ -39,6 +40,7 @@ local defaultConfig = T{
         supplies = false,
         materials = false,
         drops = false,
+        nms = false,
         quests = false,
         mainStory = false,
     },
@@ -291,6 +293,7 @@ local state = {
     itemSearch = { '' },
     materialSearch = { '' },
     dropSearch = { '' },
+    nmSearch = { '' },
     questSearch = { '' },
     missionSearch = { '' },
     spellMode = 1,
@@ -309,6 +312,10 @@ local state = {
     dropItems = {},
     dropViewCache = nil,
     selectedDropItem = nil,
+    nmSort = 1,
+    nms = {},
+    nmViewCache = nil,
+    selectedNm = nil,
     itemSorts = { weapon = 2, armor = 2, supply = 1 },
     itemTypeFilters = { weapon = '', armor = '' },
     myLevel = { false },
@@ -478,6 +485,7 @@ local function refreshCurrentLocation()
         local zone = AshitaCore:GetResourceManager():GetString('zones.names', zoneId) or
             ('Zone ' .. tostring(zoneId));
         return {
+            zoneId = zoneId,
             zone = zone,
             grid = currentGrid(zoneId, x, groundY, height, subMapNum),
             subMap = subMapNum,
@@ -674,6 +682,7 @@ local function rebuildCatalogs()
         selectedItemIds[category] = selected and selected.id or nil;
     end
     local selectedMaterialId = state.selectedMaterial and state.selectedMaterial.id or nil;
+    local selectedNmKey = state.selectedNm and state.selectedNm.key or nil;
 
     state.spells = {};
     state.items = { weapon = {}, armor = {}, supply = {} };
@@ -825,6 +834,61 @@ local function rebuildCatalogs()
         table.sort(state.dropItems, function (a, b) return lower(a.name) < lower(b.name); end);
         state.selectedDropItem = state.dropItems[1];
         state.dropViewCache = nil;
+    end
+
+    if #state.nms == 0 then
+        local nmsByKey = {};
+        for _, row in ipairs(acquisition.nms or {}) do
+            local zoneId = row.zoneId or row[2];
+            local name = row.monster or row[1];
+            local key = tostring(zoneId) .. ':' .. normalizeName(name);
+            local entry = {
+                key = key,
+                monster = name,
+                zoneId = zoneId,
+                zone = acquisition.zones[zoneId] or ('Zone #' .. tostring(zoneId)),
+                minLevel = row.minLevel or row[3] or 0,
+                maxLevel = row.maxLevel or row[4] or 0,
+                positions = row.positions or row[5],
+                isNm = true,
+                drops = {},
+                dropIds = {},
+            };
+            state.nms[#state.nms + 1] = entry;
+            nmsByKey[key] = entry;
+        end
+
+        -- Reuse the addon's retained spell and equipment acquisition sources
+        -- instead of duplicating a second drop catalog for the NM browser.
+        for itemId, sources in pairs(acquisition.drops or {}) do
+            for _, source in ipairs(sources) do
+                if source.isNm == true or source[5] == 1 then
+                    local zoneId = source.zoneId or source[2];
+                    local name = source.monster or source[1];
+                    local nm = nmsByKey[tostring(zoneId) .. ':' .. normalizeName(name)];
+                    if nm ~= nil and not nm.dropIds[itemId] then
+                        nm.dropIds[itemId] = true;
+                        local item = resources:GetItemById(itemId);
+                        local itemName = item ~= nil and item.Name ~= nil and item.Name[1] or nil;
+                        nm.drops[#nm.drops + 1] = {
+                            id = itemId,
+                            name = itemName ~= nil and itemName ~= '' and itemName or ('Item #' .. tostring(itemId)),
+                        };
+                    end
+                end
+            end
+        end
+        for _, nm in ipairs(state.nms) do
+            nm.dropIds = nil;
+            table.sort(nm.drops, function (a, b) return lower(a.name) < lower(b.name); end);
+            if selectedNmKey == nm.key then state.selectedNm = nm; end
+        end
+        table.sort(state.nms, function (a, b)
+            if lower(a.zone) ~= lower(b.zone) then return lower(a.zone) < lower(b.zone); end
+            return lower(a.monster) < lower(b.monster);
+        end);
+        if state.selectedNm == nil then state.selectedNm = state.nms[1]; end
+        state.nmViewCache = nil;
     end
 end
 
@@ -1995,6 +2059,179 @@ local function renderDrops()
     end
 end
 
+local function nmSortRows(rows)
+    table.sort(rows, function (a, b)
+        if state.nmSort == 2 then
+            local aLevel = a.minLevel > 0 and a.minLevel or math.huge;
+            local bLevel = b.minLevel > 0 and b.minLevel or math.huge;
+            if aLevel ~= bLevel then return aLevel < bLevel; end
+        elseif state.nmSort == 3 and lower(a.zone) ~= lower(b.zone) then
+            return lower(a.zone) < lower(b.zone);
+        end
+        return lower(a.monster) < lower(b.monster);
+    end);
+end
+
+local function getNmView()
+    local query = lower(state.nmSearch[1]);
+    local zoneId = state.currentLocation and state.currentLocation.zoneId or 0;
+    local cached = state.nmViewCache;
+    if cached ~= nil and cached.query == query and cached.zoneId == zoneId and cached.sort == state.nmSort then
+        return cached;
+    end
+
+    local current, other = {}, {};
+    local view = {
+        query = query,
+        zoneId = zoneId,
+        sort = state.nmSort,
+        items = {},
+        visibleKeys = {},
+        currentCount = 0,
+    };
+    for _, nm in ipairs(state.nms) do
+        local visible = query == '' or lower(nm.monster):find(query, 1, true) ~= nil or
+            lower(nm.zone):find(query, 1, true) ~= nil;
+        if not visible then
+            local methods = acquisition.spawnMethods[nm.zoneId];
+            methods = methods and methods[nm.monster] or nil;
+            for _, method in ipairs(methods or {}) do
+                local placeholder = method.placeholder or method[1] or '';
+                if lower(placeholder):find(query, 1, true) ~= nil then
+                    visible = true;
+                    break
+                end
+            end
+        end
+        if visible then
+            local target = nm.zoneId == zoneId and current or other;
+            target[#target + 1] = nm;
+            view.visibleKeys[nm.key] = true;
+        end
+    end
+    nmSortRows(current);
+    nmSortRows(other);
+    view.currentCount = #current;
+    for _, nm in ipairs(current) do view.items[#view.items + 1] = nm; end
+    for _, nm in ipairs(other) do view.items[#view.items + 1] = nm; end
+    state.nmViewCache = view;
+    return view;
+end
+
+local function renderVirtualNmRows(view)
+    local items = view.items;
+    if #items == 0 then return; end
+    local rowHeight = imgui.GetFrameHeightWithSpacing();
+    local originY = imgui.GetCursorPosY();
+    local scrollY = imgui.GetScrollY();
+    local viewportHeight = imgui.GetWindowHeight();
+    local first = math.max(1, math.floor(scrollY / rowHeight) + 1);
+    local last = math.min(#items, math.ceil((scrollY + viewportHeight) / rowHeight) + 2);
+    imgui.SetCursorPosY(originY + (first - 1) * rowHeight);
+    for index = first, last do
+        local nm = items[index];
+        local rowY = imgui.GetCursorPosY();
+        local level = nm.minLevel > 0 and tostring(nm.minLevel) or '?';
+        local prefix = nm.zoneId == view.zoneId and '[Here] ' or '';
+        local label = string.format('%sLv.%s  %s  [%s]##nm_%s',
+            prefix, level, nm.monster, nm.zone, nm.key);
+        if imgui.Selectable(label, state.selectedNm == nm) then state.selectedNm = nm; end
+        imgui.SetCursorPosY(rowY + rowHeight);
+    end
+    imgui.SetCursorPosY(originY + #items * rowHeight);
+    imgui.Dummy({ 1, 1 });
+end
+
+local function renderNmDetails(nm, idPrefix)
+    if nm == nil then
+        imgui.TextDisabled('Select an NM from the list.');
+        return;
+    end
+    if state.currentLocation ~= nil and nm.zoneId == state.currentLocation.zoneId then
+        imgui.TextColored(theme.colors.ok, 'CURRENT ZONE');
+    end
+    imgui.TextWrapped(nm.monster);
+    imgui.TextDisabled(nm.zone .. '   ' .. sourceLevelText(nm));
+    renderSourcePosition(nm);
+    portButton(closestTeleport(nm.zone), 'nm_' .. idPrefix .. '_' .. nm.key);
+    imgui.Separator();
+    imgui.TextColored(theme.colors.hint, 'SPAWN');
+    local zoneMethods = acquisition.spawnMethods[nm.zoneId];
+    local methods = zoneMethods and zoneMethods[nm.monster] or nil;
+    if methods ~= nil and #methods > 0 then
+        renderSpawnMethod(nm);
+    else
+        textDisabledWrapped('No script-exposed placeholder instructions are available. This NM may use a timed, forced, battlefield, event, or other spawn method.');
+    end
+    imgui.Separator();
+    if #nm.drops > 0 then
+        if imgui.CollapsingHeader(string.format('Tracked drops (%d)###nm_drops_%s', #nm.drops, nm.key)) then
+            imgui.TextDisabled('Equipment and spell sources already tracked by VanaCompass. Drop rates are omitted.');
+            for index = 1, math.min(#nm.drops, 50) do
+                imgui.Bullet(); imgui.SameLine(); imgui.TextWrapped(nm.drops[index].name);
+            end
+            if #nm.drops > 50 then
+                imgui.TextDisabled(string.format('+ %d more tracked items', #nm.drops - 50));
+            end
+        end
+    else
+        imgui.TextDisabled('No equipment or spell drops are currently tracked for this NM.');
+    end
+end
+
+local function renderNms()
+    refreshCurrentLocation();
+    local toolbarWidth = imgui.GetWindowWidth();
+    searchHeader(state.nmSearch, 'NM, placeholder, or zone');
+    if toolbarWidth >= 640 then imgui.SameLine(); end
+    imgui.TextDisabled('Sort:');
+    for index, label in ipairs({ 'Name', 'Level', 'Zone' }) do
+        imgui.SameLine();
+        local selected = pushSelectedButton(state.nmSort == index);
+        if imgui.SmallButton(label .. '##nm_sort_' .. index) then state.nmSort = index; end
+        if selected then imgui.PopStyleColor(); end
+    end
+    browserListToggle();
+    local view = getNmView();
+    local currentZone = state.currentLocation and state.currentLocation.zone or 'current zone';
+    imgui.TextDisabled(string.format('%d NM%s match. %d in %s are pinned first.',
+        #view.items, #view.items == 1 and '' or 's', view.currentCount, currentZone));
+    imgui.Separator();
+
+    local stacked = imgui.GetWindowWidth() < 760;
+    if state.showBrowserList[1] and not stacked and
+        imgui.BeginTable('##nm_layout', 2, ImGuiTableFlags_SizingStretchProp) then
+        imgui.TableSetupColumn('Notorious monsters', ImGuiTableColumnFlags_WidthStretch, 1.15);
+        imgui.TableSetupColumn('NM guide', ImGuiTableColumnFlags_WidthStretch, 1.85);
+        imgui.TableNextRow(); imgui.TableNextColumn();
+        imgui.BeginChild('##nm_list', { 0, 0 }, ImGuiChildFlags_Borders);
+        renderVirtualNmRows(view);
+        if #view.items == 0 then state.selectedNm = nil;
+        elseif state.selectedNm == nil or not view.visibleKeys[state.selectedNm.key] then
+            state.selectedNm = view.items[1];
+        end
+        imgui.EndChild();
+        imgui.TableNextColumn();
+        imgui.BeginChild('##nm_details', { 0, 0 }, ImGuiChildFlags_Borders);
+        renderNmDetails(state.selectedNm, 'wide');
+        imgui.EndChild();
+        imgui.EndTable();
+    else
+        if state.showBrowserList[1] then
+            imgui.BeginChild('##nm_list_stacked', { 0, 180 }, ImGuiChildFlags_Borders);
+            renderVirtualNmRows(view);
+            if #view.items == 0 then state.selectedNm = nil;
+            elseif state.selectedNm == nil or not view.visibleKeys[state.selectedNm.key] then
+                state.selectedNm = view.items[1];
+            end
+            imgui.EndChild();
+        end
+        imgui.BeginChild('##nm_details_stacked', { 0, 0 }, ImGuiChildFlags_Borders);
+        renderNmDetails(state.selectedNm, 'stacked');
+        imgui.EndChild();
+    end
+end
+
 local function questVisible(quest)
     if state.questMode == 2 and not quest.artifact then return false; end
     if state.questMode == 3 and not quest.jobUnlock then return false; end
@@ -2367,6 +2604,7 @@ local function renderWelcome()
     imgui.BulletText(string.format('%d other vendor supplies.', #state.items.supply));
     imgui.BulletText(string.format('%d searchable crafting-related items with NPC and synthesis sources.', #state.materials));
     imgui.BulletText(string.format('%d non-vendor dropped weapons and armor.', #state.dropItems));
+    imgui.BulletText(string.format('%d notorious monsters with current-zone priority.', #state.nms));
     imgui.BulletText(string.format('%d implemented regional quest guides.', #state.quests));
     imgui.BulletText(string.format('%d nation and Zilart main-story mission guides.', #state.missions));
     imgui.Spacing();
@@ -2387,6 +2625,7 @@ local function renderWindow()
         if state.visibleTabs.supplies[1] and imgui.BeginTabItem('Supplies') then renderItems('supply'); imgui.EndTabItem(); end
         if state.visibleTabs.materials[1] and imgui.BeginTabItem('Materials') then renderMaterials(); imgui.EndTabItem(); end
         if state.visibleTabs.drops[1] and imgui.BeginTabItem('Drops') then renderDrops(); imgui.EndTabItem(); end
+        if state.visibleTabs.nms[1] and imgui.BeginTabItem('NMs') then renderNms(); imgui.EndTabItem(); end
         if state.visibleTabs.quests[1] and imgui.BeginTabItem('Quests') then renderQuests(); imgui.EndTabItem(); end
         if state.visibleTabs.mainStory[1] and imgui.BeginTabItem('Main Story') then renderMainStory(); imgui.EndTabItem(); end
         imgui.EndTabBar();
@@ -2537,7 +2776,8 @@ ashita.events.register('command', 'vanacompass_command', function (e)
         for index = 2, #args do terms[#terms + 1] = args[index]; end
         local query = table.concat(terms, ' ');
         state.spellSearch[1], state.itemSearch[1], state.materialSearch[1], state.dropSearch[1],
-            state.questSearch[1], state.missionSearch[1] = query, query, query, query, query, query;
+            state.nmSearch[1], state.questSearch[1], state.missionSearch[1] =
+            query, query, query, query, query, query, query;
         state.open[1] = true;
     else
         state.open[1] = not state.open[1];

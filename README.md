@@ -23,6 +23,7 @@ current map position without leaving the game.
   dynamic-stock warnings, nearest teleports, and synthesis recipes
 - Monster-drop locations and synthesis recipes for listed purchases
 - Searchable non-vendor weapon and armor drop browser
+- Searchable NM guide with current-zone priority, spawn areas, and placeholders
 - Quest and main-story guides with START NPCs, map grids, exact `!pos`, and ports
 - Server-synced active, completed, and current-step quest status
 - Artifact and advanced-job unlock filtering, including prerequisite chains
@@ -34,7 +35,7 @@ current map position without leaving the game.
 ## Guided tabs and nearest travel
 
 VanaCompass is designed to answer both **what do I need?** and **how do I get
-there?** Across Spells, Vendor Gear, Supplies, Materials, Drops, Quests, and Main Story, the
+there?** Across Spells, Vendor Gear, Supplies, Materials, Drops, NMs, Quests, and Main Story, the
 detail pane pairs an NPC or objective location with the closest safe Driftwood
 teleport it can identify. Home Points and Survival Guides are preferred for the
 requested zone, with regional Outposts used as field-zone fallbacks. Clicking
@@ -121,6 +122,24 @@ available spawn guidance. Drop rates are intentionally omitted, and Driftwood
 customizations may differ from the standard source data.
 
 ![VanaCompass Drops tab showing non-vendor equipment, Leaping Lizzy spawn guidance, monster level, map area, and nearest Outpost](docs/images/drops-tab.png)
+
+### Notorious Monsters
+
+The optional NMs tab searches the complete generated notorious-monster
+catalog by NM name, zone, or known placeholder. NMs belonging to your current
+zone are always pinned above the remaining results and marked **[Here]**. The
+full list can be sorted by name, level, or zone without submitting thousands
+of rows to ImGui every frame.
+
+Selecting an NM shows its level range, known grid or `!pos` area, closest
+supported **Port**, and script-exposed lottery instructions when available.
+The detail pane also lists equipment and spell drops already tracked elsewhere
+in VanaCompass. Drop rates are intentionally omitted. Timed, forced,
+battlefield, event, and other spawn types are identified as having no parsed
+placeholder instructions rather than being guessed.
+
+NM screenshots are not downloaded at runtime. A future optional image pack can
+use original captures while keeping the main addon lightweight and offline.
 
 ### Quests, Artifact quests, and Job Unlocks
 

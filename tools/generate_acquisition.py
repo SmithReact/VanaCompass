@@ -308,7 +308,7 @@ def parse_vendor_items(shops: Path) -> set[int]:
     }
 
 
-def build_catalog(server: Path, shops: Path, vendors: Path) -> tuple[dict[str, int], dict[int, int], dict[int, str], dict[int, dict[str, list[dict[str, object]]]], dict[int, list[dict[str, object]]], dict[int, list[dict[str, object]]]]:
+def build_catalog(server: Path, shops: Path, vendors: Path):
     item_rows = sql_rows(server / 'sql/item_basic.sql', 'item_basic')
     items = {int(row[0]): (str(row[2]), str(row[3])) for row in item_rows}
     item_rows_by_id = {int(row[0]): row for row in item_rows}
@@ -360,18 +360,43 @@ def build_catalog(server: Path, shops: Path, vendors: Path) -> tuple[dict[str, i
 
     drops: dict[int, list[dict[str, object]]] = defaultdict(list)
     drop_seen: dict[int, dict[tuple[str, int, int, int, bool], dict[str, object]]] = defaultdict(dict)
+    nms: dict[tuple[int, str], dict[str, object]] = {}
     for row in sql_rows(server / 'sql/mob_groups.sql', 'mob_groups'):
         group_id, pool_id, zone_id = int(row[0]), int(row[1]), int(row[2])
         group_name, drop_id = display_name(row[3]), int(row[6])
-        if drop_id not in drops_by_list:
-            continue
         spawn = spawn_groups.get((zone_id, group_id))
         names = sorted(spawn['names']) if spawn and spawn['names'] else [group_name]
         minimum = int(spawn['min']) if spawn else 0
         maximum = int(spawn['max']) if spawn else 0
+        is_nm = pool_id in notorious_pools
+        if is_nm:
+            for monster in names:
+                key = (zone_id, name_key(monster))
+                nm = nms.get(key)
+                if nm is None:
+                    nm = {
+                        'monster': monster,
+                        'zoneId': zone_id,
+                        'zone': zones.get(zone_id, f'Zone {zone_id}'),
+                        'min': minimum,
+                        'max': maximum,
+                        'positions': set(),
+                    }
+                    nms[key] = nm
+                else:
+                    if minimum > 0 and (not nm['min'] or minimum < int(nm['min'])):
+                        nm['min'] = minimum
+                    if maximum > int(nm['max']):
+                        nm['max'] = maximum
+                if spawn:
+                    nm['positions'].update(spawn['positions'].get(monster, set()))
+                nm['positions'].update(
+                    script_spawn_positions.get((zone_id, name_key(monster)), set())
+                )
+        if drop_id not in drops_by_list:
+            continue
         for item_id in drops_by_list[drop_id]:
             for monster in names:
-                is_nm = pool_id in notorious_pools
                 key = (monster, zone_id, minimum, maximum, is_nm)
                 source = drop_seen[item_id].get(key)
                 if source is None:
@@ -396,6 +421,10 @@ def build_catalog(server: Path, shops: Path, vendors: Path) -> tuple[dict[str, i
         for row in rows:
             row['positions'] = sorted(row['positions'])
         rows.sort(key=lambda row: (str(row['zone']).lower(), str(row['monster']).lower(), int(row['min'])))
+    nm_rows = list(nms.values())
+    for row in nm_rows:
+        row['positions'] = sorted(row['positions'])
+    nm_rows.sort(key=lambda row: (str(row['zone']).lower(), str(row['monster']).lower()))
 
     magic_categories = {'@WHITE_MAGIC', '@BLACK_MAGIC', '@SUMMONING', '@NINJUTSU', '@SONGS'}
 
@@ -425,7 +454,7 @@ def build_catalog(server: Path, shops: Path, vendors: Path) -> tuple[dict[str, i
     drops = {item_id: drops[item_id] for item_id in source_item_ids}
     retained_nms = {
         (int(row['zoneId']), name_key(str(row['monster']))): str(row['monster'])
-        for rows in drops.values() for row in rows if row['isNm']
+        for row in nm_rows
     }
     spawn_methods = parse_spawn_methods(server, zone_folders, canonical_mobs, retained_nms)
 
@@ -453,10 +482,16 @@ def build_catalog(server: Path, shops: Path, vendors: Path) -> tuple[dict[str, i
             'keyItem': int(row[2]),
         })
     used_zones = {int(row['zoneId']) for rows in drops.values() for row in rows}
-    return spell_items, drop_items, {zone_id: zones[zone_id] for zone_id in used_zones}, spawn_methods, dict(drops), dict(recipes)
+    used_zones.update(int(row['zoneId']) for row in nm_rows)
+    return (spell_items, drop_items, {zone_id: zones[zone_id] for zone_id in used_zones},
+            nm_rows, spawn_methods, dict(drops), dict(recipes))
 
 
-def write_catalog(path: Path, spell_items: dict[str, int], drop_items: dict[int, int], zones: dict[int, str], spawn_methods: dict[int, dict[str, list[dict[str, object]]]], drops: dict[int, list[dict[str, object]]], recipes: dict[int, list[dict[str, object]]]) -> None:
+def write_catalog(path: Path, spell_items: dict[str, int], drop_items: dict[int, int],
+                  zones: dict[int, str], nms: list[dict[str, object]],
+                  spawn_methods: dict[int, dict[str, list[dict[str, object]]]],
+                  drops: dict[int, list[dict[str, object]]],
+                  recipes: dict[int, list[dict[str, object]]]) -> None:
     lines = [
         '-- Generated from LandSandBoat SQL by tools/generate_acquisition.py; do not hand-edit.',
         'return {',
@@ -470,6 +505,20 @@ def write_catalog(path: Path, spell_items: dict[str, int], drop_items: dict[int,
     lines.extend(['    },', '    zones = {'])
     for zone_id in sorted(zones):
         lines.append(f'        [{zone_id}] = {lua_quote(zones[zone_id])},')
+    lines.extend(['    },', '    nms = {'])
+    for row in nms:
+        values = [lua_quote(str(row['monster'])), str(row['zoneId'])]
+        if row['min']:
+            values.extend([str(row['min']), str(row['max'])])
+        if row['positions']:
+            while len(values) < 4:
+                values.append('0')
+            positions = ', '.join(
+                '{ ' + ', '.join(lua_number(value) for value in position) + ' }'
+                for position in row['positions']
+            )
+            values.append('{ ' + positions + ' }')
+        lines.append('        { ' + ', '.join(values) + ' },')
     lines.extend(['    },', '    spawnMethods = {'])
     for zone_id in sorted(spawn_methods):
         lines.append(f'        [{zone_id}] = {{')
@@ -533,13 +582,14 @@ def main() -> None:
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
 
-    spell_items, drop_items, zones, spawn_methods, drops, recipes = build_catalog(
+    spell_items, drop_items, zones, nms, spawn_methods, drops, recipes = build_catalog(
         args.server, args.shops, args.vendors
     )
-    write_catalog(args.output, spell_items, drop_items, zones, spawn_methods, drops, recipes)
+    write_catalog(args.output, spell_items, drop_items, zones, nms, spawn_methods, drops, recipes)
     print(
         f'Generated {len(spell_items)} spell-item links, '
         f'{sum(len(rows) for rows in drops.values())} retained monster sources, '
+        f'{len(nms)} NMs, '
         f'{sum(len(rows) for rows in spawn_methods.values())} NM spawn guides, '
         f'{len(drop_items)} non-vendor equipment items, and '
         f'{sum(len(rows) for rows in recipes.values())} recipes for {len(recipes)} items.'
