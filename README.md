@@ -93,6 +93,8 @@ crystal, ingredients, yield, and a warning when a synthesis key item is needed.
 Drop rates are intentionally omitted, and Driftwood-specific changes may differ
 from the standard LandSandBoat source data.
 
+![VanaCompass Vendor Gear tab showing the weapon-type dropdown and selected vendor's nearest port](docs/images/weapons-tab.png)
+
 ### Materials
 
 The optional Materials tab complements Driftwood's `/craft` recommendations.
@@ -107,8 +109,6 @@ prices and quantities change with stock; VanaCompass reports the configured
 maximum price and never guarantees that an item is currently on the shelf.
 
 ![VanaCompass Materials tab showing Bronze Ingot guild vendors, wrapped shop details, nearest ports, and Smithing recipes](docs/images/materials-tab.png)
-
-![VanaCompass weapon vendor view using the weapon-type dropdown and showing the selected vendor's nearest port](docs/images/weapons-tab.png)
 
 ### Monster Drops
 
