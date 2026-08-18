@@ -54,6 +54,9 @@ supported types.
 
 Selecting a spell shows every known vendor, the vendor's exact area, price or
 requirements, and a **Port** button for the closest destination to that NPC.
+The filter-aware **Moogle's missing-scroll bill** totals each missing spell at
+its cheapest listed Gil vendor and identifies entries that require another
+currency or have no fixed Gil price.
 
 ![VanaCompass Spells tab showing spell filters, job requirements, vendor details, price, and nearest port](docs/images/spells-tab.png)
 

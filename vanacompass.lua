@@ -2,7 +2,7 @@
 
 addon.name    = 'vanacompass';
 addon.author  = 'Unofficial DriftwoodXI community addon';
-addon.version = '0.11.0';
+addon.version = '0.11.1';
 addon.desc    = 'Find purchases, level-appropriate quests, story missions, job unlocks, and ports.';
 
 require('common');
@@ -107,9 +107,11 @@ local WEAPON_TYPES = {
 };
 
 local SPELL_TYPES = {
-    [2] = 'White Magic', [3] = 'Black Magic', [4] = 'Summoning',
-    [5] = 'Ninjutsu', [6] = 'Bard Song', [7] = 'Blue Magic',
-    [8] = 'Geomancy',
+    -- ISpell.Type values used by FFXI's spell resources. Type 8 is Trust
+    -- magic, which has no vendor scrolls and therefore remains unlisted.
+    [1] = 'White Magic', [2] = 'Black Magic', [3] = 'Summoning',
+    [4] = 'Ninjutsu', [5] = 'Bard Song', [6] = 'Blue Magic',
+    [7] = 'Geomancy',
 };
 
 -- FFXI's labeled town-map cells are 40 world units wide. Vendor records pair
@@ -470,6 +472,26 @@ local function spellLevels(resource)
     return table.concat(parts, ', ');
 end
 
+local function vendorGilPrice(vendor)
+    if vendor.price ~= nil and vendor.price > 0 then return vendor.price; end
+    local notes = vendor.notes or '';
+    -- Variable-price shops are written as "450-515 Gil". The shopping bill
+    -- is explicitly a cheapest-vendor estimate, so use the low end.
+    local amount = notes:match('([%d,]+)%s*%-%s*[%d,]+%s*[Gg][Ii][Ll]') or
+        notes:match('([%d,]+)%s*[Gg][Ii][Ll]');
+    if amount == nil then return nil; end
+    return tonumber((amount:gsub(',', '')));
+end
+
+local function cheapestVendorGil(rows)
+    local cheapest = nil;
+    for _, vendor in ipairs(rows) do
+        local price = vendorGilPrice(vendor);
+        if price ~= nil and (cheapest == nil or price < cheapest) then cheapest = price; end
+    end
+    return cheapest;
+end
+
 local function rebuildCatalogs()
     local resources = AshitaCore:GetResourceManager();
     local player = AshitaCore:GetMemoryManager():GetPlayer();
@@ -497,6 +519,7 @@ local function rebuildCatalogs()
                     levels = spellLevels(resource),
                     jobLevels = resource.LevelRequired,
                     typeName = SPELL_TYPES[resource.Type] or 'Other magic',
+                    cheapestGil = cheapestVendorGil(rows),
                 };
                 state.spells[#state.spells + 1] = entry;
                 if selectedSpellId == id then state.selectedSpell = entry; end
@@ -668,7 +691,9 @@ local function portButton(destination, id)
     if imgui.SmallButton('Port##' .. id) then issuePort(destination); end
     if imgui.IsItemHovered() then imgui.SetTooltip('Travel to ' .. destination.name .. ' using !port.'); end
     imgui.SameLine();
-    imgui.TextDisabled(destination.name);
+    imgui.PushStyleColor(ImGuiCol_Text, theme.colors.dim);
+    imgui.TextWrapped(destination.name);
+    imgui.PopStyleColor();
 end
 
 local function vendorTable(rows, idPrefix)
@@ -698,15 +723,15 @@ local function vendorTable(rows, idPrefix)
     imgui.TableHeadersRow();
     for index, vendor in ipairs(rows) do
         imgui.TableNextRow();
-        imgui.TableNextColumn(); imgui.Text(vendor.npc);
+        imgui.TableNextColumn(); imgui.TextWrapped(vendor.npc);
         imgui.TableNextColumn();
         local location = vendor.location or '';
-        imgui.Text(vendor.zone .. (location ~= '' and (' (' .. location:gsub('^%(', ''):gsub('%)$', '') .. ')') or ''));
+        imgui.TextWrapped(vendor.zone .. (location ~= '' and (' (' .. location:gsub('^%(', ''):gsub('%)$', '') .. ')') or ''));
         imgui.TableNextColumn();
         if vendor.notes ~= nil then
-            imgui.Text(vendor.notes ~= '' and vendor.notes or '-');
+            imgui.TextWrapped(vendor.notes ~= '' and vendor.notes or '-');
         else
-            imgui.Text(string.format('%d gil%s', vendor.price or 0,
+            imgui.TextWrapped(string.format('%d gil%s', vendor.price or 0,
                 vendor.tier and string.format(' (shop tier %d)', vendor.tier) or ''));
         end
         imgui.TableNextColumn();
@@ -754,9 +779,9 @@ local function spellSortLevel(spell)
     return required ~= nil and required > 0 and required < 100 and required or math.huge;
 end
 
-local function spellVisible(spell)
-    if state.spellMode == 2 and spell.learned then return false; end
-    if state.spellMode == 3 and not spell.learned then return false; end
+local function spellVisible(spell, ignoreLearnedState)
+    if not ignoreLearnedState and state.spellMode == 2 and spell.learned then return false; end
+    if not ignoreLearnedState and state.spellMode == 3 and not spell.learned then return false; end
     if state.spellTypeFilter ~= '' and spell.typeName ~= state.spellTypeFilter then return false; end
     if not state.showAllSpells[1] then
         local player = AshitaCore:GetMemoryManager():GetPlayer();
@@ -771,6 +796,38 @@ local function spellVisible(spell)
         if lower(vendor.npc):find(query, 1, true) or lower(vendor.zone):find(query, 1, true) then return true; end
     end
     return false;
+end
+
+local function formatNumber(value)
+    local reversed = tostring(math.floor(value or 0)):reverse():gsub('(%d%d%d)', '%1,');
+    local formatted = reversed:reverse():gsub('^,', '');
+    return formatted;
+end
+
+local function renderMissingSpellBill()
+    local total, missingCount, pricedCount = 0, 0, 0;
+    for _, spell in ipairs(state.spells) do
+        -- The learned-state buttons do not change the bill; the search, magic
+        -- family, job, and level filters do. This keeps the total visible even
+        -- while someone briefly inspects their learned scrolls.
+        if not spell.learned and spellVisible(spell, true) then
+            missingCount = missingCount + 1;
+            if spell.cheapestGil ~= nil then
+                total = total + spell.cheapestGil;
+                pricedCount = pricedCount + 1;
+            end
+        end
+    end
+
+    local suffix = pricedCount < missingCount and
+        string.format(' + %d without a Gil price', missingCount - pricedCount) or '';
+    imgui.PushStyleColor(ImGuiCol_Text, theme.colors.warn);
+    imgui.TextWrapped(string.format("Moogle's missing-scroll bill: %s Gil for %d spell%s%s.",
+        formatNumber(total), missingCount, missingCount == 1 and '' or 's', suffix));
+    imgui.PopStyleColor();
+    if imgui.IsItemHovered() then
+        imgui.SetTooltip('Uses the cheapest listed Gil vendor once per missing spell. Search, magic type, job, and level filters apply; non-Gil currencies are excluded.');
+    end
 end
 
 local function renderSpells()
@@ -811,13 +868,14 @@ local function renderSpells()
     browserListToggle();
     local player = AshitaCore:GetMemoryManager():GetPlayer();
     if state.showAllSpells[1] then
-        imgui.TextDisabled('Showing vendor spells for every job and level.');
+        imgui.TextWrapped('Showing vendor spells for every job and level.');
     elseif player ~= nil then
         local jobName = AshitaCore:GetResourceManager():GetString('jobs.names_abbr', player:GetMainJob()) or '?';
-        imgui.TextDisabled(string.format('Showing vendor spells usable by %s %d.', jobName, player:GetMainJobLevel()));
+        imgui.TextWrapped(string.format('Showing vendor spells usable by %s %d.', jobName, player:GetMainJobLevel()));
     else
-        imgui.TextDisabled('Character job is unavailable; showing the vendor spell catalog.');
+        imgui.TextWrapped('Character job is unavailable; showing the vendor spell catalog.');
     end
+    renderMissingSpellBill();
     imgui.Separator();
     if state.showBrowserList[1] and imgui.GetWindowWidth() >= 760 and
         imgui.BeginTable('##spell_layout', 2, ImGuiTableFlags_SizingStretchProp) then
@@ -1029,7 +1087,7 @@ local function renderItems(category)
             imgui.Text(item.name);
             if category ~= 'supply' then
                 imgui.SameLine(); imgui.TextDisabled(string.format('Level %d', item.level));
-                imgui.TextDisabled(slotsText(item.slots) .. '   ' .. jobsText(item.jobs));
+                imgui.TextWrapped(slotsText(item.slots) .. '   ' .. jobsText(item.jobs));
                 if category == 'weapon' then
                     local skill = itemTypeName(item, category);
                     imgui.TextDisabled(string.format('%s   DMG %d   Delay %d', skill, item.damage, item.delay));
@@ -1047,7 +1105,7 @@ local function renderItems(category)
             imgui.Text(item.name);
             if category ~= 'supply' then
                 imgui.SameLine(); imgui.TextDisabled(string.format('Level %d', item.level));
-                imgui.TextDisabled(slotsText(item.slots) .. '   ' .. jobsText(item.jobs));
+                imgui.TextWrapped(slotsText(item.slots) .. '   ' .. jobsText(item.jobs));
                 if category == 'weapon' then
                     imgui.TextDisabled(string.format('%s   DMG %d   Delay %d', itemTypeName(item, category), item.damage, item.delay));
                 end
@@ -1133,7 +1191,7 @@ local function renderStartCard(entry, idPrefix)
         imgui.TextDisabled('Starter information is unavailable for this entry.');
         return;
     end
-    imgui.TextDisabled(start.kind .. ':'); imgui.SameLine(); imgui.Text(start.contact);
+    imgui.TextDisabled(start.kind .. ':'); imgui.SameLine(); imgui.TextWrapped(start.contact);
     if start.grid ~= nil and start.grid ~= '' then
         imgui.TextDisabled('Map grid:'); imgui.SameLine(); imgui.Text(start.grid);
     end
@@ -1171,9 +1229,9 @@ local function renderQuests()
         imgui.TextDisabled('Current job unavailable');
     end
     if state.questMode == 3 then
-        imgui.TextDisabled('Advanced-job unlock chains are listed in prerequisite order. Reach level 30 on any job before starting the final unlock steps.');
+        imgui.TextWrapped('Advanced-job unlock chains are listed in prerequisite order. Reach level 30 on any job before starting the final unlock steps.');
     end
-    imgui.TextDisabled('Level-appropriate entries are shown by default. Fame, job, nation, prior quests and other prerequisites still apply. ' .. state.missionSyncStatus);
+    imgui.TextWrapped('Level-appropriate entries are shown by default. Fame, job, nation, prior quests and other prerequisites still apply. ' .. state.missionSyncStatus);
     browserListToggle();
     imgui.Separator();
     local questStacked = imgui.GetWindowWidth() < 760;
@@ -1227,7 +1285,7 @@ local function renderQuests()
         imgui.BeginChild('##quest_details', { 0, 0 }, ImGuiChildFlags_Borders);
         local quest = state.selectedQuest;
         if quest then
-            imgui.Text(quest.name); imgui.SameLine(); imgui.TextDisabled(quest.area);
+            imgui.TextWrapped(quest.name .. '  ' .. quest.area);
             if activeQuest(quest.log, quest.id) then
                 imgui.SameLine(); imgui.TextColored(theme.colors.info, 'Active');
             elseif completedQuest(quest.log, quest.id) then
@@ -1250,7 +1308,7 @@ local function renderQuests()
         imgui.BeginChild('##quest_details_full', { 0, 0 }, ImGuiChildFlags_Borders);
         local quest = state.selectedQuest;
         if quest then
-            imgui.Text(quest.name); imgui.SameLine(); imgui.TextDisabled(quest.area);
+            imgui.TextWrapped(quest.name .. '  ' .. quest.area);
             if activeQuest(quest.log, quest.id) then imgui.SameLine(); imgui.TextColored(theme.colors.info, 'Active');
             elseif completedQuest(quest.log, quest.id) then imgui.SameLine(); imgui.TextColored(theme.colors.ok, 'Completed'); end
             imgui.Separator();
@@ -1297,7 +1355,7 @@ local function renderMainStory()
         if imgui.SmallButton(label .. '##story_' .. mode) then state.storyMode = mode; end
         if selected then imgui.PopStyleColor(); end
     end
-    imgui.TextDisabled('Missions are listed in story-ID order within each line. ' .. state.missionSyncStatus);
+    imgui.TextWrapped('Missions are listed in story-ID order within each line. ' .. state.missionSyncStatus);
     browserListToggle();
     imgui.Separator();
     local storyStacked = imgui.GetWindowWidth() < 760;
@@ -1336,7 +1394,7 @@ local function renderMainStory()
         imgui.BeginChild('##story_details', { 0, 0 }, ImGuiChildFlags_Borders);
         local mission = state.selectedMission;
         if mission then
-            imgui.Text(mission.name); imgui.SameLine(); imgui.TextDisabled(mission.area);
+            imgui.TextWrapped(mission.name .. '  ' .. mission.area);
             if activeMission(mission.log, mission.id) then
                 imgui.SameLine(); imgui.TextColored(theme.colors.info, 'Active');
             elseif completedMission(mission.log, mission.id) then
@@ -1353,7 +1411,7 @@ local function renderMainStory()
         imgui.BeginChild('##story_details_full', { 0, 0 }, ImGuiChildFlags_Borders);
         local mission = state.selectedMission;
         if mission then
-            imgui.Text(mission.name); imgui.SameLine(); imgui.TextDisabled(mission.area);
+            imgui.TextWrapped(mission.name .. '  ' .. mission.area);
             if activeMission(mission.log, mission.id) then imgui.SameLine(); imgui.TextColored(theme.colors.info, 'Active');
             elseif completedMission(mission.log, mission.id) then imgui.SameLine(); imgui.TextColored(theme.colors.ok, 'Completed'); end
             imgui.Separator();
@@ -1398,7 +1456,7 @@ local function renderWelcome()
     imgui.BulletText(string.format('%d implemented regional quest guides.', #state.quests));
     imgui.BulletText(string.format('%d nation and Zilart main-story mission guides.', #state.missions));
     imgui.Spacing();
-    imgui.TextDisabled('Vendor inventories are generated from standard LandSandBoat data. Quest steps are Driftwood\'s own guide data.');
+    imgui.TextWrapped('Vendor inventories are generated from standard LandSandBoat data. Quest steps are Driftwood\'s own guide data.');
     imgui.EndChild();
 end
 
@@ -1406,7 +1464,7 @@ local function renderWindow()
     renderCurrentLocation();
     imgui.Separator();
     if imgui.Button('Refresh character state') then rebuildCatalogs(); end
-    imgui.SameLine(); imgui.TextDisabled('/vana toggles this window; /vana <text> searches all purchase tabs.');
+    imgui.SameLine(); imgui.TextWrapped('/vana toggles this window; /vana <text> searches all purchase tabs.');
     imgui.Separator();
     if imgui.BeginTabBar('##vanacompass_tabs') then
         if imgui.BeginTabItem('Welcome') then renderWelcome(); imgui.EndTabItem(); end
