@@ -13,5 +13,9 @@ multiple sources. `DATA_SOURCES.md` records the exact inputs and revisions.
   DriftwoodXI author. Permission was confirmed before the initial public
   release on August 17, 2026.
 
-No Square Enix game assets are included. FINAL FANTASY XI names and references
-are used only to describe compatibility and in-game data.
+No Square Enix game-client files are included. The screenshots and animated
+demonstration under `docs/images` contain in-game FINAL FANTASY XI imagery and
+are provided only to document the addon's interface and behavior. Those media
+files are not offered under GPL-3.0. FINAL FANTASY XI and its game imagery are
+owned by Square Enix; this project is not affiliated with or endorsed by
+Square Enix.

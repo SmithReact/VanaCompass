@@ -25,6 +25,90 @@ current map position without leaving the game.
 - Driftwood launcher palette integration through the bundled theme adapter
 - New-player Signet, Conquest Point, and EXP-ring walkthrough
 
+## Guided tabs and nearest travel
+
+VanaCompass is designed to answer both **what do I need?** and **how do I get
+there?** Across Spells, Weapons, Armor, Supplies, Quests, and Main Story, the
+detail pane pairs an NPC or objective location with the closest safe Driftwood
+teleport it can identify. Clicking **Port** sends the normal `!port` request;
+the server still enforces unlocks and travel rules. If a map is ambiguous or
+has no suitable destination, VanaCompass shows **No direct port** instead of
+guessing.
+
+### Welcome
+
+The Welcome tab is a quick-start page for new characters. It explains Signet,
+Conquest Points, and the EXP rings sold under **Common rewards** by home-nation
+Conquest guards. It also has a **Cast Signet now** button for Driftwood's
+`!signet` command. The persistent header reports your current zone, safe map
+grid when known, and exact `!pos` coordinates.
+
+### Spells
+
+The Spells tab searches purchasable scrolls by spell name, vendor, or zone.
+Use the learned-state buttons to show missing or learned spells, restrict the
+list to the current job and level, or enable **Show all jobs / levels** to see
+every job requirement. Results can be sorted by name or level and filtered by
+magic family, including White Magic, Black Magic, Songs, Ninjutsu, and other
+supported types.
+
+Selecting a spell shows every known vendor, the vendor's exact area, price or
+requirements, and a **Port** button for the closest destination to that NPC.
+
+![VanaCompass Spells tab showing spell filters, job requirements, vendor details, price, and nearest port](docs/images/spells-tab.png)
+
+### Weapons, Armor, and Supplies
+
+The three purchase tabs share the same searchable vendor browser. Weapons can
+be narrowed to categories such as Axe, Great Axe, Dagger, or Great Sword;
+Armor can be filtered by equipment slot; and Supplies collects other ordinary
+vendor goods. Job/level usability, item level, combat statistics, vendor,
+location, and price requirements remain visible in the detail pane. Every
+vendor row includes its closest available **Port** destination.
+
+![VanaCompass Weapons tab using the weapon-type dropdown and showing the selected vendor's nearest port](docs/images/weapons-tab.png)
+
+### Quests, Artifact quests, and Job Unlocks
+
+The Quests tab shows level-appropriate entries by default, with toggles for
+quests above the current level and already-completed quests. A tracker sync
+adds active/completed status and highlights the current walkthrough step when
+the server reports one. Each guide begins with a clearly labeled **START** NPC,
+zone, grid coordinate, exact `!pos`, and nearest port; individual objectives
+also receive Port buttons wherever safe travel data exists.
+
+Three filters make the larger quest catalog easier to use:
+
+- **All quests** searches the normal regional catalog.
+- **Artifact quests** isolates job artifact chains and can optionally show
+  artifact quests for jobs other than the one currently equipped.
+- **Job Unlocks** shows every supported advanced-job unlock, not only the
+  current job. Multi-quest prerequisites—such as the Paladin lead-in chain—are
+  kept in required order, followed by the final job-unlock step. Reaching
+  level 30 does not bypass fame, nation, or prerequisite requirements.
+
+### Main Story
+
+Main Story keeps national missions and **Rise of the Zilart** chains in story
+order. Filters separate San d'Oria, Bastok, Windurst, and expansion progress;
+the completed toggle and tracker sync help returning players see what is done
+and which objective is active. Selecting a mission shows its recommended
+starting NPC, precise START location, and a numbered walkthrough. START and
+step locations receive nearest-port buttons when the destination is safe.
+
+![VanaCompass Main Story tab showing mission order, completion status, START NPC, walkthrough steps, coordinates, and ports](docs/images/main-story-tab.png)
+
+## Resizable modular interface
+
+The window can be resized for a full guide view or compact navigation duty.
+At wider sizes, the result list and detail guide sit side by side. At narrower
+sizes, they stack automatically. **Hide list** collapses the browser after you
+select a destination, leaving more room for the walkthrough, while independent
+scrollbars keep long lists and instructions usable. The current zone, grid,
+and `!pos` header remains available as the content layout changes.
+
+![Animated demonstration of VanaCompass switching filters and resizing between two-column and compact layouts](docs/images/resizable-interface.gif)
+
 ## Installation
 
 1. Download the latest release archive.
