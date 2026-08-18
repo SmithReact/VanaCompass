@@ -2714,7 +2714,9 @@ local function renderMainStory()
         if imgui.SmallButton(label .. '##story_' .. mode) then state.storyMode = mode; end
         if selected then imgui.PopStyleColor(); end
     end
-    imgui.TextWrapped('Missions are listed in story-ID order within each line. ' .. state.missionSyncStatus);
+    if state.showBrowserList[1] then
+        imgui.TextWrapped('Missions are listed in story-ID order within each line. ' .. state.missionSyncStatus);
+    end
     browserListToggle();
     imgui.Separator();
     local storyStacked = imgui.GetWindowWidth() < 760;

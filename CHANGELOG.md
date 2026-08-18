@@ -15,6 +15,8 @@
   location and place the closest-port control on its own readable row.
 - Moved the `/vana` command reminder to Welcome while keeping Refresh character
   state available above every module.
+- Hid the Main Story ordering and synchronization note when its mission list is
+  collapsed, leaving more room for the selected guide.
 
 ## 0.14.1
 
