@@ -8,9 +8,12 @@ build. It is not a substitute for the upstream projects' license files.
 - Repository: https://github.com/LandSandBoat/server
 - Commit: `baf0b36e1d2405467ef5ef82d52b8026d2aca7ae`
 - License: GPL-3.0
-- Inputs: `scripts/zones/**`, `scripts/enum/item.lua`, `sql/item_weapon.sql`,
+- Inputs: `scripts/zones/**`, `scripts/data/guild_shops.lua`,
+  `scripts/enum/item.lua`, `sql/item_weapon.sql`,
   `sql/item_equipment.sql`, `sql/npc_list.sql`, and `sql/zone_settings.sql`
-- Generated output: `data/shops.lua`
+- Generated outputs: `data/shops.lua` and `data/guild_shops.lua`. The guild
+  catalog retains shop hours, holidays, restocking behavior, maximum prices,
+  NPC positions, and map grids. Actual guild stock and price remain dynamic.
 - Additional inputs: `sql/item_basic.sql`, `sql/mob_droplist.sql`,
   `sql/mob_groups.sql`, `sql/mob_spawn_points.sql`, and
   `sql/synth_recipes.sql`

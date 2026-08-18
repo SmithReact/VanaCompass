@@ -2,8 +2,8 @@
 
 addon.name    = 'vanacompass';
 addon.author  = 'Elcatrin (Spacedandy)';
-addon.version = '0.12.5';
-addon.desc    = 'Find purchases, level-appropriate quests, story missions, job unlocks, and ports.';
+addon.version = '0.13.0';
+addon.desc    = 'Find spells, crafting materials, gear, quests, missions, and ports.';
 
 require('common');
 
@@ -13,6 +13,7 @@ local settings   = require('settings');
 local theme      = require('dwtheme');
 local spellShops = require('data.vendors');
 local shops      = require('data.shops');
+local guildShops = require('data.guild_shops');
 local teleports  = require('data.teleports');
 local questStarts = require('data.quest_starts');
 local missionStarts = require('data.mission_starts');
@@ -25,6 +26,7 @@ local TAB_DEFINITIONS = {
     { key = 'spells', label = 'Spells' },
     { key = 'vendorGear', label = 'Vendor Gear' },
     { key = 'supplies', label = 'Supplies' },
+    { key = 'materials', label = 'Materials' },
     { key = 'drops', label = 'Drops' },
     { key = 'quests', label = 'Quests' },
     { key = 'mainStory', label = 'Main Story' },
@@ -35,6 +37,7 @@ local defaultConfig = T{
         spells = true,
         vendorGear = false,
         supplies = false,
+        materials = false,
         drops = false,
         quests = false,
         mainStory = false,
@@ -286,6 +289,7 @@ local state = {
     open = { false },
     spellSearch = { '' },
     itemSearch = { '' },
+    materialSearch = { '' },
     dropSearch = { '' },
     questSearch = { '' },
     missionSearch = { '' },
@@ -310,6 +314,9 @@ local state = {
     myLevel = { false },
     spells = {},
     items = { weapon = {}, armor = {}, supply = {} },
+    materials = {},
+    materialViewCache = nil,
+    selectedMaterial = nil,
     quests = {},
     missions = {},
     questMode = 1,
@@ -404,6 +411,16 @@ local function pushSelectedButton(selected)
     local color = theme.colors.hint;
     imgui.PushStyleColor(ImGuiCol_Button, { color[1], color[2], color[3], 0.52 });
     return true;
+end
+
+local function textColoredWrapped(color, value)
+    imgui.PushStyleColor(ImGuiCol_Text, color);
+    imgui.TextWrapped(value);
+    imgui.PopStyleColor();
+end
+
+local function textDisabledWrapped(value)
+    textColoredWrapped(theme.colors.dim, value);
 end
 
 local function pageGridCalibration(zoneId, subMapNum)
@@ -628,6 +645,7 @@ local function spellLevels(resource)
 end
 
 local function vendorGilPrice(vendor)
+    if vendor.buyMax ~= nil and vendor.buyMax > 0 then return vendor.buyMax; end
     if vendor.price ~= nil and vendor.price > 0 then return vendor.price; end
     local notes = vendor.notes or '';
     -- Variable-price shops are written as "450-515 Gil". The shopping bill
@@ -655,11 +673,15 @@ local function rebuildCatalogs()
     for category, selected in pairs(state.selectedItems) do
         selectedItemIds[category] = selected and selected.id or nil;
     end
+    local selectedMaterialId = state.selectedMaterial and state.selectedMaterial.id or nil;
 
     state.spells = {};
     state.items = { weapon = {}, armor = {}, supply = {} };
     state.selectedSpell = nil;
     state.selectedItems = { weapon = nil, armor = nil, supply = nil };
+    state.materials = {};
+    state.selectedMaterial = nil;
+    state.materialViewCache = nil;
 
     for id = 1, 1299 do
         local resource = resources:GetSpellById(id);
@@ -703,6 +725,43 @@ local function rebuildCatalogs()
             end
         end
     end
+
+    -- Materials are every synthesis result, ingredient, crystal, and guild or
+    -- standard supply item. Names come from Ashita resources at runtime, which
+    -- keeps the generated source catalog compact.
+    local materialIds = {};
+    for resultId, recipes in pairs(acquisition.recipes or {}) do
+        materialIds[resultId] = true;
+        for _, recipe in ipairs(recipes) do
+            if recipe.crystal ~= nil then materialIds[recipe.crystal] = true; end
+            for _, ingredient in ipairs(recipe.ingredients or {}) do
+                materialIds[ingredient[1]] = true;
+            end
+        end
+    end
+    for id, shop in pairs(shops) do
+        if shop.category == 'supply' then materialIds[id] = true; end
+    end
+    for id in pairs(guildShops) do materialIds[id] = true; end
+
+    for id in pairs(materialIds) do
+        local resource = resources:GetItemById(id);
+        if resource ~= nil and resource.Name ~= nil and resource.Name[1] ~= nil and resource.Name[1] ~= '' then
+            local vendors = {};
+            for _, vendor in ipairs((shops[id] and shops[id].vendors) or {}) do vendors[#vendors + 1] = vendor; end
+            for _, vendor in ipairs((guildShops[id] and guildShops[id].vendors) or {}) do vendors[#vendors + 1] = vendor; end
+            local entry = {
+                id = id,
+                name = resource.Name[1],
+                description = resource.Description and resource.Description[1] or '',
+                vendors = vendors,
+                recipes = acquisition.recipes[id] or {},
+            };
+            state.materials[#state.materials + 1] = entry;
+            if selectedMaterialId == id then state.selectedMaterial = entry; end
+        end
+    end
+    table.sort(state.materials, function (a, b) return lower(a.name) < lower(b.name); end);
 
     table.sort(state.spells, function (a, b) return lower(a.name) < lower(b.name); end);
     local seenSpellTypes = {};
@@ -894,7 +953,7 @@ end
 
 local function portButton(destination, id)
     if destination == nil then
-        imgui.TextDisabled('No direct port');
+        textDisabledWrapped('No direct port');
         return;
     end
     if imgui.SmallButton('Port##' .. id) then issuePort(destination); end
@@ -906,7 +965,16 @@ local function portButton(destination, id)
 end
 
 local function renderVendorPriceAndRequirements(vendor)
-    if vendor.notes ~= nil then
+    if vendor.shopType == 'Guild shop' then
+        imgui.TextWrapped(string.format('Guild shop, variable stock and price; up to %d gil.', vendor.buyMax or 0));
+        if vendor.openHour ~= nil and vendor.closeHour ~= nil then
+            imgui.TextWrapped(string.format('Open %02d:00-%02d:00%s.', vendor.openHour, vendor.closeHour,
+                vendor.holiday and ('; closed ' .. vendor.holiday) or ''));
+        end
+        if (vendor.initial or 0) == 0 and (vendor.restockRate or 0) == 0 then
+            textColoredWrapped(theme.colors.warn, 'May be unavailable until players sell stock to the guild.');
+        end
+    elseif vendor.notes ~= nil then
         imgui.TextWrapped(vendor.notes ~= '' and vendor.notes or '-');
     else
         imgui.TextWrapped(string.format('%d gil%s', vendor.price or 0,
@@ -923,7 +991,7 @@ end
 local function vendorTable(rows, idPrefix)
     if imgui.GetWindowWidth() < 620 then
         for index, vendor in ipairs(rows) do
-            imgui.Text(vendor.npc);
+            imgui.TextWrapped(vendor.npc);
             local location = vendor.location or '';
             imgui.TextWrapped(vendor.zone .. (location ~= '' and
                 (' (' .. location:gsub('^%(', ''):gsub('%)$', '') .. ')') or ''));
@@ -1032,7 +1100,7 @@ end
 local function renderSourcePosition(source)
     local label, tooltip = sourcePositionText(source);
     if label == nil then
-        if sourceIsNm(source) then imgui.TextDisabled('NM area unavailable'); end
+        if sourceIsNm(source) then textDisabledWrapped('NM area unavailable'); end
         return;
     end
     imgui.PushStyleColor(ImGuiCol_Text, theme.colors.hint);
@@ -1063,10 +1131,8 @@ local function renderSpawnMethod(source)
         local chance = method.chance or method[2];
         local minimum = method.minimum or method[3] or 0;
         local maximum = method.maximum or method[4] or minimum;
-        imgui.PushStyleColor(ImGuiCol_Text, theme.colors.warn);
-        imgui.TextWrapped('Spawn: defeat the specific ' .. placeholder ..
+        textColoredWrapped(theme.colors.warn, 'Spawn: defeat the specific ' .. placeholder ..
             ' placeholder(s), not every ' .. placeholder .. '.');
-        imgui.PopStyleColor();
         -- ImGui TextWrapped treats its string as a printf format. Produce two
         -- percent signs here so its formatter displays one literal percent.
         local details = string.format('%d%%%% chance per qualifying placeholder despawn', chance);
@@ -1153,12 +1219,12 @@ local function renderCraftingSources(rows, idPrefix)
     if rows == nil or #rows == 0 then return; end
     if not imgui.CollapsingHeader(string.format('Crafting recipes (%d)###recipes_%s', #rows, idPrefix)) then return; end
     for index, recipe in ipairs(rows) do
-        imgui.TextColored(theme.colors.hint, recipe.craft);
+        textColoredWrapped(theme.colors.hint, recipe.craft);
         imgui.TextWrapped(string.format('%s   Yield: %d', itemResourceName(recipe.crystal), recipe.resultQty or 1));
         imgui.TextDisabled('Ingredients:'); imgui.SameLine();
         imgui.TextWrapped(recipeIngredientsText(recipe));
         if recipe.keyItem ~= nil then
-            imgui.TextColored(theme.colors.warn, 'A synthesis key item is required.');
+            textColoredWrapped(theme.colors.warn, 'A synthesis key item is required.');
         end
         if index < #rows then imgui.Separator(); end
     end
@@ -1639,6 +1705,121 @@ local function renderVendorGear()
     imgui.PopItemWidth();
     imgui.Separator();
     renderItems(state.vendorGearCategory);
+end
+
+local function getMaterialView()
+    local query = lower(state.materialSearch[1]);
+    local cached = state.materialViewCache;
+    if cached ~= nil and cached.query == query then return cached; end
+    local view = { query = query, items = {}, visibleIds = {} };
+    if #query >= 2 then
+        for _, item in ipairs(state.materials) do
+            local visible = lower(item.name):find(query, 1, true) ~= nil or
+                lower(item.description):find(query, 1, true) ~= nil;
+            if not visible then
+                for _, vendor in ipairs(item.vendors) do
+                    if lower(vendor.npc):find(query, 1, true) or
+                        lower(vendor.zone):find(query, 1, true) then
+                        visible = true;
+                        break
+                    end
+                end
+            end
+            if visible then
+                view.items[#view.items + 1] = item;
+                view.visibleIds[item.id] = true;
+            end
+        end
+    end
+    state.materialViewCache = view;
+    return view;
+end
+
+local function renderVirtualMaterialRows(items)
+    if #items == 0 then return; end
+    local rowHeight = imgui.GetFrameHeightWithSpacing();
+    local originY = imgui.GetCursorPosY();
+    local scrollY = imgui.GetScrollY();
+    local viewportHeight = imgui.GetWindowHeight();
+    local first = math.max(1, math.floor(scrollY / rowHeight) + 1);
+    local last = math.min(#items, math.ceil((scrollY + viewportHeight) / rowHeight) + 2);
+    imgui.SetCursorPosY(originY + (first - 1) * rowHeight);
+    for index = first, last do
+        local item = items[index];
+        local rowY = imgui.GetCursorPosY();
+        local vendorMark = #item.vendors > 0 and '[NPC] ' or '';
+        if imgui.Selectable(vendorMark .. item.name .. '##material_' .. item.id,
+            state.selectedMaterial == item) then
+            state.selectedMaterial = item;
+        end
+        imgui.SetCursorPosY(rowY + rowHeight);
+    end
+    imgui.SetCursorPosY(originY + #items * rowHeight);
+    imgui.Dummy({ 1, 1 });
+end
+
+local function renderMaterialDetails(item, idPrefix)
+    if item == nil then
+        imgui.TextDisabled('Search for a material and select it from the list.');
+        return;
+    end
+    imgui.Text(item.name);
+    if item.description ~= '' then imgui.TextWrapped(item.description); end
+    imgui.Separator();
+    if #item.vendors > 0 then
+        textColoredWrapped(theme.colors.hint, string.format('NPC vendors (%d)', #item.vendors));
+        vendorTable(item.vendors, 'material_' .. idPrefix .. '_' .. item.id);
+    else
+        textColoredWrapped(theme.colors.warn, 'No NPC vendor was found in the server shop data.');
+        imgui.TextWrapped('The item may need to be crafted, obtained from another source, or purchased from the Auction House.');
+    end
+    renderCraftingSources(item.recipes, 'material_' .. idPrefix .. '_' .. item.id);
+end
+
+local function renderMaterials()
+    searchHeader(state.materialSearch, 'material, vendor, or zone');
+    browserListToggle();
+    local view = getMaterialView();
+    if #state.materialSearch[1] < 2 then
+        imgui.TextDisabled('Enter at least two characters. Example: Bronze Ingot');
+    else
+        imgui.TextDisabled(string.format('%d crafting-related item%s match. [NPC] means at least one vendor is known.',
+            #view.items, #view.items == 1 and '' or 's'));
+    end
+    imgui.Separator();
+
+    local stacked = imgui.GetWindowWidth() < 760;
+    if state.showBrowserList[1] and not stacked and
+        imgui.BeginTable('##material_layout', 2, ImGuiTableFlags_SizingStretchProp) then
+        imgui.TableSetupColumn('Materials', ImGuiTableColumnFlags_WidthStretch, 1.0);
+        imgui.TableSetupColumn('Sources', ImGuiTableColumnFlags_WidthStretch, 2.0);
+        imgui.TableNextRow(); imgui.TableNextColumn();
+        imgui.BeginChild('##material_list', { 0, 0 }, ImGuiChildFlags_Borders);
+        renderVirtualMaterialRows(view.items);
+        if #view.items == 0 then state.selectedMaterial = nil;
+        elseif state.selectedMaterial == nil or not view.visibleIds[state.selectedMaterial.id] then
+            state.selectedMaterial = view.items[1];
+        end
+        imgui.EndChild();
+        imgui.TableNextColumn();
+        imgui.BeginChild('##material_details', { 0, 0 }, ImGuiChildFlags_Borders);
+        renderMaterialDetails(state.selectedMaterial, 'wide');
+        imgui.EndChild();
+        imgui.EndTable();
+    else
+        if state.showBrowserList[1] then
+            imgui.BeginChild('##material_list_stacked', { 0, 180 }, ImGuiChildFlags_Borders);
+            renderVirtualMaterialRows(view.items);
+            if #view.items == 0 then state.selectedMaterial = nil;
+            elseif state.selectedMaterial == nil or not view.visibleIds[state.selectedMaterial.id] then
+                state.selectedMaterial = view.items[1];
+            end
+            imgui.EndChild();
+        end
+        imgui.BeginChild('##material_details_stacked', { 0, 0 }, ImGuiChildFlags_Borders);
+        renderMaterialDetails(state.selectedMaterial, 'stacked');
+        imgui.EndChild();
+    end
 end
 
 local function getDropView()
@@ -2174,6 +2355,7 @@ local function renderWelcome()
     imgui.BulletText(string.format('%d purchasable spells with learned/missing state.', #state.spells));
     imgui.BulletText(string.format('%d weapons and %d armor pieces sold by standard vendors.', #state.items.weapon, #state.items.armor));
     imgui.BulletText(string.format('%d other vendor supplies.', #state.items.supply));
+    imgui.BulletText(string.format('%d searchable crafting-related items with NPC and synthesis sources.', #state.materials));
     imgui.BulletText(string.format('%d non-vendor dropped weapons and armor.', #state.dropItems));
     imgui.BulletText(string.format('%d implemented regional quest guides.', #state.quests));
     imgui.BulletText(string.format('%d nation and Zilart main-story mission guides.', #state.missions));
@@ -2193,6 +2375,7 @@ local function renderWindow()
         if state.visibleTabs.spells[1] and imgui.BeginTabItem('Spells') then renderSpells(); imgui.EndTabItem(); end
         if state.visibleTabs.vendorGear[1] and imgui.BeginTabItem('Vendor Gear') then renderVendorGear(); imgui.EndTabItem(); end
         if state.visibleTabs.supplies[1] and imgui.BeginTabItem('Supplies') then renderItems('supply'); imgui.EndTabItem(); end
+        if state.visibleTabs.materials[1] and imgui.BeginTabItem('Materials') then renderMaterials(); imgui.EndTabItem(); end
         if state.visibleTabs.drops[1] and imgui.BeginTabItem('Drops') then renderDrops(); imgui.EndTabItem(); end
         if state.visibleTabs.quests[1] and imgui.BeginTabItem('Quests') then renderQuests(); imgui.EndTabItem(); end
         if state.visibleTabs.mainStory[1] and imgui.BeginTabItem('Main Story') then renderMainStory(); imgui.EndTabItem(); end
@@ -2343,7 +2526,8 @@ ashita.events.register('command', 'vanacompass_command', function (e)
         local terms = {};
         for index = 2, #args do terms[#terms + 1] = args[index]; end
         local query = table.concat(terms, ' ');
-        state.spellSearch[1], state.itemSearch[1], state.questSearch[1], state.missionSearch[1] = query, query, query, query;
+        state.spellSearch[1], state.itemSearch[1], state.materialSearch[1], state.dropSearch[1],
+            state.questSearch[1], state.missionSearch[1] = query, query, query, query, query, query;
         state.open[1] = true;
     else
         state.open[1] = not state.open[1];

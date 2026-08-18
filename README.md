@@ -19,6 +19,8 @@ current map position without leaving the game.
 - Purchasable spell scrolls filtered by job, level, learned state, and magic type
 - Vendor Gear with weapons and armor filtered by equipment type, job, and level
 - Standard vendor supplies with NPC, location, price, and nearest teleport
+- Crafting-material lookup with ordinary and guild vendors, shop schedules,
+  dynamic-stock warnings, nearest teleports, and synthesis recipes
 - Monster-drop locations and synthesis recipes for listed purchases
 - Searchable non-vendor weapon and armor drop browser
 - Quest and main-story guides with START NPCs, map grids, exact `!pos`, and ports
@@ -32,7 +34,7 @@ current map position without leaving the game.
 ## Guided tabs and nearest travel
 
 VanaCompass is designed to answer both **what do I need?** and **how do I get
-there?** Across Spells, Weapons, Armor, Supplies, Quests, and Main Story, the
+there?** Across Spells, Vendor Gear, Supplies, Materials, Drops, Quests, and Main Story, the
 detail pane pairs an NPC or objective location with the closest safe Driftwood
 teleport it can identify. Home Points and Survival Guides are preferred for the
 requested zone, with regional Outposts used as field-zone fallbacks. Clicking
@@ -90,6 +92,21 @@ locations and synthesis recipes. Recipes include craft levels,
 crystal, ingredients, yield, and a warning when a synthesis key item is needed.
 Drop rates are intentionally omitted, and Driftwood-specific changes may differ
 from the standard LandSandBoat source data.
+
+### Materials
+
+The optional Materials tab complements Driftwood's `/craft` recommendations.
+Search for a crafting-related item such as **Bronze Ingot** to see every known
+ordinary or guild-shop NPC, exact zone and grid, closest **Port**, shop hours,
+guild holiday, and variable-stock warning. If the item can be synthesized,
+its craft level, crystal, ingredients, and yield are listed as well.
+
+The search waits for at least two characters and renders only visible rows, so
+the full material catalog does not create a large per-frame UI workload. Guild
+prices and quantities change with stock; VanaCompass reports the configured
+maximum price and never guarantees that an item is currently on the shelf.
+
+![VanaCompass Materials tab showing Bronze Ingot guild vendors, wrapped shop details, nearest ports, and Smithing recipes](docs/images/materials-tab.png)
 
 ![VanaCompass weapon vendor view using the weapon-type dropdown and showing the selected vendor's nearest port](docs/images/weapons-tab.png)
 

@@ -206,6 +206,146 @@ def parse_shops(
     return catalog
 
 
+def lua_table_block(text: str, start: int) -> str | None:
+    """Return the contents of the Lua table whose opening brace is at start."""
+    depth = 0
+    quote: str | None = None
+    escaped = False
+    for index in range(start, len(text)):
+        char = text[index]
+        if escaped:
+            escaped = False
+        elif quote is not None and char == '\\':
+            escaped = True
+        elif char in {"'", '"'}:
+            if quote == char:
+                quote = None
+            elif quote is None:
+                quote = char
+        elif quote is None and char == '{':
+            depth += 1
+        elif quote is None and char == '}':
+            depth -= 1
+            if depth == 0:
+                return text[start + 1:index]
+    return None
+
+
+def parse_guild_shops(
+    server: Path,
+    constants: dict[str, int],
+    zone_ids: dict[str, int],
+    npcs: dict[tuple[int, str], tuple[float, float, float]],
+    cache_dir: Path,
+) -> dict[int, dict[str, object]]:
+    """Build a material-vendor catalog from LandSandBoat's dynamic guild shops."""
+    source = (server / 'scripts/data/guild_shops.lua').read_text(encoding='utf-8')
+    definitions: dict[str, dict[str, object]] = {}
+    entry_pattern = re.compile(r"^\s*\['((?:\\.|[^'])+)'\]\s*=\s*\{", re.M)
+    for match in entry_pattern.finditer(source):
+        body = lua_table_block(source, match.end() - 1)
+        if body is None:
+            continue
+        name = match.group(1).replace("\\'", "'")
+        shared = re.search(r"sharedStock\s*=\s*'([^']+)'", body)
+        hours = re.search(r'hours\s*=\s*\{\s*(\d+)\s*,\s*(\d+)\s*\}', body)
+        holiday = re.search(r'holiday\s*=\s*xi\.day\.([A-Z]+)', body)
+        stock: list[dict[str, int | str]] = []
+        for row in re.finditer(r'\{\s*id\s*=\s*xi\.item\.([A-Z0-9_]+)\s*,([^}]*)\}', body):
+            item_id = constants.get(row.group(1))
+            if item_id is None:
+                continue
+            values: dict[str, int | str] = {'itemId': item_id}
+            for key, raw in re.findall(r'(initial|maxStock|targetStock|buyMax|restockRate|priceFloor)\s*=\s*(\d+)', row.group(2)):
+                values[key] = int(raw)
+            stock.append(values)
+        definitions[name] = {
+            'shared': shared.group(1) if shared else None,
+            'hours': (int(hours.group(1)), int(hours.group(2))) if hours else None,
+            'holiday': holiday.group(1).title() if holiday else None,
+            'stock': stock,
+        }
+
+    guild_npcs: dict[str, tuple[str, int, str | None, tuple[float, float, float] | None]] = {}
+    areas: set[str] = set()
+    for path in (server / 'scripts/zones').glob('*/npcs/*.lua'):
+        text = path.read_text(encoding='utf-8')
+        if 'xi.guildShops.onTrigger' not in text:
+            continue
+        area_match = re.search(r'^-- Area:\s*(.+?)\s*$', text, re.M)
+        npc_match = re.search(r'^--\s+NPC:\s*(.+?)\s*$', text, re.M)
+        area = area_match.group(1).strip() if area_match else path.parents[1].name.replace('_', ' ')
+        npc_name = npc_match.group(1).strip() if npc_match else path.stem.replace('_', ' ')
+        pos_match = re.search(r'^--\s*!pos\s+[-.\d]+\s+[-.\d]+\s+[-.\d]+\s+(\d+)\s*$', text, re.M)
+        zone_id = int(pos_match.group(1)) if pos_match else zone_ids.get(name_key(path.parents[1].name), -1)
+        world = npcs.get((zone_id, name_key(npc_name)))
+        guild_npcs[npc_name] = (area, zone_id, None, world)
+        areas.add(area)
+
+    grids = {area: fetch_zone_npcs(area, cache_dir) for area in sorted(areas)}
+    catalog: dict[int, dict[str, object]] = {}
+    seen: set[tuple[int, str, int]] = set()
+    for npc_name, (area, zone_id, _, world) in guild_npcs.items():
+        definition = definitions.get(npc_name)
+        if definition is None:
+            continue
+        owner = str(definition.get('shared') or npc_name)
+        stock_definition = definitions.get(owner, definition)
+        hours = stock_definition.get('hours')
+        holiday = stock_definition.get('holiday')
+        grid = grids.get(area, {}).get(name_key(npc_name))
+        gx, gy = grid_xy(grid)
+        for row in stock_definition.get('stock', []):
+            item_id = int(row['itemId'])
+            key = (item_id, name_key(npc_name), zone_id)
+            if key in seen:
+                continue
+            seen.add(key)
+            vendor: dict[str, object] = {
+                'npc': npc_name,
+                'zone': wiki_zone(area),
+                'zoneId': zone_id,
+                'shopType': 'Guild shop',
+                'buyMax': int(row.get('buyMax', 0)),
+                'initial': int(row.get('initial', 0)),
+                'maxStock': int(row.get('maxStock', 0)),
+                'restockRate': int(row.get('restockRate', 0)),
+            }
+            if hours:
+                vendor['openHour'], vendor['closeHour'] = hours
+            if holiday:
+                vendor['holiday'] = holiday
+            if grid:
+                vendor['location'] = grid
+                vendor['x'], vendor['y'] = gx, gy
+            if world:
+                vendor['wx'], vendor['wy'], vendor['wz'] = world
+            catalog.setdefault(item_id, {'vendors': []})['vendors'].append(vendor)
+    return catalog
+
+
+def write_guild_catalog(path: Path, catalog: dict[int, dict[str, object]]) -> None:
+    lines = [
+        '-- Generated from LandSandBoat dynamic guild-shop data; do not hand-edit.',
+        'return {',
+    ]
+    for item_id in sorted(catalog):
+        lines.append(f'    [{item_id}] = {{ vendors = {{')
+        for vendor in catalog[item_id]['vendors']:
+            values = []
+            for key in ('npc', 'zone', 'zoneId', 'shopType', 'buyMax', 'initial', 'maxStock',
+                        'restockRate', 'openHour', 'closeHour', 'holiday', 'location',
+                        'x', 'y', 'wx', 'wy', 'wz'):
+                if key in vendor:
+                    value = vendor[key]
+                    values.append(f'{key} = {lua_quote(value) if isinstance(value, str) else value}')
+            lines.append('        { ' + ', '.join(values) + ' },')
+        lines.append('    } },')
+    lines.extend(['}', ''])
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text('\n'.join(lines), encoding='utf-8')
+
+
 def write_catalog(path: Path, catalog: dict[int, dict[str, object]]) -> None:
     lines = [
         '-- Generated from LandSandBoat shop scripts; do not hand-edit.',
@@ -235,6 +375,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument('--server', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--guild-output', type=Path)
     parser.add_argument('--cache', type=Path, required=True)
     args = parser.parse_args()
 
@@ -249,6 +390,12 @@ def main() -> None:
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     write_catalog(args.output, catalog)
+
+    if args.guild_output is not None:
+        guild_catalog = parse_guild_shops(args.server, constants, zone_ids, npcs, args.cache)
+        write_guild_catalog(args.guild_output, guild_catalog)
+        print(f'Generated {len(guild_catalog)} guild-shop items and '
+              f'{sum(len(i["vendors"]) for i in guild_catalog.values())} vendor rows.')
 
     counts: dict[str, int] = defaultdict(int)
     for item in catalog.values():

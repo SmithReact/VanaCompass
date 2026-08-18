@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.13.0
+
+- Added an optional Materials tab that searches synthesis results,
+  ingredients, crystals, standard supplies, and guild-shop inventory.
+- Added 854 dynamic guild-shop items across 1,721 NPC vendor entries, with
+  exact zones and grids, closest ports, operating hours, guild holidays,
+  maximum prices, and variable-stock warnings.
+- Added synthesis details for material results, including craft level,
+  crystal, ingredients, yield, and key-item requirements.
+- Kept the large material catalog off the per-frame rendering path with a
+  two-character search threshold, cached results, and virtualized rows.
+- Improved wrapping for long vendor, price, requirement, port, spawn, and
+  crafting text inside narrow table columns.
+
 ## 0.12.5
 
 - Added a prominent Tenshodo membership requirement to every Amalasanda and
