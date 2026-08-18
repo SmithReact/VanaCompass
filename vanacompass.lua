@@ -2251,11 +2251,12 @@ local function renderNmDetails(nm, idPrefix)
     end
     imgui.Separator();
     if #nm.drops > 0 then
-        if imgui.CollapsingHeader(string.format('Tracked drops (%d)###nm_drops_%s', #nm.drops, nm.key)) then
+        if imgui.CollapsingHeader(string.format('Tracked drops (%d)###nm_drops_open_%s', #nm.drops, nm.key),
+            ImGuiTreeNodeFlags_DefaultOpen) then
             imgui.TextDisabled('Equipment and spell sources already tracked by VanaCompass. Drop rates are omitted.');
             for index = 1, math.min(#nm.drops, 50) do
                 local drop = nm.drops[index];
-                imgui.Bullet(); imgui.SameLine(); imgui.TextWrapped(drop.name);
+                imgui.Selectable(drop.name .. '##nm_drop_' .. nm.key .. '_' .. tostring(drop.id), false);
                 if drop.equipmentCategory ~= nil and imgui.IsItemHovered() then
                     imgui.SetTooltip(nmEquipmentTooltip(drop));
                 end
