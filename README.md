@@ -90,29 +90,12 @@ from the standard LandSandBoat source data.
 
 ### Monster Drops
 
-The Drops tab searches non-vendor equipment sources in both directions:
-enter an item such as **Bounding Boots**, or a monster such as **Leaping
-Lizzy**, to reach the same source details. The catalog contains only weapons
-and armor with a monster source that are absent from VanaCompass's standard
-vendor inventory; spells, materials, and quest-objective items are excluded.
-Filters isolate weapons or armor. Selecting a result shows every retained
-monster and zone, its standard level range, and the closest supported port.
-Both normal monsters and notorious monsters appear when they provide matching
-equipment, with notorious-monster sources tagged **NM**. NM rows show a map
-grid and exact `!pos` for fixed spawns; lottery or multi-spawn NMs show a rough
-multi-grid area with exact known points available on hover. When the standard
-server script exposes a lottery relationship, the row also identifies the
-specific placeholder family, chance per qualifying despawn, and minimum
-respawn window. It does not instruct players to clear an entire monster family
-when only designated placeholder slots count. Ambiguous dungeon pages remain
-explicitly unavailable rather than guessing. Every result displays the lowest
-known monster level that can drop it, and the full catalog can be sorted by
-name or that level across both categories.
-Large lists are paged and the item browser is virtualized so the complete
-catalog does not create per-frame UI load. Drop rates are intentionally omitted.
-
-This baseline comes from LandSandBoat. Driftwood can customize NM rewards,
-locations, or progression, so server behavior remains authoritative.
+The Drops tab lists weapons and armor obtained from monsters rather than
+vendors. Results show the monster's level, zone, grid location, and closest
+supported port. For lottery NMs, VanaCompass also identifies the specific
+placeholder monster to defeat and displays the available spawn guidance.
+Drop rates are intentionally omitted, and Driftwood customizations may differ
+from the standard source data.
 
 ![VanaCompass Drops tab showing non-vendor equipment, Leaping Lizzy spawn guidance, monster level, map area, and nearest Outpost](docs/images/drops-tab.png)
 
