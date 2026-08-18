@@ -93,9 +93,16 @@ vendor inventory; spells, materials, and quest-objective items are excluded.
 Filters isolate weapons or armor. Selecting a result shows every retained
 monster and zone, its standard level range, and the closest supported port.
 Both normal monsters and notorious monsters appear when they provide matching
-equipment, with notorious-monster sources tagged **NM**. Every result displays
-the lowest known monster level that can drop it, and the full catalog can be
-sorted by name or that level across both categories.
+equipment, with notorious-monster sources tagged **NM**. NM rows show a map
+grid and exact `!pos` for fixed spawns; lottery or multi-spawn NMs show a rough
+multi-grid area with exact known points available on hover. When the standard
+server script exposes a lottery relationship, the row also identifies the
+specific placeholder family, chance per qualifying despawn, and minimum
+respawn window. It does not instruct players to clear an entire monster family
+when only designated placeholder slots count. Ambiguous dungeon pages remain
+explicitly unavailable rather than guessing. Every result displays the lowest
+known monster level that can drop it, and the full catalog can be sorted by
+name or that level across both categories.
 Large lists are paged and the item browser is virtualized so the complete
 catalog does not create per-frame UI load. Drop rates are intentionally omitted.
 

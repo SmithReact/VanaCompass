@@ -2,7 +2,7 @@
 
 addon.name    = 'vanacompass';
 addon.author  = 'Unofficial DriftwoodXI community addon';
-addon.version = '0.12.1';
+addon.version = '0.12.2';
 addon.desc    = 'Find purchases, level-appropriate quests, story missions, job unlocks, and ports.';
 
 require('common');
@@ -872,10 +872,103 @@ local function sourceLevelText(source)
     return string.format('Lv.%d-%d', minimum, maximum);
 end
 
+local function sourcePositionText(source)
+    local positions = source.positions or source[6];
+    if positions == nil or #positions == 0 then return nil, nil; end
+    local zoneId = source.zoneId or source[2];
+    local grids, seenGrids = {}, {};
+    local exact = {};
+    for _, position in ipairs(positions) do
+        local x = position.x or position[1];
+        local height = position.height or position[2];
+        local groundY = position.groundY or position[3];
+        exact[#exact + 1] = string.format('!pos %.1f %.1f %.1f', x, height, groundY);
+        local grid = currentGrid(zoneId, x, groundY, height, nil);
+        if grid ~= nil and not seenGrids[grid] then
+            seenGrids[grid] = true;
+            grids[#grids + 1] = grid;
+        end
+    end
+    table.sort(grids, function (a, b)
+        local aColumn, aRow = a:match('^(%a)%-(%d+)$');
+        local bColumn, bRow = b:match('^(%a)%-(%d+)$');
+        if aColumn ~= bColumn then return aColumn < bColumn; end
+        return tonumber(aRow) < tonumber(bRow);
+    end);
+
+    local label;
+    if #positions == 1 then
+        label = (#grids == 1 and ('Grid: ' .. grids[1]) or 'Grid unavailable') .. '   ' .. exact[1];
+    elseif #grids > 0 then
+        label = string.format('Area: %s (%d known points)', table.concat(grids, ' / '), #positions);
+    else
+        label = string.format('Grid unavailable (%d known points)', #positions);
+    end
+
+    local tooltip = {};
+    for index = 1, math.min(#exact, 8) do tooltip[#tooltip + 1] = exact[index]; end
+    if #exact > 8 then tooltip[#tooltip + 1] = string.format('+ %d more points', #exact - 8); end
+    return label, table.concat(tooltip, '\n');
+end
+
+local function renderSourcePosition(source)
+    local label, tooltip = sourcePositionText(source);
+    if label == nil then
+        if sourceIsNm(source) then imgui.TextDisabled('NM area unavailable'); end
+        return;
+    end
+    imgui.PushStyleColor(ImGuiCol_Text, theme.colors.hint);
+    imgui.TextWrapped(label);
+    imgui.PopStyleColor();
+    if tooltip ~= '' and imgui.IsItemHovered() then imgui.SetTooltip(tooltip); end
+end
+
+local function spawnDuration(seconds)
+    if seconds % 3600 == 0 then
+        local hours = seconds / 3600;
+        return string.format('%d hour%s', hours, hours == 1 and '' or 's');
+    end
+    if seconds % 60 == 0 then
+        local minutes = seconds / 60;
+        return string.format('%d minute%s', minutes, minutes == 1 and '' or 's');
+    end
+    return string.format('%d second%s', seconds, seconds == 1 and '' or 's');
+end
+
+local function renderSpawnMethod(source)
+    if not sourceIsNm(source) or acquisition.spawnMethods == nil then return; end
+    local zoneMethods = acquisition.spawnMethods[source.zoneId or source[2]];
+    local methods = zoneMethods and zoneMethods[sourceMonsterName(source)] or nil;
+    if methods == nil or #methods == 0 then return; end
+    for _, method in ipairs(methods) do
+        local placeholder = method.placeholder or method[1];
+        local chance = method.chance or method[2];
+        local minimum = method.minimum or method[3] or 0;
+        local maximum = method.maximum or method[4] or minimum;
+        imgui.PushStyleColor(ImGuiCol_Text, theme.colors.warn);
+        imgui.TextWrapped('Spawn: defeat the specific ' .. placeholder ..
+            ' placeholder(s), not every ' .. placeholder .. '.');
+        imgui.PopStyleColor();
+        -- ImGui TextWrapped treats its string as a printf format. Produce two
+        -- percent signs here so its formatter displays one literal percent.
+        local details = string.format('%d%%%% chance per qualifying placeholder despawn', chance);
+        if minimum <= 1 and maximum <= 1 then
+            details = details .. '; no minimum respawn window.';
+        elseif minimum > 0 then
+            local window = spawnDuration(minimum);
+            if maximum > minimum then window = window .. ' to ' .. spawnDuration(maximum); end
+            details = details .. '; window opens ' .. window .. ' after the NM\'s last death.';
+        else
+            details = details .. '.';
+        end
+        imgui.TextWrapped(details);
+    end
+end
+
 local function renderDropSources(rows, idPrefix)
     if rows == nil or #rows == 0 then return; end
     if not imgui.CollapsingHeader(string.format('Monster sources (%d)###drops_%s', #rows, idPrefix)) then return; end
-    imgui.TextDisabled('Standard LandSandBoat locations; Driftwood customizations may differ.');
+    imgui.TextWrapped('Standard LandSandBoat locations and script-exposed lottery rules; Driftwood customizations may differ. NM areas use known spawn points; hover a rough area for exact !pos values.');
     local pageSize = 25;
     local pageCount = math.max(1, math.ceil(#rows / pageSize));
     local page = math.max(1, math.min(state.sourcePages[idPrefix] or 1, pageCount));
@@ -900,7 +993,9 @@ local function renderDropSources(rows, idPrefix)
             local zone = sourceZoneName(source);
             imgui.TextWrapped((sourceIsNm(source) and '[NM] ' or '') ..
                 sourceMonsterName(source) .. '   ' .. sourceLevelText(source));
+            renderSpawnMethod(source);
             imgui.TextWrapped(zone);
+            renderSourcePosition(source);
             portButton(closestTeleport(zone), 'drop_' .. idPrefix .. '_' .. index);
             if index < last then imgui.Separator(); end
         end
@@ -908,16 +1003,20 @@ local function renderDropSources(rows, idPrefix)
     end
     if not imgui.BeginTable('##drops_' .. idPrefix, 3,
         bit.bor(ImGuiTableFlags_Borders, ImGuiTableFlags_RowBg, ImGuiTableFlags_SizingStretchProp)) then return; end
-    imgui.TableSetupColumn('Monster', ImGuiTableColumnFlags_WidthStretch, 1.2);
-    imgui.TableSetupColumn('Zone / level', ImGuiTableColumnFlags_WidthStretch, 1.3);
+    imgui.TableSetupColumn('Monster / spawn', ImGuiTableColumnFlags_WidthStretch, 1.5);
+    imgui.TableSetupColumn('Zone / level / NM area', ImGuiTableColumnFlags_WidthStretch, 1.5);
     imgui.TableSetupColumn('Closest port', ImGuiTableColumnFlags_WidthStretch, 1.1);
     imgui.TableHeadersRow();
     for index = first, last do
         local source = rows[index];
         local zone = sourceZoneName(source);
         imgui.TableNextRow();
-        imgui.TableNextColumn(); imgui.TextWrapped((sourceIsNm(source) and '[NM] ' or '') .. sourceMonsterName(source));
-        imgui.TableNextColumn(); imgui.TextWrapped(zone .. '   ' .. sourceLevelText(source));
+        imgui.TableNextColumn();
+        imgui.TextWrapped((sourceIsNm(source) and '[NM] ' or '') .. sourceMonsterName(source));
+        renderSpawnMethod(source);
+        imgui.TableNextColumn();
+        imgui.TextWrapped(zone .. '   ' .. sourceLevelText(source));
+        renderSourcePosition(source);
         imgui.TableNextColumn(); portButton(closestTeleport(zone), 'drop_' .. idPrefix .. '_' .. index);
     end
     imgui.EndTable();

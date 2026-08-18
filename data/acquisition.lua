@@ -1836,6 +1836,925 @@ return {
         [255] = 'Abyssea-Empyreal Paradox',
         [262] = 'Foret de Hennetiel',
     },
+    spawnMethods = {
+        [2] = {
+            ['Orctrap'] = {
+                { 'Birdtrap', 10, 3600, 3600 },
+            },
+        },
+        [4] = {
+            ['Intulo'] = {
+                { 'Eft', 10, 3600, 3600 },
+            },
+            ['Serra'] = {
+                { 'Jagil', 10, 3600, 3600 },
+            },
+            ['Splacknuck'] = {
+                { 'Tartarus Eft', 10, 3600, 3600 },
+            },
+        },
+        [5] = {
+            ['Bonnacon'] = {
+                { 'Buffalo', 5, 3600, 3600 },
+            },
+            ['Magnotaur'] = {
+                { 'Molech', 10, 3600, 3600 },
+            },
+        },
+        [7] = {
+            ['Ambusher Antlion'] = {
+                { 'Trench Antlion', 15, 3600, 3600 },
+            },
+            ['Citipati'] = {
+                { 'Corse', 10, 10800, 21600 },
+            },
+        },
+        [9] = {
+            ['Gyre-Carlin'] = {
+                { 'Diremite', 5, 1800, 1800 },
+            },
+        },
+        [11] = {
+            ['Bugbear Strongman'] = {
+                { 'Bugbear Bondman', 10, 1, 1 },
+            },
+        },
+        [12] = {
+            ['Swashstox Beadblinker'] = {
+                { 'Goblin Swordsman', 15, 10800, 10800 },
+            },
+        },
+        [24] = {
+            ['Megalobugard'] = {
+                { 'Gigantobugard', 10, 3600, 3600 },
+            },
+        },
+        [25] = {
+            ['Okyupete'] = {
+                { 'Diatryma', 10, 3600, 3600 },
+            },
+        },
+        [29] = {
+            ['Imdugud'] = {
+                { 'Nimbus Hippogryph', 10, 75600, 75600 },
+            },
+        },
+        [30] = {
+            ['Aiatar'] = {
+                { 'Flamedrake', 10, 75600, 75600 },
+            },
+        },
+        [40] = {
+            ['Baa Dava the Bibliophage'] = {
+                { 'Vanguard Oracle', 10, 1200, 1200 },
+            },
+            ['Doo Peku the Fleetfoot'] = {
+                { 'Vanguard Assassin', 10, 1200, 1200 },
+            },
+            ['Elvaansticker Bxafraff'] = {
+                { 'Vanguard Mesmerizer', 10, 1200, 1200 },
+            },
+            ['Flamecaller Zoeqdoq'] = {
+                { 'Vanguard Impaler', 10, 1200, 1200 },
+            },
+            ['Gi\'Bhe Fleshfeaster'] = {
+                { 'Vanguard Constable', 10, 1200, 1200 },
+            },
+            ['Gosspix Blabberlips'] = {
+                { 'Vanguard Enchanter', 10, 1200, 1200 },
+            },
+            ['Hamfist Gukhbuk'] = {
+                { 'Vanguard Grappler', 10, 1200, 1200 },
+            },
+            ['Koo Rahi the Levinblade'] = {
+                { 'Vanguard Persecutor', 10, 1200, 1200 },
+            },
+            ['Lyncean Juwgneg'] = {
+                { 'Vanguard Predator', 10, 1200, 1200 },
+            },
+            ['Qu\'Pho Bloodspiller'] = {
+                { 'Vanguard Vindicator', 10, 1200, 1200 },
+            },
+            ['Ree Nata the Melomanic'] = {
+                { 'Vanguard Chanter', 10, 1200, 1200 },
+            },
+            ['Shamblix Rottenheart'] = {
+                { 'Vanguard Tinkerer', 10, 1200, 1200 },
+            },
+            ['Te\'Zha Ironclad'] = {
+                { 'Vanguard Defender', 10, 1200, 1200 },
+            },
+            ['Va\'Rhu Bodysnatcher'] = {
+                { 'Vanguard Purloiner', 10, 1200, 1200 },
+            },
+            ['Woodnix Shrillwhistle'] = {
+                { 'Vanguard Pathfinder', 10, 1200, 1200 },
+            },
+        },
+        [51] = {
+            ['Jaded Jody'] = {
+                { 'Great Ameretat', 10, 7200, 7200 },
+            },
+            ['Zoraal Ja\'s Pkuucha'] = {
+                { 'Lesser Colibri', 15, 1800, 1800 },
+            },
+        },
+        [52] = {
+            ['Emergent Elm'] = {
+                { 'Olden Treant', 5, 7200, 7200 },
+            },
+            ['Mahishasura'] = {
+                { 'Marid', 15, 10800, 10800 },
+            },
+            ['Nis Puk'] = {
+                { 'Sea Puk', 5, 43200, 43200 },
+            },
+        },
+        [54] = {
+            ['Bloody Bones'] = {
+                { 'Draugar Servant', 5, 75600, 75600 },
+            },
+        },
+        [61] = {
+            ['Energetic Eruca'] = {
+                { 'Magmatic Eruca', 10, 86400, 86400 },
+            },
+            ['Ignamoth'] = {
+                { 'Wamoura', 10, 7200, 7200 },
+            },
+        },
+        [65] = {
+            ['Firedance Magmaal Ja'] = {
+                { 'Watch Wyvern', 5, 3600, 3600 },
+            },
+            ['Zizzy Zillah'] = {
+                { 'Ziz', 5, 3600, 3600 },
+            },
+        },
+        [68] = {
+            ['Bluestreak Gyugyuroon'] = {
+                { 'Qiqirn Archaeologist', 10, 7200, 7200 },
+            },
+        },
+        [72] = {
+            ['Cookieduster Lipiroon'] = {
+                { 'Qiqirn Goldsmith', 15, 3600, 3600 },
+            },
+        },
+        [81] = {
+            ['Goblintrap'] = {
+                { 'Battrap', 5, 3600, 3600 },
+            },
+            ['Skogs Fru'] = {
+                { 'Ladybug', 5, 3600, 3600 },
+            },
+        },
+        [82] = {
+            ['Voirloup'] = {
+                { 'Decrepit Gnole', 10, 7200, 7200 },
+            },
+        },
+        [83] = {
+            ['Pallas'] = {
+                { 'Gigas Helmsman', 5, 3600, 18000 },
+            },
+        },
+        [84] = {
+            ['Burlibix Brawnback'] = {
+                { 'Goblin Blastmaster', 10, 10800, 10800 },
+            },
+            ['Habergoass'] = {
+                { 'Ba', 10, 5400, 5400 },
+            },
+            ['La Velue'] = {
+                { 'Smilodon', 10, 3600, 3600 },
+            },
+        },
+        [85] = {
+            ['Ashmaker Gotblut'] = {
+                { 'Orcish Augur', 10, 3600, 3600 },
+            },
+            ['Hawkeyed Dnatbat'] = {
+                { 'Orcish Bowshooter', 10, 3600, 3600 },
+            },
+        },
+        [88] = {
+            ['Ankabut'] = {
+                { 'Huge Spider', 10, 3600, 3600 },
+            },
+            ['Gloomanita'] = {
+                { 'Coppercap', 10, 3600, 3600 },
+            },
+        },
+        [89] = {
+            ['Kotan-kor Kamuy'] = {
+                { 'Grauberg Hippogryph', 5, 10800, 10800 },
+            },
+            ['Scitalis'] = {
+                { 'Ajattara', 10, 3600, 3600 },
+            },
+            ['Vasiliceratops'] = {
+                { 'Wivre', 10, 5400, 5400 },
+            },
+        },
+        [90] = {
+            ['Nommo'] = {
+                { 'Lou Carcolh', 10, 3600, 3600 },
+            },
+            ['Sugaar'] = {
+                { 'Virulent Peiste', 5, 3600, 3600 },
+            },
+        },
+        [91] = {
+            ['Delicieuse Delphine'] = {
+                { 'Ochu', 10, 5400, 5400 },
+            },
+            ['Dyinyinga'] = {
+                { 'Scabrous Slug', 10, 3600, 3600 },
+            },
+            ['Erle'] = {
+                { 'Death Jacket', 10, 5400, 5400 },
+            },
+        },
+        [92] = {
+            ['Ba\'Tho Mercifulheart'] = {
+                { 'Adaman Quadav', 10, 7200, 7200 },
+            },
+            ['Da\'Dha Hundredmask'] = {
+                { 'Gold Quadav', 12, 7200, 7200 },
+            },
+            ['Ea\'Tho Cruelheart'] = {
+                { 'Adaman Quadav', 10, 7200, 7200 },
+            },
+        },
+        [95] = {
+            ['Jeduah'] = {
+                { 'Tiny Lycopodium', 10, 3600, 3600 },
+            },
+            ['Ramponneau'] = {
+                { 'Toad', 20, 5400, 5400 },
+            },
+        },
+        [96] = {
+            ['Kirtimukha'] = {
+                { 'Rafflesia', 5, 3600, 3600 },
+            },
+        },
+        [97] = {
+            ['Centipedal Centruroides'] = {
+                { 'Mountain Scolopendrid', 10, 3600, 3600 },
+            },
+        },
+        [98] = {
+            ['Balam-Quitz'] = {
+                { 'Lynx', 10, 3600, 3600 },
+            },
+        },
+        [99] = {
+            ['Aa Xalmo the Savage'] = {
+                { 'Yagudo Sentinel', 10, 7200, 7200 },
+            },
+            ['Zhuu Buxu the Silent'] = {
+                { 'Yagudo Sentinel', 10, 7200, 7200 },
+            },
+        },
+        [100] = {
+            ['Fungus Beetle'] = {
+                { 'Scarab Beetle', 15, 900, 900 },
+            },
+            ['Jaggedy-Eared Jack'] = {
+                { 'Forest Hare', 9, 2400, 2400 },
+            },
+        },
+        [101] = {
+            ['Bigmouth Billy'] = {
+                { 'Carrion Worm', 7, 1300, 1300 },
+            },
+            ['Swamfisk'] = {
+                { 'Pugil', 7, 3600, 3600 },
+            },
+        },
+        [102] = {
+            ['Tumbling Truffle'] = {
+                { 'Poison Funguar', 5, 3600, 3600 },
+            },
+        },
+        [103] = {
+            ['Golden Bat'] = {
+                { 'Giant Bat', 5, 3600, 3600 },
+            },
+            ['Valkurm Emperor'] = {
+                { 'Damselfly', 10, 1, 1 },
+            },
+        },
+        [104] = {
+            ['Fradubio'] = {
+                { 'Fraelissa', 10, 75600, 75600 },
+            },
+            ['Panzer Percival'] = {
+                { 'Stag Beetle', 10, 1, 1 },
+            },
+        },
+        [105] = {
+            ['Prankster Maverix'] = {
+                { 'Evil Weapon', 15, 3600, 3600 },
+            },
+            ['Tottering Toby'] = {
+                { 'Ba', 20, 3600, 3600 },
+                { 'Stalking Sapling', 20, 3600, 3600 },
+            },
+        },
+        [106] = {
+            ['Maighdean Uaine'] = {
+                { 'Walking Sapling', 5, 900, 900 },
+            },
+            ['Stinging Sophie'] = {
+                { 'Maneating Hornet', 5, 1, 1 },
+            },
+        },
+        [107] = {
+            ['Carnero'] = {
+                { 'Ornery Sheep', 10, 1, 1 },
+            },
+            ['Leaping Lizzy'] = {
+                { 'Rock Lizard', 10, 1, 1 },
+            },
+        },
+        [108] = {
+            ['Stray Mary'] = {
+                { 'Mad Sheep', 5, 300, 300 },
+            },
+        },
+        [109] = {
+            ['Bloodpool Vorax'] = {
+                { 'Thread Leech', 10, 600, 600 },
+            },
+            ['Jolly Green'] = {
+                { 'Goobbue', 10, 1, 1 },
+            },
+            ['Ni\'Zho Bladebender'] = {
+                { 'Veteran Quadav', 10, 3600, 3600 },
+            },
+        },
+        [110] = {
+            ['Drooling Daisy'] = {
+                { 'Ochu', 10, 3600, 3600 },
+            },
+            ['Eldritch Edge'] = {
+                { 'Evil Weapon', 10, 5400, 5400 },
+            },
+        },
+        [111] = {
+            ['Gargantua'] = {
+                { 'Stone Golem', 5, 3600, 25200 },
+            },
+            ['Kirata'] = {
+                { 'Tundra Tiger', 7, 3600, 28800 },
+            },
+        },
+        [112] = {
+            ['Barbaric Weapon'] = {
+                { 'Cursed Weapon', 10, 7200, 7200 },
+            },
+            ['Shadow Eye'] = {
+                { 'Evil Eye', 5, 3600, 3600 },
+            },
+            ['Timeworn Warrior'] = {
+                { 'Lost Soul', 5, 5400, 5400 },
+            },
+        },
+        [113] = {
+            ['Frostmane'] = {
+                { 'Greater Manticore', 5, 3600, 3600 },
+            },
+            ['Killer Jonny'] = {
+                { 'Velociraptor', 15, 7200, 7200 },
+            },
+        },
+        [114] = {
+            ['Dune Widow'] = {
+                { 'Giant Spider', 10, 3600, 3600 },
+            },
+        },
+        [115] = {
+            ['Nunyenunc'] = {
+                { 'Carrion Crow', 10, 3600, 3600 },
+            },
+            ['Tom Tit Tat'] = {
+                { 'Mandragora', 10, 3600, 7200 },
+            },
+        },
+        [116] = {
+            ['Sharp-Eared Ropipi'] = {
+                { 'Savanna Rarab', 20, 300, 300 },
+            },
+            ['Spiny Spipi'] = {
+                { 'Crawler', 10, 2700, 2700 },
+            },
+        },
+        [117] = {
+            ['Herbage Hunter'] = {
+                { 'Canyon Crawler', 10, 3600, 3600 },
+            },
+            ['Serpopard Ishtar'] = {
+                { 'Wild Dhalmel', 10, 3600, 3600 },
+            },
+        },
+        [118] = {
+            ['Buburimboo'] = {
+                { 'Shoal Pugil', 10, 3600, 3600 },
+            },
+            ['Helldiver'] = {
+                { 'Zu', 10, 3600, 3600 },
+            },
+        },
+        [119] = {
+            ['Daggerclaw Dracos'] = {
+                { 'Raptor', 10, 3600, 3600 },
+            },
+            ['Naa Zeku the Unwaiting'] = {
+                { 'Yagudo Persecutor', 10, 3600, 3600 },
+            },
+            ['Patripatan'] = {
+                { 'Coeurl', 15, 3600, 3600 },
+            },
+        },
+        [120] = {
+            ['Bashe'] = {
+                { 'Hill Lizard', 10, 3600, 3600 },
+            },
+            ['Blighting Brand'] = {
+                { 'Evil Weapon', 20, 5400, 7200 },
+            },
+        },
+        [121] = {
+            ['Keeper of Halidom'] = {
+                { 'Goobbue Gardener', 10, 7200, 7200 },
+            },
+        },
+        [122] = {
+            ['Nightmare Vase'] = {
+                { 'Magic Flagon', 10, 3600, 3600 },
+            },
+            ['Rogue Receptacle'] = {
+                { 'Magic Flagon', 10, 7200, 7200 },
+            },
+        },
+        [123] = {
+            ['Mischievous Micholas'] = {
+                { 'Young Opo-opo', 20, 3600, 3600 },
+            },
+        },
+        [124] = {
+            ['Hoar-knuckled Rimberry'] = {
+                { 'Tonberry Creeper', 10, 5400, 5400 },
+                { 'Tonberry Shadower', 10, 5400, 5400 },
+            },
+        },
+        [125] = {
+            ['Cactuar Cantautor'] = {
+                { 'Cactuar', 15, 3600, 3600 },
+            },
+            ['Calchas'] = {
+                { 'Tulwar Scorpion', 10, 3600, 3600 },
+            },
+            ['Celphie'] = {
+                { 'Desert Dhalmel', 10, 7200, 7200 },
+            },
+            ['Picolaton'] = {
+                { 'Phorusrhacos', 10, 6400, 6400 },
+            },
+        },
+        [126] = {
+            ['Slippery Sucker'] = {
+                { 'Giant Ascetic', 10, 600, 600 },
+                { 'Giant Hunter', 10, 600, 600 },
+                { 'Giant Ranger', 10, 600, 600 },
+                { 'Giant Trapper', 10, 600, 600 },
+            },
+            ['Trickster Kinetix'] = {
+                { 'Dancing Weapon', 5, 3600, 3600 },
+            },
+        },
+        [130] = {
+            ['Despot'] = {
+                { 'Groundskeeper', 5, 7200, 7200 },
+            },
+        },
+        [135] = {
+            ['Count Raum'] = {
+                { 'Kindred Thief', 10, 1200, 1200 },
+            },
+            ['Count Vine'] = {
+                { 'Kindred Samurai', 10, 1200, 1200 },
+            },
+            ['Count Zaebos'] = {
+                { 'Kindred Warrior', 10, 1200, 1200 },
+            },
+            ['Duke Berith'] = {
+                { 'Kindred Red Mage', 10, 1200, 1200 },
+            },
+            ['Duke Gomory'] = {
+                { 'Kindred Monk', 10, 1200, 1200 },
+            },
+            ['Duke Scox'] = {
+                { 'Kindred Dark Knight', 10, 1200, 1200 },
+            },
+            ['King Zagan'] = {
+                { 'Kindred Dragoon', 10, 1200, 1200 },
+            },
+            ['Marquis Andras'] = {
+                { 'Kindred Beastmaster', 10, 1200, 1200 },
+            },
+            ['Marquis Cimeries'] = {
+                { 'Kindred Ranger', 10, 1200, 1200 },
+            },
+            ['Marquis Decarabia'] = {
+                { 'Kindred Bard', 10, 1200, 1200 },
+            },
+            ['Marquis Gamygyn'] = {
+                { 'Kindred Ninja', 10, 1200, 1200 },
+            },
+            ['Marquis Nebiros'] = {
+                { 'Kindred Summoner', 10, 1200, 1200 },
+            },
+            ['Marquis Orias'] = {
+                { 'Kindred Black Mage', 10, 1200, 1200 },
+            },
+            ['Marquis Sabnak'] = {
+                { 'Kindred Paladin', 10, 1200, 1200 },
+            },
+            ['Prince Seere'] = {
+                { 'Kindred White Mage', 10, 1200, 1200 },
+            },
+        },
+        [136] = {
+            ['Grand\'Goule'] = {
+                { 'Gargouille', 10, 3600, 3600 },
+            },
+        },
+        [137] = {
+            ['Graoully'] = {
+                { 'Dire Gargouille', 10, 3600, 3600 },
+            },
+        },
+        [145] = {
+            ['Hoo Mjuu the Torrent'] = {
+                { 'Yagudo Mendicant', 12, 3600, 3600 },
+            },
+            ['Vuu Puqu the Beguiler'] = {
+                { 'Yagudo Piper', 15, 900, 900 },
+            },
+        },
+        [147] = {
+            ['Ge\'Dha Evileye'] = {
+                { 'Old Quadav', 25, 3600, 3600 },
+            },
+        },
+        [153] = {
+            ['Ellyllon'] = {
+                { 'Death Cap', 10, 7200, 7200 },
+            },
+            ['Leshonki'] = {
+                { 'Boyahda Sapling', 15, 3600, 3600 },
+            },
+            ['Unut'] = {
+                { 'Moss Eater', 5, 7200, 7200 },
+            },
+            ['Voluptuous Vivian'] = {
+                { 'Demonic Rose', 10, 57600, 57600 },
+            },
+        },
+        [157] = {
+            ['Eurytos'] = {
+                { 'Giant Gatekeeper', 100, 7200, 14400 },
+                { 'Giant Guard', 5, 7200, 14400 },
+            },
+            ['Ogygos'] = {
+                { 'Gigas Wallwatcher', 5, 7200, 14400 },
+            },
+            ['Ophion'] = {
+                { 'Gigas Kettlemaster', 5, 7200, 14400 },
+            },
+            ['Polybotes'] = {
+                { 'Giant Gatekeeper', 5, 7200, 14400 },
+                { 'Giant Guard', 5, 7200, 14400 },
+                { 'Giant Lobber', 5, 7200, 14400 },
+            },
+            ['Rhoikos'] = {
+                { 'Gigas Quarrier', 5, 7200, 14400 },
+            },
+            ['Rhoitos'] = {
+                { 'Giant Gatekeeper', 5, 7200, 14400 },
+                { 'Giant Guard', 5, 7200, 14400 },
+                { 'Giant Lobber', 5, 7200, 14400 },
+                { 'Giant Sentry', 5, 7200, 14400 },
+            },
+        },
+        [158] = {
+            ['Enkelados'] = {
+                { 'Gigas Bonecutter', 5, 1, 1 },
+            },
+        },
+        [159] = {
+            ['Sozu Sarberry'] = {
+                { 'Tonberry Cutter', 10, 3600, 3600 },
+            },
+        },
+        [160] = {
+            ['Bistre-hearted Malberry'] = {
+                { 'Tonberry Beleaguerer', 10, 3600, 3600 },
+            },
+            ['Carmine-tailed Janberry'] = {
+                { 'Tonberry Imprecator', 5, 3600, 3600 },
+            },
+            ['Celeste-eyed Tozberry'] = {
+                { 'Tonberry Trailer', 10, 7200, 7200 },
+            },
+            ['Friar Rush'] = {
+                { 'Bifrons', 10, 3600, 3600 },
+            },
+            ['Ogama'] = {
+                { 'Doom Toad', 5, 3600, 3600 },
+            },
+            ['Tawny-fingered Mugberry'] = {
+                { 'Tonberry Slasher', 5, 3600, 3600 },
+            },
+        },
+        [161] = {
+            ['Marquis Sabnock'] = {
+                { 'Abyssal Demon', 10, 7200, 7200 },
+                { 'Doom Demon', 10, 7200, 7200 },
+            },
+        },
+        [162] = {
+            ['Baron Vapula'] = {
+                { 'Demon Wizard', 10, 1, 1 },
+            },
+            ['Baronet Romwe'] = {
+                { 'Demon Pawn', 10, 1, 1 },
+            },
+            ['Count Bifrons'] = {
+                { 'Demon Knight', 10, 1, 1 },
+            },
+        },
+        [166] = {
+            ['Gloom Eye'] = {
+                { 'Seeker Bats', 10, 3600, 3600 },
+            },
+        },
+        [167] = {
+            ['Shii'] = {
+                { 'Garm', 5, 3600, 3600 },
+            },
+        },
+        [171] = {
+            ['Morille Mortelle'] = {
+                { 'Witch Hazel', 12, 18000, 18000 },
+            },
+        },
+        [173] = {
+            ['Cargo Crab Colin'] = {
+                { 'Clipper', 5, 5400, 5400 },
+            },
+            ['Falcatus Aranei'] = {
+                { 'Huge Spider', 5, 7200, 7200 },
+            },
+        },
+        [174] = {
+            ['Bloodthirster Madkix'] = {
+                { 'Goblin Mercenary', 5, 7200, 7200 },
+            },
+            ['Pelican'] = {
+                { 'Greater Cockatrice', 10, 14400, 14400 },
+            },
+            ['Sabotender Mariachi'] = {
+                { 'Sabotender Sediendo', 5, 10800, 10800 },
+            },
+        },
+        [176] = {
+            ['Charybdis'] = {
+                { 'Devil Manta', 10, 28800, 28800 },
+            },
+            ['Denn the Orcavoiced'] = {
+                { 'Coastal Sahagin', 10, 7200, 7200 },
+            },
+            ['Fyuu the Seabellow'] = {
+                { 'Riparian Sahagin', 10, 7200, 7200 },
+            },
+            ['Masan'] = {
+                { 'Royal Leech', 10, 14400, 14400 },
+            },
+            ['Mouu the Waverider'] = {
+                { 'Bog Sahagin', 10, 7200, 7200 },
+            },
+            ['Novv the Whitehearted'] = {
+                { 'Lagoon Sahagin', 10, 7200, 7200 },
+            },
+            ['Pahh the Gullcaller'] = {
+                { 'Swamp Sahagin', 10, 7200, 7200 },
+            },
+            ['Qull the Shellbuster'] = {
+                { 'Brook Sahagin', 10, 7200, 7200 },
+            },
+            ['Voll the Sharkfinned'] = {
+                { 'Marsh Sahagin', 10, 7200, 7200 },
+            },
+            ['Worr the Clawfisted'] = {
+                { 'Marsh Sahagin', 10, 7200, 7200 },
+            },
+            ['Wuur the Sandcomber'] = {
+                { 'Spring Sahagin', 10, 7200, 7200 },
+            },
+            ['Yarr the Pearleyed'] = {
+                { 'Lagoon Sahagin', 10, 3600, 3600 },
+            },
+            ['Zuug the Shoreleaper'] = {
+                { 'Delta Sahagin', 10, 7200, 7200 },
+            },
+        },
+        [184] = {
+            ['Epialtes'] = {
+                { 'Giant Gatekeeper', 5, 1, 1 },
+            },
+            ['Eurymedon'] = {
+                { 'Giant Sentry', 5, 1, 1 },
+            },
+            ['Hippolytos'] = {
+                { 'Giant Gatekeeper', 5, 1, 1 },
+                { 'Giant Sentry', 5, 1, 1 },
+            },
+        },
+        [190] = {
+            ['Gwyllgi'] = {
+                { 'Nachzehrer', 10, 3600, 3600 },
+            },
+        },
+        [191] = {
+            ['Teporingo'] = {
+                { 'Hoarder Hare', 20, 3600, 3600 },
+            },
+        },
+        [192] = {
+            ['Nocuous Weapon'] = {
+                { 'Boggart', 10, 1, 1 },
+            },
+            ['Slendlix Spindlethumb'] = {
+                { 'Goblin Leecher', 10, 3600, 3600 },
+            },
+        },
+        [193] = {
+            ['Agar Agar'] = {
+                { 'Jelly', 5, 3600, 3600 },
+            },
+            ['Donggu'] = {
+                { 'Fly Agaric', 10, 1, 1 },
+            },
+        },
+        [194] = {
+            ['Ah Puch'] = {
+                { 'Ghoul', 20, 3600, 3600 },
+            },
+            ['Desmodont'] = {
+                { 'Stink Bats', 10, 3600, 3600 },
+            },
+        },
+        [195] = {
+            ['Cwn Cyrff'] = {
+                { 'Tomb Wolf', 15, 3600, 3600 },
+            },
+        },
+        [197] = {
+            ['Demonic Tiphia'] = {
+                { 'Wespe', 5, 7200, 28800 },
+            },
+        },
+        [200] = {
+            ['Hazmat'] = {
+                { 'Explosure', 10, 3600, 3600 },
+            },
+            ['Hovering Hotpot'] = {
+                { 'Fallen Mage', 20, 1800, 1800 },
+                { 'Fallen Major', 20, 1800, 1800 },
+            },
+        },
+        [204] = {
+            ['Eastern Shadow'] = {
+                { 'Specter', 10, 3600, 7200 },
+            },
+            ['Goliath'] = {
+                { 'Colossus', 15, 1, 1 },
+            },
+            ['Mind Hoarder'] = {
+                { 'Clockwork Pod', 10, 5400, 32400 },
+            },
+            ['Northern Shadow'] = {
+                { 'Specter', 10, 3600, 7200 },
+            },
+            ['Southern Shadow'] = {
+                { 'Specter', 10, 3600, 7200 },
+            },
+            ['Western Shadow'] = {
+                { 'Specter', 10, 3600, 7200 },
+            },
+        },
+        [205] = {
+            ['Foreseer Oramix'] = {
+                { 'Goblin Alchemist', 5, 3600, 3600 },
+            },
+            ['Lindwurm'] = {
+                { 'Eotyrannus', 5, 3600, 3600 },
+            },
+            ['Tyrannic Tunnok'] = {
+                { 'Sulfur Scorpion', 5, 3600, 3600 },
+            },
+            ['Vouivre'] = {
+                { 'Hurricane Wyvern', 5, 7200, 7200 },
+            },
+        },
+        [208] = {
+            ['Antican Magister'] = {
+                { 'Antican Hastatus', 10, 3600, 3600 },
+                { 'Antican Princeps', 10, 3600, 3600 },
+                { 'Antican Signifer', 10, 3600, 3600 },
+            },
+            ['Antican Praefectus'] = {
+                { 'Antican Princeps', 10, 3600, 3600 },
+            },
+            ['Antican Proconsul'] = {
+                { 'Antican Signifer', 10, 3600, 3600 },
+            },
+            ['Antican Tribunus'] = {
+                { 'Antican Aedilis', 10, 3600, 3600 },
+            },
+            ['Centurio X-I'] = {
+                { 'Antican Signifer', 10, 9000, 9000 },
+            },
+            ['Diamond Daig'] = {
+                { 'Helm Beetle', 20, 3600, 3600 },
+            },
+            ['Nussknacker'] = {
+                { 'Sand Lizard', 20, 3600, 3600 },
+            },
+            ['Sabotender Bailarin'] = {
+                { 'Sabotender Bailaor', 10, 9000, 9000 },
+            },
+            ['Sabotender Bailarina'] = {
+                { 'Spelunking Sabotender', 10, 9000, 9000 },
+            },
+            ['Sagittarius X-XIII'] = {
+                { 'Antican Princeps', 10, 14400, 14400 },
+            },
+            ['Triarius X-XV'] = {
+                { 'Antican Triarius', 10, 7200, 7200 },
+            },
+        },
+        [212] = {
+            ['Amikiri'] = {
+                { 'Antares', 5, 25200, 25200 },
+            },
+            ['Goblinsavior Heronox'] = {
+                { 'Goblin Reaper', 5, 10800, 10800 },
+            },
+            ['Taxim'] = {
+                { 'Doom Warlock', 5, 7200, 7200 },
+            },
+            ['Ungur'] = {
+                { 'Typhoon Wyvern', 5, 7200, 7200 },
+            },
+            ['Wyvernpoacher Drachlox'] = {
+                { 'Goblin Mercenary', 10, 7200, 7200 },
+            },
+        },
+        [213] = {
+            ['Hellion'] = {
+                { 'Tainted Flesh', 10, 7200, 7200 },
+            },
+            ['Lord of Onzozo'] = {
+                { 'Flying Manta', 4, 57600, 57600 },
+            },
+            ['Ose'] = {
+                { 'Torama', 5, 3600, 3600 },
+            },
+            ['Peg Powler'] = {
+                { 'Flying Manta', 10, 7200, 7200 },
+            },
+            ['Soulstealer Skullnix'] = {
+                { 'Goblin Alchemist', 5, 7200, 10800 },
+                { 'Goblin Bandit', 5, 7200, 10800 },
+            },
+        },
+        [220] = {
+            ['Sea Horror'] = {
+                { 'Sea Monk', 20, 1, 1 },
+            },
+        },
+        [221] = {
+            ['Sea Horror'] = {
+                { 'Sea Monk', 20, 1, 1 },
+            },
+        },
+    },
     drops = {
         [572] = {
             { 'Trotting Sapling', 15, 74, 75 },
@@ -1851,7 +2770,7 @@ return {
             { 'Stalking Sapling', 193, 18, 21 },
             { 'Swagger Spruce', 193, 86, 88 },
             { 'Strolling Sapling', 117, 7, 11 },
-            { 'Yara Ma Yha Who', 117, 14, 14, 1 },
+            { 'Yara Ma Yha Who', 117, 14, 14, 1, { { 271, 0.005, -334 } } },
             { 'Wandering Sapling', 83, 35, 36 },
         },
         [573] = {
@@ -1866,14 +2785,14 @@ return {
             { 'Stalking Sapling', 193, 18, 21 },
             { 'Swagger Spruce', 193, 86, 88 },
             { 'Walking Sapling', 107, 3, 6 },
-            { 'Yara Ma Yha Who', 117, 14, 14, 1 },
+            { 'Yara Ma Yha Who', 117, 14, 14, 1, { { 271, 0.005, -334 } } },
             { 'Wandering Sapling', 83, 35, 36 },
         },
         [574] = {
             { 'Treant Sapling', 68, 66, 69 },
             { 'Sobbing Sapling', 105, 36, 38 },
             { 'Stalking Sapling', 105, 23, 24 },
-            { 'Tottering Toby', 105, 27, 28, 1 },
+            { 'Tottering Toby', 105, 27, 28, 1, { { -280.154, -8.011, 204.82 }, { -272.561, -7.431, 175.465 }, { -265.481, -8.166, 217.296 }, { -265.187, -8.055, 173.233 }, { -259.618, -5.921, 251.595 }, { -255.948, -7.945, 180.664 }, { -255.542, -7.872, 185.826 }, { -250.759, -7.663, 201.289 }, { -248.15, -12.502, 174.407 }, { -246.893, -7.763, 208.077 }, { -246.228, -16.967, 142.903 }, { -245.528, -14.424, 162.956 }, { -245.174, -7.011, 258.708 }, { -244.147, -7.159, 266.756 }, { -239.064, -14.061, 110.444 }, { -237.143, -8, 280.262 }, { -236.333, -7.819, 343.322 }, { -231.086, -15.796, 111.698 }, { -230.377, -11.414, 179.846 }, { -229.306, -6.949, 276.4 }, { -228.923, -9.25, 216.27 }, { -228.02, -5.112, 309.864 }, { -226.245, -3.617, 302.039 }, { -224.556, -20.334, 125.018 }, { -223.021, -5.225, 235.076 }, { -216.412, -20.437, 125.398 }, { -212.698, -20.333, 154.443 }, { -212, -7.604, 198.146 }, { -211.023, -17.196, 115.028 }, { -209.148, -21.169, 136.423 }, { -200.54, -0.243, 234.106 }, { -199.639, 0, 240.702 }, { -198.995, -0.009, 276.15 }, { -194.234, -18.485, 132.208 }, { -192.185, -0.249, 229.95 }, { -191.986, 0.247, 249.832 }, { -191.54, -0.064, 257.78 }, { -184.48, -8.312, 179.873 }, { -181.608, -2.902, 224.92 }, { -174.207, -3.968, 221.75 }, { -170.955, 0.347, 237.283 }, { -164.401, -5.626, 218.126 }, { -163.012, -0.072, 235.474 }, { -151.124, 0.236, 232.74 }, { -149.552, -6.521, 206.1 }, { -146.838, -6.139, 178.254 }, { -143.123, -0.435, 231.413 }, { -141.794, -6.182, 167.545 }, { -132.889, -0.379, 225.931 }, { -129.344, 0.075, 218.83 }, { -126.988, -0.724, 211.075 } } },
             { 'Treant Sapling', 52, 66, 68 },
             { 'Caveberry', 197, 42, 44 },
             { 'Witch Hazel', 171, 62, 64 },
@@ -1882,7 +2801,7 @@ return {
             { 'Maighdean Uaine', 77, 75, 80, 1 },
             { 'Tottering Toby', 77, 75, 80, 1 },
             { 'Boyahda Sapling', 153, 74, 77 },
-            { 'Leshonki', 153, 79, 81, 1 },
+            { 'Leshonki', 153, 79, 81, 1, { { -224.433, 13.898, 55.985 }, { -220.5, 13.621, 73.357 }, { -211.494, 13.755, 59.057 }, { -209.231, 14.243, 66.595 } } },
             { 'Treant Sapling', 51, 66, 68 },
         },
         [575] = {
@@ -1903,12 +2822,12 @@ return {
             { 'Swagger Spruce', 193, 86, 88 },
             { 'Walking Sapling', 107, 3, 6 },
             { 'Strolling Sapling', 117, 7, 11 },
-            { 'Yara Ma Yha Who', 117, 14, 14, 1 },
+            { 'Yara Ma Yha Who', 117, 14, 14, 1, { { 271, 0.005, -334 } } },
             { 'Treant Sapling', 51, 66, 68 },
         },
         [605] = {
-            { 'Goblin Archaeologist', 108, 30, 75, 1 },
-            { 'Goblin Archaeologist', 102, 30, 75, 1 },
+            { 'Goblin Archaeologist', 108, 30, 75, 1, { { 141.024, 23.679, 248.83 } } },
+            { 'Goblin Archaeologist', 102, 30, 75, 1, { { 342.811, 23.593, -10.756 } } },
             { 'Goblin Miner', 213, 51, 58 },
             { 'Goblin Jeweler', 9, 56, 58 },
             { 'Goblin Archaeologist', 117, 30, 75, 1 },
@@ -1936,13 +2855,13 @@ return {
             { 'Locus Tomb Worm', 190, 131, 133 },
             { 'Rock Eater', 190, 14, 16 },
             { 'Stone Eater', 190, 5, 7 },
-            { 'Goblin Archaeologist', 108, 30, 75, 1 },
+            { 'Goblin Archaeologist', 108, 30, 75, 1, { { 141.024, 23.679, 248.83 } } },
             { 'Rock Eater', 108, 10, 11 },
             { 'Land Worm', 173, 20, 25 },
             { 'Cave Worm', 174, 60, 63 },
             { 'Kuftal Delver', 174, 99, 101 },
             { 'Kuftal Digger', 174, 66, 69 },
-            { 'Goblin Archaeologist', 102, 30, 75, 1 },
+            { 'Goblin Archaeologist', 102, 30, 75, 1, { { 342.811, 23.593, -10.756 } } },
             { 'Rock Eater', 102, 10, 11 },
             { 'Abyss Worm', 198, 27, 30 },
             { 'Maze Maker', 198, 18, 21 },
@@ -1959,18 +2878,18 @@ return {
         },
         [643] = {
             { 'Cave Worm', 160, 61, 64 },
-            { 'Bigmouth Billy', 101, 9, 10, 1 },
+            { 'Bigmouth Billy', 101, 9, 10, 1, { { 402.872, -25.056, -98.082 }, { 403.348, -39.689, 4.992 }, { 403.967, -36.822, -16.285 }, { 406.556, -19.687, -123.314 }, { 407.6, -29.273, -69.477 }, { 408.099, -32.149, -24.668 }, { 409.263, -29.244, -74.763 }, { 410.482, -38.712, 13.81 }, { 410.899, -38.684, 20.079 }, { 412.905, -27.336, -43.678 }, { 413.229, -38.467, 7.047 }, { 414.225, -31.004, -23.073 }, { 423.216, -29.953, -82.35 }, { 423.957, -36.374, 2.725 }, { 424.676, -19.923, -122.458 }, { 425.536, -36.928, 22.731 }, { 429.797, -19.451, -126.414 }, { 430.545, -37.343, 5.28 }, { 431.383, -21.708, -104.452 }, { 431.411, -19.818, -113.567 }, { 432.659, -19.464, -132.145 }, { 435.613, -23.975, -100.172 }, { 436.087, -19.615, -147.229 }, { 436.76, -36.135, -15.581 }, { 438.519, -33.314, -21.631 }, { 440.453, -30.4, -30.854 }, { 440.601, -30, -37.197 }, { 442.568, -29.206, -46.41 }, { 443.869, -29.559, -83.515 }, { 444.402, -25.84, -62.278 }, { 445.846, -19.276, -117.997 }, { 448.055, -35.685, 20.914 }, { 453.625, -18.436, -127.048 }, { 453.689, -35.968, 17.659 }, { 460.231, -15.656, -134.938 }, { 460.873, -15.62, -150.22 }, { 461.516, -16.197, -121.186 }, { 461.55, -37.907, 12.718 }, { 461.682, -16.351, -140.659 }, { 467.287, -17.351, -118.462 }, { 473.52, -29.799, -35.259 }, { 474.083, -29.712, -58.443 }, { 474.156, -33.593, -20.535 }, { 476, -30, -32 }, { 479.689, -28.06, -90.073 }, { 480.573, -30, -80.894 }, { 483.839, -30, -75.735 }, { 492.99, -31.627, -26.952 }, { 500.6, -30.374, -31.999 }, { 512.339, -38.228, -11.539 }, { 512.951, -30.305, -30.55 } } },
             { 'Antican Decurio', 114, 44, 49 },
             { 'Antican Sagittarius', 114, 44, 49 },
             { 'Antican Speculator', 114, 44, 49 },
             { 'Flesh Eater', 114, 37, 42 },
             { 'Land Worm', 173, 20, 25 },
-            { 'Centurio X-I', 208, 56, 58, 1 },
-            { 'Proconsul XII', 208, 70, 72, 1 },
-            { 'Sagittarius X-XIII', 208, 55, 57, 1 },
+            { 'Centurio X-I', 208, 56, 58, 1, { { 754, 2, -553 }, { 765, 1, -572 }, { 773.581, 1.576, -568.904 }, { 781, 2, -556 }, { 798, 2, -567 }, { 804, 2, -552 } } },
+            { 'Proconsul XII', 208, 70, 72, 1, { { -392.671, -0.181, 692.656 } } },
+            { 'Sagittarius X-XIII', 208, 55, 57, 1, { { 624, -16.5, -775 } } },
             { 'Sand Eater', 208, 51, 59 },
-            { 'Triarius X-XV', 208, 72, 74, 1 },
-            { 'Tribunus VII-I', 208, 60, 62, 1 },
+            { 'Triarius X-XV', 208, 72, 74, 1, { { -815, -0.5, -340 } } },
+            { 'Tribunus VII-I', 208, 60, 62, 1, { { -47.41, -0.312, -139.298 } } },
             { 'Glacier Eater', 5, 58, 62 },
             { 'Mountain Worm', 5, 66, 70 },
             { 'Antican Eques', 125, 45, 49 },
@@ -1979,30 +2898,30 @@ return {
             { 'Desert Worm', 125, 43, 47 },
         },
         [644] = {
-            { 'Sisyphus', 253, 100, 100, 1 },
+            { 'Sisyphus', 253, 100, 100, 1, { { -234.454, -176.203, 338.367 } } },
             { 'Verglas Golem', 253, 98, 99 },
-            { 'Gargantua', 111, 47, 48, 1 },
+            { 'Gargantua', 111, 47, 48, 1, { { 282.706, 0, -38.483 }, { 283.38, 0.199, -31.995 }, { 284.287, 0.845, -22.413 }, { 285.954, 0.097, -40.103 }, { 290.23, 0.573, -20.922 }, { 291.646, 0.544, -47.484 }, { 293.582, 0.251, -26.982 }, { 294.364, 0.6, -49.252 }, { 296.187, 0.803, -35.99 }, { 296.495, 0.824, -42.375 }, { 298.756, 0.814, -34.874 }, { 301.916, 0.103, -58.846 }, { 302.529, 0.36, 30.251 }, { 303.445, 0.827, 0.838 }, { 304.605, 0.735, -37.672 }, { 305.637, 0.232, -48.436 }, { 307.969, 0.101, -53.054 }, { 309.494, 0.539, -17.324 }, { 311.701, 0.11, -46.047 }, { 315.168, 0.039, 34.351 }, { 317.195, 0.81, -56.219 }, { 320.713, 0, -42.444 }, { 320.997, 0.331, 10.641 }, { 322.341, 0.042, -4.863 }, { 323.349, 0.89, -57.822 }, { 324.808, 0.709, -23.77 }, { 324.941, 0.499, -54.015 }, { 325.796, 0.279, -27.33 }, { 327.591, 0.046, -47.442 }, { 329.737, 0.6, -62.745 }, { 330.652, 0.332, 2.583 }, { 333.903, 0.186, -48.65 }, { 334.463, -0.309, -19.662 }, { 338.129, 0.905, -38.965 }, { 339, -0.472, -20 }, { 339.589, -0.1, -12.67 }, { 339.802, -0.202, -30.909 }, { 341.426, 0.928, -39.709 }, { 341.807, -0.223, -12.313 }, { 342.365, 0.881, -0.875 }, { 342.663, 0.486, 28.435 }, { 344.515, 0.703, 4.793 }, { 348, -0.5, 17 }, { 351.296, 0.234, -41.178 }, { 352.063, 0.196, -43.52 }, { 352.379, -0.085, -7.133 }, { 355.032, 0.376, -29.398 }, { 355.582, 0.145, -33.835 }, { 355.967, 0.175, 7.57 }, { 360.585, 0, -0.759 }, { 362.484, 0.385, -11.897 } } },
             { 'Stone Golem', 111, 40, 42 },
-            { 'Bigmouth Billy', 101, 9, 10, 1 },
+            { 'Bigmouth Billy', 101, 9, 10, 1, { { 402.872, -25.056, -98.082 }, { 403.348, -39.689, 4.992 }, { 403.967, -36.822, -16.285 }, { 406.556, -19.687, -123.314 }, { 407.6, -29.273, -69.477 }, { 408.099, -32.149, -24.668 }, { 409.263, -29.244, -74.763 }, { 410.482, -38.712, 13.81 }, { 410.899, -38.684, 20.079 }, { 412.905, -27.336, -43.678 }, { 413.229, -38.467, 7.047 }, { 414.225, -31.004, -23.073 }, { 423.216, -29.953, -82.35 }, { 423.957, -36.374, 2.725 }, { 424.676, -19.923, -122.458 }, { 425.536, -36.928, 22.731 }, { 429.797, -19.451, -126.414 }, { 430.545, -37.343, 5.28 }, { 431.383, -21.708, -104.452 }, { 431.411, -19.818, -113.567 }, { 432.659, -19.464, -132.145 }, { 435.613, -23.975, -100.172 }, { 436.087, -19.615, -147.229 }, { 436.76, -36.135, -15.581 }, { 438.519, -33.314, -21.631 }, { 440.453, -30.4, -30.854 }, { 440.601, -30, -37.197 }, { 442.568, -29.206, -46.41 }, { 443.869, -29.559, -83.515 }, { 444.402, -25.84, -62.278 }, { 445.846, -19.276, -117.997 }, { 448.055, -35.685, 20.914 }, { 453.625, -18.436, -127.048 }, { 453.689, -35.968, 17.659 }, { 460.231, -15.656, -134.938 }, { 460.873, -15.62, -150.22 }, { 461.516, -16.197, -121.186 }, { 461.55, -37.907, 12.718 }, { 461.682, -16.351, -140.659 }, { 467.287, -17.351, -118.462 }, { 473.52, -29.799, -35.259 }, { 474.083, -29.712, -58.443 }, { 474.156, -33.593, -20.535 }, { 476, -30, -32 }, { 479.689, -28.06, -90.073 }, { 480.573, -30, -80.894 }, { 483.839, -30, -75.735 }, { 492.99, -31.627, -26.952 }, { 500.6, -30.374, -31.999 }, { 512.339, -38.228, -11.539 }, { 512.951, -30.305, -30.55 } } },
             { 'Antican Centurio', 114, 50, 52 },
             { 'Antican Veles', 114, 50, 52 },
             { 'Colossus', 204, 56, 58 },
-            { 'Goliath', 204, 62, 62, 1 },
+            { 'Goliath', 204, 62, 62, 1, { { -192.4, -0.035, 168.529 }, { -165.8, -0.112, 148.027 }, { -165.4, -0.098, 189.481 }, { -90, -0.112, 72 } } },
             { 'Ore Golem', 204, 43, 45 },
             { 'Ancient Bombs', 61, 74, 78, 1 },
             { 'Gargantua', 77, 75, 80, 1 },
             { 'Antican Hastatus', 208, 52, 59 },
-            { 'Antican Magister', 208, 65, 66, 1 },
-            { 'Antican Praefectus', 208, 65, 65, 1 },
+            { 'Antican Magister', 208, 65, 66, 1, { { -77, -0.5, -56 } } },
+            { 'Antican Praefectus', 208, 65, 65, 1, { { 869.24, 1.045, -655.214 } } },
             { 'Antican Princeps', 208, 52, 59 },
-            { 'Antican Proconsul', 208, 65, 65, 1 },
+            { 'Antican Proconsul', 208, 65, 65, 1, { { 76, -0.6, -194 } } },
             { 'Antican Signifer', 208, 52, 59 },
-            { 'Antican Tribunus', 208, 65, 65, 1 },
-            { 'Centurio X-I', 208, 56, 58, 1 },
-            { 'Proconsul XII', 208, 70, 72, 1 },
-            { 'Sagittarius X-XIII', 208, 55, 57, 1 },
-            { 'Triarius X-XV', 208, 72, 74, 1 },
-            { 'Tribunus VII-I', 208, 60, 62, 1 },
+            { 'Antican Tribunus', 208, 65, 65, 1, { { -582, -0.5, -412 } } },
+            { 'Centurio X-I', 208, 56, 58, 1, { { 754, 2, -553 }, { 765, 1, -572 }, { 773.581, 1.576, -568.904 }, { 781, 2, -556 }, { 798, 2, -567 }, { 804, 2, -552 } } },
+            { 'Proconsul XII', 208, 70, 72, 1, { { -392.671, -0.181, 692.656 } } },
+            { 'Sagittarius X-XIII', 208, 55, 57, 1, { { 624, -16.5, -775 } } },
+            { 'Triarius X-XV', 208, 72, 74, 1, { { -815, -0.5, -340 } } },
+            { 'Tribunus VII-I', 208, 60, 62, 1, { { -47.41, -0.312, -139.298 } } },
             { 'Darksteel Golem', 122, 80, 82 },
             { 'Mythril Golem', 122, 68, 70 },
             { 'Rock Golem', 121, 49, 50 },
@@ -2014,8 +2933,8 @@ return {
             { 'Antican Secutor', 125, 54, 58 },
         },
         [688] = {
-            { 'Goblin Archaeologist', 108, 30, 75, 1 },
-            { 'Goblin Archaeologist', 102, 30, 75, 1 },
+            { 'Goblin Archaeologist', 108, 30, 75, 1, { { 141.024, 23.679, 248.83 } } },
+            { 'Goblin Archaeologist', 102, 30, 75, 1, { { 342.811, 23.593, -10.756 } } },
             { 'Goblin Archaeologist', 117, 30, 75, 1 },
         },
         [690] = {
@@ -2031,13 +2950,13 @@ return {
             { 'Nachtmahr', 167, 96, 97 },
         },
         [833] = {
-            { 'Goblin Archaeologist', 108, 30, 75, 1 },
-            { 'Goblin Archaeologist', 102, 30, 75, 1 },
+            { 'Goblin Archaeologist', 108, 30, 75, 1, { { 141.024, 23.679, 248.83 } } },
+            { 'Goblin Archaeologist', 102, 30, 75, 1, { { 342.811, 23.593, -10.756 } } },
             { 'Goblin Archaeologist', 117, 30, 75, 1 },
         },
         [840] = {
-            { 'Goblin Archaeologist', 108, 30, 75, 1 },
-            { 'Goblin Archaeologist', 102, 30, 75, 1 },
+            { 'Goblin Archaeologist', 108, 30, 75, 1, { { 141.024, 23.679, 248.83 } } },
+            { 'Goblin Archaeologist', 102, 30, 75, 1, { { 342.811, 23.593, -10.756 } } },
             { 'Goblin Archaeologist', 117, 30, 75, 1 },
         },
         [924] = {
@@ -2084,7 +3003,7 @@ return {
             { 'Vampire Leech', 262, 102, 103 },
             { 'Cheiroptera', 141, 8, 10 },
             { 'Donjon Bat', 200, 91, 93 },
-            { 'Old Two-Wings', 200, 52, 52, 1 },
+            { 'Old Two-Wings', 200, 52, 52, 1, { { -183.484, 0, 220.377 }, { -180.822, 0, 198.857 }, { -180.746, 0, 235.899 }, { -180.383, 0, 254.393 }, { -180.314, 0, 243.029 }, { -180.289, 0, 235.43 }, { -180.27, 0, 228.063 }, { -179.502, 0, 262.085 }, { -179.392, 0, 186.668 }, { -169.835, 0, 262.432 }, { -167.665, 0, 175.938 }, { -161.895, 0, 180.105 }, { -159.527, 0, 179.309 }, { -157.577, 0, 180.375 }, { -152.005, 0, 180.332 }, { -151.905, 0, 174.673 }, { -151.483, 0, 260.145 }, { -150.449, 0, 258.38 }, { -146.672, 0, 181.931 }, { -144.489, 0, 259.614 }, { -143.826, 0, 258.477 }, { -140.96, 0, 178.832 }, { -140.859, 0, 269.985 }, { -140.333, 0, 195.324 }, { -140.174, 0, 275.309 }, { -139.858, 0, 197.25 }, { -139.191, 0, 188 }, { -138.888, 0, 239.155 }, { -138.148, 0, 247.792 }, { -130.853, 0, 181.213 }, { -121.32, 0, 179.397 }, { -117.52, 0, 260.279 }, { -113.993, 0, 179.747 }, { -101.899, 0, 261.406 }, { -101.825, 0, 201.559 }, { -101.038, 0, 225.392 }, { -101.034, -0.191, 194.019 }, { -100.504, 0, 196.897 }, { -100.196, 0, 253.509 }, { -100.067, 0, 212.22 }, { -100.016, 0, 215.784 }, { -99.804, 0, 204.174 }, { -99.542, 0, 186.363 }, { -99.31, 0, 233.119 }, { -99, -0.5, 226 }, { -98.406, 0, 213.379 }, { -96.443, 0, 218.911 }, { -94.011, 0, 222.85 }, { -89.186, 0, 215.729 }, { -87.103, 0, 224.191 } } },
             { 'Siege Bat', 200, 40, 43 },
             { 'Dire Bat', 164, 62, 64 },
             { 'Incubus Bats', 164, 62, 64 },
@@ -2125,7 +3044,7 @@ return {
             { 'Ancient Bat', 198, 26, 29 },
             { 'Bleeder Leech', 198, 83, 85 },
             { 'Combat', 198, 20, 23 },
-            { 'Leech King', 198, 35, 36, 1 },
+            { 'Leech King', 198, 35, 36, 1, { { 243.469, 19.727, -196.274 }, { 262.156, 19.973, -219.851 }, { 270, 18, -205 }, { 271.844, 18.887, -203.545 }, { 280.504, 21, -220.683 }, { 281.575, 20, -241.118 } } },
             { 'Poison Leech', 198, 24, 28 },
             { 'Warren Bat', 198, 86, 88 },
             { 'Black Bat', 119, 17, 18 },
@@ -2157,7 +3076,7 @@ return {
             { 'Combat', 194, 20, 23 },
             { 'Thorn Bat', 194, 82, 84 },
             { 'Black Bat', 109, 17, 18 },
-            { 'Bloodpool Vorax', 109, 24, 25, 1 },
+            { 'Bloodpool Vorax', 109, 24, 25, 1, { { -405.854, 24.113, 513.944 }, { -351.884, 24.014, 513.531 } } },
             { 'Swamp Leech', 109, 13, 15 },
             { 'Thread Leech', 109, 21, 22 },
             { 'Night Bats', 90, 65, 66 },
@@ -2183,7 +3102,7 @@ return {
             { 'Moon Bat', 120, 24, 26 },
             { 'Moon Bat', 98, 49, 51 },
             { 'Dire Bat', 176, 63, 66 },
-            { 'Masan', 176, 39, 39, 1 },
+            { 'Masan', 176, 39, 39, 1, { { 1.178, 10.799, 178.807 } } },
             { 'Sahagin Parasite', 176, 50, 53 },
             { 'Undead Bats', 176, 36, 39 },
             { 'Vampire Bat', 176, 42, 45 },
@@ -2206,7 +3125,7 @@ return {
             { 'Dire Bat', 158, 64, 66 },
             { 'Incubus Bats', 158, 62, 64 },
             { 'Giant Bat', 103, 21, 22 },
-            { 'Golden Bat', 103, 26, 27, 1 },
+            { 'Golden Bat', 103, 26, 27, 1, { { -811.618, -8.139, 28.638 }, { -810.44, -8.27, 33.978 }, { -807.523, -8.022, 23.607 }, { -806.759, -8.051, 23.825 }, { -805.583, -8.005, 21.835 }, { -804.502, -8.567, 22.082 }, { -801.056, -8, 19.913 }, { -798.992, -8, 20.315 }, { -798.915, -8.117, 17.802 }, { -798.674, -8.672, 19.204 }, { -798.394, -8, 21.387 }, { -796.484, -8.691, 19.19 }, { -787.206, -8.574, 20.903 }, { -785.714, -8.436, 21.917 }, { -785.475, -8.419, 20.912 }, { -785.197, -8.4, 22.135 }, { -780.327, -7.531, 23.17 }, { -779.336, -7.439, 21.866 }, { -778.844, -7.842, 25.86 }, { -776.624, -7.464, 24.271 }, { -775.578, -7.484, 21.065 }, { -774.324, -7.502, 20.253 }, { -772.254, -7.567, 20.874 } } },
             { 'Star Bat', 103, 17, 20 },
             { 'Thread Leech', 103, 22, 25 },
             { 'Bloodsucker', 83, 60, 65 },
@@ -2235,7 +3154,7 @@ return {
             { 'Puroboros', 197, 45, 45 },
             { 'Puroboros', 171, 69, 70 },
             { 'Bifrons', 160, 68, 70 },
-            { 'Friar Rush', 160, 70, 70, 1 },
+            { 'Friar Rush', 160, 70, 70, 1, { { -86, 16, 2 } } },
             { 'Bomb', 101, 8, 10 },
             { 'Balloon', 116, 8, 10 },
             { 'Kaboom', 200, 94, 96 },
@@ -2245,7 +3164,7 @@ return {
             { 'Spunkie', 196, 28, 30 },
             { 'Friar\'s Lantern', 62, 72, 79 },
             { 'Friars Lantern Grow', 62 },
-            { 'Bomb Queen', 205, 79, 81, 1 },
+            { 'Bomb Queen', 205, 79, 81, 1, { { 21.128, 19.687, -110.232 } } },
             { 'Volcanic Bomb', 205, 71, 78 },
             { 'Volcanic Gas', 205, 62, 68 },
             { 'Balloon', 192, 8, 10 },
@@ -2264,7 +3183,7 @@ return {
             { 'Napalm', 193, 31, 33 },
             { 'Will-o\'-the-Wisp', 193, 23, 25 },
             { 'Balloon', 194, 8, 10 },
-            { 'Bomb King', 194, 16, 18, 1 },
+            { 'Bomb King', 194, 16, 18, 1, { { 310, 0, 710 }, { 509, -1, 709 }, { 549, -1, 769 } } },
             { 'Fox Fire', 109, 24, 25 },
             { 'Ignis Fatuus', 110, 34, 36 },
             { 'Cannonball', 122, 66, 70 },
@@ -2318,12 +3237,12 @@ return {
             { 'Snipper', 104, 19, 20 },
             { 'Stag Crab', 104, 17, 18 },
             { 'Stag Crab', 82, 39, 51 },
-            { 'Goblin Archaeologist', 108, 30, 75, 1 },
+            { 'Goblin Archaeologist', 108, 30, 75, 1, { { 141.024, 23.679, 248.83 } } },
             { 'Snipper', 173, 22, 24 },
-            { 'Cancer', 174, 65, 65, 1 },
+            { 'Cancer', 174, 65, 65, 1, { { -21.291, -10.899, -147.523 } } },
             { 'Scavenger Crab', 174, 60, 62 },
             { 'Coral Crab', 102, 8, 10 },
-            { 'Goblin Archaeologist', 102, 30, 75, 1 },
+            { 'Goblin Archaeologist', 102, 30, 75, 1, { { 342.811, 23.593, -10.756 } } },
             { 'Thickshell', 102, 12, 14 },
             { 'Thickshell', 102, 13, 14 },
             { 'Clipper', 24, 30, 34 },
@@ -2414,13 +3333,13 @@ return {
             { 'Soot Crab', 172, 76, 78 },
         },
         [943] = {
-            { 'Goblin Archaeologist', 108, 30, 75, 1 },
-            { 'Goblin Archaeologist', 102, 30, 75, 1 },
+            { 'Goblin Archaeologist', 108, 30, 75, 1, { { 141.024, 23.679, 248.83 } } },
+            { 'Goblin Archaeologist', 102, 30, 75, 1, { { 342.811, 23.593, -10.756 } } },
             { 'Goblin Archaeologist', 117, 30, 75, 1 },
         },
         [948] = {
-            { 'Goblin Archaeologist', 108, 30, 75, 1 },
-            { 'Goblin Archaeologist', 102, 30, 75, 1 },
+            { 'Goblin Archaeologist', 108, 30, 75, 1, { { 141.024, 23.679, 248.83 } } },
+            { 'Goblin Archaeologist', 102, 30, 75, 1, { { 342.811, 23.593, -10.756 } } },
             { 'Goblin Archaeologist', 117, 30, 75, 1 },
         },
         [952] = {
@@ -2441,24 +3360,24 @@ return {
             { 'Goblin Gambler', 103, 22, 25 },
         },
         [1236] = {
-            { 'Cuijatender', 218, 105, 105, 1 },
-            { 'Cactrot Rapido', 114, 80, 81, 1 },
-            { 'Sabotender Mariachi', 174, 68, 70, 1 },
+            { 'Cuijatender', 218, 105, 105, 1, { { -635, 1.02, -299.202 } } },
+            { 'Cactrot Rapido', 114, 80, 81, 1, { { -44.821, 0.04, -204.137 }, { -43.733, 0.029, -205.89 }, { -36.339, 0, -196.558 }, { -26.834, -2.92, -183.684 }, { -8.384, -9.174, -163.234 }, { -7.862, -14.669, 184.072 }, { -1.399, -15.415, 173.901 }, { -0.093, -16, 196.311 }, { 10.562, -7.763, -153.151 }, { 16.3, -16.153, 177.281 }, { 21.13, -20.765, 143.381 }, { 25.823, -15.431, 155.779 }, { 37.798, -22.609, 136.094 }, { 38.579, -8, -159.953 }, { 47.843, -21.39, 129.461 }, { 48.97, -9.183, -157.981 }, { 59.675, -14.091, -155.496 }, { 61.654, -7.113, -202.886 }, { 62.594, -18.367, 119.87 }, { 69.335, -19.906, -150.315 }, { 72.849, -7.547, -207.622 }, { 90.956, -14.351, 119.106 }, { 91.295, -22.441, -133.185 }, { 97.334, -13.89, -116.29 }, { 105.762, -11.687, -109.258 }, { 117.167, -15.802, 154.863 }, { 121.918, -8.169, -85.653 }, { 129.604, -8.359, -69.037 }, { 143.842, -11.473, 58.988 }, { 144.24, -12.902, 149.28 }, { 147.488, -7.989, 107.295 }, { 148.003, -9.46, 28.999 }, { 148.563, -9.651, 16.788 }, { 149.41, -10.013, -1.53 }, { 167.395, -7.425, -230.588 }, { 195.466, -2.154, -225.452 }, { 198.27, -7.032, -59.389 }, { 199.52, -0.495, -7.907 }, { 204.107, -8.062, 85.677 }, { 204.896, 0.044, 3.06 }, { 209.036, -8.379, -64.954 }, { 212.223, -5.971, -202.506 }, { 225.075, -5.462, -73.46 }, { 225.18, -4.675, 47.242 }, { 228.024, -9.949, 74.323 }, { 259.785, -1.055, -58.388 }, { 280.895, 0, -40.171 }, { 297.468, 0.181, -109.136 } } },
+            { 'Sabotender Mariachi', 174, 68, 70, 1, { { -84.721, -0.325, -2.861 }, { -83.818, 0, 0.745 }, { -82.26, 0, -3.803 }, { -82.074, -0.45, -0.738 }, { -80.201, 0, 4.608 }, { -73.786, 0.412, 7.445 }, { -71.861, 0.312, 8.733 }, { -70.231, 0, -5.691 }, { -68.434, 0.038, -10.282 }, { -62.178, 0, 8.761 }, { -60.718, 0.581, 3.455 }, { -58.807, -0.327, -8.531 }, { -56.767, -0.026, 14.866 }, { -56.081, -1.546, 21.705 }, { -55.152, -0.256, 16.03 }, { -54.912, 0.347, -1.681 }, { -54.868, 0.178, 4.089 }, { -53.27, -0.603, 17.775 }, { -52.063, -0.59, 18.69 }, { -50.903, 0, 26.114 }, { -49.404, 0.026, 17.894 }, { -48.92, 0, 27.265 }, { -48.509, 0.116, 29.248 }, { -48.381, 0.5, 40.53 }, { -48.005, -0.006, 22.456 }, { -47.584, 0, 28.471 }, { -46.737, -0.34, -5.031 }, { -45.168, 0.34, 24.419 }, { -45.096, 0, 38.272 }, { -45, -0.115, 39 }, { -44.785, 0, -12.403 }, { -43.815, 0.628, 20.362 }, { -43.57, 0.141, 8.711 }, { -42.088, -0.029, -3.996 }, { -42.018, 0.797, 24.783 }, { -41.902, 0.645, 27.768 }, { -41, -0.488, -31 }, { -41, 0.088, -3 }, { -39.419, 0.326, 9.41 }, { -39.391, 0.326, 30.587 }, { -39.019, 0, 33.954 }, { -38.791, 0.23, 26.579 }, { -38.632, 1, 17.886 }, { -38.605, 1, 13.136 }, { -37.809, 0.851, 25.235 }, { -36.626, 0.645, 22.122 }, { -34.971, 0.582, 21.415 }, { -34.263, -0.512, 30.437 }, { -33.717, -0.448, -43.478 }, { -23.543, -0.396, 59.578 }, { -17.217, -0.956, -57.647 } } },
             { 'Sabotender Sediendo', 174, 64, 67 },
             { 'Cactuar Cantautor', 77, 75, 80, 1 },
             { 'Sabotender Bailarin', 77, 75, 80, 1 },
             { 'Sabotender Mariachi', 77, 70, 72, 1 },
             { 'Sabotender Bailaor', 208, 52, 59 },
-            { 'Sabotender Bailarina', 208, 80, 81, 1 },
+            { 'Sabotender Bailarina', 208, 80, 81, 1, { { -502.576, -0.219, 778.166 } } },
             { 'Spelunking Sabotender', 208, 62, 68 },
-            { 'Leshonki', 153, 79, 81, 1 },
-            { 'Cactuar Cantautor', 125, 55, 59, 1 },
+            { 'Leshonki', 153, 79, 81, 1, { { -224.433, 13.898, 55.985 }, { -220.5, 13.621, 73.357 }, { -211.494, 13.755, 59.057 }, { -209.231, 14.243, 66.595 } } },
+            { 'Cactuar Cantautor', 125, 55, 59, 1, { { -490, -0.539, -632 }, { -478.142, -0.457, -596.091 }, { -472.962, 0.137, -556.255 }, { -472.739, 0.058, -551.533 }, { -471.958, 0.199, -529.783 }, { -471.788, 0.199, -525.19 }, { -469.699, 0.037, -534.067 }, { -469.423, -0.074, -536.14 }, { -468.728, 0.263, -554.157 }, { -468.483, -0.012, -551.961 }, { -465.162, -0.029, -542.296 }, { -464.555, 0.018, -528.08 }, { -463.786, 0.87, -557.356 }, { -462.278, -0.142, -534.934 }, { -460.202, 0.225, -529.886 }, { -460.188, 0.99, -557.978 }, { -458.944, 0.018, -557.266 }, { -456.587, 0.586, -526.256 }, { -456.443, 0.206, -551.653 }, { -454.573, 0, -532.416 }, { -454.114, 0.596, -522.354 }, { -450.483, 0.311, -541.258 }, { -449.211, 0.259, -560.431 }, { -447.851, 0.351, -535.403 }, { -447.661, 0.181, -523.961 }, { -447.27, -0.007, -532.98 }, { -447.217, 0.591, -540.932 }, { -445.989, 0.006, -564.497 }, { -445.075, 0.052, -559.968 }, { -444.349, 0.319, -549.207 }, { -443.667, 0.314, -530.327 }, { -443.059, 0.766, -535.698 }, { -441.272, 0.103, -526.081 }, { -440.787, 0.881, -542.365 }, { -439.995, 0, -560.519 }, { -438.482, 0.828, -537.343 }, { -437.561, 0.212, -551.716 }, { -435.36, 0.031, -559.357 }, { -434.965, 0.051, -519.91 }, { -432.707, 0.163, -522.664 }, { -429.57, 0.199, -549.34 }, { -428.513, 0.372, -520.2 }, { -427.79, -0.285, -544.446 }, { -424.479, -0.061, -540.95 }, { -423.303, -0.034, -549.993 }, { -421.772, 0.293, -529.533 }, { -419.954, -0.407, -535.319 }, { -416.605, 0.829, -518.183 }, { -413.544, 0.55, -521.676 }, { -401.595, 0.628, -534.323 }, { -398.733, 0.316, -530.365 } } },
         },
         [1441] = {
-            { 'Mother Globe', 178, 83, 84, 1 },
-            { 'Olla Grande', 178, 85, 85, 1 },
-            { 'Brigandish Blade', 177, 82, 84, 1 },
-            { 'Steam Cleaner', 177, 81, 83, 1 },
+            { 'Mother Globe', 178, 83, 84, 1, { { 855.947, -99.924, -578.291 } } },
+            { 'Olla Grande', 178, 85, 85, 1, { { 851, -1, 92 } } },
+            { 'Brigandish Blade', 177, 82, 84, 1, { { -1, -1, -283 } } },
+            { 'Steam Cleaner', 177, 81, 83, 1, { { 317, -1, 361 } } },
         },
         [1446] = {
             { 'Great Ameretat', 68, 73, 76 },
@@ -2473,19 +3392,19 @@ return {
             { 'Great Ameretat', 51, 73, 74 },
             { 'Anemone', 124, 51, 54 },
             { 'Overgrown Rose', 123, 45, 48 },
-            { 'Rose Garden', 123, 50, 50, 1 },
-            { 'Voluptuous Vilma', 123, 52, 53, 1 },
+            { 'Rose Garden', 123, 50, 50, 1, { { 50, 10, 245 } } },
+            { 'Voluptuous Vilma', 123, 52, 53, 1, { { 42, 9, 245 } } },
         },
         [1650] = {
             { 'Bugbear Deathsman', 12, 74, 75 },
-            { 'Bugbear Matman', 12, 78, 78, 1 },
+            { 'Bugbear Matman', 12, 78, 78, 1, { { 124.544, 19.988, -60.67 } } },
             { 'Bugbear Trashman', 12, 65, 67 },
             { 'Bugbear Watchman', 12, 71, 76 },
             { 'Bugbear Bondman', 11, 42, 45 },
             { 'Bugbear Servingman', 11, 32, 35 },
         },
         [1817] = {
-            { 'Cactrot Rapido', 114, 80, 81, 1 },
+            { 'Cactrot Rapido', 114, 80, 81, 1, { { -44.821, 0.04, -204.137 }, { -43.733, 0.029, -205.89 }, { -36.339, 0, -196.558 }, { -26.834, -2.92, -183.684 }, { -8.384, -9.174, -163.234 }, { -7.862, -14.669, 184.072 }, { -1.399, -15.415, 173.901 }, { -0.093, -16, 196.311 }, { 10.562, -7.763, -153.151 }, { 16.3, -16.153, 177.281 }, { 21.13, -20.765, 143.381 }, { 25.823, -15.431, 155.779 }, { 37.798, -22.609, 136.094 }, { 38.579, -8, -159.953 }, { 47.843, -21.39, 129.461 }, { 48.97, -9.183, -157.981 }, { 59.675, -14.091, -155.496 }, { 61.654, -7.113, -202.886 }, { 62.594, -18.367, 119.87 }, { 69.335, -19.906, -150.315 }, { 72.849, -7.547, -207.622 }, { 90.956, -14.351, 119.106 }, { 91.295, -22.441, -133.185 }, { 97.334, -13.89, -116.29 }, { 105.762, -11.687, -109.258 }, { 117.167, -15.802, 154.863 }, { 121.918, -8.169, -85.653 }, { 129.604, -8.359, -69.037 }, { 143.842, -11.473, 58.988 }, { 144.24, -12.902, 149.28 }, { 147.488, -7.989, 107.295 }, { 148.003, -9.46, 28.999 }, { 148.563, -9.651, 16.788 }, { 149.41, -10.013, -1.53 }, { 167.395, -7.425, -230.588 }, { 195.466, -2.154, -225.452 }, { 198.27, -7.032, -59.389 }, { 199.52, -0.495, -7.907 }, { 204.107, -8.062, 85.677 }, { 204.896, 0.044, 3.06 }, { 209.036, -8.379, -64.954 }, { 212.223, -5.971, -202.506 }, { 225.075, -5.462, -73.46 }, { 225.18, -4.675, 47.242 }, { 228.024, -9.949, 74.323 }, { 259.785, -1.055, -58.388 }, { 280.895, 0, -40.171 }, { 297.468, 0.181, -109.136 } } },
             { 'Sabotender', 114, 42, 46 },
             { 'Sabotender Sediendo', 174, 64, 67 },
             { 'Sabotender Bailaor', 208, 52, 59 },
@@ -2493,46 +3412,46 @@ return {
             { 'Cactuar', 125, 48, 53 },
         },
         [2322] = {
-            { 'Ob', 72, 78, 80, 1 },
+            { 'Ob', 72, 78, 80, 1, { { 552.914, -0.112, -135.001 } } },
         },
         [2323] = {
-            { 'Ob', 72, 78, 80, 1 },
+            { 'Ob', 72, 78, 80, 1, { { 552.914, -0.112, -135.001 } } },
         },
         [2324] = {
-            { 'Ob', 72, 78, 80, 1 },
+            { 'Ob', 72, 78, 80, 1, { { 552.914, -0.112, -135.001 } } },
         },
         [2325] = {
-            { 'Ob', 72, 78, 80, 1 },
+            { 'Ob', 72, 78, 80, 1, { { 552.914, -0.112, -135.001 } } },
         },
         [2326] = {
-            { 'Ob', 72, 78, 80, 1 },
+            { 'Ob', 72, 78, 80, 1, { { 552.914, -0.112, -135.001 } } },
         },
         [2327] = {
-            { 'Ob', 72, 78, 80, 1 },
+            { 'Ob', 72, 78, 80, 1, { { 552.914, -0.112, -135.001 } } },
         },
         [2328] = {
-            { 'Ob', 72, 78, 80, 1 },
+            { 'Ob', 72, 78, 80, 1, { { 552.914, -0.112, -135.001 } } },
         },
         [2329] = {
-            { 'Ob', 72, 78, 80, 1 },
+            { 'Ob', 72, 78, 80, 1, { { 552.914, -0.112, -135.001 } } },
         },
         [2413] = {
-            { 'Ob', 72, 78, 80, 1 },
+            { 'Ob', 72, 78, 80, 1, { { 552.914, -0.112, -135.001 } } },
         },
         [2414] = {
-            { 'Ob', 72, 78, 80, 1 },
+            { 'Ob', 72, 78, 80, 1, { { 552.914, -0.112, -135.001 } } },
         },
         [3310] = {
-            { 'Ob', 72, 78, 80, 1 },
+            { 'Ob', 72, 78, 80, 1, { { 552.914, -0.112, -135.001 } } },
         },
         [3312] = {
-            { 'Ob', 72, 78, 80, 1 },
+            { 'Ob', 72, 78, 80, 1, { { 552.914, -0.112, -135.001 } } },
         },
         [3313] = {
-            { 'Ob', 72, 78, 80, 1 },
+            { 'Ob', 72, 78, 80, 1, { { 552.914, -0.112, -135.001 } } },
         },
         [3314] = {
-            { 'Ob', 72, 78, 80, 1 },
+            { 'Ob', 72, 78, 80, 1, { { 552.914, -0.112, -135.001 } } },
         },
         [4366] = {
             { 'Steppe Hare', 102, 8, 10 },
@@ -2541,15 +3460,15 @@ return {
         [4378] = {
             { 'Broo', 147, 39, 41 },
             { 'Charging Sheep', 147, 28, 30 },
-            { 'Stray Mary', 108, 19, 20, 1 },
+            { 'Stray Mary', 108, 19, 20, 1, { { -257.465, -15.805, -117.638 }, { -212.268, 39.477, 329.581 } } },
             { 'Tavnazian Sheep', 24, 33, 37 },
             { 'Tavnazian Sheep', 25, 33, 37 },
         },
         [4382] = {
-            { 'Black Coney', 5, 70, 72, 1 },
+            { 'Black Coney', 5, 70, 72, 1, { { 413.462, -0.353, -409.845 } } },
             { 'Polar Hare', 5, 65, 68 },
             { 'Variable Hare', 5, 58, 61 },
-            { 'White Coney', 5, 70, 72, 1 },
+            { 'White Coney', 5, 70, 72, 1, { { 404.04, -0.588, -445.81 } } },
         },
         [4412] = {
             { 'Brae Opo-Opo', 132, 79, 80 },
@@ -2558,14 +3477,14 @@ return {
             { 'Old Opo-opo', 205, 61, 65 },
             { 'Mischievous Micholas', 77, 75, 80, 1 },
             { 'Temple Opo-opo', 159, 51, 54 },
-            { 'Mischievous Micholas', 123, 53, 55, 1 },
+            { 'Mischievous Micholas', 123, 53, 55, 1, { { -279.575, 3.317, 16.011 } } },
         },
         [4432] = {
             { 'Wily Opo-opo', 217, 79, 80 },
             { 'Old Opo-opo', 205, 61, 65 },
             { 'Mischievous Micholas', 77, 75, 80, 1 },
             { 'Temple Opo-opo', 159, 51, 54 },
-            { 'Mischievous Micholas', 123, 53, 55, 1 },
+            { 'Mischievous Micholas', 123, 53, 55, 1, { { -279.575, 3.317, 16.011 } } },
         },
         [4444] = {
             { 'Bumblebee', 116, 1, 1 },
@@ -2580,18 +3499,18 @@ return {
             { 'Old Opo-opo', 205, 61, 65 },
             { 'Mischievous Micholas', 77, 75, 80, 1 },
             { 'Temple Opo-opo', 159, 51, 54 },
-            { 'Edacious Opo-opo', 124, 55, 55, 1 },
+            { 'Edacious Opo-opo', 124, 55, 55, 1, { { 544.436, 0.589, -436.372 } } },
             { 'Young Opo-opo', 124, 40, 44 },
-            { 'Mischievous Micholas', 123, 53, 55, 1 },
+            { 'Mischievous Micholas', 123, 53, 55, 1, { { -279.575, 3.317, 16.011 } } },
             { 'Young Opo-opo', 123, 34, 36 },
         },
         [4495] = {
-            { 'Goblin Archaeologist', 108, 30, 75, 1 },
-            { 'Goblin Archaeologist', 102, 30, 75, 1 },
+            { 'Goblin Archaeologist', 108, 30, 75, 1, { { 141.024, 23.679, 248.83 } } },
+            { 'Goblin Archaeologist', 102, 30, 75, 1, { { 342.811, 23.593, -10.756 } } },
             { 'Goblin Archaeologist', 117, 30, 75, 1 },
         },
         [4509] = {
-            { 'Cuijatender', 218, 105, 105, 1 },
+            { 'Cuijatender', 218, 105, 105, 1, { { -635, 1.02, -299.202 } } },
             { 'Sabotender', 114, 42, 46 },
             { 'Sabotender Sediendo', 174, 64, 67 },
             { 'Cactuar Cantautor', 77, 75, 80, 1 },
@@ -2638,7 +3557,7 @@ return {
             { 'Carrion Crow', 95, 22, 25 },
         },
         [4638] = {
-            { 'Coral Sahagin', 176, 72, 74, 1 },
+            { 'Coral Sahagin', 176, 72, 74, 1, { { 128.532, 9.997, -284.626 } } },
             { 'Lagoon Sahagin', 176, 62, 72 },
         },
         [4680] = {
@@ -2767,7 +3686,7 @@ return {
         },
         [4744] = {
             { 'Goblin Leecher', 105, 26, 27 },
-            { 'Ge\'Dha Evileye', 147, 30, 30, 1 },
+            { 'Ge\'Dha Evileye', 147, 30, 30, 1, { { -242.709, 0.5, -188.01 }, { -238, 1, -203 } } },
             { 'Goblin Leecher', 118, 22, 25 },
             { 'Yagudo Priest', 151, 22, 28 },
             { 'Yagudo Priest', 145, 21, 23 },
@@ -2791,7 +3710,7 @@ return {
         },
         [4745] = {
             { 'Goblin Leecher', 105, 26, 27 },
-            { 'Ge\'Dha Evileye', 147, 30, 30, 1 },
+            { 'Ge\'Dha Evileye', 147, 30, 30, 1, { { -242.709, 0.5, -188.01 }, { -238, 1, -203 } } },
             { 'Goblin Leecher', 118, 22, 25 },
             { 'Sapphirine Quadav', 171, 66, 69 },
             { 'Yagudo Acolyte', 116, 3, 6 },
@@ -2826,7 +3745,7 @@ return {
             { 'Goblin Leecher', 105, 26, 27 },
             { 'Goblin Leecher', 118, 22, 25 },
             { 'Yagudo Priest', 151, 22, 28 },
-            { 'Hoo Mjuu the Torrent', 145, 16, 17, 1 },
+            { 'Hoo Mjuu the Torrent', 145, 16, 17, 1, { { -90.28, -0.565, -84.597 }, { -81.423, 1, -71.308 }, { -79.258, 0.49, -85.936 }, { -78.692, -0.653, -92.499 }, { -70.482, 1.243, -69.38 }, { -69.216, 0.727, -84.936 }, { -64.949, -0.272, -88.724 }, { -63, -0.86, -91 }, { -62.358, 0.916, -77.275 }, { -62.342, 0.474, -86.003 }, { -61.027, -0.295, -89.536 }, { -58.354, 1, -80.969 }, { -57.961, 1, -81.284 }, { -57, -2, -119 }, { -55.364, -0.359, -90.817 }, { -50.829, 0.95, -83.587 }, { -50.083, -0.267, -120.731 }, { -50, 1, -75 }, { -48.812, -0.166, -106.726 }, { -47.804, 0.017, -112.115 }, { -47.404, 0.123, -101.495 }, { -46.897, 0.295, -97.197 }, { -46.852, 0.175, -91.316 }, { -46.65, 0.311, -102.442 }, { -46.02, 0.469, -101.926 }, { -45.738, 0.539, -100.449 }, { -43.103, 1, -112.137 }, { -42.943, 1, -97.089 }, { -42.81, 0.834, -91.884 }, { -42.389, 0.315, -130.93 }, { -41.118, 1, -93.202 }, { -40.48, 1, -118.954 }, { -39.073, 0.597, -115.279 }, { -37.128, 1, -118.051 }, { -37.1, 0.582, -127.259 }, { -36.586, 1.329, -104.497 }, { -36.325, 1, -95.533 }, { -36.316, 1.277, -111.276 }, { -35.367, 0.859, -90.359 }, { -35.23, 0.744, -91.412 }, { -34.975, 1.35, -111.613 }, { -32.032, 1.318, -87.061 }, { -32, 0.74, -105 }, { -31.958, 1.028, -71.971 }, { -31.715, 0.771, -93.257 }, { -28.083, 0.899, -73.763 }, { -28.026, 1.056, -64.385 }, { -27.974, 1.404, -88.717 }, { -27.194, 1.316, -84.194 }, { -26.922, 1.09, -83.896 }, { -21.61, 0.687, -70.378 } } },
             { 'Yagudo Priest', 145, 21, 23 },
             { 'Goblin Leecher', 192, 20, 23 },
             { 'Goblin Leecher', 104, 21, 22 },
@@ -2848,21 +3767,21 @@ return {
         },
         [4750] = {
             { 'Goblin Alchemist', 113, 65, 68 },
-            { 'Yagudo High Priest', 151, 72, 74, 1 },
+            { 'Yagudo High Priest', 151, 72, 74, 1, { { -106, -72, 96 }, { -102, -63, 64 } } },
             { 'Goblin Alchemist', 212, 65, 68 },
             { 'Goblin Alchemist', 205, 66, 69 },
             { 'Goblin Alchemist', 174, 66, 69 },
             { 'Goblin Alchemist', 213, 66, 69 },
             { 'Goblin Alchemist', 9, 62, 68 },
-            { 'Coral Sahagin', 176, 72, 74, 1 },
-            { 'Yarr the Pearleyed', 176, 64, 66, 1 },
+            { 'Coral Sahagin', 176, 72, 74, 1, { { 128.532, 9.997, -284.626 } } },
+            { 'Yarr the Pearleyed', 176, 64, 66, 1, { { 3, 20, -140 } } },
         },
         [4754] = {
             { 'Dread Demon', 161, 71, 73 },
-            { 'Marquis Amon', 161, 76, 76, 1 },
+            { 'Marquis Amon', 161, 76, 76, 1, { { -45.451, -4, 2.691 }, { -44.664, -4, 0.671 }, { -44.337, -4, -18.642 }, { -44.096, -4, -1.129 }, { -43.779, -4, -3.345 }, { -43.04, -4, -7.677 }, { -42.501, -4, -1.566 }, { -42.356, -4, -12.358 }, { -41.793, -4, 5.527 }, { -41.741, -4, -1.07 }, { -41.575, -4, -15.19 }, { -40.77, -4, -16.928 }, { -40.749, -4, -11.079 }, { -40.119, -4, 2.191 }, { -39.398, -4, -18.995 }, { -39.063, -4, -15.999 }, { -38.143, -4, -12.759 }, { -37.941, -4, 1.472 }, { -37.871, -4, -12.995 }, { -37.208, -4, 7.541 }, { -36.064, -4, -17.204 }, { -35.742, -4, -18.005 }, { -35.299, -4, -7.573 }, { -34.922, -4, -5.554 }, { -34.245, -4, -0.117 }, { -34.191, -4, -4.037 }, { -34.15, -4, 1.973 }, { -34.147, -4, -17.818 }, { -33.959, -4, -16.539 }, { -33.601, -4, 3.087 }, { -31.919, -4, 6.051 }, { -31.659, -4, -11.285 }, { -30.845, -4, -3.526 }, { -30.757, -4, -12.312 }, { -30.715, -4.5, -20.455 }, { -29.845, -4, 4.826 }, { -28.994, -4, -2.958 }, { -28.56, -4, 3.923 }, { -28.253, -4, -13.785 }, { -27.26, -4, -13.595 }, { -27.089, -4, -8.732 }, { -26.348, -4, -8.1 }, { -25.805, -4, -1.42 }, { -25.566, -4, -18.922 }, { -24.693, -4, 3.786 }, { -22.554, -4, -2.814 }, { -22.415, -4, -10.492 }, { -21.648, -4, -5.49 }, { -21.092, -4, -6.196 }, { -19.697, -4, -5.593 } } },
             { 'Soulsearer Demon', 138, 85, 88 },
             { 'Inferno Demon', 155, 82, 83 },
-            { 'Hakutaku', 160, 84, 85, 1 },
+            { 'Hakutaku', 160, 84, 85, 1, { { 24, 25, -306 } } },
             { 'Million Eyes', 160, 73, 76 },
             { 'Dodomeki', 205, 63, 68 },
             { 'Locus Thousand Eyes', 190, 135, 137 },
@@ -2872,10 +3791,10 @@ return {
         },
         [4755] = {
             { 'Dread Demon', 161, 71, 73 },
-            { 'Marquis Amon', 161, 76, 76, 1 },
+            { 'Marquis Amon', 161, 76, 76, 1, { { -45.451, -4, 2.691 }, { -44.664, -4, 0.671 }, { -44.337, -4, -18.642 }, { -44.096, -4, -1.129 }, { -43.779, -4, -3.345 }, { -43.04, -4, -7.677 }, { -42.501, -4, -1.566 }, { -42.356, -4, -12.358 }, { -41.793, -4, 5.527 }, { -41.741, -4, -1.07 }, { -41.575, -4, -15.19 }, { -40.77, -4, -16.928 }, { -40.749, -4, -11.079 }, { -40.119, -4, 2.191 }, { -39.398, -4, -18.995 }, { -39.063, -4, -15.999 }, { -38.143, -4, -12.759 }, { -37.941, -4, 1.472 }, { -37.871, -4, -12.995 }, { -37.208, -4, 7.541 }, { -36.064, -4, -17.204 }, { -35.742, -4, -18.005 }, { -35.299, -4, -7.573 }, { -34.922, -4, -5.554 }, { -34.245, -4, -0.117 }, { -34.191, -4, -4.037 }, { -34.15, -4, 1.973 }, { -34.147, -4, -17.818 }, { -33.959, -4, -16.539 }, { -33.601, -4, 3.087 }, { -31.919, -4, 6.051 }, { -31.659, -4, -11.285 }, { -30.845, -4, -3.526 }, { -30.757, -4, -12.312 }, { -30.715, -4.5, -20.455 }, { -29.845, -4, 4.826 }, { -28.994, -4, -2.958 }, { -28.56, -4, 3.923 }, { -28.253, -4, -13.785 }, { -27.26, -4, -13.595 }, { -27.089, -4, -8.732 }, { -26.348, -4, -8.1 }, { -25.805, -4, -1.42 }, { -25.566, -4, -18.922 }, { -24.693, -4, 3.786 }, { -22.554, -4, -2.814 }, { -22.415, -4, -10.492 }, { -21.648, -4, -5.49 }, { -21.092, -4, -6.196 }, { -19.697, -4, -5.593 } } },
             { 'Soulsearer Demon', 138, 85, 88 },
             { 'Inferno Demon', 155, 82, 83 },
-            { 'Hakutaku', 160, 84, 85, 1 },
+            { 'Hakutaku', 160, 84, 85, 1, { { 24, 25, -306 } } },
             { 'Million Eyes', 160, 73, 76 },
             { 'Dread Demon', 5, 75, 77 },
             { 'Inferno Demon', 137, 82, 83 },
@@ -2917,20 +3836,20 @@ return {
             { 'Yagudo Prior', 98, 71, 74 },
         },
         [4769] = {
-            { 'Orcish Hexspinner', 150, 71, 73, 1 },
-            { 'Orcish Warlord', 150, 72, 74, 1 },
+            { 'Orcish Hexspinner', 150, 71, 73, 1, { { 217.819, -3.025, -102.635 } } },
+            { 'Orcish Warlord', 150, 72, 74, 1, { { 98.262, -1.442, -136.775 }, { 230.037, -2.886, -95.685 } } },
             { 'Moblin Draftsman', 12, 66, 69 },
             { 'Goblin Chapman', 88, 71, 74 },
-            { 'Centurio X-I', 208, 56, 58, 1 },
+            { 'Centurio X-I', 208, 56, 58, 1, { { 754, 2, -553 }, { 765, 1, -572 }, { 773.581, 1.576, -568.904 }, { 781, 2, -556 }, { 798, 2, -567 }, { 804, 2, -552 } } },
         },
         [4770] = {
-            { 'Orcish Hexspinner', 150, 71, 73, 1 },
-            { 'Orcish Warlord', 150, 72, 74, 1 },
+            { 'Orcish Hexspinner', 150, 71, 73, 1, { { 217.819, -3.025, -102.635 } } },
+            { 'Orcish Warlord', 150, 72, 74, 1, { { 98.262, -1.442, -136.775 }, { 230.037, -2.886, -95.685 } } },
             { 'Goblin Chapman', 88, 71, 74 },
-            { 'Antican Praetor', 208, 72, 74, 1 },
-            { 'Antican Proconsul', 208, 65, 65, 1 },
+            { 'Antican Praetor', 208, 72, 74, 1, { { -298.904, -2.441, 377.605 }, { -179, 1, 378 } } },
+            { 'Antican Proconsul', 208, 65, 65, 1, { { 76, -0.6, -194 } } },
             { 'Antican Quaestor', 208, 62, 72 },
-            { 'Centurio X-I', 208, 56, 58, 1 },
+            { 'Centurio X-I', 208, 56, 58, 1, { { 754, 2, -553 }, { 765, 1, -572 }, { 773.581, 1.576, -568.904 }, { 781, 2, -556 }, { 798, 2, -567 }, { 804, 2, -552 } } },
         },
         [4774] = {
             { 'Tonberry Imprecator', 160, 62, 64 },
@@ -2940,16 +3859,16 @@ return {
         [4779] = {
             { 'Sapphire Quadav', 147, 65, 69 },
             { 'Baetyl Quadav', 92, 80, 83 },
-            { 'Bistre-hearted Malberry', 160, 71, 73, 1 },
-            { 'Tonberry Pontifex', 160, 75, 75, 1 },
+            { 'Bistre-hearted Malberry', 160, 71, 73, 1, { { -32, 16, -178 } } },
+            { 'Tonberry Pontifex', 160, 75, 75, 1, { { -164.725, 16.416, -116.191 } } },
             { 'Sapphire Quadav', 148, 69, 72 },
         },
         [4780] = {
             { 'Sapphire Quadav', 147, 65, 69 },
             { 'Baetyl Quadav', 92, 80, 83 },
-            { 'Bistre-hearted Malberry', 160, 71, 73, 1 },
-            { 'Sozu Bliberry', 160, 65, 66, 1 },
-            { 'Tonberry Pontifex', 160, 75, 75, 1 },
+            { 'Bistre-hearted Malberry', 160, 71, 73, 1, { { -32, 16, -178 } } },
+            { 'Sozu Bliberry', 160, 65, 66, 1, { { 98.83, 16.807, -40.687 } } },
+            { 'Tonberry Pontifex', 160, 75, 75, 1, { { -164.725, 16.416, -116.191 } } },
             { 'Sapphire Quadav', 148, 69, 72 },
         },
         [4783] = {
@@ -2962,10 +3881,10 @@ return {
         },
         [4784] = {
             { 'Dread Demon', 161, 71, 73 },
-            { 'Marquis Amon', 161, 76, 76, 1 },
+            { 'Marquis Amon', 161, 76, 76, 1, { { -45.451, -4, 2.691 }, { -44.664, -4, 0.671 }, { -44.337, -4, -18.642 }, { -44.096, -4, -1.129 }, { -43.779, -4, -3.345 }, { -43.04, -4, -7.677 }, { -42.501, -4, -1.566 }, { -42.356, -4, -12.358 }, { -41.793, -4, 5.527 }, { -41.741, -4, -1.07 }, { -41.575, -4, -15.19 }, { -40.77, -4, -16.928 }, { -40.749, -4, -11.079 }, { -40.119, -4, 2.191 }, { -39.398, -4, -18.995 }, { -39.063, -4, -15.999 }, { -38.143, -4, -12.759 }, { -37.941, -4, 1.472 }, { -37.871, -4, -12.995 }, { -37.208, -4, 7.541 }, { -36.064, -4, -17.204 }, { -35.742, -4, -18.005 }, { -35.299, -4, -7.573 }, { -34.922, -4, -5.554 }, { -34.245, -4, -0.117 }, { -34.191, -4, -4.037 }, { -34.15, -4, 1.973 }, { -34.147, -4, -17.818 }, { -33.959, -4, -16.539 }, { -33.601, -4, 3.087 }, { -31.919, -4, 6.051 }, { -31.659, -4, -11.285 }, { -30.845, -4, -3.526 }, { -30.757, -4, -12.312 }, { -30.715, -4.5, -20.455 }, { -29.845, -4, 4.826 }, { -28.994, -4, -2.958 }, { -28.56, -4, 3.923 }, { -28.253, -4, -13.785 }, { -27.26, -4, -13.595 }, { -27.089, -4, -8.732 }, { -26.348, -4, -8.1 }, { -25.805, -4, -1.42 }, { -25.566, -4, -18.922 }, { -24.693, -4, 3.786 }, { -22.554, -4, -2.814 }, { -22.415, -4, -10.492 }, { -21.648, -4, -5.49 }, { -21.092, -4, -6.196 }, { -19.697, -4, -5.593 } } },
             { 'Soulsearer Demon', 138, 85, 88 },
             { 'Inferno Demon', 155, 82, 83 },
-            { 'Hakutaku', 160, 84, 85, 1 },
+            { 'Hakutaku', 160, 84, 85, 1, { { 24, 25, -306 } } },
             { 'Million Eyes', 160, 73, 76 },
             { 'Dread Demon', 5, 75, 77 },
             { 'Inferno Demon', 137, 82, 83 },
@@ -2995,7 +3914,7 @@ return {
             { 'Yagudo Prelate', 151, 65, 72 },
             { 'Yagudo Prelate', 99, 76, 79 },
             { 'Yagudo Prelate', 138, 77, 79 },
-            { 'Baron Vapula', 162, 68, 68, 1 },
+            { 'Baron Vapula', 162, 68, 68, 1, { { -241, -52, 84 } } },
             { 'Yagudo Prior', 164, 71, 74 },
             { 'Yagudo Prelate', 97, 76, 79 },
             { 'Moblin Engineman', 12, 75, 79 },
@@ -3003,25 +3922,25 @@ return {
             { 'Yagudo Prior', 98, 71, 74 },
         },
         [4798] = {
-            { 'Orcish Hexspinner', 150, 71, 73, 1 },
-            { 'Orcish Warlord', 150, 72, 74, 1 },
+            { 'Orcish Hexspinner', 150, 71, 73, 1, { { 217.819, -3.025, -102.635 } } },
+            { 'Orcish Warlord', 150, 72, 74, 1, { { 98.262, -1.442, -136.775 }, { 230.037, -2.886, -95.685 } } },
             { 'Moblin Draftsman', 12, 66, 69 },
             { 'Goblin Chapman', 88, 71, 74 },
             { 'Antican Quaestor', 208, 62, 72 },
-            { 'Centurio X-I', 208, 56, 58, 1 },
+            { 'Centurio X-I', 208, 56, 58, 1, { { 754, 2, -553 }, { 765, 1, -572 }, { 773.581, 1.576, -568.904 }, { 781, 2, -556 }, { 798, 2, -567 }, { 804, 2, -552 } } },
         },
         [4799] = {
-            { 'Orcish Hexspinner', 150, 71, 73, 1 },
-            { 'Orcish Warlord', 150, 72, 74, 1 },
+            { 'Orcish Hexspinner', 150, 71, 73, 1, { { 217.819, -3.025, -102.635 } } },
+            { 'Orcish Warlord', 150, 72, 74, 1, { { 98.262, -1.442, -136.775 }, { 230.037, -2.886, -95.685 } } },
             { 'Moblin Draftsman', 12, 66, 69 },
             { 'Goblin Chapman', 88, 71, 74 },
-            { 'Antican Praetor', 208, 72, 74, 1 },
-            { 'Antican Proconsul', 208, 65, 65, 1 },
+            { 'Antican Praetor', 208, 72, 74, 1, { { -298.904, -2.441, 377.605 }, { -179, 1, 378 } } },
+            { 'Antican Proconsul', 208, 65, 65, 1, { { 76, -0.6, -194 } } },
             { 'Antican Quaestor', 208, 62, 72 },
-            { 'Centurio X-I', 208, 56, 58, 1 },
+            { 'Centurio X-I', 208, 56, 58, 1, { { 754, 2, -553 }, { 765, 1, -572 }, { 773.581, 1.576, -568.904 }, { 781, 2, -556 }, { 798, 2, -567 }, { 804, 2, -552 } } },
         },
         [4803] = {
-            { 'Baron Vapula', 162, 68, 68, 1 },
+            { 'Baron Vapula', 162, 68, 68, 1, { { -241, -52, 84 } } },
             { 'Tonberry Imprecator', 160, 62, 64 },
             { 'Tonberry Maledictor', 159, 61, 69 },
             { 'Tonberry Jinxer', 124, 61, 63 },
@@ -3029,24 +3948,24 @@ return {
         [4808] = {
             { 'Sapphire Quadav', 147, 65, 69 },
             { 'Baetyl Quadav', 92, 80, 83 },
-            { 'Bistre-hearted Malberry', 160, 71, 73, 1 },
-            { 'Tonberry Pontifex', 160, 75, 75, 1 },
+            { 'Bistre-hearted Malberry', 160, 71, 73, 1, { { -32, 16, -178 } } },
+            { 'Tonberry Pontifex', 160, 75, 75, 1, { { -164.725, 16.416, -116.191 } } },
             { 'Sapphire Quadav', 148, 69, 72 },
         },
         [4809] = {
             { 'Sapphire Quadav', 147, 65, 69 },
             { 'Baetyl Quadav', 92, 80, 83 },
-            { 'Bistre-hearted Malberry', 160, 71, 73, 1 },
-            { 'Sozu Bliberry', 160, 65, 66, 1 },
-            { 'Tonberry Pontifex', 160, 75, 75, 1 },
+            { 'Bistre-hearted Malberry', 160, 71, 73, 1, { { -32, 16, -178 } } },
+            { 'Sozu Bliberry', 160, 65, 66, 1, { { 98.83, 16.807, -40.687 } } },
+            { 'Tonberry Pontifex', 160, 75, 75, 1, { { -164.725, 16.416, -116.191 } } },
             { 'Sapphire Quadav', 148, 69, 72 },
         },
         [4812] = {
             { 'Dread Demon', 161, 71, 73 },
-            { 'Marquis Amon', 161, 76, 76, 1 },
+            { 'Marquis Amon', 161, 76, 76, 1, { { -45.451, -4, 2.691 }, { -44.664, -4, 0.671 }, { -44.337, -4, -18.642 }, { -44.096, -4, -1.129 }, { -43.779, -4, -3.345 }, { -43.04, -4, -7.677 }, { -42.501, -4, -1.566 }, { -42.356, -4, -12.358 }, { -41.793, -4, 5.527 }, { -41.741, -4, -1.07 }, { -41.575, -4, -15.19 }, { -40.77, -4, -16.928 }, { -40.749, -4, -11.079 }, { -40.119, -4, 2.191 }, { -39.398, -4, -18.995 }, { -39.063, -4, -15.999 }, { -38.143, -4, -12.759 }, { -37.941, -4, 1.472 }, { -37.871, -4, -12.995 }, { -37.208, -4, 7.541 }, { -36.064, -4, -17.204 }, { -35.742, -4, -18.005 }, { -35.299, -4, -7.573 }, { -34.922, -4, -5.554 }, { -34.245, -4, -0.117 }, { -34.191, -4, -4.037 }, { -34.15, -4, 1.973 }, { -34.147, -4, -17.818 }, { -33.959, -4, -16.539 }, { -33.601, -4, 3.087 }, { -31.919, -4, 6.051 }, { -31.659, -4, -11.285 }, { -30.845, -4, -3.526 }, { -30.757, -4, -12.312 }, { -30.715, -4.5, -20.455 }, { -29.845, -4, 4.826 }, { -28.994, -4, -2.958 }, { -28.56, -4, 3.923 }, { -28.253, -4, -13.785 }, { -27.26, -4, -13.595 }, { -27.089, -4, -8.732 }, { -26.348, -4, -8.1 }, { -25.805, -4, -1.42 }, { -25.566, -4, -18.922 }, { -24.693, -4, 3.786 }, { -22.554, -4, -2.814 }, { -22.415, -4, -10.492 }, { -21.648, -4, -5.49 }, { -21.092, -4, -6.196 }, { -19.697, -4, -5.593 } } },
             { 'Soulsearer Demon', 138, 85, 88 },
             { 'Inferno Demon', 155, 82, 83 },
-            { 'Hakutaku', 160, 84, 85, 1 },
+            { 'Hakutaku', 160, 84, 85, 1, { { 24, 25, -306 } } },
             { 'Million Eyes', 160, 73, 76 },
             { 'Dread Demon', 5, 75, 77 },
             { 'Inferno Demon', 137, 82, 83 },
@@ -3065,18 +3984,18 @@ return {
             { 'Yagudo Prior', 98, 71, 74 },
         },
         [4818] = {
-            { 'Orcish Hexspinner', 150, 71, 73, 1 },
-            { 'Orcish Warlord', 150, 72, 74, 1 },
+            { 'Orcish Hexspinner', 150, 71, 73, 1, { { 217.819, -3.025, -102.635 } } },
+            { 'Orcish Warlord', 150, 72, 74, 1, { { 98.262, -1.442, -136.775 }, { 230.037, -2.886, -95.685 } } },
             { 'Moblin Draftsman', 12, 66, 69 },
             { 'Goblin Chapman', 88, 71, 74 },
-            { 'Centurio X-I', 208, 56, 58, 1 },
-            { 'Kirin', 178, 92, 92, 1 },
+            { 'Centurio X-I', 208, 56, 58, 1, { { 754, 2, -553 }, { 765, 1, -572 }, { 773.581, 1.576, -568.904 }, { 781, 2, -556 }, { 798, 2, -567 }, { 804, 2, -552 } } },
+            { 'Kirin', 178, 92, 92, 1, { { -90.377, 32.575, 5.507 } } },
         },
         [4822] = {
             { 'Sapphire Quadav', 147, 65, 69 },
             { 'Baetyl Quadav', 92, 80, 83 },
-            { 'Bistre-hearted Malberry', 160, 71, 73, 1 },
-            { 'Tonberry Pontifex', 160, 75, 75, 1 },
+            { 'Bistre-hearted Malberry', 160, 71, 73, 1, { { -32, 16, -178 } } },
+            { 'Tonberry Pontifex', 160, 75, 75, 1, { { -164.725, 16.416, -116.191 } } },
             { 'Sapphire Quadav', 148, 69, 72 },
         },
         [4860] = {
@@ -3088,7 +4007,7 @@ return {
             { 'Fallen Soldier', 200, 47, 49 },
             { 'Goblin Reaper', 212, 46, 49 },
             { 'Goblin Reaper', 213, 46, 49 },
-            { 'Orcish Warlord', 150, 72, 74, 1 },
+            { 'Orcish Warlord', 150, 72, 74, 1, { { 98.262, -1.442, -136.775 }, { 230.037, -2.886, -95.685 } } },
             { 'Orcish Zerker', 150, 54, 58 },
             { 'Mummy', 195, 50, 52 },
             { 'Shade', 195, 46, 48 },
@@ -3121,7 +4040,7 @@ return {
             { 'Orcish Neckchopper', 81, 62, 64 },
         },
         [4994] = {
-            { 'Vuu Puqu the Beguiler', 145, 21, 22, 1 },
+            { 'Vuu Puqu the Beguiler', 145, 21, 22, 1, { { -53.392, 1, -398.981 }, { -51.505, 1.313, -413.423 }, { -50.548, 1.049, -428.5 }, { -44.266, 0.478, -443.736 }, { -43.719, 0.905, -442.343 }, { -42.88, 1.208, -431.751 }, { -42.784, 0.834, -446.496 }, { -41.774, 1, -447.188 }, { -40.505, 1, -435.957 }, { -38.884, 1, -450.274 }, { -37.559, 1, -407.265 }, { -34.721, 1.362, -452.833 }, { -33.448, 1, -404.362 }, { -32.796, 1.062, -432.045 }, { -31.894, 1.081, -450.774 }, { -31.186, 1, -400.763 }, { -30.201, 1.29, -451.293 }, { -28.067, 0.688, -448.233 }, { -26.949, 0.755, -396.144 }, { -26.92, 0.729, -445.507 }, { -26.442, 0.951, -411.526 }, { -24.993, 1, -403.34 }, { -24.722, 0.905, -396.844 }, { -23.973, 0.459, -399.155 }, { -22.731, 0.977, -391.702 }, { -22.162, 0.473, -422.905 }, { -21.979, 1.124, -411.164 }, { -21.466, 0.985, -393.328 }, { -19.782, 0.662, -387.789 }, { -19.308, 0.926, -442.627 }, { -18.517, 0.942, -415.834 }, { -18.396, 0.891, -389.958 }, { -16.162, 0.972, -442.341 }, { -16.062, 1, -397.764 }, { -15.505, 0.663, -409.358 }, { -13.731, 0.948, -404.361 }, { -13.44, 0.727, -390.878 }, { -12.69, 0.755, -394.148 }, { -12.229, 1.273, -444.978 }, { -11.776, 0.312, -423.92 }, { -10.861, 0.811, -390.019 }, { -7.079, 0.359, -427.846 }, { -0.253, 1, -389.341 }, { 3.909, 1, -439.793 }, { 4.23, 0.943, -390.702 }, { 5.251, 0.917, -413.893 }, { 6.512, 0.657, -419.587 }, { 7.351, 1.246, -423.952 }, { 8.054, 0.884, -444.05 }, { 9.491, 0.947, -394.842 }, { 10.149, 1, -399.547 } } },
             { 'Yagudo Piper', 145, 11, 18 },
         },
         [5072] = {
@@ -3137,14 +4056,14 @@ return {
         },
         [5073] = {
             { 'Yagudo Conductor', 151, 63, 72 },
-            { 'Abyss Sahagin', 176, 72, 74, 1 },
+            { 'Abyss Sahagin', 176, 72, 74, 1, { { 100.499, 0.73, -194.593 }, { 127.653, 9.904, -277.297 } } },
             { 'Coastal Sahagin', 176, 62, 72 },
-            { 'Denn the Orcavoiced', 176, 64, 65, 1 },
+            { 'Denn the Orcavoiced', 176, 64, 65, 1, { { -94, 9, -298 } } },
         },
         [5152] = {
             { 'Bluffalo', 253, 83, 84 },
             { 'Bonnacon', 77, 75, 80, 1 },
-            { 'Bonnacon', 5, 69, 69, 1 },
+            { 'Bonnacon', 5, 69, 69, 1, { { -615.121, -40.062, 6.126 }, { -578.888, -38.507, -67.605 } } },
             { 'Buffalo', 5, 62, 65 },
             { 'Giant Buffalo', 5, 68, 71 },
             { 'King Buffalo', 5, 79, 82 },
@@ -3162,98 +4081,98 @@ return {
             { 'King Buffalo', 5, 79, 82 },
         },
         [10754] = {
-            { 'Arch Christelle', 39, 105, 105, 1 },
+            { 'Arch Christelle', 39, 105, 105, 1, { { 63, 0.782, -72.473 } } },
         },
         [10755] = {
-            { 'Arch Christelle', 39, 105, 105, 1 },
+            { 'Arch Christelle', 39, 105, 105, 1, { { 63, 0.782, -72.473 } } },
         },
         [10756] = {
-            { 'Arch Apocalyptic Beast', 40, 105, 105, 1 },
+            { 'Arch Apocalyptic Beast', 40, 105, 105, 1, { { -224, -22, 100.5 } } },
         },
         [10757] = {
-            { 'Arch Apocalyptic Beast', 40, 105, 105, 1 },
+            { 'Arch Apocalyptic Beast', 40, 105, 105, 1, { { -224, -22, 100.5 } } },
         },
         [10758] = {
-            { 'Arch Antaeus', 41, 105, 105, 1 },
+            { 'Arch Antaeus', 41, 105, 105, 1, { { -260, -20.499, 320 } } },
         },
         [10759] = {
-            { 'Arch Antaeus', 41, 105, 105, 1 },
+            { 'Arch Antaeus', 41, 105, 105, 1, { { -260, -20.499, 320 } } },
         },
         [10760] = {
-            { 'Diabolos Letum', 42, 105, 105, 1 },
-            { 'Diabolos Nox', 42, 105, 105, 1 },
-            { 'Diabolos Somnus', 42, 105, 105, 1 },
-            { 'Diabolos Umbra', 42, 105, 105, 1 },
+            { 'Diabolos Letum', 42, 105, 105, 1, { { 1.5, -30.3, 149.5 } } },
+            { 'Diabolos Nox', 42, 105, 105, 1, { { 1.5, -30.308, 149.5 } } },
+            { 'Diabolos Somnus', 42, 105, 105, 1, { { 1.5, -30.308, 149.5 } } },
+            { 'Diabolos Umbra', 42, 105, 105, 1, { { 1.5, -30.308, 149.5 } } },
         },
         [10761] = {
-            { 'Diabolos Letum', 42, 105, 105, 1 },
-            { 'Diabolos Nox', 42, 105, 105, 1 },
-            { 'Diabolos Somnus', 42, 105, 105, 1 },
-            { 'Diabolos Umbra', 42, 105, 105, 1 },
+            { 'Diabolos Letum', 42, 105, 105, 1, { { 1.5, -30.3, 149.5 } } },
+            { 'Diabolos Nox', 42, 105, 105, 1, { { 1.5, -30.308, 149.5 } } },
+            { 'Diabolos Somnus', 42, 105, 105, 1, { { 1.5, -30.308, 149.5 } } },
+            { 'Diabolos Umbra', 42, 105, 105, 1, { { 1.5, -30.308, 149.5 } } },
         },
         [10817] = {
-            { 'Lost Fairy Ring', 39, 100, 100, 1 },
+            { 'Lost Fairy Ring', 39, 100, 100, 1, { { -526, -7.8, 138 } } },
         },
         [10818] = {
-            { 'Arch Apocalyptic Beast', 40, 105, 105, 1 },
+            { 'Arch Apocalyptic Beast', 40, 105, 105, 1, { { -224, -22, 100.5 } } },
         },
         [10932] = {
-            { 'Tee Zaksa the Ceaseless', 187, 95, 95, 1 },
+            { 'Tee Zaksa the Ceaseless', 187, 95, 95, 1, { { 0.05, -17.25, 133.415 } } },
         },
         [10933] = {
-            { 'Arch Tzee Xicu Idol', 187, 99, 99, 1 },
+            { 'Arch Tzee Xicu Idol', 187, 99, 99, 1, { { 94.944, -3.171, -147.77 } } },
         },
         [10940] = {
-            { 'Arch Christelle', 39, 105, 105, 1 },
+            { 'Arch Christelle', 39, 105, 105, 1, { { 63, 0.782, -72.473 } } },
         },
         [10941] = {
-            { 'Lost Stihi', 40, 100, 100, 1 },
+            { 'Lost Stihi', 40, 100, 100, 1, { { 450, 0.485, -82 } } },
         },
         [10942] = {
-            { 'Lost Stringes', 41, 100, 100, 1 },
+            { 'Lost Stringes', 41, 100, 100, 1, { { 140, 17.999, -438 } } },
         },
         [10943] = {
-            { 'Lost Nant\'ina', 39, 100, 100, 1 },
+            { 'Lost Nant\'ina', 39, 100, 100, 1, { { 6.675, -9.157, 167.014 } } },
         },
         [10944] = {
-            { 'Diabolos Letum', 42, 105, 105, 1 },
-            { 'Diabolos Nox', 42, 105, 105, 1 },
-            { 'Diabolos Somnus', 42, 105, 105, 1 },
-            { 'Diabolos Umbra', 42, 105, 105, 1 },
+            { 'Diabolos Letum', 42, 105, 105, 1, { { 1.5, -30.3, 149.5 } } },
+            { 'Diabolos Nox', 42, 105, 105, 1, { { 1.5, -30.308, 149.5 } } },
+            { 'Diabolos Somnus', 42, 105, 105, 1, { { 1.5, -30.308, 149.5 } } },
+            { 'Diabolos Umbra', 42, 105, 105, 1, { { 1.5, -30.308, 149.5 } } },
         },
         [10972] = {
-            { 'Steelshank Kratzvatz', 185, 95, 95, 1 },
+            { 'Steelshank Kratzvatz', 185, 95, 95, 1, { { 18.315, 1.7, -94.055 } } },
         },
         [10973] = {
-            { 'Spellspear Djokvukk', 185, 95, 95, 1 },
+            { 'Spellspear Djokvukk', 185, 95, 95, 1, { { -274, -6.698, 98 } } },
         },
         [10974] = {
-            { 'Quicktrix Hexhands', 188, 95, 95, 1 },
+            { 'Quicktrix Hexhands', 188, 95, 95, 1, { { 0, -5.5, 68 } } },
         },
         [10975] = {
-            { 'Arch Dynamis Lord', 135, 99, 99, 1 },
+            { 'Arch Dynamis Lord', 135, 99, 99, 1, { { -416.746, -44.499, 19.278 }, { -415.989, -44.499, 20.524 }, { -415, -44.499, 20 }, { -413.792, -44.499, 23.551 }, { -406, -43.478, 26 }, { -406, -43.404, 14 }, { -406, -43.152, 20 }, { -405.62, -43.743, 22.602 } } },
         },
         [10983] = {
-            { 'Lost Scolopendra', 41, 100, 100, 1 },
+            { 'Lost Scolopendra', 41, 100, 100, 1, { { -62, -20.412, -62 } } },
         },
         [10984] = {
-            { 'Lost Barong', 40, 100, 100, 1 },
+            { 'Lost Barong', 40, 100, 100, 1, { { 446, -0.125, -322 } } },
         },
         [11030] = {
-            { 'Fuu Tzapo the Blessed', 187, 95, 95, 1 },
+            { 'Fuu Tzapo the Blessed', 187, 95, 95, 1, { { -94, -13.482, 190 } } },
         },
         [11031] = {
-            { 'Scourquix Scaleskin', 188, 95, 95, 1 },
+            { 'Scourquix Scaleskin', 188, 95, 95, 1, { { 23, 1.5, 64 } } },
         },
         [11032] = {
-            { 'Wilywox Tenderpalm', 188, 95, 95, 1 },
+            { 'Wilywox Tenderpalm', 188, 95, 95, 1, { { -0.14, 1.5, 125.726 } } },
         },
         [11048] = {
-            { 'Skull of Sloth', 195, 60, 60, 1 },
+            { 'Skull of Sloth', 195, 60, 60, 1, { { -186.78, 0, 57.41 } } },
         },
         [11281] = {
-            { 'Pandemonium Lamp', 68, 86, 88, 1 },
-            { 'Pandemonium Warden', 68, 86, 88, 1 },
+            { 'Pandemonium Lamp', 68, 86, 88, 1, { { 206.11, 33.936, -140.64 }, { 206.11, 33.936, -140.47 }, { 206.5, 33.842, -141.13 }, { 206.51, 33.861, -140.04 }, { 206.61, 33.84, -140.08 }, { 206.64, 33.812, -141.14 }, { 206.93, 33.776, -140.15 }, { 207.17, 33.707, -140.46 }, { 207.74, 33.382, -140.3 } } },
+            { 'Pandemonium Warden', 68, 86, 88, 1, { { 208.16, 33.75, -138.61 } } },
         },
         [11285] = {
             { 'Lambton Worm', 86 },
@@ -3270,73 +4189,73 @@ return {
             { 'Guivre', 93, 0, 0, 1 },
         },
         [11289] = {
-            { 'Dark Ixion', 84, 85, 85, 1 },
-            { 'Dark Ixion', 81, 85, 85, 1 },
-            { 'Dark Ixion', 96, 85, 85, 1 },
-            { 'Dark Ixion', 89, 85, 85, 1 },
-            { 'Dark Ixion', 82, 85, 85, 1 },
-            { 'Dark Ixion', 91, 85, 85, 1 },
-            { 'Dark Ixion', 95, 85, 85, 1 },
+            { 'Dark Ixion', 84, 85, 85, 1, { { -83.03, -8.5, 35.26 } } },
+            { 'Dark Ixion', 81, 85, 85, 1, { { 236, -20, -323 } } },
+            { 'Dark Ixion', 96, 85, 85, 1, { { -237.169, -60.711, -237.419 } } },
+            { 'Dark Ixion', 89, 85, 85, 1, { { 344.419, 36.341, -442.948 } } },
+            { 'Dark Ixion', 82, 85, 85, 1, { { -191.51, -0.28, 91.963 } } },
+            { 'Dark Ixion', 91, 85, 85, 1, { { 25.225, -8.723, -346.82 } } },
+            { 'Dark Ixion', 95, 85, 85, 1, { { 231.823, -25.286, 258.575 } } },
         },
         [11338] = {
-            { 'Koropokkur', 123, 36, 37, 1 },
+            { 'Koropokkur', 123, 36, 37, 1, { { -301.557, 0.058, 207.924 } } },
         },
         [11339] = {
-            { 'Hippomaritimus', 103, 37, 38, 1 },
+            { 'Hippomaritimus', 103, 37, 38, 1, { { 238, 4, -163 }, { 264, 4, -161 }, { 289, 4, -168 }, { 326, 4, -171 }, { 346, 3, -150 }, { 351, 4, -198 } } },
         },
         [11342] = {
-            { 'Myradrosh', 81, 53, 53, 1 },
+            { 'Myradrosh', 81, 53, 53, 1, { { 470, -18, -241 } } },
         },
         [11343] = {
-            { 'Picolaton', 125, 61, 64, 1 },
+            { 'Picolaton', 125, 61, 64, 1, { { -545.469, 0.438, -72.377 }, { -515.298, 0.757, -57.25 }, { -504.039, -0.085, -37.812 }, { -452.12, 0.403, -36.623 }, { -413.287, -1.496, -61.436 }, { -389.771, -1.449, -92.104 }, { -354.821, 0.471, -93.987 }, { -349.252, 0.52, -137.37 }, { -338.75, 0.935, -161.939 } } },
         },
         [11359] = {
-            { 'Ironclad Cleaver', 215, 0, 0, 1 },
+            { 'Ironclad Cleaver', 215, 0, 0, 1, { { -276, -4, -159 } } },
         },
         [11360] = {
-            { 'Ironclad Severer', 216, 0, 0, 1 },
+            { 'Ironclad Severer', 216, 0, 0, 1, { { -468.874, -31.645, 361.382 } } },
         },
         [11361] = {
-            { 'Ironclad Executioner', 217, 95, 95, 1 },
+            { 'Ironclad Executioner', 217, 95, 95, 1, { { 88, -32, 73 } } },
         },
         [11366] = {
-            { 'Iriz Ima', 51, 87, 88, 1 },
+            { 'Iriz Ima', 51, 87, 88, 1, { { 253, -23, 116 } } },
         },
         [11367] = {
-            { 'Lividroot Amooshah', 52, 85, 87, 1 },
+            { 'Lividroot Amooshah', 52, 85, 87, 1, { { 334, -10, 184 } } },
         },
         [11368] = {
-            { 'Lil\' Apkallu', 54, 82, 83, 1 },
+            { 'Lil\' Apkallu', 54, 82, 83, 1, { { 489.74, -2.742, 168.49 } } },
         },
         [11369] = {
-            { 'Lil\' Apkallu', 54, 82, 83, 1 },
+            { 'Lil\' Apkallu', 54, 82, 83, 1, { { 489.74, -2.742, 168.49 } } },
         },
         [11390] = {
-            { 'Cogtooth Skagnogg', 85, 83, 83, 1 },
+            { 'Cogtooth Skagnogg', 85, 83, 83, 1, { { 142.595, -0.377, -176.132 } } },
         },
         [11391] = {
-            { 'Bres', 92, 83, 83, 1 },
+            { 'Bres', 92, 83, 83, 1, { { 179.322, 39.503, 13.407 } } },
         },
         [11404] = {
-            { 'Hazmat', 200, 57, 58, 1 },
+            { 'Hazmat', 200, 57, 58, 1, { { 5.839, 7.014, 197.462 } } },
         },
         [11405] = {
-            { 'Habergoass', 84, 64, 64, 1 },
+            { 'Habergoass', 84, 64, 64, 1, { { 137, 8.5, -472 } } },
         },
         [11406] = {
-            { 'Delicieuse Delphine', 91, 72, 73, 1 },
+            { 'Delicieuse Delphine', 91, 72, 73, 1, { { -515.4, -23.78, -453.51 } } },
         },
         [11408] = {
-            { 'Sarcopsylla', 89, 72, 72, 1 },
+            { 'Sarcopsylla', 89, 72, 72, 1, { { 129.207, -35.913, -217.684 } } },
         },
         [11409] = {
-            { 'Sugaar', 90, 83, 83, 1 },
+            { 'Sugaar', 90, 83, 83, 1, { { -416.496, 24.11, -441.589 } } },
         },
         [11410] = {
-            { 'Lugh', 171, 80, 82, 1 },
+            { 'Lugh', 171, 80, 82, 1, { { -251.177, -0.848, 250.864 } } },
         },
         [11411] = {
-            { 'Buarainech', 164, 80, 81, 1 },
+            { 'Buarainech', 164, 80, 81, 1, { { 114.154, 6.388, -131.777 } } },
         },
         [11416] = {
             { 'Guimauve', 15, 85, 85 },
@@ -3345,64 +4264,64 @@ return {
             { 'Depths Digester', 15, 0, 0, 1 },
         },
         [11418] = {
-            { 'Lugarhoo', 132, 85, 85, 1 },
+            { 'Lugarhoo', 132, 85, 85, 1, { { -85, 24, -513 } } },
         },
         [11419] = {
-            { 'Muscaliet', 45, 85, 85, 1 },
+            { 'Muscaliet', 45, 85, 85, 1, { { 253, 46, 291 } } },
         },
         [11420] = {
-            { 'Nguruvilu', 132, 85, 85, 1 },
+            { 'Nguruvilu', 132, 85, 85, 1, { { 311, 23, -524 } } },
         },
         [11421] = {
-            { 'Lentor', 15, 85, 85, 1 },
+            { 'Lentor', 15, 85, 85, 1, { { -248, 47, 403 } } },
         },
         [11430] = {
-            { 'Ironclad Cleaver', 215, 0, 0, 1 },
+            { 'Ironclad Cleaver', 215, 0, 0, 1, { { -276, -4, -159 } } },
         },
         [11431] = {
-            { 'Durinn', 217, 85, 87, 1 },
+            { 'Durinn', 217, 85, 87, 1, { { -571, -47, -570 }, { -571, -47, -554 }, { -555, -47, -564 } } },
         },
         [11432] = {
-            { 'Itzpapalotl', 215, 90, 93, 1 },
+            { 'Itzpapalotl', 215, 90, 93, 1, { { 424.94, 20.22, -194.227 }, { 436, 20, -184 }, { 439.94, 21.02, -179.227 } } },
         },
         [11433] = {
-            { 'Sedna', 217, 85, 87, 1 },
+            { 'Sedna', 217, 85, 87, 1, { { 402, -31, 406 }, { 403, -31, 375 }, { 403, -31, 390 } } },
         },
         [11434] = {
-            { 'Div-e Sepid', 217, 90, 90, 1 },
+            { 'Div-e Sepid', 217, 90, 90, 1, { { -491, -39, -486 } } },
         },
         [11444] = {
-            { 'Vadleany', 218, 0, 0, 1 },
+            { 'Vadleany', 218, 0, 0, 1, { { -58, 0.001, 119 } } },
         },
         [11445] = {
-            { 'Bugul Noz', 218, 0, 0, 1 },
+            { 'Bugul Noz', 218, 0, 0, 1, { { -611, -1, -398 } } },
         },
         [11446] = {
-            { 'Refitted Chariot', 253, 100, 100, 1 },
+            { 'Refitted Chariot', 253, 100, 100, 1, { { -266.179, -176.137, -69.295 } } },
         },
         [11456] = {
-            { 'Taquede', 134, 95, 95, 1 },
+            { 'Taquede', 134, 95, 95, 1, { { -170.313, -60.399, -178.111 } } },
         },
         [11461] = {
-            { 'Arch Antaeus', 41, 105, 105, 1 },
+            { 'Arch Antaeus', 41, 105, 105, 1, { { -260, -20.499, 320 } } },
         },
         [11473] = {
-            { 'All-seeing Onyx Eye', 85, 83, 83, 1 },
+            { 'All-seeing Onyx Eye', 85, 83, 83, 1, { { 173.407, 3.171, -374.932 } } },
         },
         [11474] = {
-            { 'Ra\'Dha Scarscute', 92, 83, 83, 1 },
+            { 'Ra\'Dha Scarscute', 92, 83, 83, 1, { { -22.51, -3.529, -57.955 } } },
         },
         [11493] = {
-            { 'Herbage Hunter', 117, 29, 29, 1 },
+            { 'Herbage Hunter', 117, 29, 29, 1, { { -144, 24, 460 }, { -134, 24, 441 }, { -127, 25, 446 }, { -127, 30, 466 } } },
         },
         [11494] = {
-            { 'Slendlix Spindlethumb', 192, 33, 34, 1 },
+            { 'Slendlix Spindlethumb', 192, 33, 34, 1, { { -238, -0.5, -167 } } },
         },
         [11496] = {
-            { 'Lizardtrap', 68, 71, 72, 1 },
+            { 'Lizardtrap', 68, 71, 72, 1, { { 276.06, 1.419, 409.441 } } },
         },
         [11497] = {
-            { 'Morille Mortelle', 171, 82, 83, 1 },
+            { 'Morille Mortelle', 171, 82, 83, 1, { { 59.788, -0.939, 22.316 } } },
         },
         [11502] = {
             { 'Krabkatoa', 101, 85, 85, 1 },
@@ -3411,25 +4330,25 @@ return {
             { 'Krabkatoa', 82, 85, 85, 1 },
         },
         [11506] = {
-            { 'Khalamari', 15, 85, 85, 1 },
+            { 'Khalamari', 15, 85, 85, 1, { { -443.957, 8.12, 80.261 } } },
         },
         [11507] = {
-            { 'Lacovie', 45, 90, 90, 1 },
+            { 'Lacovie', 45, 90, 90, 1, { { -336, 24, 442 }, { -325, 23, 432 }, { -316, 24, 442 } } },
         },
         [11508] = {
-            { 'Glavoid', 45, 90, 90, 1 },
+            { 'Glavoid', 45, 90, 90, 1, { { 196, 32, 400 }, { 196, 34, 415 }, { 211, 33, 400 } } },
         },
         [11509] = {
-            { 'Chloris', 45, 90, 90, 1 },
+            { 'Chloris', 45, 90, 90, 1, { { 160, 0, -30 }, { 160, 0, -15 }, { 160, 0, 0 } } },
         },
         [11510] = {
-            { 'Ruminator', 132, 90, 90, 1 },
+            { 'Ruminator', 132, 90, 90, 1, { { 512.529, 23.999, -183.839 } } },
         },
         [11512] = {
-            { 'Carabosse', 132, 90, 90, 1 },
+            { 'Carabosse', 132, 90, 90, 1, { { -3, 17, 148 }, { 11, 17, 148 }, { 26, 19, 148 } } },
         },
         [11513] = {
-            { 'Eccentric Eve', 15, 90, 90, 1 },
+            { 'Eccentric Eve', 15, 90, 90, 1, { { 215.412, 32.241, 280.677 }, { 230.412, 31.779, 280.677 }, { 245, 31, 280 } } },
         },
         [11514] = {
             { 'Hadal Satiator', 15, 78, 88, 1 },
@@ -3438,55 +4357,55 @@ return {
             { 'Karkinos', 132, 90, 90, 1 },
         },
         [11516] = {
-            { 'Bloodeye Vileberry', 15, 90, 90, 1 },
+            { 'Bloodeye Vileberry', 15, 90, 90, 1, { { 538, 24, 713 }, { 539, 24, 714 }, { 554, 23, 698 } } },
         },
         [11517] = {
-            { 'Myrmecoleon', 45, 90, 90, 1 },
+            { 'Myrmecoleon', 45, 90, 90, 1, { { -224, 0.001, -337 } } },
         },
         [11518] = {
-            { 'Fistule', 15, 90, 90, 1 },
+            { 'Fistule', 15, 90, 90, 1, { { -213.979, 67.18, 823.206 } } },
         },
         [11519] = {
-            { 'Briareus', 132, 90, 90, 1 },
+            { 'Briareus', 132, 90, 90, 1, { { -189, 7, 269 }, { -179, 7, 259 }, { -170, 7, 269 } } },
         },
         [11520] = {
-            { 'Kukulkan', 15, 90, 90, 1 },
+            { 'Kukulkan', 15, 90, 90, 1, { { -39.777, 71.308, 558.021 }, { -39, 68, 574 }, { -25, 68.375, 560 } } },
         },
         [11521] = {
-            { 'Lacovie', 45, 90, 90, 1 },
+            { 'Lacovie', 45, 90, 90, 1, { { -336, 24, 442 }, { -325, 23, 432 }, { -316, 24, 442 } } },
         },
         [11522] = {
-            { 'Fistule', 15, 90, 90, 1 },
+            { 'Fistule', 15, 90, 90, 1, { { -213.979, 67.18, 823.206 } } },
         },
         [11524] = {
-            { 'Gangly Gean', 15, 85, 85, 1 },
+            { 'Gangly Gean', 15, 85, 85, 1, { { -455.162, -27.55, -224.898 } } },
         },
         [11525] = {
-            { 'Abas', 45, 85, 85, 1 },
+            { 'Abas', 45, 85, 85, 1, { { 407, -16, -397 } } },
         },
         [11526] = {
-            { 'Sarcophilus', 15, 85, 85, 1 },
+            { 'Sarcophilus', 15, 85, 85, 1, { { -234, -15, -119 } } },
         },
         [11527] = {
-            { 'Fear Gorta', 15, 80, 85, 1 },
+            { 'Fear Gorta', 15, 80, 85, 1, { { 630, 33, 409 } } },
         },
         [11528] = {
-            { 'Habrok', 117, 16, 18, 1 },
+            { 'Habrok', 117, 16, 18, 1, { { -292, 15, -540 } } },
         },
         [11529] = {
-            { 'Kegpaunch Doshgnosh', 141, 22, 23, 1 },
+            { 'Kegpaunch Doshgnosh', 141, 22, 23, 1, { { 43.773, -44, -119.706 } } },
         },
         [11531] = {
-            { 'Desmodont', 194, 26, 27, 1 },
+            { 'Desmodont', 194, 26, 27, 1, { { -377.758, -0.054, 737.73 } } },
         },
         [11533] = {
-            { 'Rogue Receptacle', 122, 67, 68, 1 },
+            { 'Rogue Receptacle', 122, 67, 68, 1, { { -334, 3, 182 }, { -307, 2, 216 }, { -301, 0, 166 }, { -299, 0, 192 }, { 219.8, -3.2, -41.22 } } },
         },
         [11534] = {
-            { 'Acolnahuacatl', 124, 67, 68, 1 },
+            { 'Acolnahuacatl', 124, 67, 68, 1, { { -278.034, 0, -359.746 }, { -275.045, 0.069, -441.843 }, { -242.5, 0, -400.4 }, { -201.329, 0.057, -444.798 } } },
         },
         [11536] = {
-            { 'Copper Borer', 62, 82, 82, 1 },
+            { 'Copper Borer', 62, 82, 82, 1, { { 56.952, -0.984, -312.27 } } },
         },
         [11544] = {
             { 'Skuld', 105, 82, 82, 1 },
@@ -3497,61 +4416,61 @@ return {
             { 'Skuld', 98, 82, 82, 1 },
         },
         [11548] = {
-            { 'Myrmecoleon', 45, 90, 90, 1 },
+            { 'Myrmecoleon', 45, 90, 90, 1, { { -224, 0.001, -337 } } },
         },
         [11549] = {
-            { 'Chasmic Hornet', 132, 85, 85, 1 },
+            { 'Chasmic Hornet', 132, 85, 85, 1, { { -288.485, -8.986, -32.26 } } },
         },
         [11550] = {
-            { 'Tonberry Lieje', 15, 85, 85, 1 },
+            { 'Tonberry Lieje', 15, 85, 85, 1, { { 552.683, 30.739, 644.965 } } },
         },
         [11551] = {
-            { 'Quetzalli', 45, 85, 85, 1 },
+            { 'Quetzalli', 45, 85, 85, 1, { { 317.004, -8, -518.312 } } },
         },
         [11552] = {
-            { 'Brooder', 132, 85, 85, 1 },
+            { 'Brooder', 132, 85, 85, 1, { { -380.775, -6.863, 86.758 } } },
         },
         [11553] = {
-            { 'Raskovnik', 15, 85, 85, 1 },
+            { 'Raskovnik', 15, 85, 85, 1, { { -223.331, 34.027, 272.821 } } },
         },
         [11554] = {
-            { 'Mangy-tailed Marvin', 132, 85, 85, 1 },
+            { 'Mangy-tailed Marvin', 132, 85, 85, 1, { { -525.941, -8.527, 210.483 } } },
         },
         [11555] = {
-            { 'Raskovnik', 15, 85, 85, 1 },
+            { 'Raskovnik', 15, 85, 85, 1, { { -223.331, 34.027, 272.821 } } },
         },
         [11556] = {
-            { 'Hexenpilz', 15, 85, 85, 1 },
+            { 'Hexenpilz', 15, 85, 85, 1, { { -182, 2, 31 } } },
         },
         [11557] = {
-            { 'Trudging Thomas', 132, 85, 85, 1 },
+            { 'Trudging Thomas', 132, 85, 85, 1, { { 278, 24, -82 } } },
         },
         [11558] = {
-            { 'Adamastor', 132, 85, 85, 1 },
+            { 'Adamastor', 132, 85, 85, 1, { { -716, 15, 639 } } },
         },
         [11559] = {
-            { 'Dozing Dorian', 132, 85, 85, 1 },
+            { 'Dozing Dorian', 132, 85, 85, 1, { { 703, 40, 283 } } },
         },
         [11561] = {
-            { 'Clingy Clare', 15, 85, 85, 1 },
+            { 'Clingy Clare', 15, 85, 85, 1, { { 150, 17.125, 90 } } },
         },
         [11562] = {
-            { 'La Theine Liege', 132, 85, 85, 1 },
+            { 'La Theine Liege', 132, 85, 85, 1, { { 80, 15, 199 } } },
         },
         [11563] = {
-            { 'Alkonost', 15, 85, 85, 1 },
+            { 'Alkonost', 15, 85, 85, 1, { { 45.727, 31.097, 414.995 } } },
         },
         [11564] = {
-            { 'Halimede', 45, 85, 85, 1 },
+            { 'Halimede', 45, 85, 85, 1, { { -234, 15, -603 } } },
         },
         [11572] = {
-            { 'Veri Selen', 253, 0, 0, 1 },
+            { 'Veri Selen', 253, 0, 0, 1, { { 13, -140, 470 } } },
         },
         [11573] = {
-            { 'Minaruja', 254, 100, 100, 1 },
+            { 'Minaruja', 254, 100, 100, 1, { { 340, -15, -116 } } },
         },
         [11574] = {
-            { 'Waugyl', 218, 0, 0, 1 },
+            { 'Waugyl', 218, 0, 0, 1, { { -409, 0.001, -295 } } },
         },
         [11585] = {
             { 'Blobdingnag', 106, 85, 85, 1 },
@@ -3572,92 +4491,92 @@ return {
             { 'Erebus', 137, 82, 82, 1 },
         },
         [11591] = {
-            { 'Balaur', 15, 85, 85, 1 },
+            { 'Balaur', 15, 85, 85, 1, { { 597.959, 23.178, 162.849 } } },
         },
         [11592] = {
-            { 'Cuelebre', 45, 85, 85, 1 },
+            { 'Cuelebre', 45, 85, 85, 1, { { -460.369, -39.828, -132.006 } } },
         },
         [11593] = {
-            { 'Bakka', 15, 85, 85, 1 },
+            { 'Bakka', 15, 85, 85, 1, { { 440.581, 32.216, 524.624 } } },
         },
         [11594] = {
-            { 'Adze', 45, 85, 85, 1 },
+            { 'Adze', 45, 85, 85, 1, { { -91, 23, 395 } } },
         },
         [11595] = {
-            { 'Chukwa', 45, 85, 85, 1 },
+            { 'Chukwa', 45, 85, 85, 1, { { -349.213, 15.946, 391.568 } } },
         },
         [11596] = {
-            { 'Minhocao', 45, 85, 85, 1 },
+            { 'Minhocao', 45, 85, 85, 1, { { 79.764, 39.258, 278.157 } } },
         },
         [11597] = {
-            { 'Mictlantecuhtli', 45, 85, 85, 1 },
+            { 'Mictlantecuhtli', 45, 85, 85, 1, { { -244.841, 40.113, 501.657 } } },
         },
         [11598] = {
-            { 'Gangly Gean', 15, 85, 85, 1 },
+            { 'Gangly Gean', 15, 85, 85, 1, { { -455.162, -27.55, -224.898 } } },
         },
         [11599] = {
-            { 'Chasmic Hornet', 132, 85, 85, 1 },
+            { 'Chasmic Hornet', 132, 85, 85, 1, { { -288.485, -8.986, -32.26 } } },
         },
         [11600] = {
             { 'Nahn', 132, 85, 85, 1 },
         },
         [11601] = {
-            { 'Piasa', 132, 85, 85, 1 },
+            { 'Piasa', 132, 85, 85, 1, { { -427.728, -7.523, 84.505 } } },
         },
         [11602] = {
-            { 'Keesha Poppo', 132, 85, 85, 1 },
+            { 'Keesha Poppo', 132, 85, 85, 1, { { 671.895, 32.398, 110.392 } } },
         },
         [11603] = {
-            { 'Khalamari', 15, 85, 85, 1 },
+            { 'Khalamari', 15, 85, 85, 1, { { -443.957, 8.12, 80.261 } } },
         },
         [11604] = {
-            { 'Manananggal', 45, 85, 85, 1 },
+            { 'Manananggal', 45, 85, 85, 1, { { 352, -8, -464 } } },
         },
         [11605] = {
-            { 'Quetzalli', 45, 85, 85, 1 },
+            { 'Quetzalli', 45, 85, 85, 1, { { 317.004, -8, -518.312 } } },
         },
         [11606] = {
-            { 'Pantagruel', 132, 85, 85, 1 },
+            { 'Pantagruel', 132, 85, 85, 1, { { -356, 8, 163 } } },
         },
         [11607] = {
-            { 'Cannered Noz', 45, 85, 85, 1 },
+            { 'Cannered Noz', 45, 85, 85, 1, { { -355, 4, 251 } } },
         },
         [11608] = {
-            { 'Poroggo Dom Juan', 132, 85, 85, 1 },
+            { 'Poroggo Dom Juan', 132, 85, 85, 1, { { 275, 24, -558 } } },
         },
         [11615] = {
-            { 'Karkadann', 217, 85, 87, 1 },
+            { 'Karkadann', 217, 85, 87, 1, { { -158, -32, 118 }, { -157, -31, 88 }, { -157, -31, 104 } } },
         },
         [11616] = {
-            { 'Smok', 215, 0, 0, 1 },
+            { 'Smok', 215, 0, 0, 1, { { -547, -4, -12 }, { -539, -12, -75 }, { -530, -5, -39 } } },
         },
         [11617] = {
-            { 'Yaanei', 215, 95, 95, 1 },
+            { 'Yaanei', 215, 95, 95, 1, { { 322, -25, -33 } } },
         },
         [11618] = {
-            { 'Sippoy', 217, 95, 95, 1 },
+            { 'Sippoy', 217, 95, 95, 1, { { -494.686, -39.097, 161.897 } } },
         },
         [11619] = {
-            { 'Ironclad Severer', 216, 0, 0, 1 },
+            { 'Ironclad Severer', 216, 0, 0, 1, { { -468.874, -31.645, 361.382 } } },
         },
         [11620] = {
-            { 'Ironclad Pulverizer', 216, 0, 0, 1 },
+            { 'Ironclad Pulverizer', 216, 0, 0, 1, { { -214, -31, 160 }, { -199, -31, 145 }, { -198, -31, 160 }, { -192, -31, 145 } } },
         },
         [11621] = {
-            { 'Abyssic Cluster', 216, 90, 90, 1 },
+            { 'Abyssic Cluster', 216, 90, 90, 1, { { -268, -31, 188 } } },
         },
         [11623] = {
-            { 'Tuskertrap', 216, 0, 0, 1 },
+            { 'Tuskertrap', 216, 0, 0, 1, { { -22, -23, 656 } } },
         },
         [11625] = {
-            { 'Shinryu', 255, 90, 92, 1 },
-            { 'Shinryu', 255, 139, 139, 1 },
+            { 'Shinryu', 255, 90, 92, 1, { { -479, -1000, -471 }, { -477.491, -0.5, 515.33 }, { 519, -500, 519 } } },
+            { 'Shinryu', 255, 139, 139, 1, { { -477.922, -1000.5, -484.836 }, { -477.341, -0.5, 510.673 }, { 520, -500.5, 520 } } },
         },
         [11626] = {
-            { 'Pantokrator', 253, 0, 0, 1 },
+            { 'Pantokrator', 253, 0, 0, 1, { { -199, -175, 155 }, { -199, -175, 170 }, { -198, -175, 140 } } },
         },
         [11627] = {
-            { 'Apademak', 253, 100, 100, 1 },
+            { 'Apademak', 253, 100, 100, 1, { { -332, -156, 346 }, { -332, -156, 377 }, { -332, -155, 361 } } },
         },
         [11628] = {
             { 'Lord Ruthven', 111, 85, 85, 1 },
@@ -3752,70 +4671,70 @@ return {
             { 'Farruca Fly', 95, 82, 82, 1 },
         },
         [11637] = {
-            { 'Iratham', 45, 90, 90, 1 },
+            { 'Iratham', 45, 90, 90, 1, { { 30.807, 0.386, -28.861 } } },
         },
         [11638] = {
-            { 'Mangy-tailed Marvin', 132, 85, 85, 1 },
+            { 'Mangy-tailed Marvin', 132, 85, 85, 1, { { -525.941, -8.527, 210.483 } } },
         },
         [11640] = {
-            { 'Vetehinen', 45, 85, 85, 1 },
+            { 'Vetehinen', 45, 85, 85, 1, { { 74, 0.001, -435 } } },
         },
         [11641] = {
-            { 'Treble Noctules', 45, 85, 85, 1 },
+            { 'Treble Noctules', 45, 85, 85, 1, { { 190, -22, -153 } } },
         },
         [11642] = {
-            { 'Alectryon', 45, 85, 85, 1 },
+            { 'Alectryon', 45, 85, 85, 1, { { -42, -8, 34 } } },
         },
         [11643] = {
-            { 'Keratyrannos', 15, 85, 85, 1 },
+            { 'Keratyrannos', 15, 85, 85, 1, { { -140.925, 47.472, 411.038 } } },
         },
         [11647] = {
-            { 'Nightshade', 215, 0, 0, 1 },
+            { 'Nightshade', 215, 0, 0, 1, { { 411, 19, 13 } } },
         },
         [11648] = {
-            { 'Avalerion', 216, 0, 0, 1 },
+            { 'Avalerion', 216, 0, 0, 1, { { 41, -16, 81 } } },
         },
         [11649] = {
-            { 'Dvalinn', 217, 85, 87, 1 },
+            { 'Dvalinn', 217, 85, 87, 1, { { -634, -48, -476 } } },
         },
         [11650] = {
-            { 'Kampe', 215, 0, 0, 1 },
+            { 'Kampe', 215, 0, 0, 1, { { -404, 3, -198 } } },
         },
         [11651] = {
-            { 'Rani', 218, 90, 92, 1 },
+            { 'Rani', 218, 90, 92, 1, { { -801, -7.801, -366 }, { -801, -7.8, -368 }, { 102, 0, -151 } } },
         },
         [11652] = {
-            { 'Audumbla', 253, 0, 0, 1 },
+            { 'Audumbla', 253, 0, 0, 1, { { 337, 20, -277 } } },
         },
         [11653] = {
-            { 'Sharabha', 218, 0, 0, 1 },
+            { 'Sharabha', 218, 0, 0, 1, { { -307, 0.001, 307 } } },
         },
         [11670] = {
-            { 'Arch Gu\'Dha Effigy', 186, 99, 99, 1 },
+            { 'Arch Gu\'Dha Effigy', 186, 99, 99, 1, { { -16.149, -2, -130.5 } } },
         },
         [11671] = {
-            { 'Xuu Bhoqa the Enigma', 187, 95, 95, 1 },
+            { 'Xuu Bhoqa the Enigma', 187, 95, 95, 1, { { -100.066, -6, 132.102 } } },
         },
         [11672] = {
-            { 'Naa Yixo the Stillrage', 187, 95, 95, 1 },
+            { 'Naa Yixo the Stillrage', 187, 95, 95, 1, { { -26, -13.454, 259 } } },
         },
         [11673] = {
-            { 'Baron Avnas', 135, 95, 95, 1 },
+            { 'Baron Avnas', 135, 95, 95, 1, { { 342.843, -28.677, 336.044 } } },
         },
         [11674] = {
-            { 'Arch Dynamis Lord', 135, 99, 99, 1 },
+            { 'Arch Dynamis Lord', 135, 99, 99, 1, { { -416.746, -44.499, 19.278 }, { -415.989, -44.499, 20.524 }, { -415, -44.499, 20 }, { -413.792, -44.499, 23.551 }, { -406, -43.478, 26 }, { -406, -43.404, 14 }, { -406, -43.152, 20 }, { -405.62, -43.743, 22.602 } } },
         },
         [11694] = {
-            { 'Manohra', 216, 0, 0, 1 },
+            { 'Manohra', 216, 0, 0, 1, { { 121, -8, -120 } } },
         },
         [11695] = {
-            { 'Granite Borer', 215, 0, 0, 1 },
+            { 'Granite Borer', 215, 0, 0, 1, { { 401, 20, -282 } } },
         },
         [11696] = {
-            { 'Cep-Kamuy', 216, 0, 0, 1 },
+            { 'Cep-Kamuy', 216, 0, 0, 1, { { -160, -15, 638 } } },
         },
         [11698] = {
-            { 'Rani', 218, 90, 92, 1 },
+            { 'Rani', 218, 90, 92, 1, { { -801, -7.801, -366 }, { -801, -7.8, -368 }, { 102, 0, -151 } } },
         },
         [11699] = {
             { 'Brulo', 218, 0, 0, 1 },
@@ -3824,310 +4743,310 @@ return {
             { 'Maere', 254, 0, 0, 1 },
         },
         [11701] = {
-            { 'Chickcharney', 218, 0, 0, 1 },
+            { 'Chickcharney', 218, 0, 0, 1, { { 43, 0.001, -240 } } },
         },
         [11702] = {
-            { 'Lorelei', 254, 0, 0, 1 },
+            { 'Lorelei', 254, 0, 0, 1, { { -192, -31, 480 } } },
         },
         [11703] = {
             { 'Gamayun', 254, 0, 0, 1 },
         },
         [11704] = {
-            { 'Kur', 253, 100, 100, 1 },
+            { 'Kur', 253, 100, 100, 1, { { 224.82, -115.389, 404.609 } } },
         },
         [11705] = {
-            { 'Long-Barreled Chariot', 218, 100, 100, 1 },
+            { 'Long-Barreled Chariot', 218, 100, 100, 1, { { -799.719, -19.886, -646.279 } } },
         },
         [11706] = {
-            { 'Ouzelum', 218, 100, 100, 1 },
+            { 'Ouzelum', 218, 100, 100, 1, { { 136.641, 1.6, -73.459 } } },
         },
         [11707] = {
-            { 'Deelgeed', 254, 0, 0, 1 },
+            { 'Deelgeed', 254, 0, 0, 1, { { -128.666, -89.223, 43.91 } } },
         },
         [11708] = {
-            { 'Melo Melo', 254, 100, 100, 1 },
+            { 'Melo Melo', 254, 100, 100, 1, { { -45.507, -32.055, -241.948 } } },
         },
         [11709] = {
             { 'Chione', 253, 0, 0, 1 },
         },
         [11710] = {
-            { 'Sisyphus', 253, 100, 100, 1 },
+            { 'Sisyphus', 253, 100, 100, 1, { { -234.454, -176.203, 338.367 } } },
         },
         [11711] = {
-            { 'Battlerigged Chariot', 218, 100, 100, 1 },
+            { 'Battlerigged Chariot', 218, 100, 100, 1, { { -676.528, -7.988, -564.241 } } },
         },
         [11712] = {
-            { 'Impervious Chariot', 253, 100, 100, 1 },
+            { 'Impervious Chariot', 253, 100, 100, 1, { { -328.71, -176.298, 3.881 } } },
         },
         [11713] = {
-            { 'Rencounter Chariot', 254, 100, 100, 1 },
+            { 'Rencounter Chariot', 254, 100, 100, 1, { { 814.939, 66.367, 639.932 } } },
         },
         [11714] = {
-            { 'Hazhdiha', 218, 100, 100, 1 },
+            { 'Hazhdiha', 218, 100, 100, 1, { { -267.509, 0.477, -321.101 } } },
         },
         [11715] = {
-            { 'Refitted Chariot', 253, 100, 100, 1 },
+            { 'Refitted Chariot', 253, 100, 100, 1, { { -266.179, -176.137, -69.295 } } },
         },
         [11716] = {
-            { 'Jaculus', 254, 100, 100, 1 },
+            { 'Jaculus', 254, 100, 100, 1, { { 262.005, -48.969, 110.609 } } },
         },
         [11717] = {
-            { 'Awahondo', 253, 100, 100, 1 },
+            { 'Awahondo', 253, 100, 100, 1, { { 441.022, -84, 323.353 } } },
         },
         [11718] = {
-            { 'Koios', 218, 0, 0, 1 },
+            { 'Koios', 218, 0, 0, 1, { { -322, 0.001, -581 } } },
         },
         [11719] = {
-            { 'Ansherekh', 218, 100, 100, 1 },
+            { 'Ansherekh', 218, 100, 100, 1, { { -514.005, 0.545, -63.118 } } },
         },
         [11720] = {
-            { 'Assailer Chariot', 254, 100, 100, 1 },
+            { 'Assailer Chariot', 254, 100, 100, 1, { { 659.348, 19.48, 401.638 } } },
         },
         [11721] = {
             { 'Chione', 253, 0, 0, 1 },
         },
         [11722] = {
-            { 'Koios', 218, 0, 0, 1 },
+            { 'Koios', 218, 0, 0, 1, { { -322, 0.001, -581 } } },
         },
         [11728] = {
-            { 'Ovni', 132, 85, 85, 1 },
+            { 'Ovni', 132, 85, 85, 1, { { 508.775, 40.361, 481.563 } } },
         },
         [11729] = {
-            { 'Lacovie', 45, 90, 90, 1 },
+            { 'Lacovie', 45, 90, 90, 1, { { -336, 24, 442 }, { -325, 23, 432 }, { -316, 24, 442 } } },
         },
         [11730] = {
-            { 'Turul', 15, 90, 90, 1 },
+            { 'Turul', 15, 90, 90, 1, { { 82.055, 24.226, 270.143 } } },
         },
         [11731] = {
-            { 'Kukulkan', 15, 90, 90, 1 },
+            { 'Kukulkan', 15, 90, 90, 1, { { -39.777, 71.308, 558.021 }, { -39, 68, 574 }, { -25, 68.375, 560 } } },
         },
         [11732] = {
             { 'Karkinos', 132, 90, 90, 1 },
         },
         [11733] = {
-            { 'Iratham', 45, 90, 90, 1 },
+            { 'Iratham', 45, 90, 90, 1, { { 30.807, 0.386, -28.861 } } },
         },
         [11734] = {
-            { 'Ovni', 132, 85, 85, 1 },
+            { 'Ovni', 132, 85, 85, 1, { { 508.775, 40.361, 481.563 } } },
         },
         [11735] = {
-            { 'Adze', 45, 85, 85, 1 },
+            { 'Adze', 45, 85, 85, 1, { { -91, 23, 395 } } },
         },
         [11736] = {
-            { 'Irrlicht', 132, 85, 85, 1 },
+            { 'Irrlicht', 132, 85, 85, 1, { { -66.416, 2.036, -154.016 } } },
         },
         [11737] = {
-            { 'Manananggal', 45, 85, 85, 1 },
+            { 'Manananggal', 45, 85, 85, 1, { { 352, -8, -464 } } },
         },
         [11738] = {
-            { 'Megamaw Mikey', 132, 85, 85, 1 },
+            { 'Megamaw Mikey', 132, 85, 85, 1, { { 613.82, 25.669, -67.938 } } },
         },
         [11739] = {
-            { 'Tonberry Lieje', 15, 85, 85, 1 },
+            { 'Tonberry Lieje', 15, 85, 85, 1, { { 552.683, 30.739, 644.965 } } },
         },
         [11740] = {
-            { 'Bombadeel', 15, 85, 85, 1 },
+            { 'Bombadeel', 15, 85, 85, 1, { { -357, 8, -41 } } },
         },
         [11741] = {
-            { 'Tefenet', 45, 85, 85, 1 },
+            { 'Tefenet', 45, 85, 85, 1, { { -127, 15, 239 } } },
         },
         [11742] = {
-            { 'Grandgousier', 132, 85, 85, 1 },
+            { 'Grandgousier', 132, 85, 85, 1, { { -398, 0.01, -322 } } },
         },
         [11743] = {
-            { 'Arimaspi', 15, 85, 85, 1 },
+            { 'Arimaspi', 15, 85, 85, 1, { { 439.763, 31.5, 357.652 } } },
         },
         [11744] = {
-            { 'Toppling Tuber', 132, 85, 85, 1 },
+            { 'Toppling Tuber', 132, 85, 85, 1, { { -325, 38, 201 } } },
         },
         [11745] = {
-            { 'Baba Yaga', 132, 85, 85, 1 },
+            { 'Baba Yaga', 132, 85, 85, 1, { { -74, 18, 137 } } },
         },
         [11750] = {
-            { 'Ironclad Executioner', 217, 95, 95, 1 },
+            { 'Ironclad Executioner', 217, 95, 95, 1, { { 88, -32, 73 } } },
         },
         [11751] = {
-            { 'Ironclad Severer', 216, 0, 0, 1 },
+            { 'Ironclad Severer', 216, 0, 0, 1, { { -468.874, -31.645, 361.382 } } },
         },
         [11752] = {
-            { 'Athamas', 216, 90, 90, 1 },
+            { 'Athamas', 216, 90, 90, 1, { { 220.138, -15.383, 179.102 } } },
         },
         [11753] = {
-            { 'Xan', 217, 85, 87, 1 },
+            { 'Xan', 217, 85, 87, 1, { { 120, -39, -551 } } },
         },
         [11754] = {
-            { 'Funereal Apkallu', 216, 0, 0, 1 },
+            { 'Funereal Apkallu', 216, 0, 0, 1, { { 209, -23, 321 } } },
         },
         [11755] = {
-            { 'Fleshflayer Killakriq', 254, 105, 105, 1 },
+            { 'Fleshflayer Killakriq', 254, 105, 105, 1, { { 484.582, 47.295, -440.789 } } },
         },
         [11756] = {
-            { 'Isgebind', 253, 0, 0, 1 },
+            { 'Isgebind', 253, 0, 0, 1, { { 145, -117, 471 }, { 161, -115, 472 }, { 175, -113, 472 } } },
         },
         [11757] = {
-            { 'Empousa', 253, 105, 105, 1 },
+            { 'Empousa', 253, 105, 105, 1, { { -617, -39, -15 } } },
         },
         [11758] = {
-            { 'Cuijatender', 218, 105, 105, 1 },
+            { 'Cuijatender', 218, 105, 105, 1, { { -635, 1.02, -299.202 } } },
         },
         [11759] = {
-            { 'Hedjedjet', 218, 105, 105, 1 },
+            { 'Hedjedjet', 218, 105, 105, 1, { { -119.02, 0.949, 301.014 } } },
         },
         [11760] = {
-            { 'Ogopogo', 253, 84, 86, 1 },
+            { 'Ogopogo', 253, 84, 86, 1, { { -16.737, -175.496, 70.529 } } },
         },
         [11761] = {
-            { 'Indrik', 253, 105, 105, 1 },
+            { 'Indrik', 253, 105, 105, 1, { { 354.514, 0.721, -375.945 } } },
         },
         [11762] = {
             { 'Maere', 254, 0, 0, 1 },
         },
         [11772] = {
-            { 'Bladeburner Rokgevok', 185, 95, 95, 1 },
+            { 'Bladeburner Rokgevok', 185, 95, 95, 1, { { 103, 0.5, -47 } } },
         },
         [11773] = {
-            { 'Bloodfist Voshgrosh', 185, 95, 95, 1 },
+            { 'Bloodfist Voshgrosh', 185, 95, 95, 1, { { -103, 0.5, -47 } } },
         },
         [11774] = {
-            { 'Arch Overlord Tombstone', 185, 99, 99, 1 },
+            { 'Arch Overlord Tombstone', 185, 99, 99, 1, { { 0, -2.5, 43 } } },
         },
         [11775] = {
-            { 'Zo\'Pha Forgesoul', 186, 95, 95, 1 },
+            { 'Zo\'Pha Forgesoul', 186, 95, 95, 1, { { -131, -0.5, -68 } } },
         },
         [11776] = {
-            { 'Ra\'Gho Darkfount', 186, 95, 95, 1 },
+            { 'Ra\'Gho Darkfount', 186, 95, 95, 1, { { -187.748, -9.076, -22.176 } } },
         },
         [11777] = {
-            { 'Duke Haures', 135, 95, 95, 1 },
+            { 'Duke Haures', 135, 95, 95, 1, { { 575.395, -1.988, 18.722 } } },
         },
         [11784] = {
-            { 'Yaanei', 215, 95, 95, 1 },
+            { 'Yaanei', 215, 95, 95, 1, { { 322, -25, -33 } } },
         },
         [11785] = {
-            { 'Sippoy', 217, 95, 95, 1 },
+            { 'Sippoy', 217, 95, 95, 1, { { -494.686, -39.097, 161.897 } } },
         },
         [11786] = {
-            { 'Kutharei', 216, 95, 95, 1 },
+            { 'Kutharei', 216, 95, 95, 1, { { -146.279, -31.324, -316.425 } } },
         },
         [11787] = {
-            { 'Tunga', 215, 90, 90, 1 },
+            { 'Tunga', 215, 90, 90, 1, { { 511.266, 19.337, -162.986 } } },
         },
         [11799] = {
-            { 'Pantokrator', 253, 0, 0, 1 },
+            { 'Pantokrator', 253, 0, 0, 1, { { -199, -175, 155 }, { -199, -175, 170 }, { -198, -175, 140 } } },
         },
         [11800] = {
-            { 'Tablilla', 218, 0, 0, 1 },
+            { 'Tablilla', 218, 0, 0, 1, { { -878, -8, -525 } } },
         },
         [11801] = {
-            { 'Battlerigged Chariot', 218, 100, 100, 1 },
+            { 'Battlerigged Chariot', 218, 100, 100, 1, { { -676.528, -7.988, -564.241 } } },
         },
         [11816] = {
-            { 'Arch Overlord Tombstone', 185, 99, 99, 1 },
+            { 'Arch Overlord Tombstone', 185, 99, 99, 1, { { 0, -2.5, 43 } } },
         },
         [11817] = {
-            { 'Arch Gu\'Dha Effigy', 186, 99, 99, 1 },
+            { 'Arch Gu\'Dha Effigy', 186, 99, 99, 1, { { -16.149, -2, -130.5 } } },
         },
         [11818] = {
-            { 'Arch Tzee Xicu Idol', 187, 99, 99, 1 },
+            { 'Arch Tzee Xicu Idol', 187, 99, 99, 1, { { 94.944, -3.171, -147.77 } } },
         },
         [11819] = {
-            { 'Arch Goblin Golem', 188, 99, 99, 1 },
+            { 'Arch Goblin Golem', 188, 99, 99, 1, { { 0, -0.5, -101 } } },
         },
         [11820] = {
-            { 'Pignonpausard', 134, 95, 95, 1 },
+            { 'Pignonpausard', 134, 95, 95, 1, { { 18.033, -80.5, 163.089 } } },
         },
         [11821] = {
-            { 'Cavanneche', 134, 95, 95, 1 },
+            { 'Cavanneche', 134, 95, 95, 1, { { -340, -100.75, 138 } } },
         },
         [11843] = {
-            { 'Assailer Chariot', 254, 100, 100, 1 },
+            { 'Assailer Chariot', 254, 100, 100, 1, { { 659.348, 19.48, 401.638 } } },
         },
         [11884] = {
-            { 'Ulhuadshi', 215, 0, 0, 1 },
+            { 'Ulhuadshi', 215, 0, 0, 1, { { 340.193, 20.005, 220.34 }, { 360, 20, 199 }, { 361.193, 20.005, 199.34 } } },
         },
         [11885] = {
             { 'Ketea', 217, 85, 87, 1 },
         },
         [11886] = {
-            { 'Iktomi', 217, 90, 90, 1 },
+            { 'Iktomi', 217, 90, 90, 1, { { 123.839, -48.027, -437.669 } } },
         },
         [11896] = {
-            { 'Raja', 254, 89, 90, 1 },
+            { 'Raja', 254, 89, 90, 1, { { 465, 56, 679 }, { 481, 56, 680 }, { 495, 56, 679 } } },
         },
         [11897] = {
-            { 'Raja', 254, 89, 90, 1 },
+            { 'Raja', 254, 89, 90, 1, { { 465, 56, 679 }, { 481, 56, 680 }, { 495, 56, 679 } } },
         },
         [11898] = {
-            { 'Amarok', 218, 0, 0, 1 },
+            { 'Amarok', 218, 0, 0, 1, { { -565, 0.001, 160 } } },
         },
         [11899] = {
-            { 'Yaguarogui', 253, 0, 0, 1 },
+            { 'Yaguarogui', 253, 0, 0, 1, { { 432, 0.001, -424 } } },
         },
         [11900] = {
-            { 'Bomblix Flamefinger', 254, 0, 0, 1 },
+            { 'Bomblix Flamefinger', 254, 0, 0, 1, { { 555, 23, -317 } } },
         },
         [11901] = {
-            { 'Dhorme Khimaira', 253, 95, 95, 1 },
+            { 'Dhorme Khimaira', 253, 95, 95, 1, { { -281.411, -155.568, 267.682 } } },
         },
         [11902] = {
-            { 'Emperador de Altepa', 218, 0, 0, 1 },
+            { 'Emperador de Altepa', 218, 0, 0, 1, { { -492, 0.001, -613 } } },
         },
         [11903] = {
-            { 'Blanga', 253, 0, 0, 1 },
+            { 'Blanga', 253, 0, 0, 1, { { -513, -40, -114 } } },
         },
         [11904] = {
-            { 'Ningishzida', 254, 100, 100, 1 },
+            { 'Ningishzida', 254, 100, 100, 1, { { 380, -31, 239 } } },
         },
         [11905] = {
-            { 'Ironclad Triturator', 253, 0, 0, 1 },
+            { 'Ironclad Triturator', 253, 0, 0, 1, { { -10, -175, 56 } } },
         },
         [11906] = {
-            { 'Shaula', 218, 0, 0, 1 },
+            { 'Shaula', 218, 0, 0, 1, { { -71, 0.001, 398 } } },
         },
         [11907] = {
-            { 'Teugghia', 254, 0, 0, 1 },
+            { 'Teugghia', 254, 0, 0, 1, { { -68, -6, 656 } } },
         },
         [11908] = {
-            { 'Burstrox Powderpate', 254, 0, 0, 1 },
+            { 'Burstrox Powderpate', 254, 0, 0, 1, { { 396, 40, -436 } } },
         },
         [11909] = {
-            { 'Koghatu', 253, 0, 0, 1 },
+            { 'Koghatu', 253, 0, 0, 1, { { -108, -175, 4 } } },
         },
         [11910] = {
-            { 'Xibalba', 254, 0, 0, 1 },
+            { 'Xibalba', 254, 0, 0, 1, { { -487, -168, 211 } } },
         },
         [11918] = {
-            { 'Hitaume', 134, 95, 95, 1 },
+            { 'Hitaume', 134, 95, 95, 1, { { -108.81, -100.939, 61.472 } } },
         },
         [11919] = {
-            { 'Arch Angra Mainyu', 134, 95, 95, 1 },
+            { 'Arch Angra Mainyu', 134, 95, 95, 1, { { 280, 19.899, 468 } } },
         },
         [11923] = {
-            { 'Lost Alklha', 40, 100, 100, 1 },
+            { 'Lost Alklha', 40, 100, 100, 1, { { -566, -40.978, 126 } } },
         },
         [11924] = {
-            { 'Diabolos Letum', 42, 105, 105, 1 },
-            { 'Diabolos Nox', 42, 105, 105, 1 },
-            { 'Diabolos Somnus', 42, 105, 105, 1 },
-            { 'Diabolos Umbra', 42, 105, 105, 1 },
+            { 'Diabolos Letum', 42, 105, 105, 1, { { 1.5, -30.3, 149.5 } } },
+            { 'Diabolos Nox', 42, 105, 105, 1, { { 1.5, -30.308, 149.5 } } },
+            { 'Diabolos Somnus', 42, 105, 105, 1, { { 1.5, -30.308, 149.5 } } },
+            { 'Diabolos Umbra', 42, 105, 105, 1, { { 1.5, -30.308, 149.5 } } },
         },
         [11934] = {
-            { 'Smok', 215, 0, 0, 1 },
+            { 'Smok', 215, 0, 0, 1, { { -547, -4, -12 }, { -539, -12, -75 }, { -530, -5, -39 } } },
         },
         [11935] = {
-            { 'Karkadann', 217, 85, 87, 1 },
+            { 'Karkadann', 217, 85, 87, 1, { { -158, -32, 118 }, { -157, -31, 88 }, { -157, -31, 104 } } },
         },
         [11936] = {
-            { 'Ironclad Pulverizer', 216, 0, 0, 1 },
+            { 'Ironclad Pulverizer', 216, 0, 0, 1, { { -214, -31, 160 }, { -199, -31, 145 }, { -198, -31, 160 }, { -192, -31, 145 } } },
         },
         [11937] = {
-            { 'Berstuk', 215, 82, 85, 1 },
+            { 'Berstuk', 215, 82, 85, 1, { { -279, -4, -38 } } },
         },
         [11947] = {
-            { 'Ika-Roa', 254, 0, 0, 1 },
+            { 'Ika-Roa', 254, 0, 0, 1, { { 158, -29, -215 } } },
         },
         [11948] = {
-            { 'Long-Barreled Chariot', 218, 100, 100, 1 },
+            { 'Long-Barreled Chariot', 218, 100, 100, 1, { { -799.719, -19.886, -646.279 } } },
         },
         [11949] = {
             { 'Anemic Aloysius', 253, 87, 88 },
@@ -4137,9 +5056,9 @@ return {
             { 'Gigas Stonecarrier', 173, 35, 37 },
             { 'Gigas Stonegrinder', 173, 35, 37 },
             { 'Gigas Stonemason', 173, 35, 37 },
-            { 'Epialtes', 184, 32, 32, 1 },
-            { 'Eurymedon', 184, 32, 32, 1 },
-            { 'Hippolytos', 184, 32, 32, 1 },
+            { 'Epialtes', 184, 32, 32, 1, { { 477.096, -0.522, 52.554 } } },
+            { 'Eurymedon', 184, 32, 32, 1, { { 405, -32, -32 } } },
+            { 'Hippolytos', 184, 32, 32, 1, { { 339.212, -16.099, 16.733 } } },
             { 'Gigas Braver', 24, 41, 44 },
             { 'Gigas Catapulter', 24, 41, 44 },
             { 'Gigas Fighter', 24, 35, 38 },
@@ -4147,69 +5066,69 @@ return {
             { 'Gigas Slinger', 24, 35, 38 },
             { 'Gigas Warwolf', 24, 41, 44 },
             { 'Gigas Wrestler', 24, 35, 38 },
-            { 'Eurytos', 157, 32, 32, 1 },
-            { 'Ophion', 157, 34, 34, 1 },
-            { 'Polybotes', 157, 34, 34, 1 },
-            { 'Rhoikos', 157, 34, 34, 1 },
-            { 'Rhoitos', 157, 34, 34, 1 },
+            { 'Eurytos', 157, 32, 32, 1, { { 20, -47, 94 } } },
+            { 'Ophion', 157, 34, 34, 1, { { -444, -95, -3 } } },
+            { 'Polybotes', 157, 34, 34, 1, { { -41.284, -63.636, 3.492 } } },
+            { 'Rhoikos', 157, 34, 34, 1, { { -378, -111, 47 } } },
+            { 'Rhoitos', 157, 34, 34, 1, { { 88, -79, 73 } } },
             { 'Gigas Braver', 25, 41, 44 },
             { 'Gigas Catapulter', 25, 41, 44 },
             { 'Gigas Martialist', 25, 41, 44 },
             { 'Gigas Warwolf', 25, 41, 44 },
         },
         [12292] = {
-            { 'Ogygos', 157, 35, 35, 1 },
-            { 'Alkyoneus', 158, 75, 75, 1 },
-            { 'Enkelados', 158, 40, 40, 1 },
-            { 'Pallas', 158, 72, 72, 1 },
+            { 'Ogygos', 157, 35, 35, 1, { { -495, -128, 19 } } },
+            { 'Alkyoneus', 158, 75, 75, 1, { { -300, -175, 22 } } },
+            { 'Enkelados', 158, 40, 40, 1, { { -391, -145, 25 }, { -226.158, -144.099, 28.522 } } },
+            { 'Pallas', 158, 72, 72, 1, { { -300, -159, 21 } } },
         },
         [12296] = {
-            { 'Genbu', 130, 88, 90, 1 },
+            { 'Genbu', 130, 88, 90, 1, { { 261.868, -70.219, 526.413 } } },
         },
         [12298] = {
-            { 'Zhuu Buxu the Silent', 145, 16, 16, 1 },
+            { 'Zhuu Buxu the Silent', 145, 16, 16, 1, { { -17.158, 16.684, 109.386 } } },
         },
         [12318] = {
-            { 'Burstrox Powderpate', 254, 0, 0, 1 },
+            { 'Burstrox Powderpate', 254, 0, 0, 1, { { 396, 40, -436 } } },
         },
         [12320] = {
-            { 'Piasa', 132, 85, 85, 1 },
+            { 'Piasa', 132, 85, 85, 1, { { -427.728, -7.523, 84.505 } } },
         },
         [12342] = {
             { 'Orcish Barricader', 140, 17, 18 },
         },
         [12344] = {
-            { 'Southern Shadow', 204, 63, 63, 1 },
+            { 'Southern Shadow', 204, 63, 63, 1, { { -166, -15, 84 }, { -164.6, -16.01, 77.191 }, { -163, -15, 74 }, { -153, -16, 89 }, { -152, -15, 77 } } },
         },
         [12345] = {
-            { 'Alfard', 254, 105, 105, 1 },
+            { 'Alfard', 254, 105, 105, 1, { { 309, -39, 189 }, { 309, -33, 158 }, { 309, -32, 173 } } },
         },
         [12348] = {
-            { 'Serket', 200, 70, 70, 1 },
+            { 'Serket', 200, 70, 70, 1, { { -167.192, 19.157, 235.746 }, { -165.16, 19.46, 220.486 }, { -165.156, 19.212, 230.02 }, { -164.159, 19.19, 235.805 }, { -160.123, 19.25, 205.139 }, { -160.077, 19, 197.804 }, { -159.937, 19.034, 237.676 }, { -159.629, 19.408, 211.318 }, { -159.615, 19.25, 233.174 }, { -155.791, 19.25, 199.302 }, { -155.492, 19.25, 200.878 }, { -155.056, 19.221, 242.651 }, { -155, 19, 244 }, { -154.83, 19.167, 195.725 }, { -148.803, 19.392, 240.088 }, { -148.529, 19.427, 198.422 }, { -147.583, 19.412, 245.273 }, { -143.935, 19.5, 240.142 }, { -143.7, 19.53, 240.467 }, { -143.11, 19.268, 193.103 }, { -141.367, 19.146, 247.842 }, { -139.063, 19.75, 198.544 }, { -139.057, 19.75, 199.46 }, { -138.278, 19.75, 240.786 }, { -138.026, 19.747, 241.748 }, { -136.678, 19.426, 244.692 }, { -133.576, 19.5, 200.166 }, { -132.043, 19.397, 244.589 }, { -131.474, 19.438, 242.54 }, { -131.077, 19.378, 240.586 }, { -129.743, 19.212, 201.519 }, { -127.813, 19.247, 240.123 }, { -126.718, 19.14, 246.689 }, { -126.28, 19.115, 246.072 }, { -125.611, 19.18, 193.884 }, { -123.968, 19.123, 196.309 }, { -121.567, 19, 245.373 }, { -121.338, 19, 200.745 }, { -121.179, 19, 197.685 }, { -119.536, 19.5, 212.511 }, { -119.397, 19.25, 209.755 }, { -119.085, 19.5, 225.52 }, { -117.685, 19, 239.765 }, { -117.266, 19, 202.293 }, { -117.164, 19, 200.375 }, { -116.376, 19.19, 205.379 }, { -116.267, 19.519, 224.755 }, { -114.963, 19.154, 204.267 }, { -114.685, 19.445, 218.52 }, { -114.629, 19.047, 237.23 } } },
             { 'Serket', 129, 0, 0, 1 },
         },
         [12356] = {
-            { 'Steelfleece Baldarich', 108, 55, 56, 1 },
-            { 'Bloodtear Baldurf', 102, 55, 56, 1 },
+            { 'Steelfleece Baldarich', 108, 55, 56, 1, { { -10, 7, 45 } } },
+            { 'Bloodtear Baldurf', 102, 55, 56, 1, { { -343, -7, 50 }, { -331, -15, -112 }, { -320, -15, -14 }, { -266, -7, -49 }, { -207, -7, -132 }, { -155, -7, -187 }, { -97, 7, -307 }, { -90, 0, -97 }, { -41, 8, -264 }, { -23, 7, -141 }, { 64, 8, -165 }, { 79, 8, -241 }, { 88, 8, -239 }, { 159, 7, -216 } } },
         },
         [12361] = {
-            { 'Adamantoise', 128, 70, 70, 1 },
-            { 'Aspidochelone', 128, 85, 85, 1 },
+            { 'Adamantoise', 128, 70, 70, 1, { { 0.894, 0.021, -35.588 } } },
+            { 'Aspidochelone', 128, 85, 85, 1, { { 0.894, 0.021, -35.588 } } },
         },
         [12371] = {
-            { 'Fungus Beetle', 100, 10, 15, 1 },
+            { 'Fungus Beetle', 100, 10, 15, 1, { { -295.626, -21.389, -192.191 }, { -287.202, -20.826, -199.075 }, { -266.857, -23.044, -149.485 }, { -263.406, -19.965, -119.037 }, { -262.558, -25.139, -99.857 }, { -262.264, -21.727, -185.715 }, { -253.892, -20.743, -158.584 }, { -253.22, -20.649, -168.029 }, { -252.249, -20.538, -160.574 }, { -250.801, -20.476, -154.371 }, { -246.897, -19.663, -192.657 }, { -242.801, -19.5, -148.395 }, { -242.073, -19.5, -171.025 }, { -240.463, -19.5, -188.056 }, { -235.352, -19.926, -156.308 }, { -234.316, -20.217, -197.83 }, { -229.78, -21.087, -187.939 }, { -227.256, -20.596, -193.797 }, { -226.57, -20.74, -164.24 }, { -226.055, -20.46, -170.825 }, { -218.936, -19.102, -147.128 }, { -216.035, -19.69, -153.69 }, { -211.173, -20.188, -169.174 }, { -211.078, -19.739, -127.686 }, { -209.735, -18.87, -145.829 }, { -208.288, -18.364, -151.782 }, { -202.223, -20, -156.869 }, { -200.54, -26.731, -93.185 }, { -199.37, -19.903, -137.574 }, { -194.311, -19.796, -119.369 }, { -190.373, -19.769, -151.189 }, { -182.749, -20.065, -153.827 }, { -176.108, -20.878, -138.067 }, { -172.596, -19.581, -160.288 }, { -171.065, -19.98, -141.711 }, { -169.847, -20.232, -134.252 }, { -162.497, -19.5, -151.499 }, { -160.393, -19.5, -131.787 }, { -158.985, -19.741, -146.129 }, { -153.107, -19.814, -140.866 }, { -144.323, -20.033, -155.329 }, { -143.541, -20.285, -130.4 }, { -142.426, -19.489, -145.079 }, { -140.414, -19.76, -124.514 }, { -135.337, -20.281, -141.171 }, { -133.001, -20.636, -141.11 }, { -124.609, -19.983, -136.957 }, { -121.798, -19.5, -150.639 }, { -116.201, -20.031, -157.715 }, { -109.167, -19.87, -153.98 }, { -108.421, -21.746, -142.465 } } },
         },
         [12374] = {
-            { 'Bo\'Who Warmonger', 109, 36, 37, 1 },
+            { 'Bo\'Who Warmonger', 109, 36, 37, 1, { { 467.436, 24.5, -342.082 } } },
         },
         [12378] = {
-            { 'Manipulator', 159, 59, 61, 1 },
+            { 'Manipulator', 159, 59, 61, 1, { { -18.045, -8.558, -91.983 } } },
         },
         [12381] = {
-            { 'Sacrificial Goblet', 159, 66, 68, 1 },
+            { 'Sacrificial Goblet', 159, 66, 68, 1, { { 300, 1, 255 } } },
         },
         [12382] = {
-            { 'Pelican', 174, 80, 81, 1 },
+            { 'Pelican', 174, 80, 81, 1, { { 180.299, 20.449, -42.575 } } },
         },
         [12415] = {
             { 'Young Quadav', 108, 9, 10 },
@@ -4295,7 +5214,7 @@ return {
             { 'Goblin Chaser', 166, 88, 90 },
         },
         [12434] = {
-            { 'Genbu', 130, 88, 90, 1 },
+            { 'Genbu', 130, 88, 90, 1, { { 261.868, -70.219, 526.413 } } },
         },
         [12440] = {
             { 'Goblin Ambusher', 191, 12, 16 },
@@ -4456,16 +5375,16 @@ return {
             { 'Spinel Quadav', 162, 47, 49 },
         },
         [12480] = {
-            { 'Hedetet', 45, 85, 85, 1 },
+            { 'Hedetet', 45, 85, 85, 1, { { -279, 7, 126 } } },
         },
         [12485] = {
-            { 'Tumbling Truffle', 102, 19, 20, 1 },
+            { 'Tumbling Truffle', 102, 19, 20, 1, { { 339, 56, 155 }, { 384, 71, 205 }, { 434, 70, 241 }, { 467, 71, 239 }, { 528, 70, 278 }, { 592, 59, 297 } } },
         },
         [12562] = {
-            { 'Kirin', 178, 92, 92, 1 },
+            { 'Kirin', 178, 92, 92, 1, { { -90.377, 32.575, 5.507 } } },
         },
         [12567] = {
-            { 'Geyser Lizard', 191, 28, 30, 1 },
+            { 'Geyser Lizard', 191, 28, 30, 1, { { -447.935, 3.412, 230.371 }, { -413.266, 4, 120.417 }, { -363, 3, -69 }, { -211.909, 3.537, 549.528 } } },
         },
         [12611] = {
             { 'Yagudo Abbot', 151, 55, 59 },
@@ -4549,7 +5468,7 @@ return {
             { 'Goblin Chaser', 166, 88, 90 },
         },
         [12690] = {
-            { 'Seiryu', 130, 88, 90, 1 },
+            { 'Seiryu', 130, 88, 90, 1, { { 580.835, -70.22, -84.529 } } },
         },
         [12696] = {
             { 'Goblin Ambusher', 191, 12, 16 },
@@ -4730,16 +5649,16 @@ return {
             { 'Sapphire Quadav', 148, 69, 72 },
         },
         [12741] = {
-            { 'Chloris', 45, 90, 90, 1 },
+            { 'Chloris', 45, 90, 90, 1, { { 160, 0, -30 }, { 160, 0, -15 }, { 160, 0, 0 } } },
         },
         [12748] = {
-            { 'Tonberry Tracker', 160, 72, 74, 1 },
+            { 'Tonberry Tracker', 160, 72, 74, 1, { { -188.621, 15.588, -100.234 }, { -167.336, 15.851, -120.259 } } },
         },
         [12796] = {
             { 'Balloon', 192, 8, 10 },
         },
         [12798] = {
-            { 'Hoo Mjuu the Torrent', 145, 16, 17, 1 },
+            { 'Hoo Mjuu the Torrent', 145, 16, 17, 1, { { -90.28, -0.565, -84.597 }, { -81.423, 1, -71.308 }, { -79.258, 0.49, -85.936 }, { -78.692, -0.653, -92.499 }, { -70.482, 1.243, -69.38 }, { -69.216, 0.727, -84.936 }, { -64.949, -0.272, -88.724 }, { -63, -0.86, -91 }, { -62.358, 0.916, -77.275 }, { -62.342, 0.474, -86.003 }, { -61.027, -0.295, -89.536 }, { -58.354, 1, -80.969 }, { -57.961, 1, -81.284 }, { -57, -2, -119 }, { -55.364, -0.359, -90.817 }, { -50.829, 0.95, -83.587 }, { -50.083, -0.267, -120.731 }, { -50, 1, -75 }, { -48.812, -0.166, -106.726 }, { -47.804, 0.017, -112.115 }, { -47.404, 0.123, -101.495 }, { -46.897, 0.295, -97.197 }, { -46.852, 0.175, -91.316 }, { -46.65, 0.311, -102.442 }, { -46.02, 0.469, -101.926 }, { -45.738, 0.539, -100.449 }, { -43.103, 1, -112.137 }, { -42.943, 1, -97.089 }, { -42.81, 0.834, -91.884 }, { -42.389, 0.315, -130.93 }, { -41.118, 1, -93.202 }, { -40.48, 1, -118.954 }, { -39.073, 0.597, -115.279 }, { -37.128, 1, -118.051 }, { -37.1, 0.582, -127.259 }, { -36.586, 1.329, -104.497 }, { -36.325, 1, -95.533 }, { -36.316, 1.277, -111.276 }, { -35.367, 0.859, -90.359 }, { -35.23, 0.744, -91.412 }, { -34.975, 1.35, -111.613 }, { -32.032, 1.318, -87.061 }, { -32, 0.74, -105 }, { -31.958, 1.028, -71.971 }, { -31.715, 0.771, -93.257 }, { -28.083, 0.899, -73.763 }, { -28.026, 1.056, -64.385 }, { -27.974, 1.404, -88.717 }, { -27.194, 1.316, -84.194 }, { -26.922, 1.09, -83.896 }, { -21.61, 0.687, -70.378 } } },
         },
         [12800] = {
             { 'Elder Quadav', 147, 42, 46 },
@@ -4819,7 +5738,7 @@ return {
             { 'Goblin Chaser', 166, 88, 90 },
         },
         [12818] = {
-            { 'Byakko', 130, 88, 90, 1 },
+            { 'Byakko', 130, 88, 90, 1, { { -419.403, -70.2, 410.956 } } },
         },
         [12824] = {
             { 'Goblin Ambusher', 191, 12, 16 },
@@ -5000,17 +5919,17 @@ return {
             { 'Sapphire Quadav', 148, 69, 72 },
         },
         [12920] = {
-            { 'Hadhayosh', 132, 85, 85, 1 },
+            { 'Hadhayosh', 132, 85, 85, 1, { { 410, 24, 41 }, { 434, 24, 41 }, { 449, 24, 40 } } },
         },
         [12921] = {
-            { 'Bloodeye Vileberry', 15, 90, 90, 1 },
+            { 'Bloodeye Vileberry', 15, 90, 90, 1, { { 538, 24, 713 }, { 539, 24, 714 }, { 554, 23, 698 } } },
         },
         [12922] = {
             { 'Crypt Ghost', 190, 20, 21 },
         },
         [12924] = {
             { 'King Arthro', 86, 0, 0, 1 },
-            { 'King Arthro', 104, 55, 55, 1 },
+            { 'King Arthro', 104, 55, 55, 1, { { -160.911, 0.369, 451.411 }, { -156.857, 0.458, 485.462 }, { -156.276, 0.532, 434.495 }, { -156.151, 0.633, 472.79 }, { -152.811, 2.06, 462.249 }, { -149.786, 3.354, 434.074 }, { -149.55, 3.005, 442.039 }, { -149.255, 4.077, 426.342 }, { -149.049, 4.21, 464.421 }, { -149.012, 1.591, 451.211 }, { -148.752, 3.572, 475.929 }, { -147.938, 3.671, 482.846 }, { -147.849, 1.999, 457.706 }, { -146.19, 4.814, 429.599 }, { -145.913, 4.56, 436.723 }, { -145.798, 4.882, 469.291 }, { -145.579, 4.847, 443.856 }, { -144.582, 5.083, 473.179 }, { -144, 5, 474 }, { -143.716, 5.493, 479.213 }, { -142.296, 5.301, 485.065 }, { -138.765, 4.415, 489.87 }, { -136.924, 4.786, 493.231 } } },
         },
         [12928] = {
             { 'Elder Quadav', 147, 42, 46 },
@@ -5090,7 +6009,7 @@ return {
             { 'Goblin Chaser', 166, 88, 90 },
         },
         [12946] = {
-            { 'Suzaku', 130, 88, 90, 1 },
+            { 'Suzaku', 130, 88, 90, 1, { { -520.836, -70.22, -271.516 } } },
         },
         [12952] = {
             { 'Goblin Ambusher', 191, 12, 16 },
@@ -5271,31 +6190,31 @@ return {
             { 'Sapphire Quadav', 148, 69, 72 },
         },
         [12997] = {
-            { 'Eccentric Eve', 15, 90, 90, 1 },
+            { 'Eccentric Eve', 15, 90, 90, 1, { { 215.412, 32.241, 280.677 }, { 230.412, 31.779, 280.677 }, { 245, 31, 280 } } },
         },
         [12999] = {
-            { 'Keesha Poppo', 132, 85, 85, 1 },
+            { 'Keesha Poppo', 132, 85, 85, 1, { { 671.895, 32.398, 110.392 } } },
         },
         [13000] = {
-            { 'Balaur', 15, 85, 85, 1 },
+            { 'Balaur', 15, 85, 85, 1, { { 597.959, 23.178, 162.849 } } },
         },
         [13001] = {
-            { 'Bloodeye Vileberry', 15, 90, 90, 1 },
+            { 'Bloodeye Vileberry', 15, 90, 90, 1, { { 538, 24, 713 }, { 539, 24, 714 }, { 554, 23, 698 } } },
         },
         [13013] = {
-            { 'Tottering Toby', 105, 27, 28, 1 },
+            { 'Tottering Toby', 105, 27, 28, 1, { { -280.154, -8.011, 204.82 }, { -272.561, -7.431, 175.465 }, { -265.481, -8.166, 217.296 }, { -265.187, -8.055, 173.233 }, { -259.618, -5.921, 251.595 }, { -255.948, -7.945, 180.664 }, { -255.542, -7.872, 185.826 }, { -250.759, -7.663, 201.289 }, { -248.15, -12.502, 174.407 }, { -246.893, -7.763, 208.077 }, { -246.228, -16.967, 142.903 }, { -245.528, -14.424, 162.956 }, { -245.174, -7.011, 258.708 }, { -244.147, -7.159, 266.756 }, { -239.064, -14.061, 110.444 }, { -237.143, -8, 280.262 }, { -236.333, -7.819, 343.322 }, { -231.086, -15.796, 111.698 }, { -230.377, -11.414, 179.846 }, { -229.306, -6.949, 276.4 }, { -228.923, -9.25, 216.27 }, { -228.02, -5.112, 309.864 }, { -226.245, -3.617, 302.039 }, { -224.556, -20.334, 125.018 }, { -223.021, -5.225, 235.076 }, { -216.412, -20.437, 125.398 }, { -212.698, -20.333, 154.443 }, { -212, -7.604, 198.146 }, { -211.023, -17.196, 115.028 }, { -209.148, -21.169, 136.423 }, { -200.54, -0.243, 234.106 }, { -199.639, 0, 240.702 }, { -198.995, -0.009, 276.15 }, { -194.234, -18.485, 132.208 }, { -192.185, -0.249, 229.95 }, { -191.986, 0.247, 249.832 }, { -191.54, -0.064, 257.78 }, { -184.48, -8.312, 179.873 }, { -181.608, -2.902, 224.92 }, { -174.207, -3.968, 221.75 }, { -170.955, 0.347, 237.283 }, { -164.401, -5.626, 218.126 }, { -163.012, -0.072, 235.474 }, { -151.124, 0.236, 232.74 }, { -149.552, -6.521, 206.1 }, { -146.838, -6.139, 178.254 }, { -143.123, -0.435, 231.413 }, { -141.794, -6.182, 167.545 }, { -132.889, -0.379, 225.931 }, { -129.344, 0.075, 218.83 }, { -126.988, -0.724, 211.075 } } },
         },
         [13057] = {
-            { 'Buburimboo', 118, 30, 31, 1 },
+            { 'Buburimboo', 118, 30, 31, 1, { { 436.921, 20, 96.025 }, { 439.038, 20, 82.367 }, { 439.362, 20, 72.592 }, { 439.414, 20, 127.194 }, { 440.274, 20, 112.462 }, { 440.608, 20, 78.291 }, { 440.841, 20, 84.815 }, { 441.055, 20, 163.465 }, { 441.12, 20, 90.22 }, { 441.472, 20, 94.115 }, { 441.64, 20, 131.148 }, { 441.698, 20, 68.193 }, { 442.091, 20, 72.288 }, { 442.236, 20, 115.291 }, { 442.53, 20, 140.167 }, { 442.604, 20, 117.292 }, { 442.628, 20, 153.975 }, { 442.901, 19.5, 109.075 }, { 443.004, 19.5, 96 }, { 443.42, 20, 86.386 }, { 443.429, 19.5, 135.322 }, { 443.635, 20, 126.734 }, { 443.822, 20, 142.901 }, { 443.982, 20, 132.977 }, { 444.222, 20, 76.808 }, { 444.224, 19.499, 76 }, { 444.224, 20, 149.416 }, { 444.528, 20, 119.753 }, { 444.782, 20, 170.511 }, { 444.916, 19.499, 154.289 }, { 445.202, 20, 95.148 }, { 445.216, 20, 127.637 }, { 445.408, 20, 134.872 }, { 445.467, 20, 110.334 }, { 445.617, 20, 97.943 }, { 445.677, 20, 92.984 }, { 445.738, 20, 75.428 }, { 445.771, 20, 148.317 }, { 445.864, 20, 125.271 }, { 446.038, 20, 110.207 }, { 446.243, 20, 89.509 }, { 446.461, 20, 170.34 }, { 446.721, 20, 140.428 }, { 446.943, 20, 117.79 }, { 447.36, 20, 136.666 }, { 447.945, 19.998, 166.697 }, { 447.996, 20, 116.258 }, { 448.135, 20, 91.715 }, { 448.923, 20, 144.808 }, { 449.242, 20, 76.954 }, { 450.298, 20, 161.129 } } },
         },
         [13058] = {
-            { 'Bloodpool Vorax', 109, 24, 25, 1 },
+            { 'Bloodpool Vorax', 109, 24, 25, 1, { { -405.854, 24.113, 513.944 }, { -351.884, 24.014, 513.531 } } },
         },
         [13073] = {
-            { 'Ge\'Dha Evileye', 147, 30, 30, 1 },
+            { 'Ge\'Dha Evileye', 147, 30, 30, 1, { { -242.709, 0.5, -188.01 }, { -238, 1, -203 } } },
         },
         [13086] = {
-            { 'Serpopard Ishtar', 117, 19, 20, 1 },
+            { 'Serpopard Ishtar', 117, 19, 20, 1, { { -0.048, 21.041, 266.381 }, { 49.54, 0.843, -61.629 } } },
         },
         [13095] = {
             { 'Crossbones', 228, 28, 31 },
@@ -5305,13 +6224,13 @@ return {
             { 'Black Wolf', 106, 5, 8 },
         },
         [13112] = {
-            { 'Jaggedy-Eared Jack', 100, 9, 10, 1 },
+            { 'Jaggedy-Eared Jack', 100, 9, 10, 1, { { -396.894, -18.276, -210.088 }, { -384.542, -17.336, -215.42 }, { -370.9, -19.5, -235.931 }, { -354.061, -13.812, -260.33 }, { -340.369, -17.15, -222.255 }, { -331.034, -5.545, -291.57 }, { -329.892, -9.702, -313.713 }, { -322.527, -20, -197.981 }, { -319.361, -10.665, -268.73 }, { -297.961, -14.931, -287.124 }, { -295.354, -14.429, -304.559 }, { -292.31, -16.66, -310.63 }, { -291.582, -20.483, -189.155 }, { -281.22, -19.91, -215.226 }, { -281, -19, -220 }, { -278.421, -11.691, -351.425 }, { -273.558, -19.943, -284.081 }, { -272.855, -16.783, -293.164 }, { -270.059, -20.717, -260.793 }, { -267.389, -21.669, -252.72 }, { -264.351, -22.097, -256.322 }, { -262.78, -22.384, -253.873 }, { -262.351, -20.737, -210.364 }, { -258.142, -19.9, -196.353 }, { -256.406, -20.754, -272.561 }, { -248.681, -21.336, -163.987 }, { -204.492, -20.754, -324.77 } } },
         },
         [13114] = {
-            { 'Shadow Eye', 112, 48, 49, 1 },
+            { 'Shadow Eye', 112, 48, 49, 1, { { -236.734, -11.177, -23.543 } } },
         },
         [13115] = {
-            { 'Gargantua', 111, 47, 48, 1 },
+            { 'Gargantua', 111, 47, 48, 1, { { 282.706, 0, -38.483 }, { 283.38, 0.199, -31.995 }, { 284.287, 0.845, -22.413 }, { 285.954, 0.097, -40.103 }, { 290.23, 0.573, -20.922 }, { 291.646, 0.544, -47.484 }, { 293.582, 0.251, -26.982 }, { 294.364, 0.6, -49.252 }, { 296.187, 0.803, -35.99 }, { 296.495, 0.824, -42.375 }, { 298.756, 0.814, -34.874 }, { 301.916, 0.103, -58.846 }, { 302.529, 0.36, 30.251 }, { 303.445, 0.827, 0.838 }, { 304.605, 0.735, -37.672 }, { 305.637, 0.232, -48.436 }, { 307.969, 0.101, -53.054 }, { 309.494, 0.539, -17.324 }, { 311.701, 0.11, -46.047 }, { 315.168, 0.039, 34.351 }, { 317.195, 0.81, -56.219 }, { 320.713, 0, -42.444 }, { 320.997, 0.331, 10.641 }, { 322.341, 0.042, -4.863 }, { 323.349, 0.89, -57.822 }, { 324.808, 0.709, -23.77 }, { 324.941, 0.499, -54.015 }, { 325.796, 0.279, -27.33 }, { 327.591, 0.046, -47.442 }, { 329.737, 0.6, -62.745 }, { 330.652, 0.332, 2.583 }, { 333.903, 0.186, -48.65 }, { 334.463, -0.309, -19.662 }, { 338.129, 0.905, -38.965 }, { 339, -0.472, -20 }, { 339.589, -0.1, -12.67 }, { 339.802, -0.202, -30.909 }, { 341.426, 0.928, -39.709 }, { 341.807, -0.223, -12.313 }, { 342.365, 0.881, -0.875 }, { 342.663, 0.486, 28.435 }, { 344.515, 0.703, 4.793 }, { 348, -0.5, 17 }, { 351.296, 0.234, -41.178 }, { 352.063, 0.196, -43.52 }, { 352.379, -0.085, -7.133 }, { 355.032, 0.376, -29.398 }, { 355.582, 0.145, -33.835 }, { 355.967, 0.175, 7.57 }, { 360.585, 0, -0.759 }, { 362.484, 0.385, -11.897 } } },
         },
         [13116] = {
             { 'Greater Quadav', 143, 11, 18 },
@@ -5323,34 +6242,34 @@ return {
             { 'Foul Meat', 196, 43, 45 },
         },
         [13122] = {
-            { 'Wandering Ghost', 196, 45, 45, 1 },
+            { 'Wandering Ghost', 196, 45, 45, 1, { { -168.3, -1.057, 366.674 } } },
         },
         [13137] = {
-            { 'Dune Widow', 114, 45, 47, 1 },
+            { 'Dune Widow', 114, 45, 47, 1, { { -129.646, -10.544, 106.096 }, { -124.89, -8.576, 32.533 }, { -119.54, -7.307, 14.973 }, { -110.259, -11.813, 54.668 }, { -109.238, -11.541, 55.028 }, { -107.573, -9.44, 44.493 }, { -102.978, -17.091, 69.244 }, { -95.926, -16.983, 75.985 }, { -93.032, -0.462, -28.587 }, { -85, 2.952, -46 }, { -83.726, -6.622, -10.144 }, { -79.1, -8, -0.868 }, { -78.935, -15.855, 86.996 }, { -78.395, -16, 40.173 }, { -78.373, -15.784, 48.355 }, { -76.755, -15.629, 108.536 }, { -75, -7, -1 }, { -72.244, -11.739, 20.626 }, { -70.961, -7.621, 3.338 }, { -70.788, -11.475, 20.18 }, { -65.87, -15.392, 39.099 }, { -63.693, -15.468, 37.55 }, { -63.037, -15.211, 84.416 }, { -62.906, -11.926, 22.329 }, { -59.688, -14.87, 33.356 }, { -59.024, -9.066, 11.697 }, { -56.695, -7.618, -8.281 }, { -50.692, -15.668, 82.271 }, { -49.271, -6.618, -21.13 }, { -45.211, -15.941, 39.41 }, { -40.196, -15.905, 74.08 }, { -38, -7, -35 }, { -37.367, -15.392, 32.664 }, { -36.319, -16.343, 127.472 }, { -33.337, -15.868, 40.39 }, { -29.261, -16.534, 73.444 }, { -28.907, -15.602, 54.441 }, { -28.674, -7.636, 1.811 }, { -28.561, -15.834, 49.097 }, { -26.568, -8.024, -22.999 }, { -23.368, -17.144, 63.099 }, { -23.193, -15.046, 31.13 }, { -21.108, -15.669, 47.696 }, { -20.594, -23.555, 106.357 }, { -19.887, -17.946, 61.193 }, { -14.245, -17.387, 54.664 }, { -10.584, -18.871, 59.009 }, { -0.825, -20.358, 59.822 }, { 2.487, -26.41, 117.536 }, { 6.769, -34.016, 95.17 }, { 12.31, -32.154, 111.476 } } },
         },
         [13147] = {
-            { 'Tawny-fingered Mugberry', 160, 70, 72, 1 },
+            { 'Tawny-fingered Mugberry', 160, 70, 72, 1, { { 100, 17, -180 } } },
         },
         [13172] = {
-            { 'Swashstox Beadblinker', 12, 80, 80, 1 },
+            { 'Swashstox Beadblinker', 12, 80, 80, 1, { { 45.54, 16.12, 19.64 }, { 49.85, 15.85, -20.75 }, { 87.88, 16, -19.51 }, { 101.32, 16, 50.14 }, { 110.552, 15.51, -21.166 } } },
         },
         [13178] = {
-            { 'Boroka', 29, 58, 60, 1 },
+            { 'Boroka', 29, 58, 60, 1, { { -365.921, -31.255, 486.367 } } },
         },
         [13228] = {
-            { 'Jolly Green', 109, 27, 28, 1 },
+            { 'Jolly Green', 109, 27, 28, 1, { { 184.993, 24.499, -41.79 }, { 276.084, 24.146, -1.695 } } },
         },
         [13229] = {
             { 'Puroboros', 197, 45, 45 },
         },
         [13301] = {
-            { 'Voluptuous Vivian', 153, 80, 81, 1 },
+            { 'Voluptuous Vivian', 153, 80, 81, 1, { { -216.685, 5.095, 192.898 }, { -215.84, 5.914, 199.35 }, { -215.792, 5.718, 187.152 }, { -215.278, 5.612, 203.135 }, { -215.158, 5.671, 184.629 }, { -214.516, 5.285, 206.357 }, { -212.537, 4.751, 209.737 }, { -210.239, 5.545, 192.468 }, { -209.699, 5.294, 207.211 }, { -209.4, 5.804, 201.499 }, { -208.7, 5.276, 203.289 }, { -208.64, 4.712, 211.481 }, { -208.414, 5.905, 197.172 }, { -207.278, 5.288, 187.267 }, { -205.151, 5.732, 204.877 }, { -204.872, 5.763, 199.845 }, { -204.689, 5.231, 183.871 }, { -204.36, 5.735, 210.093 }, { -203.961, 5.597, 191.974 }, { -203.275, 5.63, 212.923 }, { -203.12, 5.73, 196.16 }, { -201.197, 5.792, 182.762 }, { -201.102, 5.919, 208.546 }, { -200.914, 5.956, 199.436 }, { -200.758, 5.7, 204.213 }, { -200.594, 5.709, 195.88 }, { -198.706, 5.798, 211.819 }, { -198.496, 5.989, 214.204 }, { -198.14, 5.798, 188.441 }, { -198.131, 5.913, 200.19 }, { -197.292, 5.695, 204.317 }, { -197.193, 5.87, 208.238 }, { -196.588, 5.58, 184.341 }, { -195.95, 5.721, 196.564 }, { -195.66, 5.738, 199.377 }, { -194.601, 5.529, 208.885 }, { -194.28, 5.565, 207.31 }, { -193.461, 5.606, 192.175 }, { -193.305, 5.275, 214.541 }, { -193.121, 5.351, 188.22 }, { -192.2, 5.978, 198.738 }, { -191.376, 5.91, 202.994 }, { -191.025, 5.563, 194.023 }, { -190.258, 5.53, 205.416 }, { -190.237, 5.72, 200.04 }, { -188.91, 4.527, 212.437 }, { -186.084, 5.678, 187.071 }, { -185.907, 4.365, 209.538 }, { -185.455, 5.528, 204.687 }, { -185.085, 5.956, 199.572 }, { -183.552, 5.184, 191.921 } } },
         },
         [13302] = {
-            { 'Bloodsucker', 167, 70, 73, 1 },
+            { 'Bloodsucker', 167, 70, 73, 1, { { -96.875, 16.999, -277.037 } } },
         },
         [13359] = {
-            { 'Leech King', 198, 35, 36, 1 },
+            { 'Leech King', 198, 35, 36, 1, { { 243.469, 19.727, -196.274 }, { 262.156, 19.973, -219.851 }, { 270, 18, -205 }, { 271.844, 18.887, -203.545 }, { 280.504, 21, -220.683 }, { 281.575, 20, -241.118 } } },
         },
         [13360] = {
             { 'Hill Lizard', 119, 21, 22 },
@@ -5368,10 +6287,10 @@ return {
             { 'Anemone', 195, 45, 46 },
         },
         [13401] = {
-            { 'Cactrot Rapido', 114, 80, 81, 1 },
+            { 'Cactrot Rapido', 114, 80, 81, 1, { { -44.821, 0.04, -204.137 }, { -43.733, 0.029, -205.89 }, { -36.339, 0, -196.558 }, { -26.834, -2.92, -183.684 }, { -8.384, -9.174, -163.234 }, { -7.862, -14.669, 184.072 }, { -1.399, -15.415, 173.901 }, { -0.093, -16, 196.311 }, { 10.562, -7.763, -153.151 }, { 16.3, -16.153, 177.281 }, { 21.13, -20.765, 143.381 }, { 25.823, -15.431, 155.779 }, { 37.798, -22.609, 136.094 }, { 38.579, -8, -159.953 }, { 47.843, -21.39, 129.461 }, { 48.97, -9.183, -157.981 }, { 59.675, -14.091, -155.496 }, { 61.654, -7.113, -202.886 }, { 62.594, -18.367, 119.87 }, { 69.335, -19.906, -150.315 }, { 72.849, -7.547, -207.622 }, { 90.956, -14.351, 119.106 }, { 91.295, -22.441, -133.185 }, { 97.334, -13.89, -116.29 }, { 105.762, -11.687, -109.258 }, { 117.167, -15.802, 154.863 }, { 121.918, -8.169, -85.653 }, { 129.604, -8.359, -69.037 }, { 143.842, -11.473, 58.988 }, { 144.24, -12.902, 149.28 }, { 147.488, -7.989, 107.295 }, { 148.003, -9.46, 28.999 }, { 148.563, -9.651, 16.788 }, { 149.41, -10.013, -1.53 }, { 167.395, -7.425, -230.588 }, { 195.466, -2.154, -225.452 }, { 198.27, -7.032, -59.389 }, { 199.52, -0.495, -7.907 }, { 204.107, -8.062, 85.677 }, { 204.896, 0.044, 3.06 }, { 209.036, -8.379, -64.954 }, { 212.223, -5.971, -202.506 }, { 225.075, -5.462, -73.46 }, { 225.18, -4.675, 47.242 }, { 228.024, -9.949, 74.323 }, { 259.785, -1.055, -58.388 }, { 280.895, 0, -40.171 }, { 297.468, 0.181, -109.136 } } },
         },
         [13402] = {
-            { 'Capricious Cassie', 204, 70, 70, 1 },
+            { 'Capricious Cassie', 204, 70, 70, 1, { { -89.685, 0.173, 184.675 }, { -87.518, 0.353, 195.808 }, { -85.232, 0.497, 170.57 }, { -84.039, 0.572, 182.904 }, { -82.105, 0.576, 182.042 }, { -81.337, 0.576, 182.845 }, { -80.852, 0.576, 195.573 }, { -79.958, 0.478, 205.541 }, { -78.054, 0.576, 181.669 }, { -77.43, 0.462, 164.529 }, { -75.971, 0.576, 190.393 }, { -75.552, 0.576, 177.09 }, { -74.544, 0.09, 210.626 }, { -74.442, 0.576, 171.153 }, { -74.157, 0.576, 158.338 }, { -71.973, 0.576, 165.941 }, { -71.957, 0.576, 166.48 }, { -71.94, 0.576, 183.768 }, { -71.416, 0.258, 208.709 }, { -70.833, 0.576, 165.05 }, { -70.728, 0.576, 172.76 }, { -70.315, 0.576, 200.885 }, { -70.121, 0.576, 203.582 }, { -69, 0.075, 189 }, { -68.358, 0.224, 209.099 }, { -67.607, 0.036, 166.814 }, { -67.537, 0.576, 198.618 }, { -64.65, 0.47, 154.344 }, { -64.506, 0.576, 170.202 }, { -60.303, 0.557, 204.273 }, { -60.198, 0.221, 209.135 }, { -60.196, 0.576, 171.352 }, { -59.936, 0.26, 208.696 }, { -59, -0.006, 148.284 }, { -58.071, 0.576, 174.487 }, { -54.569, 0.576, 164.872 }, { -53.871, 0.576, 164.852 }, { -53.548, 0.576, 174.446 }, { -52.706, 0.42, 206.448 }, { -52.096, 0.576, 157.417 }, { -51.455, 0.576, 182.715 }, { -51.053, 0.576, 160.541 }, { -48.685, 0.576, 190.334 }, { -48.242, 0.275, 208.52 }, { -46.088, 0.576, 190.297 }, { -45.89, 0.576, 177.262 }, { -43.417, 0.576, 193.96 }, { -39.277, 0.576, 181.679 }, { -37.558, 0.576, 197.011 }, { -34.932, 0.507, 166.115 }, { -31.618, 0.576, 176.952 } } },
         },
         [13440] = {
             { 'Rock Eater', 190, 14, 16 },
@@ -5381,163 +6300,163 @@ return {
             { 'Stone Eater', 191, 3, 5 },
         },
         [13506] = {
-            { 'Bomb King', 194, 16, 18, 1 },
+            { 'Bomb King', 194, 16, 18, 1, { { 310, 0, 710 }, { 509, -1, 709 }, { 549, -1, 769 } } },
         },
         [13508] = {
-            { 'Crushed Krause', 196, 37, 38, 1 },
+            { 'Crushed Krause', 196, 37, 38, 1, { { 167, -39, -18 } } },
         },
         [13509] = {
-            { 'Pulverized Pfeffer', 196, 36, 38, 1 },
+            { 'Pulverized Pfeffer', 196, 36, 38, 1, { { -124, -59, -101 } } },
         },
         [13510] = {
-            { 'Burned Bergmann', 196, 36, 38, 1 },
+            { 'Burned Bergmann', 196, 36, 38, 1, { { 128, -19, 429 } } },
         },
         [13511] = {
-            { 'Wounded Wurfel', 196, 36, 38, 1 },
+            { 'Wounded Wurfel', 196, 36, 38, 1, { { 41, -11, 430 } } },
         },
         [13512] = {
-            { 'Asphyxiated Amsel', 196, 36, 38, 1 },
+            { 'Asphyxiated Amsel', 196, 36, 38, 1, { { -85, -26, 431 } } },
         },
         [13552] = {
-            { 'Serket', 200, 70, 70, 1 },
+            { 'Serket', 200, 70, 70, 1, { { -167.192, 19.157, 235.746 }, { -165.16, 19.46, 220.486 }, { -165.156, 19.212, 230.02 }, { -164.159, 19.19, 235.805 }, { -160.123, 19.25, 205.139 }, { -160.077, 19, 197.804 }, { -159.937, 19.034, 237.676 }, { -159.629, 19.408, 211.318 }, { -159.615, 19.25, 233.174 }, { -155.791, 19.25, 199.302 }, { -155.492, 19.25, 200.878 }, { -155.056, 19.221, 242.651 }, { -155, 19, 244 }, { -154.83, 19.167, 195.725 }, { -148.803, 19.392, 240.088 }, { -148.529, 19.427, 198.422 }, { -147.583, 19.412, 245.273 }, { -143.935, 19.5, 240.142 }, { -143.7, 19.53, 240.467 }, { -143.11, 19.268, 193.103 }, { -141.367, 19.146, 247.842 }, { -139.063, 19.75, 198.544 }, { -139.057, 19.75, 199.46 }, { -138.278, 19.75, 240.786 }, { -138.026, 19.747, 241.748 }, { -136.678, 19.426, 244.692 }, { -133.576, 19.5, 200.166 }, { -132.043, 19.397, 244.589 }, { -131.474, 19.438, 242.54 }, { -131.077, 19.378, 240.586 }, { -129.743, 19.212, 201.519 }, { -127.813, 19.247, 240.123 }, { -126.718, 19.14, 246.689 }, { -126.28, 19.115, 246.072 }, { -125.611, 19.18, 193.884 }, { -123.968, 19.123, 196.309 }, { -121.567, 19, 245.373 }, { -121.338, 19, 200.745 }, { -121.179, 19, 197.685 }, { -119.536, 19.5, 212.511 }, { -119.397, 19.25, 209.755 }, { -119.085, 19.5, 225.52 }, { -117.685, 19, 239.765 }, { -117.266, 19, 202.293 }, { -117.164, 19, 200.375 }, { -116.376, 19.19, 205.379 }, { -116.267, 19.519, 224.755 }, { -114.963, 19.154, 204.267 }, { -114.685, 19.445, 218.52 }, { -114.629, 19.047, 237.23 } } },
             { 'Serket', 129, 0, 0, 1 },
         },
         [13567] = {
-            { 'Bomb Queen', 205, 79, 81, 1 },
+            { 'Bomb Queen', 205, 79, 81, 1, { { 21.128, 19.687, -110.232 } } },
         },
         [13573] = {
-            { 'Turul', 15, 90, 90, 1 },
+            { 'Turul', 15, 90, 90, 1, { { 82.055, 24.226, 270.143 } } },
         },
         [13574] = {
-            { 'Voluptuous Vivian', 153, 80, 81, 1 },
+            { 'Voluptuous Vivian', 153, 80, 81, 1, { { -216.685, 5.095, 192.898 }, { -215.84, 5.914, 199.35 }, { -215.792, 5.718, 187.152 }, { -215.278, 5.612, 203.135 }, { -215.158, 5.671, 184.629 }, { -214.516, 5.285, 206.357 }, { -212.537, 4.751, 209.737 }, { -210.239, 5.545, 192.468 }, { -209.699, 5.294, 207.211 }, { -209.4, 5.804, 201.499 }, { -208.7, 5.276, 203.289 }, { -208.64, 4.712, 211.481 }, { -208.414, 5.905, 197.172 }, { -207.278, 5.288, 187.267 }, { -205.151, 5.732, 204.877 }, { -204.872, 5.763, 199.845 }, { -204.689, 5.231, 183.871 }, { -204.36, 5.735, 210.093 }, { -203.961, 5.597, 191.974 }, { -203.275, 5.63, 212.923 }, { -203.12, 5.73, 196.16 }, { -201.197, 5.792, 182.762 }, { -201.102, 5.919, 208.546 }, { -200.914, 5.956, 199.436 }, { -200.758, 5.7, 204.213 }, { -200.594, 5.709, 195.88 }, { -198.706, 5.798, 211.819 }, { -198.496, 5.989, 214.204 }, { -198.14, 5.798, 188.441 }, { -198.131, 5.913, 200.19 }, { -197.292, 5.695, 204.317 }, { -197.193, 5.87, 208.238 }, { -196.588, 5.58, 184.341 }, { -195.95, 5.721, 196.564 }, { -195.66, 5.738, 199.377 }, { -194.601, 5.529, 208.885 }, { -194.28, 5.565, 207.31 }, { -193.461, 5.606, 192.175 }, { -193.305, 5.275, 214.541 }, { -193.121, 5.351, 188.22 }, { -192.2, 5.978, 198.738 }, { -191.376, 5.91, 202.994 }, { -191.025, 5.563, 194.023 }, { -190.258, 5.53, 205.416 }, { -190.237, 5.72, 200.04 }, { -188.91, 4.527, 212.437 }, { -186.084, 5.678, 187.071 }, { -185.907, 4.365, 209.538 }, { -185.455, 5.528, 204.687 }, { -185.085, 5.956, 199.572 }, { -183.552, 5.184, 191.921 } } },
         },
         [13576] = {
-            { 'Golden Bat', 103, 26, 27, 1 },
+            { 'Golden Bat', 103, 26, 27, 1, { { -811.618, -8.139, 28.638 }, { -810.44, -8.27, 33.978 }, { -807.523, -8.022, 23.607 }, { -806.759, -8.051, 23.825 }, { -805.583, -8.005, 21.835 }, { -804.502, -8.567, 22.082 }, { -801.056, -8, 19.913 }, { -798.992, -8, 20.315 }, { -798.915, -8.117, 17.802 }, { -798.674, -8.672, 19.204 }, { -798.394, -8, 21.387 }, { -796.484, -8.691, 19.19 }, { -787.206, -8.574, 20.903 }, { -785.714, -8.436, 21.917 }, { -785.475, -8.419, 20.912 }, { -785.197, -8.4, 22.135 }, { -780.327, -7.531, 23.17 }, { -779.336, -7.439, 21.866 }, { -778.844, -7.842, 25.86 }, { -776.624, -7.464, 24.271 }, { -775.578, -7.484, 21.065 }, { -774.324, -7.502, 20.253 }, { -772.254, -7.567, 20.874 } } },
         },
         [13598] = {
-            { 'Old Two-Wings', 200, 52, 52, 1 },
+            { 'Old Two-Wings', 200, 52, 52, 1, { { -183.484, 0, 220.377 }, { -180.822, 0, 198.857 }, { -180.746, 0, 235.899 }, { -180.383, 0, 254.393 }, { -180.314, 0, 243.029 }, { -180.289, 0, 235.43 }, { -180.27, 0, 228.063 }, { -179.502, 0, 262.085 }, { -179.392, 0, 186.668 }, { -169.835, 0, 262.432 }, { -167.665, 0, 175.938 }, { -161.895, 0, 180.105 }, { -159.527, 0, 179.309 }, { -157.577, 0, 180.375 }, { -152.005, 0, 180.332 }, { -151.905, 0, 174.673 }, { -151.483, 0, 260.145 }, { -150.449, 0, 258.38 }, { -146.672, 0, 181.931 }, { -144.489, 0, 259.614 }, { -143.826, 0, 258.477 }, { -140.96, 0, 178.832 }, { -140.859, 0, 269.985 }, { -140.333, 0, 195.324 }, { -140.174, 0, 275.309 }, { -139.858, 0, 197.25 }, { -139.191, 0, 188 }, { -138.888, 0, 239.155 }, { -138.148, 0, 247.792 }, { -130.853, 0, 181.213 }, { -121.32, 0, 179.397 }, { -117.52, 0, 260.279 }, { -113.993, 0, 179.747 }, { -101.899, 0, 261.406 }, { -101.825, 0, 201.559 }, { -101.038, 0, 225.392 }, { -101.034, -0.191, 194.019 }, { -100.504, 0, 196.897 }, { -100.196, 0, 253.509 }, { -100.067, 0, 212.22 }, { -100.016, 0, 215.784 }, { -99.804, 0, 204.174 }, { -99.542, 0, 186.363 }, { -99.31, 0, 233.119 }, { -99, -0.5, 226 }, { -98.406, 0, 213.379 }, { -96.443, 0, 218.911 }, { -94.011, 0, 222.85 }, { -89.186, 0, 215.729 }, { -87.103, 0, 224.191 } } },
         },
         [13607] = {
-            { 'Spiny Spipi', 116, 9, 10, 1 },
+            { 'Spiny Spipi', 116, 9, 10, 1, { { 177.874, -9.151, 230.291 }, { 194.15, -10.876, 213.142 }, { 199.378, -12.021, 195.698 }, { 203.216, -8, 239.54 }, { 204.63, -12.041, 156.675 }, { 211.152, -12.585, 177.329 }, { 214.448, -10.345, 223.663 }, { 214.601, -12.832, 166.712 }, { 224.269, -9.322, 229.849 }, { 237.861, -12.32, 165.261 }, { 238.442, -8, 236.401 }, { 240.313, -12, 159.26 }, { 250.134, -8.385, 242.199 }, { 251.685, -12.705, 154.159 }, { 256.223, -9.016, 241.744 }, { 258.638, -9.167, 237.868 }, { 261.716, -13.596, 152.072 }, { 270.957, -12.815, 118.668 }, { 271.331, -8.293, 243.108 }, { 275.997, -12.3, 151.353 }, { 282.362, -8, 238.097 }, { 285.575, -12.656, 126.129 }, { 285.73, -12.11, 157.787 }, { 286.366, -7.711, 245.328 }, { 286.959, -7.637, 242.114 }, { 288.717, -13.358, 144.527 }, { 291.627, -12.478, 158.758 }, { 297.033, -6.378, 240.07 }, { 297.554, -6.313, 236.474 }, { 306.332, -5.716, 237.148 }, { 306.505, -12.908, 151.004 }, { 310.679, -4.856, 236.851 }, { 311.298, -13.25, 140.366 }, { 319.413, -4, 244.02 }, { 319.827, -4, 241.987 }, { 320.101, -12.847, 134.725 }, { 321.094, -4, 241.614 }, { 321.463, -12.068, 125.052 }, { 330.263, -12.5, 133.625 }, { 334.7, -4.731, 242.649 }, { 345.385, -4.833, 239.222 }, { 345.695, -4.796, 237.47 }, { 354.185, -4.59, 244.205 }, { 355.681, -4.022, 244.202 }, { 367.961, -12.894, 83.454 }, { 380.521, -5.653, 246.825 }, { 399.503, -5.706, 266.407 }, { 407.03, -5.812, 265.557 }, { 409.763, -5.535, 267.935 }, { 416.203, -5.032, 278.004 }, { 421.795, -5.536, 277.605 } } },
         },
         [13613] = {
             { 'Spook', 190, 11, 13 },
         },
         [13616] = {
-            { 'Diamond Quadav', 148, 75, 75, 1 },
+            { 'Diamond Quadav', 148, 75, 75, 1, { { 277.93, 42.625, 96.177 } } },
         },
         [13617] = {
-            { 'Lumber Jack', 105, 55, 55, 1 },
+            { 'Lumber Jack', 105, 55, 55, 1, { { -670, -23, 352 } } },
         },
         [13622] = {
-            { 'Capricious Cassie', 204, 70, 70, 1 },
+            { 'Capricious Cassie', 204, 70, 70, 1, { { -89.685, 0.173, 184.675 }, { -87.518, 0.353, 195.808 }, { -85.232, 0.497, 170.57 }, { -84.039, 0.572, 182.904 }, { -82.105, 0.576, 182.042 }, { -81.337, 0.576, 182.845 }, { -80.852, 0.576, 195.573 }, { -79.958, 0.478, 205.541 }, { -78.054, 0.576, 181.669 }, { -77.43, 0.462, 164.529 }, { -75.971, 0.576, 190.393 }, { -75.552, 0.576, 177.09 }, { -74.544, 0.09, 210.626 }, { -74.442, 0.576, 171.153 }, { -74.157, 0.576, 158.338 }, { -71.973, 0.576, 165.941 }, { -71.957, 0.576, 166.48 }, { -71.94, 0.576, 183.768 }, { -71.416, 0.258, 208.709 }, { -70.833, 0.576, 165.05 }, { -70.728, 0.576, 172.76 }, { -70.315, 0.576, 200.885 }, { -70.121, 0.576, 203.582 }, { -69, 0.075, 189 }, { -68.358, 0.224, 209.099 }, { -67.607, 0.036, 166.814 }, { -67.537, 0.576, 198.618 }, { -64.65, 0.47, 154.344 }, { -64.506, 0.576, 170.202 }, { -60.303, 0.557, 204.273 }, { -60.198, 0.221, 209.135 }, { -60.196, 0.576, 171.352 }, { -59.936, 0.26, 208.696 }, { -59, -0.006, 148.284 }, { -58.071, 0.576, 174.487 }, { -54.569, 0.576, 164.872 }, { -53.871, 0.576, 164.852 }, { -53.548, 0.576, 174.446 }, { -52.706, 0.42, 206.448 }, { -52.096, 0.576, 157.417 }, { -51.455, 0.576, 182.715 }, { -51.053, 0.576, 160.541 }, { -48.685, 0.576, 190.334 }, { -48.242, 0.275, 208.52 }, { -46.088, 0.576, 190.297 }, { -45.89, 0.576, 177.262 }, { -43.417, 0.576, 193.96 }, { -39.277, 0.576, 181.679 }, { -37.558, 0.576, 197.011 }, { -34.932, 0.507, 166.115 }, { -31.618, 0.576, 176.952 } } },
         },
         [13658] = {
-            { 'Dynamis Lord', 135, 90, 90, 1 },
+            { 'Dynamis Lord', 135, 90, 90, 1, { { -417.4, -44.5, 19.332 }, { -416.7, -44.49, 17.291 }, { -416.3, -44.49, 17.291 }, { -416, -44.49, 17.291 }, { -415.9, -44.39, 20.838 }, { -406.273, -43.693, 20.465 } } },
         },
         [13692] = {
-            { 'Boroka', 29, 58, 60, 1 },
+            { 'Boroka', 29, 58, 60, 1, { { -365.921, -31.255, 486.367 } } },
         },
         [13731] = {
-            { 'Ge\'Dha Evileye', 147, 30, 30, 1 },
+            { 'Ge\'Dha Evileye', 147, 30, 30, 1, { { -242.709, 0.5, -188.01 }, { -238, 1, -203 } } },
         },
         [13791] = {
-            { 'Iratham', 45, 90, 90, 1 },
+            { 'Iratham', 45, 90, 90, 1, { { 30.807, 0.386, -28.861 } } },
         },
         [13794] = {
-            { 'Adamantoise', 128, 70, 70, 1 },
-            { 'Aspidochelone', 128, 85, 85, 1 },
+            { 'Adamantoise', 128, 70, 70, 1, { { 0.894, 0.021, -35.588 } } },
+            { 'Aspidochelone', 128, 85, 85, 1, { { 0.894, 0.021, -35.588 } } },
         },
         [13803] = {
-            { 'Centurio X-I', 208, 56, 58, 1 },
+            { 'Centurio X-I', 208, 56, 58, 1, { { 754, 2, -553 }, { 765, 1, -572 }, { 773.581, 1.576, -568.904 }, { 781, 2, -556 }, { 798, 2, -567 }, { 804, 2, -552 } } },
         },
         [13804] = {
-            { 'Novv the Whitehearted', 176, 66, 67, 1 },
+            { 'Novv the Whitehearted', 176, 66, 67, 1, { { -37, 19, -205 }, { -18.65, 20.26, -194.711 }, { -18.396, 20.241, -204.176 }, { -11.683, 20.347, -211.369 }, { -5.876, 20.313, -183.527 }, { -2.334, 20.584, -203.761 } } },
         },
         [13805] = {
-            { 'Ose', 213, 74, 76, 1 },
+            { 'Ose', 213, 74, 76, 1, { { -12.273, 4.984, 174.358 }, { -9.86, 5, 157.107 }, { -7.233, 4.976, 204.202 }, { -7, 4.467, 184 }, { -5.48, 5.494, 177.016 }, { -4.819, 4.997, 187.279 }, { -1.758, 4.982, 153.412 }, { -1.625, 5, 195.947 }, { -1.155, 5.431, 151.473 }, { 1.482, 6, 178.313 }, { 2.505, 5, 162.695 }, { 4.631, 5.004, 153.875 }, { 7.471, 5, 167.265 }, { 7.846, 5.191, 202.515 }, { 8.113, 5.055, 159.197 }, { 9, 4, 176 }, { 9.142, 4.628, 179.913 }, { 9.698, 5.3, 196.612 }, { 10.144, 5.522, 161.599 }, { 10.948, 5.711, 200.284 }, { 14.34, 5.28, 174.699 }, { 14.4, 5.583, 150.008 }, { 17, 4, 152 }, { 18.121, 4.958, 184.339 }, { 19.666, 6, 160.166 }, { 21.707, 4.469, 189.55 }, { 21.752, 5.946, 157.108 }, { 21.885, 4.912, 180.982 }, { 24.204, 4.296, 167.082 }, { 24.605, 4.521, 180.938 }, { 25.632, 3.72, 186.014 }, { 26.548, 4.373, 166.393 }, { 26.971, 4.44, 216.229 }, { 29.209, 5.478, 205.358 }, { 29.374, 3.505, 190.121 }, { 29.577, 5.58, 159.99 }, { 32.724, 4.594, 169.051 }, { 34.299, 5.75, 177.411 }, { 35.051, 5, 197.337 }, { 35.096, 4.845, 158.344 }, { 36.58, 4.993, 184.457 }, { 37.125, 5.365, 185.204 }, { 38.889, 5.282, 173.433 }, { 39.423, 5, 200.673 }, { 39.591, 5, 165.616 }, { 39.858, 4.364, 164.961 }, { 42.083, 5, 157.02 }, { 43.358, 5.323, 172.545 }, { 43.935, 4.616, 164.665 }, { 48.44, 5.07, 174.352 }, { 50.998, 5.612, 183.429 } } },
         },
         [13838] = {
             { 'Malboro', 109, 27, 28 },
-            { 'Drooling Daisy', 110, 39, 40, 1 },
+            { 'Drooling Daisy', 110, 39, 40, 1, { { -763, -31, -414 }, { -762.692, -31.007, -419.89 }, { -762.268, -31.759, -408.851 }, { -760.583, -31.722, -430.413 }, { -760.063, -32.015, -403.227 }, { -756.544, -31.14, -462.771 }, { -754.539, -31.201, -448.193 }, { -753.277, -30.435, -418.593 }, { -753.224, -30.894, -377.288 }, { -751.436, -30.135, -396.784 }, { -751.326, -29.826, -435.796 }, { -751.233, -30.086, -399.438 }, { -750.164, -30.417, -409.412 }, { -749.701, -30.084, -386.454 }, { -749.582, -29.653, -439.655 }, { -747.982, -29.188, -438.384 }, { -744.488, -31.253, -478.356 }, { -743.881, -30.321, -373.031 }, { -740.84, -31.612, -460.612 }, { -735.147, -31.179, -478.17 }, { -734.879, -31.35, -368.408 }, { -733.364, -30.094, -372.728 }, { -733.133, -31.491, -359.026 }, { -731.078, -31.354, -477.599 }, { -720.45, -31.956, -479.587 }, { -720.114, -31.392, -364.421 }, { -719.996, -31.887, -360.957 }, { -719.742, -32, -483.375 }, { -713.11, -31.306, -475.248 }, { -706.311, -30.93, -374.743 }, { -698.886, -31.057, -480.341 }, { -696.745, -31.85, -374.747 }, { -695.601, -31.527, -368.905 }, { -695.039, -31.887, -378.053 }, { -691.786, -34.802, -335.763 }, { -690.97, -31.735, -367.67 }, { -690.129, -31.695, -358.295 }, { -689.36, -30.898, -426.613 }, { -688.153, -30.232, -443.443 }, { -687.839, -30.531, -421.198 }, { -687.781, -30.358, -393.212 }, { -685.918, -30.628, -407.367 }, { -684.953, -31.754, -364.919 }, { -684.238, -31.373, -433.907 }, { -684.025, -31.352, -465.48 }, { -683.412, -31.581, -439.145 }, { -683.081, -31.282, -410.826 }, { -681.611, -31.182, -425.727 }, { -678.708, -31.324, -385.194 }, { -677.765, -31.557, -348.05 }, { -675.875, -32, -321.323 } } },
             { 'Ochu', 110, 36, 37 },
         },
         [13842] = {
-            { 'Altedour I Tavnazia', 204, 65, 65, 1 },
+            { 'Altedour I Tavnazia', 204, 65, 65, 1, { { -52.5, -16.52, 38 } } },
         },
         [13875] = {
-            { 'Voll the Sharkfinned', 176, 64, 66, 1 },
+            { 'Voll the Sharkfinned', 176, 64, 66, 1, { { -350.83, 15.475, -103.219 }, { -340.996, 16, -95.725 }, { -336.638, 16, -105.668 }, { -328.876, 16, -94.524 }, { -320, 16, -98 }, { -316.943, 16, -97.724 } } },
         },
         [13912] = {
-            { 'Drexerion the Condemned', 167, 72, 73, 1 },
-            { 'Phanduron the Condemned', 167, 72, 73, 1 },
+            { 'Drexerion the Condemned', 167, 72, 73, 1, { { -98.18, 0, -232.368 }, { -97.704, 0, -238.452 }, { -97.215, 0.25, -247.476 }, { -96.782, 0.267, -237.648 }, { -96.614, 0.052, -229.255 }, { -94.985, 0.358, -233.485 }, { -94.484, -0.137, -234.021 }, { -94.054, 0.25, -244.819 }, { -94.035, 0.25, -241.571 }, { -94.03, 0.25, -246.363 }, { -93.281, 0.048, -224.381 }, { -92.296, 0.232, -251.894 }, { -92.282, 0.25, -248.386 }, { -92.123, 0.244, -228.23 }, { -91.704, 0.344, -250.66 }, { -91.506, 0.361, -250.426 }, { -91.215, 0.304, -251.98 }, { -90.375, 0.365, -251.145 }, { -88.673, 0.342, -228.348 }, { -88.118, -0.006, -220.579 }, { -86.662, 0.292, -225.357 }, { -86.153, 0.001, -221.867 }, { -85.749, 0.25, -252.823 }, { -83.971, 0.241, -256.454 }, { -83.329, -0.007, -221.367 }, { -83.25, 0.306, -224.719 }, { -80.003, 0, -257.732 }, { -77.801, 0.25, -256.915 }, { -77.298, 0.25, -223.686 }, { -76.484, 0.25, -256.314 }, { -73.569, 0.25, -256.151 }, { -73.25, 0.25, -252.108 }, { -72.015, 0.197, -250.155 }, { -71.238, 0.303, -250.93 }, { -70.994, 0.25, -226.381 }, { -70.677, 0.25, -253.664 }, { -70.042, 0.384, -230.101 }, { -69.73, 0.36, -252.132 }, { -69.018, 0.321, -228.577 }, { -67.616, 0.25, -232.389 }, { -66.757, 0.328, -249.517 }, { -66.146, 0.25, -231.751 }, { -64.79, 0.381, -246.006 }, { -64.688, 0.361, -233.734 }, { -64.19, 0.25, -237.946 }, { -63.927, 0.25, -243.011 }, { -63.537, 0.25, -239.212 }, { -63.526, 0.286, -235.65 }, { -62.027, 0, -240.789 }, { -62, 0.972, -238 }, { -59.187, 0, -236.816 } } },
+            { 'Phanduron the Condemned', 167, 72, 73, 1, { { -97.215, 0.25, -247.476 }, { -96.614, 0.052, -229.255 }, { -95.895, 0.346, -235.778 }, { -95.678, 0.25, -244.603 }, { -94.985, 0.358, -233.485 }, { -94.035, 0.25, -241.571 }, { -93.281, 0.048, -224.381 }, { -92.296, 0.232, -251.894 }, { -92.282, 0.25, -248.386 }, { -92.123, 0.244, -228.23 }, { -91.773, 0.239, -231.25 }, { -91.704, 0.344, -250.66 }, { -91.555, 0, -225.159 }, { -91.506, 0.361, -250.426 }, { -90.081, 0.386, -249.993 }, { -88.673, 0.342, -228.348 }, { -87.915, 0.238, -226.147 }, { -86.662, 0.292, -225.357 }, { -86.419, 0.236, -254.408 }, { -84, 1, -224 }, { -83.554, -0.5, -221.832 }, { -83.329, -0.007, -221.367 }, { -83.25, 0.306, -224.719 }, { -81.811, 0.25, -255.389 }, { -81.428, 0.25, -254.973 }, { -80.003, 0, -257.732 }, { -78.407, 0.25, -223.56 }, { -78.359, 0.25, -225.492 }, { -77.298, 0.25, -223.686 }, { -76.48, 0.104, -222.346 }, { -73.569, 0.25, -256.151 }, { -73.25, 0.25, -252.108 }, { -72.015, 0.197, -250.155 }, { -70.994, 0.25, -226.381 }, { -70.042, 0.384, -230.101 }, { -69.73, 0.36, -252.132 }, { -69.448, 0.342, -229.31 }, { -69.018, 0.321, -228.577 }, { -67.76, 0.28, -248.605 }, { -66.641, 0.25, -246.572 }, { -66.146, 0.25, -231.751 }, { -66.117, 0.25, -233.085 }, { -65.75, 0.287, -231.269 }, { -65.492, 0.25, -247.396 }, { -64.79, 0.381, -246.006 }, { -64.688, 0.361, -233.734 }, { -64.395, 0.311, -245.005 }, { -63.537, 0.25, -239.212 }, { -63.534, 0.25, -243.227 }, { -61.289, 0.015, -246.933 }, { -59.187, 0, -236.816 } } },
         },
         [13913] = {
-            { 'Ellyllon', 153, 65, 66, 1 },
+            { 'Ellyllon', 153, 65, 66, 1, { { 190.75, 8.5, -152 }, { 200, 9, -167 }, { 209, 8, -151 }, { 216, 8.129, -157.1 }, { 216.01, 8.129, -157.1 } } },
         },
         [13914] = {
-            { 'Fafnir', 154, 90, 90, 1 },
+            { 'Fafnir', 154, 90, 90, 1, { { 82.325, 6.876, 42.041 } } },
         },
         [13915] = {
-            { 'Hakutaku', 160, 84, 85, 1 },
+            { 'Hakutaku', 160, 84, 85, 1, { { 24, 25, -306 } } },
         },
         [13978] = {
-            { 'Capricious Cassie', 204, 70, 70, 1 },
+            { 'Capricious Cassie', 204, 70, 70, 1, { { -89.685, 0.173, 184.675 }, { -87.518, 0.353, 195.808 }, { -85.232, 0.497, 170.57 }, { -84.039, 0.572, 182.904 }, { -82.105, 0.576, 182.042 }, { -81.337, 0.576, 182.845 }, { -80.852, 0.576, 195.573 }, { -79.958, 0.478, 205.541 }, { -78.054, 0.576, 181.669 }, { -77.43, 0.462, 164.529 }, { -75.971, 0.576, 190.393 }, { -75.552, 0.576, 177.09 }, { -74.544, 0.09, 210.626 }, { -74.442, 0.576, 171.153 }, { -74.157, 0.576, 158.338 }, { -71.973, 0.576, 165.941 }, { -71.957, 0.576, 166.48 }, { -71.94, 0.576, 183.768 }, { -71.416, 0.258, 208.709 }, { -70.833, 0.576, 165.05 }, { -70.728, 0.576, 172.76 }, { -70.315, 0.576, 200.885 }, { -70.121, 0.576, 203.582 }, { -69, 0.075, 189 }, { -68.358, 0.224, 209.099 }, { -67.607, 0.036, 166.814 }, { -67.537, 0.576, 198.618 }, { -64.65, 0.47, 154.344 }, { -64.506, 0.576, 170.202 }, { -60.303, 0.557, 204.273 }, { -60.198, 0.221, 209.135 }, { -60.196, 0.576, 171.352 }, { -59.936, 0.26, 208.696 }, { -59, -0.006, 148.284 }, { -58.071, 0.576, 174.487 }, { -54.569, 0.576, 164.872 }, { -53.871, 0.576, 164.852 }, { -53.548, 0.576, 174.446 }, { -52.706, 0.42, 206.448 }, { -52.096, 0.576, 157.417 }, { -51.455, 0.576, 182.715 }, { -51.053, 0.576, 160.541 }, { -48.685, 0.576, 190.334 }, { -48.242, 0.275, 208.52 }, { -46.088, 0.576, 190.297 }, { -45.89, 0.576, 177.262 }, { -43.417, 0.576, 193.96 }, { -39.277, 0.576, 181.679 }, { -37.558, 0.576, 197.011 }, { -34.932, 0.507, 166.115 }, { -31.618, 0.576, 176.952 } } },
         },
         [14005] = {
-            { 'Waraxe Beak', 119, 55, 56, 1 },
+            { 'Waraxe Beak', 119, 55, 56, 1, { { 579.25, -15.039, -401.207 }, { 579.52, -15.982, -420.298 }, { 582.837, -16.179, -427.499 }, { 584.522, -15.281, -395.543 }, { 592.81, -16.061, -387.008 }, { 595.48, -15.147, -379.456 }, { 596.855, -15.183, -456.359 }, { 598.788, -15.251, -424.245 }, { 599.249, -15.211, -464.073 }, { 604.102, -15.709, -370.955 }, { 611.745, -13.133, -438.04 }, { 619.021, -15.682, -357.402 }, { 625.083, -3.472, -421.495 }, { 626.523, -4.387, -401.139 }, { 626.865, -16.004, -356.017 }, { 627.749, -2.577, -433.269 }, { 633.821, -1.071, -400.581 }, { 637.898, -3.344, -450.364 }, { 646.806, -1.315, -391.317 }, { 647.102, -15.88, -355.512 }, { 650.474, -0.625, -417.903 }, { 652.615, -15.812, -487.72 }, { 653.901, 0.442, -401.884 }, { 659.067, -3.583, -384.976 }, { 662.021, 0.898, -402.07 }, { 665.31, -4.365, -455.355 }, { 665.821, 0.762, -414.117 }, { 667.028, -15.507, -357.265 }, { 670.206, -0.064, -435.25 }, { 672.263, 0.712, -418.777 }, { 672.436, -0.464, -392.826 }, { 677.511, -0.115, -399.134 }, { 679.107, 0.435, -428.905 }, { 682.363, -0.303, -402.407 }, { 687.662, -15.794, -479.64 }, { 689.518, -15.488, -365.372 }, { 693.298, -15.518, -366.907 }, { 694.376, -4.152, -402.704 }, { 700.365, -7.636, -413.211 }, { 702.477, -9.206, -448.436 }, { 706.642, -11.008, -434.663 }, { 707.3, -15.579, -474.441 }, { 712.397, -15.195, -402.549 }, { 713.178, -15.712, -388.009 }, { 713.812, -14.169, -432.05 }, { 717.244, -15.451, -380.484 }, { 719.038, -15.828, -471.548 }, { 723, -16, -397 }, { 724.959, -15.607, -465.955 } } },
         },
         [14018] = {
-            { 'Epialtes', 184, 32, 32, 1 },
-            { 'Eurymedon', 184, 32, 32, 1 },
-            { 'Hippolytos', 184, 32, 32, 1 },
-            { 'Eurytos', 157, 32, 32, 1 },
-            { 'Ophion', 157, 34, 34, 1 },
-            { 'Polybotes', 157, 34, 34, 1 },
-            { 'Rhoikos', 157, 34, 34, 1 },
-            { 'Rhoitos', 157, 34, 34, 1 },
+            { 'Epialtes', 184, 32, 32, 1, { { 477.096, -0.522, 52.554 } } },
+            { 'Eurymedon', 184, 32, 32, 1, { { 405, -32, -32 } } },
+            { 'Hippolytos', 184, 32, 32, 1, { { 339.212, -16.099, 16.733 } } },
+            { 'Eurytos', 157, 32, 32, 1, { { 20, -47, 94 } } },
+            { 'Ophion', 157, 34, 34, 1, { { -444, -95, -3 } } },
+            { 'Polybotes', 157, 34, 34, 1, { { -41.284, -63.636, 3.492 } } },
+            { 'Rhoikos', 157, 34, 34, 1, { { -378, -111, 47 } } },
+            { 'Rhoitos', 157, 34, 34, 1, { { 88, -79, 73 } } },
             { 'Gigas Catapulter', 25, 41, 44 },
         },
         [14019] = {
-            { 'Ogygos', 157, 35, 35, 1 },
+            { 'Ogygos', 157, 35, 35, 1, { { -495, -128, 19 } } },
         },
         [14020] = {
-            { 'Enkelados', 158, 40, 40, 1 },
+            { 'Enkelados', 158, 40, 40, 1, { { -391, -145, 25 }, { -226.158, -144.099, 28.522 } } },
         },
         [14021] = {
-            { 'Pallas', 158, 72, 72, 1 },
-            { 'Pallas', 83, 83, 83, 1 },
+            { 'Pallas', 158, 72, 72, 1, { { -300, -159, 21 } } },
+            { 'Pallas', 83, 83, 83, 1, { { 366.79, -31.435, 419.763 } } },
         },
         [14022] = {
-            { 'Alkyoneus', 158, 75, 75, 1 },
+            { 'Alkyoneus', 158, 75, 75, 1, { { -300, -175, 22 } } },
         },
         [14041] = {
             { 'Depths Digester', 15, 0, 0, 1 },
         },
         [14060] = {
-            { 'Hadhayosh', 132, 85, 85, 1 },
+            { 'Hadhayosh', 132, 85, 85, 1, { { 410, 24, 41 }, { 434, 24, 41 }, { 449, 24, 40 } } },
         },
         [14062] = {
-            { 'Crimson-toothed Pawberry', 159, 70, 71, 1 },
+            { 'Crimson-toothed Pawberry', 159, 70, 71, 1, { { -40, -24, 31 } } },
         },
         [14063] = {
-            { 'Diamond Daig', 208, 70, 70, 1 },
+            { 'Diamond Daig', 208, 70, 70, 1, { { -81, -0.5, -217 } } },
         },
         [14064] = {
-            { 'Nussknacker', 208, 60, 61, 1 },
+            { 'Nussknacker', 208, 60, 61, 1, { { 195, 1, 5 } } },
         },
         [14075] = {
-            { 'Fafnir', 154, 90, 90, 1 },
+            { 'Fafnir', 154, 90, 90, 1, { { 82.325, 6.876, 42.041 } } },
         },
         [14085] = {
-            { 'Brooder', 132, 85, 85, 1 },
+            { 'Brooder', 132, 85, 85, 1, { { -380.775, -6.863, 86.758 } } },
         },
         [14122] = {
-            { 'Sea Horror', 221, 60, 62, 1 },
-            { 'Sea Horror', 220, 60, 62, 1 },
+            { 'Sea Horror', 221, 60, 62, 1, { { -0.329, -7.268, 5.82 } } },
+            { 'Sea Horror', 220, 60, 62, 1, { { -0.23, -7.66, 2.86 } } },
         },
         [14128] = {
-            { 'Cactuar Cantautor', 125, 55, 59, 1 },
+            { 'Cactuar Cantautor', 125, 55, 59, 1, { { -490, -0.539, -632 }, { -478.142, -0.457, -596.091 }, { -472.962, 0.137, -556.255 }, { -472.739, 0.058, -551.533 }, { -471.958, 0.199, -529.783 }, { -471.788, 0.199, -525.19 }, { -469.699, 0.037, -534.067 }, { -469.423, -0.074, -536.14 }, { -468.728, 0.263, -554.157 }, { -468.483, -0.012, -551.961 }, { -465.162, -0.029, -542.296 }, { -464.555, 0.018, -528.08 }, { -463.786, 0.87, -557.356 }, { -462.278, -0.142, -534.934 }, { -460.202, 0.225, -529.886 }, { -460.188, 0.99, -557.978 }, { -458.944, 0.018, -557.266 }, { -456.587, 0.586, -526.256 }, { -456.443, 0.206, -551.653 }, { -454.573, 0, -532.416 }, { -454.114, 0.596, -522.354 }, { -450.483, 0.311, -541.258 }, { -449.211, 0.259, -560.431 }, { -447.851, 0.351, -535.403 }, { -447.661, 0.181, -523.961 }, { -447.27, -0.007, -532.98 }, { -447.217, 0.591, -540.932 }, { -445.989, 0.006, -564.497 }, { -445.075, 0.052, -559.968 }, { -444.349, 0.319, -549.207 }, { -443.667, 0.314, -530.327 }, { -443.059, 0.766, -535.698 }, { -441.272, 0.103, -526.081 }, { -440.787, 0.881, -542.365 }, { -439.995, 0, -560.519 }, { -438.482, 0.828, -537.343 }, { -437.561, 0.212, -551.716 }, { -435.36, 0.031, -559.357 }, { -434.965, 0.051, -519.91 }, { -432.707, 0.163, -522.664 }, { -429.57, 0.199, -549.34 }, { -428.513, 0.372, -520.2 }, { -427.79, -0.285, -544.446 }, { -424.479, -0.061, -540.95 }, { -423.303, -0.034, -549.993 }, { -421.772, 0.293, -529.533 }, { -419.954, -0.407, -535.319 }, { -416.605, 0.829, -518.183 }, { -413.544, 0.55, -521.676 }, { -401.595, 0.628, -534.323 }, { -398.733, 0.316, -530.365 } } },
         },
         [14162] = {
             { 'Yilbegan', 105, 90, 92, 1 },
@@ -5567,49 +6486,49 @@ return {
             { 'Yilbegan', 137, 90, 92, 1 },
         },
         [14168] = {
-            { 'Sabotender Bailarina', 208, 80, 81, 1 },
+            { 'Sabotender Bailarina', 208, 80, 81, 1, { { -502.576, -0.219, 778.166 } } },
         },
         [14241] = {
-            { 'Raja', 254, 89, 90, 1 },
+            { 'Raja', 254, 89, 90, 1, { { 465, 56, 679 }, { 481, 56, 680 }, { 495, 56, 679 } } },
         },
         [14286] = {
-            { 'Fyuu the Seabellow', 176, 48, 48, 1 },
+            { 'Fyuu the Seabellow', 176, 48, 48, 1, { { 175, 20, 41 } } },
         },
         [14287] = {
-            { 'Unut', 153, 69, 71, 1 },
+            { 'Unut', 153, 69, 71, 1, { { 91.597, 8.326, 85.349 }, { 92.628, 7.221, 97.59 }, { 104.34, 8.423, 81.217 }, { 105.215, 8.356, 97.292 }, { 109.771, 8.673, 74.235 }, { 120.899, 8.843, 77.341 }, { 123.823, 8.668, 91.314 } } },
         },
         [14334] = {
-            { 'Bugbear Strongman', 11, 50, 50, 1 },
+            { 'Bugbear Strongman', 11, 50, 50, 1, { { -0.92, 11.5, -98.408 }, { 60.728, 15.487, -118.886 }, { 61.612, 15.5, -122.418 } } },
         },
         [14335] = {
-            { 'Vodyanoi', 1, 45, 47, 1 },
+            { 'Vodyanoi', 1, 45, 47, 1, { { 4.616, -2.636, 4.485 } } },
         },
         [14337] = {
-            { 'Turul', 15, 90, 90, 1 },
+            { 'Turul', 15, 90, 90, 1, { { 82.055, 24.226, 270.143 } } },
         },
         [14365] = {
-            { 'Ovni', 132, 85, 85, 1 },
+            { 'Ovni', 132, 85, 85, 1, { { 508.775, 40.361, 481.563 } } },
         },
         [14443] = {
-            { 'Upyri', 25, 45, 45, 1 },
+            { 'Upyri', 25, 45, 45, 1, { { -282.944, -32.441, 159.796 } } },
         },
         [14464] = {
-            { 'Maltha', 192, 22, 23, 1 },
+            { 'Maltha', 192, 22, 23, 1, { { -57.347, 7.631, -66.473 } } },
         },
         [14465] = {
-            { 'Edacious Opo-opo', 124, 55, 55, 1 },
+            { 'Edacious Opo-opo', 124, 55, 55, 1, { { 544.436, 0.589, -436.372 } } },
         },
         [14466] = {
-            { 'Eba', 27, 48, 50, 1 },
+            { 'Eba', 27, 48, 50, 1, { { -163.538, -0.344, -76.545 } } },
         },
         [14467] = {
-            { 'Ambusher Antlion', 7, 75, 77, 1 },
+            { 'Ambusher Antlion', 7, 75, 77, 1, { { -490.195, -4.503, 145.451 } } },
         },
         [14468] = {
-            { 'Shikigami Weapon', 122, 77, 80, 1 },
+            { 'Shikigami Weapon', 122, 77, 80, 1, { { -40, -4, -36 } } },
         },
         [14469] = {
-            { 'Shen', 4, 83, 84, 1 },
+            { 'Shen', 4, 83, 84, 1, { { -102.54, 2.087, -725.207 } } },
         },
         [14547] = {
             { 'Don Poroggo', 76, 82, 82 },
@@ -5624,7 +6543,7 @@ return {
             { 'Peryton', 75, 77, 77 },
         },
         [14555] = {
-            { 'Princess Pudding', 74, 70, 72, 1 },
+            { 'Princess Pudding', 74, 70, 72, 1, { { 420, 0, -25 } } },
         },
         [14557] = {
             { 'Citadel Chelonian', 76, 73, 73, 1 },
@@ -5642,350 +6561,350 @@ return {
             { 'Qiqirn Treasure Hunter', 74, 73, 75 },
         },
         [14646] = {
-            { 'Dynamis Lord', 135, 90, 90, 1 },
+            { 'Dynamis Lord', 135, 90, 90, 1, { { -417.4, -44.5, 19.332 }, { -416.7, -44.49, 17.291 }, { -416.3, -44.49, 17.291 }, { -416, -44.49, 17.291 }, { -415.9, -44.39, 20.838 }, { -406.273, -43.693, 20.465 } } },
         },
         [14658] = {
-            { 'Odqan', 25, 49, 51, 1 },
+            { 'Odqan', 25, 49, 51, 1, { { 83.241, -8.259, -41.968 }, { 204.733, -24.365, 316.403 } } },
         },
         [14659] = {
-            { 'Megalobugard', 24, 50, 50, 1 },
+            { 'Megalobugard', 24, 50, 50, 1, { { -175.852, -7.811, 22.823 }, { -173.265, -7.799, 4.956 } } },
         },
         [14667] = {
-            { 'Stubborn Dredvodd', 1, 33, 33, 1 },
+            { 'Stubborn Dredvodd', 1, 33, 33, 1, { { -12.295, -2.5, 0.14 } } },
         },
         [14668] = {
-            { 'Zoredonite', 3, 61, 62, 1 },
+            { 'Zoredonite', 3, 61, 62, 1, { { -2.37, -3.492, -11.285 } } },
         },
         [14669] = {
-            { 'Carmine Dobsonfly', 30, 44, 46, 1 },
+            { 'Carmine Dobsonfly', 30, 44, 46, 1, { { -199.488, 47.865, -846.699 }, { -191.203, 48.221, -854.397 }, { -179.699, 47.634, -863.423 }, { -178.717, 47.507, -864.465 }, { -177.917, 47.917, -860.994 }, { -177.148, 48.009, -860.127 }, { -174.731, 48.208, -859.063 }, { -174.605, 48.335, -862.923 }, { -174.401, 47.742, -861.639 }, { -173.868, 48.086, -860.4 } } },
         },
         [14724] = {
-            { 'Mysticmaker Profblix', 213, 50, 52, 1 },
+            { 'Mysticmaker Profblix', 213, 50, 52, 1, { { 103.632, -0.066, -105.804 }, { 104.733, 0.248, -133.46 }, { 105.091, -0.233, -108.453 }, { 109.077, 0, -111.85 }, { 109.361, 0.148, -128.993 }, { 109.97, 0, -131.393 }, { 111.265, 0.361, -109.438 }, { 111.741, -0.059, -115.428 }, { 112.603, 0.413, -105.733 }, { 112.664, 0.121, -122.534 }, { 112.918, 0.137, -123.509 }, { 114.242, -0.046, -126.706 }, { 114.886, -0.145, -125.954 }, { 116.237, -0.156, -120.866 }, { 117.297, 0.416, -109.273 }, { 117.412, -0.269, -113.127 }, { 117.756, -0.124, -119.15 }, { 117.877, -0.111, -111.539 }, { 119.018, 0, -125.633 }, { 119.32, 0, -126.28 }, { 119.422, 1, -99.664 }, { 119.943, 0, -116.446 }, { 120.996, -0.122, -113.644 }, { 121.109, 0, -116.222 }, { 121.128, 0, -111.788 }, { 121.333, 0, -120.997 }, { 121.352, -0.069, -124.46 }, { 121.592, 0, -125.763 }, { 121.688, 0, -121.562 }, { 122.518, -0.086, -115.179 }, { 122.871, -0.043, -127.113 }, { 122.91, 0, -118.897 }, { 123.419, 0.835, -98.878 }, { 123.89, -0.536, -112.319 }, { 124.071, -0.365, -108.863 }, { 124.811, -0.363, -100.604 }, { 124.875, -0.213, -108.697 }, { 125.475, 0.292, -123.448 }, { 125.757, 0.346, -122.563 }, { 126.158, 0.049, -99.448 }, { 126.728, 0.18, -113.917 }, { 126.928, 0.211, -106.533 }, { 128.073, 0.29, -123.622 }, { 129.965, 0.421, -101.528 }, { 130.137, 0, -129.243 }, { 130.587, 0.326, -116.376 }, { 130.993, 0.442, -111.49 }, { 131.498, -0.506, -126.574 }, { 132.335, -0.089, -106.863 }, { 132.726, -0.508, -133.828 } } },
         },
         [14758] = {
-            { 'Imdugud', 29, 60, 60, 1 },
+            { 'Imdugud', 29, 60, 60, 1, { { 635.831, 20.273, 674.376 }, { 641.52, 20.508, 666.251 }, { 643.327, 20, 679.882 }, { 649.756, 20.716, 668.265 }, { 653.482, 20.489, 681.112 }, { 655.263, 20.664, 651.32 }, { 656.838, 20.625, 637.497 }, { 657.848, 20.819, 645.714 }, { 657.944, 20.81, 671.623 }, { 660.726, 19.047, 625.931 }, { 661.009, 20.879, 652.272 }, { 665.231, 20.74, 659.081 }, { 665.78, 20.526, 677.529 }, { 667.421, 20.055, 630.375 }, { 669.828, 19.936, 619.412 }, { 669.946, 20.706, 664.967 }, { 671.364, 20.282, 607.727 }, { 671.445, 20.188, 628.691 }, { 671.639, 20.312, 638.307 }, { 674.868, 20, 672.169 }, { 675.915, 20.07, 681.807 }, { 676.018, 20.232, 644.848 }, { 676.838, 20.605, 587.767 }, { 677.218, 20.961, 580.758 }, { 678.136, 20.084, 634.284 }, { 678.202, 20.848, 619.218 }, { 680.646, 20.477, 651.844 }, { 681.175, 20, 601.959 }, { 683.17, 20.751, 613.054 }, { 683.664, 20.956, 573.85 }, { 684.952, 20.04, 640.073 }, { 686.531, 20.867, 623.026 }, { 686.637, 21.54, 656.963 }, { 687.905, 20.817, 590.311 }, { 688.608, 21.759, 580.093 }, { 690.96, 20.414, 599.396 }, { 692.255, 21.138, 648.318 }, { 692.468, 20.777, 627.513 }, { 693.978, 20.776, 616.487 }, { 693.982, 22.835, 657.701 }, { 699.179, 20.808, 631.822 }, { 701.306, 20.947, 605.691 }, { 702.733, 22.215, 589.615 }, { 705.144, 20.767, 620.58 }, { 708.53, 20.173, 635.787 }, { 711.063, 20.301, 600.986 }, { 712.158, 20.413, 611.097 }, { 713.438, 21.454, 591.4 }, { 714.995, 20.846, 618.203 }, { 718.516, 20.353, 628.741 }, { 720.089, 20.002, 604.068 } } },
         },
         [14759] = {
-            { 'Intulo', 4, 46, 47, 1 },
+            { 'Intulo', 4, 46, 47, 1, { { 523, -8, 762 }, { 525.746, -12.134, 775.797 } } },
         },
         [14763] = {
-            { 'Boroka', 29, 58, 60, 1 },
+            { 'Boroka', 29, 58, 60, 1, { { -365.921, -31.255, 486.367 } } },
         },
         [14783] = {
-            { 'Upyri', 25, 45, 45, 1 },
+            { 'Upyri', 25, 45, 45, 1, { { -282.944, -32.441, 159.796 } } },
         },
         [14803] = {
-            { 'Maighdean Uaine', 106, 11, 11, 1 },
+            { 'Maighdean Uaine', 106, 11, 11, 1, { { 121.242, -0.5, 654.504 }, { 152.479, 0.023, 759.022 }, { 160.699, 0.066, 778.247 }, { 161.946, 0.069, 767.466 }, { 164.14, 1.981, 740.02 }, { 166.333, 0.458, 780.37 }, { 172.296, 1.072, 780.868 }, { 173.799, 1.831, 733.766 }, { 176.458, -0.347, 722.666 }, { 176.476, 2.315, 764.398 }, { 179.678, 1.754, 732.096 }, { 183.222, 2.29, 761.692 }, { 185.989, 1.862, 753.057 }, { 187.716, 1.537, 757.845 }, { 189.537, 1.769, 748.205 }, { 195.878, 0.408, 743.728 }, { 196.135, 0, 803.595 }, { 196.257, 0.643, 791.309 }, { 196.465, 2.275, 783.345 }, { 198.048, -0.099, 809.176 }, { 201.563, -0.079, 821.147 }, { 201.62, 0.112, 738.506 }, { 202.7, 0.462, 792.048 }, { 202.844, 0.891, 790.316 }, { 203.606, -0.607, 721.541 }, { 205.704, 0.206, 801.495 }, { 206.336, -0.543, 823.427 }, { 208.448, 2.563, 783.56 }, { 208.629, -0.217, 758.022 }, { 208.909, 2.639, 778.81 }, { 212.908, 0.527, 732.266 }, { 213.464, 2.811, 811.334 }, { 216.813, 2.306, 801.709 }, { 220.122, 3.124, 810.036 }, { 221.755, 0.413, 733.04 }, { 225.554, 0.228, 762.566 }, { 227.255, 0.951, 735.545 }, { 230.044, 0.76, 794.431 }, { 230.661, 0.223, 742.971 }, { 232.091, 0.511, 776.47 }, { 235.451, -0.535, 747.718 }, { 236.781, -0.492, 768.913 }, { 237.01, 0, 762.836 }, { 238.87, 0, 797.154 }, { 239.992, -0.493, 788.037 }, { 266.279, 0.278, 762.728 }, { 267.294, -0.616, 787.995 }, { 268.628, 0.465, 772.987 }, { 272, -0.324, 797.8 }, { 272.39, 0.473, 769.455 }, { 289.709, -0.297, 750.252 } } },
         },
         [14804] = {
-            { 'Colorful Leshy', 24, 57, 58, 1 },
+            { 'Colorful Leshy', 24, 57, 58, 1, { { -183.619, -15.623, 246.343 } } },
         },
         [14805] = {
-            { 'Defoliate Leshy', 24, 57, 58, 1 },
+            { 'Defoliate Leshy', 24, 57, 58, 1, { { -162.788, -16.185, 249.421 } } },
         },
         [14806] = {
-            { 'Centurio XII-I', 114, 56, 57, 1 },
+            { 'Centurio XII-I', 114, 56, 57, 1, { { -44.353, -0.433, -243.704 }, { -35.31, 0.131, -207.555 }, { -35.12, 0.242, -246.607 }, { -35.067, 0.829, -257.064 }, { -34.786, 0.465, -228.886 }, { -34.553, 0.117, -208.212 }, { -33.172, 0.75, -221.703 }, { -32.393, 0.523, -236.804 }, { -30.113, 0.058, -205.591 }, { -30.014, 0.993, -217.875 }, { -24.857, 0.715, -207.702 }, { -20.944, 0.977, -205.369 }, { -20.658, 2.186, -212.733 }, { -16.184, 2.127, -213.409 }, { -14.73, 0.51, -272.377 }, { -13.037, 1.651, -213.927 }, { -11.398, 0.425, -210.318 }, { -10.445, 0.467, -211.27 }, { -8.5, 0.239, -274.2 }, { -6.812, 0.53, -215.468 }, { -4.917, 0.118, -244.091 }, { -4.153, 0.011, -233.778 }, { -3.849, -0.038, -233.005 }, { -3.137, 0, -242.198 }, { -2.897, 0.397, -247.007 }, { 0.712, 0.374, -246.775 }, { 0.902, 0, -240.269 }, { 0.985, 0.167, -245.271 }, { 1.83, 0.281, -246.096 }, { 2.26, 0, -240.063 }, { 2.468, 0, -240.372 }, { 2.847, 1.167, -250.554 }, { 3.701, 0, -243.51 }, { 3.955, -0.003, -238.892 }, { 7.595, 0.274, -245.261 }, { 7.972, 0.197, -281.813 }, { 10.634, 0.783, -250.418 }, { 11.281, 0.362, -240.123 }, { 13.352, 0.713, -246.491 }, { 19.83, 0.984, -283.852 }, { 20.444, 0.273, -289.758 }, { 22.765, 0.656, -244.07 }, { 28.891, 0.369, -246.506 }, { 31.21, 0.797, -268.642 }, { 31.376, 0.165, -248.22 }, { 31.475, 0.97, -254.359 }, { 31.973, 0.966, -264.395 }, { 32.746, 0.154, -279.851 }, { 33.772, 0.708, -302.429 }, { 35.085, 1.015, -260.615 } } },
         },
         [14807] = {
-            { 'Ziphius', 25, 55, 55, 1 },
+            { 'Ziphius', 25, 55, 55, 1, { { 148.401, -16.018, 520.438 } } },
         },
         [14866] = {
-            { 'Gyre-Carlin', 9, 50, 50, 1 },
+            { 'Gyre-Carlin', 9, 50, 50, 1, { { -6.283, -0.352, 46.882 }, { 34.057, -0.352, 165.306 } } },
         },
         [14867] = {
-            { 'Elel', 28, 60, 60, 1 },
+            { 'Elel', 28, 60, 60, 1, { { -46.558, -0.6, -24.327 } } },
         },
         [14869] = {
-            { 'Tiamat', 7, 95, 95, 1 },
+            { 'Tiamat', 7, 95, 95, 1, { { -566.766, -12.674, -41.782 }, { -565.689, -12.42, -79.477 }, { -563.587, -12.005, -43.905 }, { -563.552, -12, -39.131 }, { -563.436, -12.14, -48.995 }, { -563.185, -12.002, -46.441 }, { -562.449, -12.202, -84.5 }, { -560.512, -12.042, -51.924 }, { -560.329, -12, -37.608 }, { -560.106, -4.234, -5.819 }, { -559.911, -11.622, -67.839 }, { -559.868, -4, -1.305 }, { -558.361, -12.178, -84.656 }, { -557.823, -4, 3.232 }, { -556.672, -11.939, -66.284 }, { -556.14, -4.988, -8.711 }, { -555.466, -11.945, -50.986 }, { -553.738, -12.191, -83.898 }, { -553.611, -11.488, -36.44 }, { -553.009, -3.918, 4.2 }, { -552.43, -5.316, -11.979 }, { -551.477, -11.58, -48.592 }, { -551.187, -12.342, -67.364 }, { -550.252, -11.713, -81.462 }, { -549.802, -8.944, -24.848 }, { -547.924, -9.652, -32.699 }, { -547.407, -11.494, -56.208 }, { -547.281, -11.188, -46.117 }, { -547.04, -4.759, -13.895 }, { -546.247, -11.653, -78.959 }, { -545.911, -11.48, -53.302 }, { -545.686, -11.851, -64.526 }, { -545.229, -9.139, -26.835 }, { -543.347, -11.08, -49.358 }, { -541.642, -11.083, -80.879 }, { -540.775, -4.301, -13.786 }, { -540.688, -12.42, -61.299 }, { -539.781, -6.688, -24.802 }, { -537.228, -6.278, -21.546 }, { -537.182, -11.317, -79.414 }, { -536.608, -4.329, -16.014 }, { -531.459, -12.028, -75.823 }, { -529.519, -5.811, -43.413 }, { -525.511, -11.937, -79.784 }, { -520.644, -12.033, -84.04 }, { -516.567, -11.228, -71.118 }, { -516.266, -12.074, -82.299 }, { -516.019, -12.018, -77.012 }, { -513.979, -9.972, -66.404 }, { -511.114, -8.854, -61.3 }, { -509.612, -7.883, -57.162 } } },
         },
         [14873] = {
-            { 'Xolotl', 7, 80, 81, 1 },
+            { 'Xolotl', 7, 80, 81, 1, { { -483.789, -3.578, 258.435 } } },
         },
         [14874] = {
-            { 'Boroka', 29, 58, 60, 1 },
+            { 'Boroka', 29, 58, 60, 1, { { -365.921, -31.255, 486.367 } } },
         },
         [14884] = {
-            { 'Mycophile', 2, 35, 35, 1 },
+            { 'Mycophile', 2, 35, 35, 1, { { 145.5, -9.483, -699 } } },
         },
         [14885] = {
             { 'Shieldtrap', 30, 39, 44, 1 },
         },
         [14886] = {
-            { 'Mountain Worm', 5, 72, 74, 1 },
+            { 'Mountain Worm', 5, 72, 74, 1, { { -269.816, -79.023, 18.257 } } },
         },
         [14887] = {
-            { 'Eccentric Eve', 15, 90, 90, 1 },
+            { 'Eccentric Eve', 15, 90, 90, 1, { { 215.412, 32.241, 280.677 }, { 230.412, 31.779, 280.677 }, { 245, 31, 280 } } },
         },
         [14888] = {
-            { 'Chloris', 45, 90, 90, 1 },
+            { 'Chloris', 45, 90, 90, 1, { { 160, 0, -30 }, { 160, 0, -15 }, { 160, 0, 0 } } },
         },
         [14889] = {
-            { 'Goblin Collector', 12, 83, 84, 1 },
+            { 'Goblin Collector', 12, 83, 84, 1, { { 152.126, 20, 103.074 } } },
         },
         [14945] = {
-            { 'Zizzy Zillah', 65, 83, 83, 1 },
+            { 'Zizzy Zillah', 65, 83, 83, 1, { { 83, 14.5, -222 } } },
         },
         [14947] = {
-            { 'Energetic Eruca', 61, 80, 80, 1 },
+            { 'Energetic Eruca', 61, 80, 80, 1, { { 176.743, -14.21, -180.926 } } },
         },
         [14948] = {
-            { 'Garharlor the Unruly', 61, 80, 80, 1 },
+            { 'Garharlor the Unruly', 61, 80, 80, 1, { { 99.854, -13.485, -11.898 } } },
         },
         [14958] = {
-            { 'Dragonscaled Bugaal Ja', 65, 75, 83, 1 },
+            { 'Dragonscaled Bugaal Ja', 65, 75, 83, 1, { { -280.843, 14.159, -84.556 } } },
         },
         [14959] = {
-            { 'Medusa', 54, 85, 85, 1 },
+            { 'Medusa', 54, 85, 85, 1, { { -460, -20.5, 460 } } },
         },
         [14960] = {
-            { 'Lamie No.9', 54, 80, 85, 1 },
+            { 'Lamie No.9', 54, 80, 85, 1, { { -228.367, -4.69, 342.671 } } },
         },
         [14964] = {
-            { 'Zebra Zachary', 75, 77, 77, 1 },
+            { 'Zebra Zachary', 75, 77, 77, 1, { { 260, -0.5, 125 } } },
         },
         [14966] = {
-            { 'Archaic Gear', 74, 73, 74, 1 },
-            { 'Archaic Gears', 74, 74, 75, 1 },
+            { 'Archaic Gear', 74, 73, 74, 1, { { -440, -0.002, -537.16 }, { -439.7, -0.001, -539.18 }, { -426, -0.5, -540 }, { -410.7, 0.001, -71.164 }, { -409.7, 0.001, -119.67 }, { -391.7, -0.004, -554.43 }, { -382.5, -0.007, -548.8 }, { -375.3, 0.005, -14.42 }, { -368.7, -0.449, -536.28 }, { -365.6, 0.021, -12.71 }, { -365.2, -0.476, 211.47 }, { -359.8, -0.474, 211.024 }, { -343.7, -0.02, -226.64 }, { -340, -4.388, -32.248 }, { -340, 3.423, -166.51 }, { -339.8, -0.486, -210.72 }, { -335.7, -0.037, 28.803 }, { -333.2, -0.061, 31.15 }, { -331.5, -0.34, 18.63 }, { -326, -0.013, -215.98 }, { -322.5, -0.469, 218.257 }, { -311.2, -0.432, 182.477 }, { -305.3, 0.014, -525.63 }, { -298.3, 0.002, -182.49 }, { -293, -0.171, -533.36 }, { -292.3, 0.021, -181.77 }, { -292, -0.026, -541.42 }, { -263, 0.001, -122.39 }, { -250, -0.5, -540 }, { -249, -0.021, -537.01 }, { -248.8, -0.006, -544.81 }, { -245.4, 0.001, -79.817 } } },
+            { 'Archaic Gears', 74, 74, 75, 1, { { -415.2, 0.001, -73.176 }, { -400.1, 0.001, -119.61 }, { -359.5, -0.474, 178.126 }, { -317.2, -0.037, 155.333 }, { -316.8, -0.075, 166.942 }, { -316, -0.472, 235.759 }, { -287.1, 0.001, -79.47 }, { -257.1, 0.001, -118.89 } } },
         },
         [14968] = {
-            { 'Gyroscopic Gear', 76, 80, 82, 1 },
+            { 'Gyroscopic Gear', 76, 80, 82, 1, { { -354.69, -1, -317.75 } } },
         },
         [14972] = {
             { 'Poroggo Madame', 73, 80, 80 },
         },
         [14974] = {
-            { 'Gyroscopic Gear', 76, 80, 82, 1 },
+            { 'Gyroscopic Gear', 76, 80, 82, 1, { { -354.69, -1, -317.75 } } },
         },
         [14976] = {
-            { 'Archaic Chariot', 74, 77, 78, 1 },
+            { 'Archaic Chariot', 74, 77, 78, 1, { { -419, -0.006, -84.586 }, { -263.1, 0.018, -102.7 } } },
         },
         [14980] = {
             { 'Gate Widow', 75, 75, 75 },
         },
         [15013] = {
-            { 'Bloodlapper', 97, 80, 80, 1 },
+            { 'Bloodlapper', 97, 80, 80, 1, { { 754.922, -16.325, -442.974 } } },
         },
         [15014] = {
-            { 'Da\'Dha Hundredmask', 92, 80, 81, 1 },
+            { 'Da\'Dha Hundredmask', 92, 80, 81, 1, { { -89.901, 0.225, -159.964 } } },
         },
         [15017] = {
-            { 'Iriri Samariri', 65, 84, 84, 1 },
+            { 'Iriri Samariri', 65, 84, 84, 1, { { -118, 7, -80 } } },
         },
         [15018] = {
-            { 'Brass Borer', 61, 83, 83, 1 },
+            { 'Brass Borer', 61, 83, 83, 1, { { 399.386, -27.022, 120.479 } } },
         },
         [15019] = {
-            { 'Mictlantecuhtli', 45, 85, 85, 1 },
+            { 'Mictlantecuhtli', 45, 85, 85, 1, { { -244.841, 40.113, 501.657 } } },
         },
         [15020] = {
-            { 'Ruminator', 132, 90, 90, 1 },
+            { 'Ruminator', 132, 90, 90, 1, { { 512.529, 23.999, -183.839 } } },
         },
         [15033] = {
-            { 'Rugaroo', 85, 83, 83, 1 },
+            { 'Rugaroo', 85, 83, 83, 1, { { 17.596, -0.289, -259.902 } } },
         },
         [15052] = {
-            { 'Qu\'Vho Deathhurler', 143, 17, 17, 1 },
+            { 'Qu\'Vho Deathhurler', 143, 17, 17, 1, { { 115, -15, 246 }, { 120, -15, 238 }, { 121, -15, 245 }, { 124, -15, 242 }, { 128, -15, 249 } } },
         },
         [15056] = {
-            { 'Barbaric Weapon', 112, 73, 74, 1 },
+            { 'Barbaric Weapon', 112, 73, 74, 1, { { 49.105, -17.595, -6.877 }, { 57, -21.108, -24 }, { 61.546, -21.743, -30.531 }, { 65.671, -19.058, -12.348 }, { 82.766, -15.533, -27.294 } } },
         },
         [15057] = {
-            { 'Elatha', 164, 80, 81, 1 },
+            { 'Elatha', 164, 80, 81, 1, { { -137.193, -0.5, -100 } } },
         },
         [15060] = {
-            { 'Irrlicht', 132, 85, 85, 1 },
+            { 'Irrlicht', 132, 85, 85, 1, { { -66.416, 2.036, -154.016 } } },
         },
         [15073] = {
-            { 'Duke Gomory', 135, 85, 85, 1 },
+            { 'Duke Gomory', 135, 85, 85, 1, { { 138.42, -25.042, -175.906 } } },
         },
         [15074] = {
-            { 'Gi\'Bhe Fleshfeaster', 40, 80, 82, 1 },
+            { 'Gi\'Bhe Fleshfeaster', 40, 80, 82, 1, { { 191.791, -8.034, 42.148 } } },
         },
         [15075] = {
-            { 'Marquis Orias', 135, 85, 85, 1 },
+            { 'Marquis Orias', 135, 85, 85, 1, { { 94.73, -15.826, -43.147 } } },
         },
         [15076] = {
-            { 'Duke Berith', 135, 85, 85, 1 },
+            { 'Duke Berith', 135, 85, 85, 1, { { 51.557, -24.16, -102.157 } } },
         },
         [15079] = {
-            { 'Duke Scox', 135, 85, 85, 1 },
+            { 'Duke Scox', 135, 85, 85, 1, { { 17.611, -23.619, -121.383 } } },
         },
         [15081] = {
-            { 'Ree Nata the Melomanic', 40, 80, 82, 1 },
+            { 'Ree Nata the Melomanic', 40, 80, 82, 1, { { 106.832, -8.216, -33.669 } } },
         },
         [15083] = {
-            { 'Count Vine', 135, 85, 85, 1 },
+            { 'Count Vine', 135, 85, 85, 1, { { -40.975, -23.718, -95.814 } } },
         },
         [15085] = {
-            { 'King Zagan', 135, 85, 85, 1 },
+            { 'King Zagan', 135, 85, 85, 1, { { 33.587, -23.791, -108.695 } } },
         },
         [15086] = {
-            { 'Marquis Nebiros', 135, 85, 85, 1 },
+            { 'Marquis Nebiros', 135, 85, 85, 1, { { -127.792, -23.643, -32.87 } } },
         },
         [15087] = {
-            { 'Count Zaebos', 135, 85, 85, 1 },
+            { 'Count Zaebos', 135, 85, 85, 1, { { 85.142, -24.125, -209.879 } } },
         },
         [15092] = {
-            { 'Va\'Rhu Bodysnatcher', 40, 80, 82, 1 },
+            { 'Va\'Rhu Bodysnatcher', 40, 80, 82, 1, { { 124.312, -7.88, 31.932 } } },
         },
         [15093] = {
-            { 'Marquis Sabnak', 135, 85, 85, 1 },
+            { 'Marquis Sabnak', 135, 85, 85, 1, { { 72.315, -24.214, -127.865 } } },
         },
         [15095] = {
-            { 'Woodnix Shrillwhistle', 40, 80, 82, 1 },
+            { 'Woodnix Shrillwhistle', 40, 80, 82, 1, { { 43.488, -16.666, -6.216 } } },
         },
         [15097] = {
-            { 'Marquis Cimeries', 135, 85, 85, 1 },
+            { 'Marquis Cimeries', 135, 85, 85, 1, { { 98.504, -24.312, -359.729 } } },
         },
         [15102] = {
-            { 'Qu\'Pho Bloodspiller', 40, 80, 82, 1 },
+            { 'Qu\'Pho Bloodspiller', 40, 80, 82, 1, { { 204.165, -7.898, 29.621 } } },
         },
         [15104] = {
-            { 'Prince Seere', 135, 85, 85, 1 },
+            { 'Prince Seere', 135, 85, 85, 1, { { 179.183, -13.74, -75.856 } } },
         },
         [15105] = {
-            { 'Flamecaller Zoeqdoq', 40, 80, 82, 1 },
+            { 'Flamecaller Zoeqdoq', 40, 80, 82, 1, { { -77.98, -16.5, 36.023 } } },
         },
         [15106] = {
-            { 'Gosspix Blabberlips', 40, 80, 82, 1 },
+            { 'Gosspix Blabberlips', 40, 80, 82, 1, { { 51.715, -15.95, 87.5 } } },
         },
         [15107] = {
-            { 'Count Raum', 135, 85, 85, 1 },
+            { 'Count Raum', 135, 85, 85, 1, { { 160.862, -15.902, -106.505 } } },
         },
         [15108] = {
-            { 'Te\'Zha Ironclad', 40, 80, 82, 1 },
+            { 'Te\'Zha Ironclad', 40, 80, 82, 1, { { 86.541, -8.591, 43.407 } } },
         },
         [15109] = {
-            { 'Shamblix Rottenheart', 40, 80, 82, 1 },
+            { 'Shamblix Rottenheart', 40, 80, 82, 1, { { -11.923, -15.769, 0.747 } } },
         },
         [15110] = {
-            { 'Marquis Andras', 135, 85, 85, 1 },
+            { 'Marquis Andras', 135, 85, 85, 1, { { 69.122, -23.951, -221.793 } } },
         },
         [15114] = {
-            { 'Marquis Gamygyn', 135, 85, 85, 1 },
+            { 'Marquis Gamygyn', 135, 85, 85, 1, { { -72.227, -24.311, -79.561 } } },
         },
         [15116] = {
-            { 'Baa Dava the Bibliophage', 40, 80, 82, 1 },
+            { 'Baa Dava the Bibliophage', 40, 80, 82, 1, { { -2.482, -8.474, -81.863 } } },
         },
         [15118] = {
-            { 'Hamfist Gukhbuk', 40, 80, 82, 1 },
+            { 'Hamfist Gukhbuk', 40, 80, 82, 1, { { -132.718, -24.351, 91.261 } } },
         },
         [15126] = {
-            { 'Marquis Decarabia', 135, 85, 85, 1 },
+            { 'Marquis Decarabia', 135, 85, 85, 1, { { 392.77, -0.649, -215.006 } } },
         },
         [15127] = {
-            { 'Lyncean Juwgneg', 40, 80, 82, 1 },
+            { 'Lyncean Juwgneg', 40, 80, 82, 1, { { -136.805, -22.812, 80.546 } } },
         },
         [15128] = {
-            { 'Koo Rahi the Levinblade', 40, 80, 82, 1 },
+            { 'Koo Rahi the Levinblade', 40, 80, 82, 1, { { 107.14, -8.302, -14.404 } } },
         },
         [15144] = {
-            { 'Doo Peku the Fleetfoot', 40, 80, 82, 1 },
+            { 'Doo Peku the Fleetfoot', 40, 80, 82, 1, { { -6.694, -7.466, -67.885 } } },
         },
         [15145] = {
-            { 'Elvaansticker Bxafraff', 40, 80, 82, 1 },
+            { 'Elvaansticker Bxafraff', 40, 80, 82, 1, { { -83.17, -14.96, 60.548 } } },
         },
         [15173] = {
-            { 'Zoredonite', 3, 61, 62, 1 },
+            { 'Zoredonite', 3, 61, 62, 1, { { -2.37, -3.492, -11.285 } } },
         },
         [15174] = {
-            { 'Elel', 28, 60, 60, 1 },
+            { 'Elel', 28, 60, 60, 1, { { -46.558, -0.6, -24.327 } } },
         },
         [15175] = {
-            { 'Vrtra', 190, 95, 95, 1 },
+            { 'Vrtra', 190, 95, 95, 1, { { 194.723, 7.272, -314.654 }, { 196.482, 8.226, -300.558 }, { 196.773, 8.252, -308.707 }, { 197.317, 8.213, -294.733 }, { 200.939, 7.846, -289.484 }, { 201.935, 7.5, -323.092 }, { 204.118, 7.84, -296.797 }, { 204.672, 7.5, -271.593 }, { 204.809, 7.51, -293.735 }, { 205.457, 7.78, -299.29 }, { 205.479, 7.084, -284.712 }, { 207.24, 7.613, -277.323 }, { 209.411, 8.072, -311.097 }, { 209.553, 7.118, -292.888 }, { 209.889, 6.901, -323.897 }, { 212.373, 7.891, -273.686 }, { 212.375, 8.006, -309.179 }, { 213.2, 8.35, -316.937 }, { 213.837, 8.386, -277.434 }, { 213.845, 7.951, -273.953 }, { 214.618, 7.457, -286.165 }, { 215.315, 8.183, -282.985 }, { 217.237, 8.473, -315.697 }, { 218.131, 8.442, -282.762 }, { 218.759, 8.385, -314.973 }, { 219.195, 8.338, -314.381 }, { 219.563, 8.5, -280.989 }, { 220.463, 8.136, -302.294 }, { 223.101, 8.025, -315.119 }, { 223.67, 8.183, -278.056 }, { 225.367, 8.098, -296.425 }, { 226.365, 8.5, -319.678 }, { 226.669, 7.5, -308.96 }, { 227.849, 8.5, -320.373 }, { 228, 7.134, -311 }, { 229.321, 8.725, -296.566 }, { 229.418, 7.924, -281.928 }, { 233.434, 7.474, -315.569 }, { 234.118, 7.5, -319.658 }, { 234.193, 7.5, -327.967 }, { 234.925, 8.097, -293.001 }, { 235.257, 7.176, -322.734 }, { 235.472, 6.751, -284.453 }, { 236.669, 7.483, -310.887 }, { 237.806, 8.372, -304.311 }, { 239.121, 7.477, -311.985 }, { 243.304, 7.563, -286.714 }, { 244.405, 7.5, -318.06 }, { 247.336, 7.494, -304.864 }, { 248.498, 7.7, -287.928 } } },
         },
         [15182] = {
-            { 'Xolotl', 7, 80, 81, 1 },
+            { 'Xolotl', 7, 80, 81, 1, { { -483.789, -3.578, 258.435 } } },
         },
         [15183] = {
-            { 'Carmine Dobsonfly', 30, 44, 46, 1 },
+            { 'Carmine Dobsonfly', 30, 44, 46, 1, { { -199.488, 47.865, -846.699 }, { -191.203, 48.221, -854.397 }, { -179.699, 47.634, -863.423 }, { -178.717, 47.507, -864.465 }, { -177.917, 47.917, -860.994 }, { -177.148, 48.009, -860.127 }, { -174.731, 48.208, -859.063 }, { -174.605, 48.335, -862.923 }, { -174.401, 47.742, -861.639 }, { -173.868, 48.086, -860.4 } } },
         },
         [15184] = {
-            { 'Carmine Dobsonfly', 30, 44, 46, 1 },
+            { 'Carmine Dobsonfly', 30, 44, 46, 1, { { -199.488, 47.865, -846.699 }, { -191.203, 48.221, -854.397 }, { -179.699, 47.634, -863.423 }, { -178.717, 47.507, -864.465 }, { -177.917, 47.917, -860.994 }, { -177.148, 48.009, -860.127 }, { -174.731, 48.208, -859.063 }, { -174.605, 48.335, -862.923 }, { -174.401, 47.742, -861.639 }, { -173.868, 48.086, -860.4 } } },
         },
         [15197] = {
-            { 'Upyri', 25, 45, 45, 1 },
+            { 'Upyri', 25, 45, 45, 1, { { -282.944, -32.441, 159.796 } } },
         },
         [15218] = {
-            { 'Sharp-Eared Ropipi', 116, 10, 11, 1 },
+            { 'Sharp-Eared Ropipi', 116, 10, 11, 1, { { 209.722, -16.507, -473.661 }, { 217.669, -17.106, -482.775 }, { 224.258, -17.858, -486.256 }, { 225.068, -16.623, -468.783 }, { 226.907, -17.159, -459.761 }, { 227.825, -16.978, -317.467 }, { 229.38, -16.768, -463.749 }, { 231.315, -16.295, -482.785 }, { 234.562, -16.816, -454.475 }, { 240.848, -19.957, -515.6 }, { 242.237, -16.009, -444.116 }, { 245.827, -16.116, -398.167 }, { 247.807, -20.24, -517.716 }, { 249.063, -16.409, -365.426 }, { 253.403, -16.682, -396.899 }, { 256.469, -17.345, -373.499 }, { 257.144, -17.576, -419.983 }, { 257.459, -16.931, -404.356 }, { 258.188, -17.28, -432.036 }, { 261.501, -17.5, -430.836 }, { 262.101, -16.116, -397.031 }, { 268.968, -16.441, -438.552 }, { 269.292, -16.421, -359.52 }, { 270.369, -16.354, -479.054 }, { 276.395, -19.436, -511.445 }, { 278.267, -16.467, -428.556 }, { 280.214, -16, -358.333 }, { 280.723, -16.08, -394.74 }, { 280.94, -16, -357.909 }, { 280.977, -16.573, -387.472 }, { 281.864, -16.623, -412.93 }, { 284.073, -16.87, -489.416 }, { 288.506, -17.109, -451.513 }, { 291.415, -17.465, -454.335 }, { 293.077, -17.209, -489.995 }, { 293.988, -17.126, -464.977 }, { 297.117, -16.932, -360.204 }, { 303.282, -17.642, -415.87 }, { 303.988, -16.391, -371.342 }, { 307.564, -15.759, -363.954 }, { 308.479, -17.058, -387.101 }, { 315.674, -16.624, -372.508 }, { 316.047, -16.168, -393.34 }, { 318.444, -16.626, -452.95 }, { 330.888, -16.432, -359.113 }, { 332, -13, -325 }, { 335.036, -16.941, -377.131 }, { 354.989, -16.097, -364.022 }, { 356.317, -16.993, -335.859 }, { 359.617, -16.608, -347.19 }, { 363.152, -16.705, -326.213 } } },
         },
         [15219] = {
-            { 'Mahisha', 27, 50, 50, 1 },
+            { 'Mahisha', 27, 50, 50, 1, { { 103.731, -0.592, 187.587 } } },
         },
         [15220] = {
-            { 'Noble Mold', 121, 49, 50, 1 },
+            { 'Noble Mold', 121, 49, 50, 1, { { -440, -0.5, -125 }, { -391.184, -0.269, -159.086 } } },
         },
         [15221] = {
-            { 'Biast', 112, 67, 67, 1 },
+            { 'Biast', 112, 67, 67, 1, { { 180, -19, -147 } } },
         },
         [15222] = {
-            { 'Taisaijin', 166, 60, 60, 1 },
+            { 'Taisaijin', 166, 60, 60, 1, { { -15, 7, -131 } } },
         },
         [15223] = {
-            { 'King Vinegarroon', 125, 80, 80, 1 },
+            { 'King Vinegarroon', 125, 80, 80, 1, { { -262.421, 0.478, -629.148 }, { -261.63, 0.518, -630.288 }, { -261.324, 0.933, -637.908 }, { -260.26, 0.986, -640.404 }, { -256.645, 0.468, -626.716 }, { -256.311, 0.815, -642.751 }, { -255.686, 0.602, -628.061 }, { -252.847, 0.235, -646.125 }, { -250.837, 0.417, -630.897 }, { -248.542, -0.021, -649.309 }, { -246.296, 0.036, -634.473 }, { -245.28, 0.461, -655.033 }, { -245.207, 0.059, -641.675 }, { -245.147, 0.599, -626.252 }, { -244.574, 0.071, -646.048 }, { -244.369, 0.02, -635.194 }, { -243.049, 0.613, -654.179 }, { -242.678, 0.092, -645.864 }, { -242.659, 0.955, -660.882 }, { -242.145, 0.827, -656.544 }, { -240.441, 0.402, -652.088 }, { -240.234, 0.303, -650.101 }, { -240.012, 0.808, -656.175 }, { -239, -0.226, -650 }, { -238.658, 0.817, -663.646 }, { -238.409, 0.703, -664.933 }, { -237.494, 0.577, -613.816 }, { -237.054, 0.964, -660.702 }, { -233.937, 0.767, -655.708 }, { -233.545, 0.121, -639.868 }, { -232.802, 0.158, -640.158 }, { -232.252, 0.787, -661.674 }, { -232.115, 0.192, -637.89 }, { -229.016, 0.222, -648.687 }, { -228.974, 0.349, -641.211 }, { -228.641, 0.365, -644.196 }, { -227.448, 0.165, -650.454 }, { -227.395, 0.704, -661.855 }, { -226.979, 1, -665.418 }, { -226.952, 0.226, -652.052 }, { -225.576, 0.548, -659.382 }, { -224.005, 0.594, -648.294 }, { -223.5, 0.605, -656.289 }, { -221.848, 0.602, -655.343 }, { -216.112, 0.144, -663.042 }, { -213.032, 0.493, -658.491 }, { -209.696, 0.602, -656.084 }, { -208.925, 0.517, -661.646 }, { -206.68, 0.424, -651.336 }, { -203.942, 0.728, -655.32 } } },
         },
         [15224] = {
-            { 'Valkurm Emperor', 103, 29, 30, 1 },
+            { 'Valkurm Emperor', 103, 29, 30, 1, { { -346.179, -0.286, -23.185 }, { -338.025, 0.232, -30.453 }, { -333.218, -1.442, -8.725 }, { -329.94, -0.704, -24.331 }, { -328.453, -0.837, -47.501 }, { -327, -1, -21 }, { -317.89, -0.426, -5.929 }, { -308.615, 0.242, -44.649 }, { -297.203, -1.108, -9.745 }, { -291.648, 0.381, -42.898 }, { -291.247, 0.396, 5.381 }, { -284.165, 0.902, -58.26 }, { -283.645, 0.351, -68.965 }, { -282.016, 0.955, -60.878 }, { -281.184, 0, -41.859 }, { -279.494, 0.111, 7.036 }, { -270.823, -2.168, -16.349 }, { -265.24, -0.799, -48.374 }, { -264.829, -0.843, -91.306 }, { -264.39, -1.137, 29.689 }, { -257.265, -0.995, -57.143 }, { -253.393, 0.372, -87.479 }, { -252.723, -1.271, -43.1 }, { -246.524, -0.916, -51.146 }, { -228.957, 2.776, -101.226 }, { -228.267, -0.028, -36.761 }, { -226.117, -1.772, 11.871 }, { -225.198, 3.304, -102.791 }, { -221.531, 3.786, -108.07 }, { -220.278, 1.528, -92.214 }, { -215.818, 0.651, -43.917 }, { -212.513, 3.307, -105.39 }, { -211.036, -0.286, -55.029 }, { -211, -0.01, -34 }, { -210.075, -1.062, -27.973 }, { -205.98, 0.227, -86.736 }, { -205.095, -0.04, -39.637 }, { -205.024, -1.791, -24.88 }, { -197.814, 0, -80.991 }, { -185.404, -1.042, -60.996 }, { -173.748, 0.359, -77.374 }, { -170.882, -0.857, -35.825 }, { -168.851, -1.917, -54.953 }, { -160.476, -0.069, -41.088 }, { -155.887, 1.18, -93.927 }, { -144.284, -1.103, 4.202 }, { -143.231, -1.973, -67.419 }, { -132.327, -0.742, -71.357 }, { -130.87, -0.088, -54.813 }, { -120.077, -0.006, -78.574 }, { -95.25, -0.268, -49.386 } } },
         },
         [15291] = {
-            { 'Orctrap', 2, 37, 38, 1 },
+            { 'Orctrap', 2, 37, 38, 1, { { 55.183, -5.286, -557.978 }, { 64.133, -8.694, -544.07 }, { 67.521, -7.25, -574.496 }, { 70.148, -8.429, -527.044 }, { 70.79, -6.853, -539.554 }, { 71.349, -7.935, -594.507 }, { 74.51, -7.215, -606.091 }, { 76.962, -5.935, -514.68 }, { 78.668, -5.044, -580.871 }, { 78.979, -6, -556.341 }, { 79.683, -5.683, -570.357 }, { 81.873, -5.138, -542.754 }, { 86.146, -6.743, -526.943 }, { 87.834, -7.597, -520.502 }, { 89.111, -6.283, -605.517 }, { 91.609, -6.222, -552.088 }, { 93.11, -6.669, -549.745 }, { 95.28, -5.276, -562.397 }, { 96.13, -8.346, -544.888 }, { 99.231, -5.38, -595.511 }, { 102.059, -5.104, -559.392 }, { 103.035, -5.152, -556.371 }, { 103.883, -7.184, -608.87 }, { 111.511, -6.951, -552.205 }, { 112.675, -6.123, -574.21 }, { 114.257, -5.913, -598.335 }, { 115.034, -7.826, -608.715 }, { 115.54, -5.978, -561.725 }, { 115.876, -5.46, -586.387 }, { 118.745, -5.128, -582.544 }, { 126.959, -5.853, -562.76 }, { 127.259, -8.54, -549.758 }, { 129.581, -7.781, -588.18 }, { 129.847, -7.358, -582.05 }, { 134.721, -7.024, -569.841 }, { 137.052, -9.105, -547.091 }, { 139.833, -9.229, -575.526 }, { 144.089, -5.213, -558.133 }, { 148.944, -9.235, -529.042 }, { 150.334, -7.799, -569.064 }, { 151.941, -7.748, -518.589 }, { 161.918, -5.59, -532.219 }, { 163.666, -5.566, -547.622 }, { 163.763, -8.363, -511.01 }, { 163.812, -6.01, -562.407 }, { 172.705, -6.989, -511.832 }, { 173.654, -5.44, -524.019 }, { 176.721, -5.672, -537.42 }, { 178.748, -5.863, -546.921 }, { 180.087, -5.484, -532.799 }, { 181.074, -5.068, -555.737 } } },
         },
         [15296] = {
-            { 'Stubborn Dredvodd', 1, 33, 33, 1 },
+            { 'Stubborn Dredvodd', 1, 33, 33, 1, { { -12.295, -2.5, 0.14 } } },
         },
         [15300] = {
-            { 'Zoredonite', 3, 61, 62, 1 },
+            { 'Zoredonite', 3, 61, 62, 1, { { -2.37, -3.492, -11.285 } } },
         },
         [15323] = {
-            { 'Bonnacon', 5, 69, 69, 1 },
+            { 'Bonnacon', 5, 69, 69, 1, { { -615.121, -40.062, 6.126 }, { -578.888, -38.507, -67.605 } } },
         },
         [15324] = {
-            { 'Megalobugard', 24, 50, 50, 1 },
+            { 'Megalobugard', 24, 50, 50, 1, { { -175.852, -7.811, 22.823 }, { -173.265, -7.799, 4.956 } } },
         },
         [15326] = {
-            { 'Stubborn Dredvodd', 1, 33, 33, 1 },
+            { 'Stubborn Dredvodd', 1, 33, 33, 1, { { -12.295, -2.5, 0.14 } } },
         },
         [15338] = {
-            { 'Upyri', 25, 45, 45, 1 },
+            { 'Upyri', 25, 45, 45, 1, { { -282.944, -32.441, 159.796 } } },
         },
         [15347] = {
-            { 'Serra', 4, 44, 46, 1 },
+            { 'Serra', 4, 44, 46, 1, { { -639.118, -0.301, -619.797 }, { -634, 0.001, -669 } } },
         },
         [15348] = {
-            { 'Heliodromos', 30, 45, 45, 1 },
+            { 'Heliodromos', 30, 45, 45, 1, { { 713.545, 49.217, -854.947 }, { 737.12, 48.207, -856.605 }, { 737.576, 48.462, -874.415 } } },
         },
         [15349] = {
-            { 'Bugbear Matman', 12, 78, 78, 1 },
+            { 'Bugbear Matman', 12, 78, 78, 1, { { 124.544, 19.988, -60.67 } } },
         },
         [15350] = {
             { 'Alastor Antlion', 7, 83, 83, 1 },
         },
         [15351] = {
-            { 'Leaping Lizzy', 107, 10, 11, 1 },
+            { 'Leaping Lizzy', 107, 10, 11, 1, { { -377.054, 36.182, -385.888 }, { -368.938, 30.712, -429.955 }, { -364.189, 30, -442.72 }, { -360.824, 30.114, -454.615 }, { -357.308, 32.336, -422.769 }, { -355.27, 28.576, -463.004 }, { -353.66, 29.043, -449.413 }, { -350.338, 32.823, -421.285 }, { -340.632, 34.587, -373.477 }, { -339.668, 28.619, -388.642 }, { -339.649, 32.626, -336.988 }, { -339.499, 29.731, -441.475 }, { -336.543, 31.582, -341.736 }, { -333.047, 30.8, -325.419 }, { -332.532, 31.063, -381.882 }, { -332.177, 30.313, -345.107 }, { -330.561, 30.093, -399.022 }, { -330.438, 30, -327.495 }, { -323.998, 30.032, -404.35 }, { -322.615, 32.348, -417.432 }, { -321.379, 29.821, -322.494 }, { -321.228, 30, -382.849 }, { -320.521, 29.886, -320.865 }, { -318.258, 29.993, -347.883 }, { -317.119, 30, -322.596 }, { -315.889, 29.358, -318.021 }, { -309.062, 28.86, -321.399 }, { -307.972, 27.455, -367.421 }, { -304.221, 27.09, -345.392 }, { -303.72, 26.918, -320.71 }, { -302.158, 27.208, -350.053 }, { -300.77, 26.288, -344.735 }, { -297.822, 23.327, -318.877 }, { -296.685, 23.114, -318.141 }, { -293.311, 21.933, -318.758 }, { -292.232, 21.428, -413.23 }, { -290.946, 21.21, -321.456 }, { -289.261, 21.32, -328.841 }, { -288.541, 21.439, -330.873 }, { -286.319, 20.645, -391.222 }, { -284.635, 20.81, -386.643 }, { -284.305, 19.641, -367.149 }, { -283.76, 21.444, -412.182 }, { -283.056, 20, -398.952 }, { -280.685, 19.994, -392.479 }, { -280.307, 20.035, -382.155 }, { -278.841, 20, -362.44 }, { -278.573, 20.138, -339.39 }, { -275.682, 20, -438.592 }, { -275.636, 22.476, -420.625 }, { -275.319, 19.746, -329.243 }, { -273.274, 21.144, -347.048 }, { -270.019, 20.612, -389.97 }, { -268.856, 21.258, -398.745 }, { -264.865, 20.765, -336.617 }, { -264.791, 21.973, -374.422 }, { -264.601, 22.994, -419.366 }, { -263.35, 20.661, -331.257 }, { -260.427, 22.593, -405.967 }, { -259.746, 22.722, -412.237 }, { -258.644, 22.424, -362.713 }, { -248.527, 19.606, -437.438 }, { -248.098, 19.81, -321.719 }, { -242.089, 19.787, -385.635 }, { -239.546, 20.444, -352.119 }, { -232.903, 19.126, -410.558 } } },
         },
         [15367] = {
-            { 'Aiatar', 30, 51, 52, 1 },
+            { 'Aiatar', 30, 51, 52, 1, { { -81.967, 0.246, 751.067 } } },
         },
         [15368] = {
-            { 'Vodyanoi', 1, 45, 47, 1 },
+            { 'Vodyanoi', 1, 45, 47, 1, { { 4.616, -2.636, 4.485 } } },
         },
         [15369] = {
-            { 'Bugbear Strongman', 11, 50, 50, 1 },
+            { 'Bugbear Strongman', 11, 50, 50, 1, { { -0.92, 11.5, -98.408 }, { 60.728, 15.487, -118.886 }, { 61.612, 15.5, -122.418 } } },
         },
         [15370] = {
-            { 'Aiatar', 30, 51, 52, 1 },
+            { 'Aiatar', 30, 51, 52, 1, { { -81.967, 0.246, 751.067 } } },
         },
         [15371] = {
-            { 'Swashstox Beadblinker', 12, 80, 80, 1 },
+            { 'Swashstox Beadblinker', 12, 80, 80, 1, { { 45.54, 16.12, 19.64 }, { 49.85, 15.85, -20.75 }, { 87.88, 16, -19.51 }, { 101.32, 16, 50.14 }, { 110.552, 15.51, -21.166 } } },
         },
         [15372] = {
-            { 'Intulo', 4, 46, 47, 1 },
+            { 'Intulo', 4, 46, 47, 1, { { 523, -8, 762 }, { 525.746, -12.134, 775.797 } } },
         },
         [15373] = {
-            { 'Odqan', 25, 49, 51, 1 },
+            { 'Odqan', 25, 49, 51, 1, { { 83.241, -8.259, -41.968 }, { 204.733, -24.365, 316.403 } } },
         },
         [15374] = {
-            { 'Citipati', 7, 67, 70, 1 },
+            { 'Citipati', 7, 67, 70, 1, { { -398.931, -4.536, 79.64 }, { -381.284, -9.233, 40.054 }, { -364.014, -4.634, -2.627 }, { -328.973, -12.876, 67.481 }, { -327.763, -12.408, 40.206 } } },
         },
         [15375] = {
             { 'Fomor Black Mage', 27, 44, 48 },
@@ -6041,134 +6960,134 @@ return {
             { 'Fomor Beastmaster', 28, 54, 56 },
         },
         [15422] = {
-            { 'Hercules Beetle', 2, 34, 34, 1 },
+            { 'Hercules Beetle', 2, 34, 34, 1, { { -238, -5.95, -93.5 } } },
         },
         [15425] = {
-            { 'Kurrea', 24, 84, 84, 1 },
+            { 'Kurrea', 24, 84, 84, 1, { { -216.906, -16.497, 63.208 } } },
         },
         [15426] = {
             { 'Hadal Satiator', 15, 78, 88, 1 },
         },
         [15427] = {
-            { 'Carabosse', 132, 90, 90, 1 },
+            { 'Carabosse', 132, 90, 90, 1, { { -3, 17, 148 }, { 11, 17, 148 }, { 26, 19, 148 } } },
         },
         [15429] = {
-            { 'Ophanim', 45, 85, 85, 1 },
+            { 'Ophanim', 45, 85, 85, 1, { { -195, -16, -165 } } },
         },
         [15430] = {
             { 'Hadal Satiator', 15, 78, 88, 1 },
         },
         [15457] = {
-            { 'Balor', 28, 57, 58, 1 },
-            { 'Caithleann', 28, 57, 58, 1 },
-            { 'Indich', 28, 57, 58, 1 },
-            { 'Lobais', 28, 57, 58, 1 },
-            { 'Luaith', 28, 57, 58, 1 },
+            { 'Balor', 28, 57, 58, 1, { { 32.129, -2.5, 117.292 } } },
+            { 'Caithleann', 28, 57, 58, 1, { { 11, -2.5, -115 } } },
+            { 'Indich', 28, 57, 58, 1, { { 50, -2.25, -115 } } },
+            { 'Lobais', 28, 57, 58, 1, { { 109, -2.5, 116 } } },
+            { 'Luaith', 28, 57, 58, 1, { { 69, -2.5, 116 } } },
         },
         [15465] = {
-            { 'Geush Urvan', 5, 85, 85, 1 },
+            { 'Geush Urvan', 5, 85, 85, 1, { { 563.638, -35.719, 110.362 } } },
         },
         [15466] = {
-            { 'Almighty Apkallu', 59, 78, 78, 1 },
+            { 'Almighty Apkallu', 59, 78, 78, 1, { { -9.036, -7.163, 12.61 } } },
         },
         [15467] = {
-            { 'Ereshkigal', 112, 48, 50, 1 },
+            { 'Ereshkigal', 112, 48, 50, 1, { { -137.143, -19.278, -19.996 } } },
         },
         [15468] = {
-            { 'Bright-handed Kunberry', 124, 55, 57, 1 },
+            { 'Bright-handed Kunberry', 124, 55, 57, 1, { { 170.303, 0.455, -186.105 }, { 171.491, 0.3, -170.484 }, { 173.151, 0.1, -189.729 }, { 174.92, 0.56, -155.508 }, { 176.404, 0.583, -175.35 }, { 178.692, 0.6, -165.667 }, { 178.971, 0.338, -137.914 }, { 181.652, 0.6, -162.661 }, { 184.936, 0.434, -135.309 }, { 185.347, 0.489, -190.552 }, { 187.531, 0.511, -158.305 }, { 188.184, 0.6, -188.101 }, { 189.502, 0.6, -168.138 }, { 189.769, 0.556, -131.56 }, { 191.895, 0.304, -157.96 }, { 195.325, 0.048, -159.431 }, { 197.57, 0.1, -191.125 }, { 197.734, 0, -202.007 }, { 200.595, 0.543, -173.745 }, { 202.693, 0.232, -207.127 }, { 204.057, 0.1, -191.613 }, { 204.182, 0.198, -193.331 }, { 206.786, 0.432, -209.796 }, { 207.933, 0.598, -173.478 }, { 210.044, 0.58, -177.279 }, { 212.337, 0.569, -132.387 }, { 213.277, 0.382, -213.023 }, { 213.315, 0.39, -183.627 }, { 213.952, 0.576, -151.06 }, { 215.317, 0.583, -206.819 }, { 215.816, 0.329, -187.19 }, { 218.084, 0.526, -213.781 }, { 219.54, 0.464, -213.919 }, { 220.152, 0.373, -173.115 }, { 220.633, 0.543, -195.269 }, { 222.153, 0.535, -190.471 }, { 222.947, -0.315, -214.094 }, { 224.991, 0.1, -210.295 }, { 226.649, 0.1, -213.963 }, { 227, -0.5, -169 }, { 227.669, 0.1, -159.93 }, { 228.294, 0.1, -164.819 }, { 228.658, 0.1, -152.722 }, { 228.911, 0.1, -184.393 }, { 231.206, 0.579, -148.838 }, { 236.195, 0.23, -152.672 }, { 237.205, 0, -156.992 }, { 237.418, -0.013, -163.859 }, { 239.555, 0.583, -175.335 }, { 246.78, 0.265, -188.459 } } },
         },
         [15469] = {
-            { 'Fradubio', 104, 59, 60, 1 },
+            { 'Fradubio', 104, 59, 60, 1, { { -36.053, -7.943, -485.956 }, { -35.174, -1.684, -450.96 }, { -32.552, -9.002, -474.435 }, { -31.886, -1.752, -438.911 }, { -30.207, -5.549, -460.885 }, { -29.48, -2.939, -430.934 }, { -26.718, -2.825, -422.256 }, { -23.777, -1.446, -411.779 }, { -15.372, -0.368, -406.452 }, { -12.13, 0.187, -398.014 }, { -6.504, 0.375, -392.454 }, { -1.621, 0.709, -385.107 }, { 3.343, 0.918, -378.388 }, { 9.32, -0.493, -371.654 }, { 14.527, -0.063, -366.15 }, { 22.521, 0.826, -359.849 }, { 30.066, 0.252, -352.284 }, { 36.316, 0.768, -341.293 }, { 41.044, 0.273, -329.481 }, { 43.361, 0, -318.522 }, { 44.656, 0.331, -304.552 }, { 45.279, 0.05, -291.648 }, { 46.312, -0.926, -280.252 }, { 48.866, -1.17, -266.033 }, { 54.975, -1.694, -253.984 }, { 67.137, -1.422, -248.949 }, { 76.573, -0.901, -246.241 }, { 87.343, 0.058, -244.344 }, { 98.928, 0.658, -237.993 }, { 110.255, 0.275, -233.674 }, { 122.516, 0.111, -233.906 }, { 133.046, 0.534, -238.654 }, { 142.354, 0.881, -241.905 }, { 148.066, -0.522, -249.35 }, { 152.09, -0.56, -257.402 }, { 153.926, -0.298, -266.347 }, { 155.073, -0.349, -274.829 }, { 156.954, -0.013, -283.759 }, { 161.421, 0.521, -292.341 }, { 166.312, -0.448, -302.504 }, { 174.128, 0.571, -309.11 }, { 182.766, 0.446, -316.806 }, { 190.242, 0.038, -325.548 }, { 195.769, 0.589, -334.999 }, { 196.908, 0.684, -345.119 }, { 197.572, 0, -356.353 }, { 197.987, -3.632, -376.425 }, { 200.561, -6.615, -389.385 }, { 202.223, -7.582, -420.354 }, { 202.317, -8, -402.152 } } },
         },
         [15474] = {
-            { 'Hadhayosh', 132, 85, 85, 1 },
+            { 'Hadhayosh', 132, 85, 85, 1, { { 410, 24, 41 }, { 434, 24, 41 }, { 449, 24, 40 } } },
         },
         [15503] = {
-            { 'Nihniknoovi', 102, 14, 14, 1 },
+            { 'Nihniknoovi', 102, 14, 14, 1, { { 211.066, 24.147, 257.961 } } },
         },
         [15504] = {
-            { 'Coo Keja the Unseen', 119, 35, 37, 1 },
+            { 'Coo Keja the Unseen', 119, 35, 37, 1, { { 656.251, -26.226, -28.532 }, { 659.313, -28.275, -35.541 }, { 669.815, -24.25, 13.968 }, { 673.336, -31.978, -53.779 }, { 673.816, -24.326, -9.02 }, { 673.86, -31.907, -45.64 }, { 674.778, -26.549, -14.611 }, { 677.592, -23.934, 7.763 }, { 677.673, -31.837, -65.387 }, { 678.898, -23.953, 33.91 }, { 679.588, -31.316, -64.119 }, { 681.563, -32.087, -45.488 }, { 683.267, -31.615, -36.833 }, { 684, -23, 6 }, { 686.2, -32.176, -71.215 }, { 686.957, -32.211, -57.123 }, { 687.428, -32.102, -45.738 }, { 690.271, -31.793, -33.406 }, { 690.499, -25.285, 18.114 }, { 691.581, -31.817, -46.128 }, { 693.369, -31.653, -41.429 }, { 696.72, -28.484, -11.413 }, { 697.028, -26.785, 25.154 }, { 700.039, -31.003, -43.542 }, { 700.133, -27.643, -4.011 }, { 700.845, -27.525, 32.313 }, { 704.116, -32.029, -35.809 }, { 704.685, -31.973, -30.884 }, { 707.975, -32.5, -18.764 }, { 708.957, -32.011, -23.967 }, { 711.559, -32.5, -18.145 }, { 713.757, -31.726, 3.473 }, { 714.578, -32.035, 16.23 }, { 714.745, -32, -24.761 }, { 714.758, -32.103, -73.451 }, { 715.503, -32.069, -17.095 }, { 716.387, -31.162, -51.941 }, { 716.442, -31.286, -65.679 }, { 716.621, -32, -5.769 }, { 717.3, -31.758, 23.904 }, { 719.337, -31.908, 6.541 }, { 719.374, -32, -38.598 }, { 719.587, -31.629, -50.699 }, { 719.882, -31.807, 31.575 }, { 720.619, -31.348, -54.566 }, { 721.095, -31.928, -34.545 }, { 721.342, -32, -42.506 }, { 721.76, -32, -35.884 }, { 723.219, -31.06, -18.827 }, { 723.475, -32, -4.249 } } },
         },
         [15505] = {
-            { 'Celphie', 125, 47, 50, 1 },
+            { 'Celphie', 125, 47, 50, 1, { { 10.439, -0.28, -80.476 }, { 35.924, 0.087, -98.228 }, { 44.36, 0.421, 68.761 }, { 48.57, 0.784, 92.642 }, { 50.014, 0.256, 7.088 }, { 50.78, 0.329, 75.859 }, { 51.581, 0.377, 40.451 }, { 54.705, -0.098, -18.06 }, { 57.256, 0.116, 13.972 }, { 57.94, 0.071, -29.694 }, { 58.112, 0.808, 114.074 }, { 63.82, 0.472, 48.17 }, { 64.89, 0.695, 27.299 }, { 64.969, -0.031, 52.197 }, { 65.149, 0.446, 31.267 }, { 65.755, 0.19, 48.801 }, { 67.375, 0.533, 33.004 }, { 68.789, 0.358, 38.265 }, { 70, -0.024, 35 }, { 70.263, 0.13, -23.484 }, { 70.277, 0.284, 36.266 }, { 74.736, 0.062, 38.806 }, { 78.105, 0.629, 25.666 }, { 78.226, -0.497, 69.745 }, { 78.887, 0.073, -34.507 }, { 79.601, 0.846, 23.081 }, { 79.711, 0.739, 55.434 }, { 82.348, 0.623, 14.276 }, { 82.403, 0.367, 51.396 }, { 84.99, 0.296, 11.658 }, { 94.648, 0.755, 3.837 }, { 95.397, -0.229, 25.741 }, { 97.649, 0.746, 35.41 }, { 99, -0.03, 116 }, { 101.831, -0.158, 15.928 }, { 101.957, 0.595, 71.922 }, { 104.483, 0.314, 54.14 }, { 104.704, 0.484, 32.804 }, { 107.552, 0.439, 38.576 }, { 107.745, -0.049, 16.725 }, { 109.647, -0.104, 28.621 }, { 114.485, 0.089, 32.253 }, { 118.575, -0.299, 127.016 }, { 122.444, 0.017, 75.632 }, { 124.936, 0.789, 15.11 }, { 133.721, 0.567, 43.579 }, { 139.05, 0.534, 21.02 }, { 144.842, 0.712, 1.704 }, { 150.314, 0.249, 30.233 }, { 151.685, 0.214, 36.615 }, { 153.282, 0.67, 18.954 } } },
         },
         [15506] = {
-            { 'Goblin Wolfman', 11, 50, 50, 1 },
+            { 'Goblin Wolfman', 11, 50, 50, 1, { { -150.91, 7.499, -251.817 } } },
         },
         [15507] = {
-            { 'Father Frost', 5, 74, 75, 1 },
-            { 'Snow Maiden', 5, 71, 72, 1 },
+            { 'Father Frost', 5, 74, 75, 1, { { 379.47, -12.048, -82.365 } } },
+            { 'Snow Maiden', 5, 71, 72, 1, { { 439.147, -20.27, -88.217 } } },
         },
         [15508] = {
-            { 'Jailer of Justice', 33, 85, 85, 1 },
+            { 'Jailer of Justice', 33, 85, 85, 1, { { -279.194, -0.5, -465.362 } } },
         },
         [15509] = {
-            { 'Jailer of Hope', 33, 85, 85, 1 },
+            { 'Jailer of Hope', 33, 85, 85, 1, { { -681.683, -0.5, -77.066 } } },
         },
         [15510] = {
-            { 'Jailer of Prudence', 33, 85, 85, 1 },
+            { 'Jailer of Prudence', 33, 85, 85, 1, { { 706.114, -1.021, 24.11 }, { 709.324, -1.289, 22.126 } } },
         },
         [15511] = {
-            { 'Jailer of Fortitude', 35, 79, 80, 1 },
+            { 'Jailer of Fortitude', 35, 79, 80, 1, { { -434.1, -0.5, 697.849 } } },
         },
         [15512] = {
-            { 'Jailer of Faith', 35, 85, 85, 1 },
+            { 'Jailer of Faith', 35, 85, 85, 1, { { -272.831, -0.5, -703.309 } } },
         },
         [15513] = {
-            { 'Jailer of Temperance', 34, 85, 85, 1 },
+            { 'Jailer of Temperance', 34, 85, 85, 1, { { -426.739, -0.5, 687.728 }, { -262.373, -0.5, 49.059 } } },
         },
         [15514] = {
-            { 'Jailer of Love', 33, 90, 90, 1 },
+            { 'Jailer of Love', 33, 90, 90, 1, { { 437.76, -1.643, -598.571 } } },
         },
         [15515] = {
-            { 'Argus', 198, 36, 37, 1 },
+            { 'Argus', 198, 36, 37, 1, { { 220.112, 18.762, -63.954 }, { 221.185, 20, -112.845 }, { 228.487, 19.971, -92.704 }, { 241.938, 20, -74.946 }, { 246.046, 19.971, -83.494 }, { 261.557, 19.67, -87.547 } } },
         },
         [15529] = {
-            { 'Bloody Bones', 54, 83, 83, 1 },
+            { 'Bloody Bones', 54, 83, 83, 1, { { 136, -6, 476 } } },
         },
         [15530] = {
-            { 'Hydra', 51, 80, 80, 1 },
+            { 'Hydra', 51, 80, 80, 1, { { -282, -24, -1 } } },
         },
         [15531] = {
-            { 'Bluestreak Gyugyuroon', 68, 80, 80, 1 },
+            { 'Bluestreak Gyugyuroon', 68, 80, 80, 1, { { -219.199, 13.483, -340.343 } } },
         },
         [15532] = {
-            { 'Proteus', 58, 79, 79, 1 },
+            { 'Proteus', 58, 79, 79, 1, { { -6.412, -7.163, 8.235 } } },
         },
         [15546] = {
-            { 'Yara Ma Yha Who', 117, 14, 14, 1 },
+            { 'Yara Ma Yha Who', 117, 14, 14, 1, { { 271, 0.005, -334 } } },
         },
         [15547] = {
-            { 'Rose Garden', 123, 50, 50, 1 },
-            { 'Voluptuous Vilma', 123, 52, 53, 1 },
+            { 'Rose Garden', 123, 50, 50, 1, { { 50, 10, 245 } } },
+            { 'Voluptuous Vilma', 123, 52, 53, 1, { { 42, 9, 245 } } },
         },
         [15551] = {
             { 'Stroper Chyme', 193, 33, 35 },
         },
         [15613] = {
-            { 'Jaded Jody', 51, 80, 80, 1 },
+            { 'Jaded Jody', 51, 80, 80, 1, { { -572, -8.5, -335 } } },
         },
         [15614] = {
-            { 'Lamia No.19', 54, 78, 78, 1 },
+            { 'Lamia No.19', 54, 78, 78, 1, { { -138, -7.6, 132 } } },
         },
         [15624] = {
-            { 'Farlarder the Shrewd', 62, 80, 80, 1 },
+            { 'Farlarder the Shrewd', 62, 80, 80, 1, { { -279.2, 19.472, 43.008 } } },
         },
         [15626] = {
-            { 'Archaic Gear', 74, 73, 74, 1 },
-            { 'Archaic Gears', 74, 74, 75, 1 },
+            { 'Archaic Gear', 74, 73, 74, 1, { { -440, -0.002, -537.16 }, { -439.7, -0.001, -539.18 }, { -426, -0.5, -540 }, { -410.7, 0.001, -71.164 }, { -409.7, 0.001, -119.67 }, { -391.7, -0.004, -554.43 }, { -382.5, -0.007, -548.8 }, { -375.3, 0.005, -14.42 }, { -368.7, -0.449, -536.28 }, { -365.6, 0.021, -12.71 }, { -365.2, -0.476, 211.47 }, { -359.8, -0.474, 211.024 }, { -343.7, -0.02, -226.64 }, { -340, -4.388, -32.248 }, { -340, 3.423, -166.51 }, { -339.8, -0.486, -210.72 }, { -335.7, -0.037, 28.803 }, { -333.2, -0.061, 31.15 }, { -331.5, -0.34, 18.63 }, { -326, -0.013, -215.98 }, { -322.5, -0.469, 218.257 }, { -311.2, -0.432, 182.477 }, { -305.3, 0.014, -525.63 }, { -298.3, 0.002, -182.49 }, { -293, -0.171, -533.36 }, { -292.3, 0.021, -181.77 }, { -292, -0.026, -541.42 }, { -263, 0.001, -122.39 }, { -250, -0.5, -540 }, { -249, -0.021, -537.01 }, { -248.8, -0.006, -544.81 }, { -245.4, 0.001, -79.817 } } },
+            { 'Archaic Gears', 74, 74, 75, 1, { { -415.2, 0.001, -73.176 }, { -400.1, 0.001, -119.61 }, { -359.5, -0.474, 178.126 }, { -317.2, -0.037, 155.333 }, { -316.8, -0.075, 166.942 }, { -316, -0.472, 235.759 }, { -287.1, 0.001, -79.47 }, { -257.1, 0.001, -118.89 } } },
         },
         [15628] = {
-            { 'Gyroscopic Gears', 76, 80, 82, 1 },
+            { 'Gyroscopic Gears', 76, 80, 82, 1, { { -225.7, -4.5, -354.63 } } },
         },
         [15632] = {
             { 'Poroggo Madame', 73, 80, 80 },
         },
         [15634] = {
-            { 'Powderkeg Yanadahn', 76, 80, 80, 1 },
+            { 'Powderkeg Yanadahn', 76, 80, 80, 1, { { 437.36, 3, 311.552 } } },
         },
         [15636] = {
-            { 'Archaic Chariot', 74, 77, 78, 1 },
+            { 'Archaic Chariot', 74, 77, 78, 1, { { -419, -0.006, -84.586 }, { -263.1, 0.018, -102.7 } } },
         },
         [15638] = {
             { 'Poroggo Madame', 73, 80, 80 },
@@ -6178,27 +7097,27 @@ return {
             { 'Peryton', 75, 77, 77 },
         },
         [15642] = {
-            { 'Archaic Gear', 74, 73, 74, 1 },
-            { 'Archaic Gears', 74, 74, 75, 1 },
+            { 'Archaic Gear', 74, 73, 74, 1, { { -440, -0.002, -537.16 }, { -439.7, -0.001, -539.18 }, { -426, -0.5, -540 }, { -410.7, 0.001, -71.164 }, { -409.7, 0.001, -119.67 }, { -391.7, -0.004, -554.43 }, { -382.5, -0.007, -548.8 }, { -375.3, 0.005, -14.42 }, { -368.7, -0.449, -536.28 }, { -365.6, 0.021, -12.71 }, { -365.2, -0.476, 211.47 }, { -359.8, -0.474, 211.024 }, { -343.7, -0.02, -226.64 }, { -340, -4.388, -32.248 }, { -340, 3.423, -166.51 }, { -339.8, -0.486, -210.72 }, { -335.7, -0.037, 28.803 }, { -333.2, -0.061, 31.15 }, { -331.5, -0.34, 18.63 }, { -326, -0.013, -215.98 }, { -322.5, -0.469, 218.257 }, { -311.2, -0.432, 182.477 }, { -305.3, 0.014, -525.63 }, { -298.3, 0.002, -182.49 }, { -293, -0.171, -533.36 }, { -292.3, 0.021, -181.77 }, { -292, -0.026, -541.42 }, { -263, 0.001, -122.39 }, { -250, -0.5, -540 }, { -249, -0.021, -537.01 }, { -248.8, -0.006, -544.81 }, { -245.4, 0.001, -79.817 } } },
+            { 'Archaic Gears', 74, 74, 75, 1, { { -415.2, 0.001, -73.176 }, { -400.1, 0.001, -119.61 }, { -359.5, -0.474, 178.126 }, { -317.2, -0.037, 155.333 }, { -316.8, -0.075, 166.942 }, { -316, -0.472, 235.759 }, { -287.1, 0.001, -79.47 }, { -257.1, 0.001, -118.89 } } },
         },
         [15644] = {
-            { 'Powderkeg Yanadahn', 76, 80, 80, 1 },
+            { 'Powderkeg Yanadahn', 76, 80, 80, 1, { { 437.36, 3, 311.552 } } },
         },
         [15700] = {
-            { 'Almighty Apkallu', 59, 78, 78, 1 },
+            { 'Almighty Apkallu', 59, 78, 78, 1, { { -9.036, -7.163, 12.61 } } },
         },
         [15701] = {
-            { 'Emergent Elm', 52, 77, 78, 1 },
+            { 'Emergent Elm', 52, 77, 78, 1, { { 53.502, -36.25, 643.045 }, { 54.38, -36.334, 636.165 }, { 55.477, -34.969, 627.564 }, { 56.988, -35.349, 609.919 }, { 57.441, -34.461, 618.68 }, { 65.536, -33.814, 628.49 }, { 65.786, -34, 619.123 }, { 66.353, -35.129, 609.604 }, { 66.826, -34, 636.625 }, { 67.882, -34.089, 643.794 }, { 71, -33, 627 }, { 79.049, -32, 642.263 }, { 79.15, -36.027, 617.262 }, { 81.29, -33.569, 629.307 }, { 81.527, -32.127, 635.03 }, { 86.597, -32.33, 636.408 }, { 89.406, -33.943, 630.1 }, { 89.76, -36.25, 616.662 }, { 93.696, -35.5, 624.091 }, { 95.099, -34, 642.372 }, { 96.366, -35.5, 628.378 }, { 97.686, -35.5, 625.171 }, { 103.465, -35.5, 627.737 }, { 103.856, -35.5, 632.055 }, { 104.481, -36.25, 638.963 } } },
         },
         [15702] = {
             { 'Northern Piranu', 46, 81, 81 },
             { 'Southern Piranu', 47, 81, 81 },
         },
         [15709] = {
-            { 'Kirlirger the Abhorrent', 62, 80, 80, 1 },
+            { 'Kirlirger the Abhorrent', 62, 80, 80, 1, { { -260.4, 9.632, 393.279 } } },
         },
         [15710] = {
-            { 'Merrow No.5', 54, 80, 82, 1 },
+            { 'Merrow No.5', 54, 80, 82, 1, { { -84.38, -4.343, 497.333 } } },
         },
         [15714] = {
             { 'Poroggo Madame', 73, 80, 80 },
@@ -6207,17 +7126,17 @@ return {
             { 'Dekka', 76, 79, 80 },
         },
         [15718] = {
-            { 'Archaic Chariot', 74, 77, 78, 1 },
+            { 'Archaic Chariot', 74, 77, 78, 1, { { -419, -0.006, -84.586 }, { -263.1, 0.018, -102.7 } } },
         },
         [15720] = {
             { 'Poroggo Madame', 73, 80, 80 },
         },
         [15722] = {
-            { 'Skirmish Pephredo', 75, 74, 75, 1 },
+            { 'Skirmish Pephredo', 75, 74, 75, 1, { { -340, -0.5, -242 } } },
         },
         [15724] = {
-            { 'Archaic Gear', 74, 73, 74, 1 },
-            { 'Archaic Gears', 74, 74, 75, 1 },
+            { 'Archaic Gear', 74, 73, 74, 1, { { -440, -0.002, -537.16 }, { -439.7, -0.001, -539.18 }, { -426, -0.5, -540 }, { -410.7, 0.001, -71.164 }, { -409.7, 0.001, -119.67 }, { -391.7, -0.004, -554.43 }, { -382.5, -0.007, -548.8 }, { -375.3, 0.005, -14.42 }, { -368.7, -0.449, -536.28 }, { -365.6, 0.021, -12.71 }, { -365.2, -0.476, 211.47 }, { -359.8, -0.474, 211.024 }, { -343.7, -0.02, -226.64 }, { -340, -4.388, -32.248 }, { -340, 3.423, -166.51 }, { -339.8, -0.486, -210.72 }, { -335.7, -0.037, 28.803 }, { -333.2, -0.061, 31.15 }, { -331.5, -0.34, 18.63 }, { -326, -0.013, -215.98 }, { -322.5, -0.469, 218.257 }, { -311.2, -0.432, 182.477 }, { -305.3, 0.014, -525.63 }, { -298.3, 0.002, -182.49 }, { -293, -0.171, -533.36 }, { -292.3, 0.021, -181.77 }, { -292, -0.026, -541.42 }, { -263, 0.001, -122.39 }, { -250, -0.5, -540 }, { -249, -0.021, -537.01 }, { -248.8, -0.006, -544.81 }, { -245.4, 0.001, -79.817 } } },
+            { 'Archaic Gears', 74, 74, 75, 1, { { -415.2, 0.001, -73.176 }, { -400.1, 0.001, -119.61 }, { -359.5, -0.474, 178.126 }, { -317.2, -0.037, 155.333 }, { -316.8, -0.075, 166.942 }, { -316, -0.472, 235.759 }, { -287.1, 0.001, -79.47 }, { -257.1, 0.001, -118.89 } } },
         },
         [15726] = {
             { 'Dekka', 76, 79, 80 },
@@ -6226,52 +7145,52 @@ return {
             { 'Poroggo Madame', 73, 80, 80 },
         },
         [15736] = {
-            { 'Simurgh', 110, 58, 58, 1 },
+            { 'Simurgh', 110, 58, 58, 1, { { -766.514, -32.804, -450.794 }, { -764.133, -31.467, -425.046 }, { -763.917, -31.391, -456.188 }, { -762.782, -32, -396.991 }, { -762.596, -31.872, -433.425 }, { -762.363, -31.715, -369.721 }, { -761.614, -31.683, -389.636 }, { -761.158, -31.248, -375.569 }, { -761.066, -31.122, -422.411 }, { -757.612, -31.638, -468.737 }, { -756.179, -31.152, -428.418 }, { -755.315, -30.373, -420.765 }, { -753.263, -30.658, -409.927 }, { -753.242, -31.516, -469.22 }, { -752.684, -31.514, -468.267 }, { -752.291, -30.438, -398.885 }, { -747.757, -30.22, -451.413 }, { -742.486, -31.125, -361.306 }, { -741.999, -31.101, -476.679 }, { -741.897, -31.5, -469.452 }, { -740.791, -31.196, -474.806 }, { -740.159, -30.523, -370.074 }, { -731.898, -31.067, -474.763 }, { -729.948, -30.918, -473.787 }, { -720.617, -31.932, -479.403 }, { -718.513, -32, -360.126 }, { -718.222, -31.61, -363.18 }, { -715.756, -31.205, -474.926 }, { -706.424, -31.1, -471.294 }, { -705.103, -31.291, -372.666 }, { -691.454, -31.628, -362.358 }, { -688.741, -29.117, -406.312 }, { -687.957, -30.687, -429.768 }, { -687.766, -31.201, -467.353 }, { -687.602, -30.415, -432.963 }, { -687.011, -30.96, -464.879 }, { -686.844, -30.652, -396.784 }, { -686.7, -30.714, -451.877 }, { -686.544, -29.245, -410.142 }, { -684.97, -31.566, -371.229 }, { -684.333, -31.075, -451.765 }, { -683.789, -31.83, -477.062 }, { -682.881, -31.647, -402.822 }, { -681.903, -31.171, -376.607 }, { -681.591, -31.441, -386.368 }, { -681.578, -31.431, -411.597 }, { -681, -31, -447 }, { -679.544, -31.819, -432.354 }, { -679.461, -31.114, -422.262 }, { -677.197, -32, -443.5 } } },
         },
         [15759] = {
-            { 'Dyinyinga', 91, 65, 68, 1 },
+            { 'Dyinyinga', 91, 65, 68, 1, { { 176.06, -31.94, -204.13 } } },
         },
         [15760] = {
-            { 'Ashmaker Gotblut', 85, 81, 83, 1 },
+            { 'Ashmaker Gotblut', 85, 81, 83, 1, { { 137.606, 3.346, -279.05 }, { 234.481, 3.424, -241.751 } } },
         },
         [15791] = {
-            { 'Gulool Ja Ja', 65, 85, 88, 1 },
+            { 'Gulool Ja Ja', 65, 85, 88, 1, { { -301, 15, -380 } } },
         },
         [15792] = {
-            { 'Gurfurlur the Menacing', 62, 85, 90, 1 },
+            { 'Gurfurlur the Menacing', 62, 85, 90, 1, { { -59, -23, 3 } } },
         },
         [15817] = {
-            { 'Skogs Fru', 81, 60, 65, 1 },
+            { 'Skogs Fru', 81, 60, 65, 1, { { 273, -15, -377 } } },
         },
         [15818] = {
-            { 'Ea\'Tho Cruelheart', 92, 78, 78, 1 },
+            { 'Ea\'Tho Cruelheart', 92, 78, 78, 1, { { -191.758, 0.5, -59.651 } } },
         },
         [15827] = {
-            { 'Chigre', 68, 82, 82, 1 },
+            { 'Chigre', 68, 82, 82, 1, { { -217.5, 34.866, 13.689 } } },
         },
         [15828] = {
-            { 'Chigre', 68, 82, 82, 1 },
+            { 'Chigre', 68, 82, 82, 1, { { -217.5, 34.866, 13.689 } } },
         },
         [15829] = {
-            { 'Loo Kutto the Pensive', 99, 83, 83, 1 },
+            { 'Loo Kutto the Pensive', 99, 83, 83, 1, { { 7.99, -16.5, -187.812 } } },
         },
         [15830] = {
-            { 'Di\'Zho Spongeshell', 92, 83, 83, 1 },
+            { 'Di\'Zho Spongeshell', 92, 83, 83, 1, { { -288.203, -3.567, -162.998 } } },
         },
         [15850] = {
-            { 'Hyakinthos', 98, 58, 59, 1 },
+            { 'Hyakinthos', 98, 58, 59, 1, { { -21, -17, -264 } } },
         },
         [15851] = {
-            { 'Lamina', 91, 57, 58, 1 },
+            { 'Lamina', 91, 57, 58, 1, { { 51.54, 23.25, 518.33 }, { 56.75, 23.29, 525.66 }, { 62.24, 23.87, 531.99 }, { 66.25, 23.91, 536.18 }, { 70.29, 23.94, 540.39 }, { 76.77, 24.15, 541.61 }, { 83.24, 23.86, 550.22 }, { 92.57, 23.57, 480.25 }, { 99.349, 23.548, 471.1 }, { 105.64, 20.1, 436.23 }, { 110.18, 23.36, 467.2 }, { 114.36, 22.57, 445.11 }, { 122.17, 23.56, 456.38 } } },
         },
         [15852] = {
-            { 'Boll Weevil', 82, 56, 57, 1 },
+            { 'Boll Weevil', 82, 56, 57, 1, { { 444.051, -0.373, -154.413 } } },
         },
         [15853] = {
-            { 'Dynast Beetle', 197, 56, 56, 1 },
+            { 'Dynast Beetle', 197, 56, 56, 1, { { -216.8, -0.931, -345.6 } } },
         },
         [15854] = {
-            { 'Burlibix Brawnback', 84, 75, 75, 1 },
+            { 'Burlibix Brawnback', 84, 75, 75, 1, { { -152, -9.2, 464 } } },
         },
         [15859] = {
             { 'Dawon', 108, 85, 85, 1 },
@@ -6279,56 +7198,56 @@ return {
             { 'Dawon', 117, 85, 85, 1 },
         },
         [15895] = {
-            { 'Garharlor the Unruly', 61, 80, 80, 1 },
+            { 'Garharlor the Unruly', 61, 80, 80, 1, { { 99.854, -13.485, -11.898 } } },
         },
         [15896] = {
-            { 'Zikko', 79, 80, 80, 1 },
+            { 'Zikko', 79, 80, 80, 1, { { -613.174, 13.337, -180.725 } } },
         },
         [15898] = {
-            { 'Darting Kachaal Ja', 65, 75, 83, 1 },
+            { 'Darting Kachaal Ja', 65, 75, 83, 1, { { 38.759, 17.138, -391.052 } } },
         },
         [15899] = {
             { 'King Arthro', 86, 0, 0, 1 },
-            { 'King Arthro', 104, 55, 55, 1 },
+            { 'King Arthro', 104, 55, 55, 1, { { -160.911, 0.369, 451.411 }, { -156.857, 0.458, 485.462 }, { -156.276, 0.532, 434.495 }, { -156.151, 0.633, 472.79 }, { -152.811, 2.06, 462.249 }, { -149.786, 3.354, 434.074 }, { -149.55, 3.005, 442.039 }, { -149.255, 4.077, 426.342 }, { -149.049, 4.21, 464.421 }, { -149.012, 1.591, 451.211 }, { -148.752, 3.572, 475.929 }, { -147.938, 3.671, 482.846 }, { -147.849, 1.999, 457.706 }, { -146.19, 4.814, 429.599 }, { -145.913, 4.56, 436.723 }, { -145.798, 4.882, 469.291 }, { -145.579, 4.847, 443.856 }, { -144.582, 5.083, 473.179 }, { -144, 5, 474 }, { -143.716, 5.493, 479.213 }, { -142.296, 5.301, 485.065 }, { -138.765, 4.415, 489.87 }, { -136.924, 4.786, 493.231 } } },
         },
         [15909] = {
-            { 'Rencounter Chariot', 254, 100, 100, 1 },
+            { 'Rencounter Chariot', 254, 100, 100, 1, { { 814.939, 66.367, 639.932 } } },
         },
         [15910] = {
-            { 'Upas-Kamuy', 253, 100, 100, 1 },
+            { 'Upas-Kamuy', 253, 100, 100, 1, { { -212, -184, 449 } } },
         },
         [15915] = {
-            { 'Vulkodlac', 82, 74, 78, 1 },
+            { 'Vulkodlac', 82, 74, 78, 1, { { 10.949, -12.659, -510.149 } } },
         },
         [15916] = {
-            { 'Velionis', 54, 78, 80, 1 },
+            { 'Velionis', 54, 78, 80, 1, { { 313.17, -4.089, 26.211 } } },
         },
         [15923] = {
-            { 'Dee Zelko the Esoteric', 99, 83, 83, 1 },
+            { 'Dee Zelko the Esoteric', 99, 83, 83, 1, { { -91.983, -40.245, -62.989 }, { -76.862, -40.277, -58.23 } } },
         },
         [15924] = {
-            { 'Mu\'Nhi Thimbletail', 92, 83, 83, 1 },
+            { 'Mu\'Nhi Thimbletail', 92, 83, 83, 1, { { 240.284, -3.717, 119.684 } } },
         },
         [15940] = {
-            { 'Gwyllgi', 190, 31, 32, 1 },
+            { 'Gwyllgi', 190, 31, 32, 1, { { -65.363, 7.726, 75.649 } } },
         },
         [15941] = {
-            { 'Chonchon', 119, 42, 43, 1 },
+            { 'Chonchon', 119, 42, 43, 1, { { -129, 23, -188 } } },
         },
         [15942] = {
-            { 'Ramponneau', 95, 47, 54, 1 },
+            { 'Ramponneau', 95, 47, 54, 1, { { 93.736, -1.104, -204.736 } } },
         },
         [15943] = {
-            { 'Belladonna', 95, 53, 54, 1 },
+            { 'Belladonna', 95, 53, 54, 1, { { -104, -22, 175 } } },
         },
         [15944] = {
-            { 'Frogamander', 200, 72, 73, 1 },
+            { 'Frogamander', 200, 72, 73, 1, { { -78.8, 6.15, 140.6 } } },
         },
         [15945] = {
-            { 'Prankster Maverix', 105, 51, 52, 1 },
+            { 'Prankster Maverix', 105, 51, 52, 1, { { 159, 7.5, -314 } } },
         },
         [15946] = {
-            { 'Nis Puk', 52, 77, 77, 1 },
+            { 'Nis Puk', 52, 77, 77, 1, { { -170.152, -15.75, 598.993 }, { -169.498, -15.764, 603.996 }, { -168.202, -17.481, 611.691 }, { -163.179, -16, 598.084 }, { -163.155, -18.654, 617.593 }, { -162.975, -20.25, 627.105 }, { -162.491, -20.25, 625.975 }, { -159.703, -20.25, 624.505 }, { -158.182, -16, 597.38 }, { -158.111, -20.332, 628.107 }, { -156.549, -15.719, 587.482 }, { -156.506, -19.569, 620.302 }, { -156.287, -18.803, 617.972 }, { -155.416, -15.902, 594.976 }, { -155.319, -15.959, -599.366 }, { -154.956, -15.75, 591.34 }, { -154.585, -20.078, 627.524 }, { -153.106, -17.841, 613.521 }, { -152.708, -17.645, 612.113 }, { -149.756, -15.879, 604.601 }, { -149.719, -19.723, 626.392 }, { -149.622, -16.5, 609.757 }, { -148.851, -20.048, 632.107 }, { -148.586, -15.75, 599.614 }, { -148.569, -19.643, 629.675 }, { -148.439, -15.764, 595.439 }, { -147.688, -15.896, 604.456 }, { -147.271, -18.25, 621.657 }, { -146.613, -16.756, 617.179 }, { -146.345, -18.856, 626.763 }, { -145.576, -16.5, 613.037 }, { -144.875, -15.556, 599.078 }, { -143.912, -19.468, 630.766 }, { -143.669, -18.23, 623.435 }, { -143.378, -15.5, 598.6 }, { -143.268, -15.534, 596.005 }, { -142.803, -15.824, 594.981 }, { -142.726, -15.5, 601.845 }, { -142.362, -15.784, 604.881 }, { -141.164, -18.082, 619.978 }, { -140.445, -16.5, 615.173 }, { -140.271, -18.018, 621.369 }, { -139.96, -16.5, 611.522 }, { -139.663, -16.605, 607.87 }, { -139.536, -16.906, 617.72 }, { -138.929, -15.5, 603.542 }, { -138.591, -15.5, 599.028 }, { -137.649, -15.625, 595.691 }, { -134.339, -16.331, 608.987 }, { -132.564, -15.716, 597.294 }, { -130.931, -15.75, 601.784 } } },
         },
         [15948] = {
             { 'Orcus', 119, 85, 85, 1 },
@@ -6355,98 +7274,98 @@ return {
             { 'Jyeshtha', 95, 82, 82, 1 },
         },
         [15959] = {
-            { 'Shinryu', 255, 90, 92, 1 },
-            { 'Shinryu', 255, 139, 139, 1 },
+            { 'Shinryu', 255, 90, 92, 1, { { -479, -1000, -471 }, { -477.491, -0.5, 515.33 }, { 519, -500, 519 } } },
+            { 'Shinryu', 255, 139, 139, 1, { { -477.922, -1000.5, -484.836 }, { -477.341, -0.5, 510.673 }, { 520, -500.5, 520 } } },
         },
         [15960] = {
-            { 'Ogopogo', 253, 84, 86, 1 },
+            { 'Ogopogo', 253, 84, 86, 1, { { -16.737, -175.496, 70.529 } } },
         },
         [15978] = {
-            { 'Crystal Eater', 68, 75, 75, 1 },
+            { 'Crystal Eater', 68, 75, 75, 1, { { -302.285, 36.716, -32.391 } } },
         },
         [15979] = {
-            { 'Zoraal Ja\'s Pkuucha', 51, 75, 75, 1 },
+            { 'Zoraal Ja\'s Pkuucha', 51, 75, 75, 1, { { 170, -18, -21 }, { 181, -18, -42 }, { 193, -18, -65 }, { 207, -16, -77 }, { 208, -17, -93 }, { 221, -19, -75 } } },
         },
         [15984] = {
-            { 'Mythril Mouth Monamaq', 62, 81, 81, 1 },
+            { 'Mythril Mouth Monamaq', 62, 81, 81, 1, { { -278.2, 9.5, 197.47 } } },
         },
         [15999] = {
-            { 'Ob', 72, 78, 80, 1 },
+            { 'Ob', 72, 78, 80, 1, { { 552.914, -0.112, -135.001 } } },
         },
         [16000] = {
-            { 'Chamrosh', 65, 78, 80, 1 },
+            { 'Chamrosh', 65, 78, 80, 1, { { 206, 14, -285 } } },
         },
         [16014] = {
-            { 'Skirling Liger', 105, 42, 43, 1 },
+            { 'Skirling Liger', 105, 42, 43, 1, { { -437, -15, 195 }, { -429, -15, 240 }, { -401, -15, 173 }, { -395, -15, 127 }, { -394, -16, 206 }, { -380, -16, 258 }, { -377, -15, 204 }, { -337, -15, 115 }, { -321, -15, 181 } } },
         },
         [16015] = {
-            { 'Lesath', 198, 43, 44, 1 },
+            { 'Lesath', 198, 43, 44, 1, { { 10.991, 19.55, -161.516 } } },
         },
         [16016] = {
-            { 'Powderer Penny', 124, 49, 49, 1 },
+            { 'Powderer Penny', 124, 49, 49, 1, { { -46.099, -0.144, -65.964 }, { -37.681, -3.3, -124.244 }, { -15.742, 8.204, -102.386 }, { -15.146, -0.698, -145.681 }, { -11.7, -2.531, -123.25 }, { -3.466, -0.5, -65.71 }, { 5.283, -3.164, -95.762 } } },
         },
         [16017] = {
-            { 'Bombast', 193, 42, 44, 1 },
+            { 'Bombast', 193, 42, 44, 1, { { -154, -27.73, -197.25 } } },
         },
         [16018] = {
-            { 'Naa Zeku the Unwaiting', 119, 49, 49, 1 },
+            { 'Naa Zeku the Unwaiting', 119, 49, 49, 1, { { 407.659, -1.452, -319.434 } } },
         },
         [16019] = {
-            { 'Elusive Edwin', 121, 46, 47, 1 },
+            { 'Elusive Edwin', 121, 46, 47, 1, { { 321.29, 0, -121.171 }, { 340.385, 0.188, -133.432 }, { 363.777, 0.151, -167.571 }, { 369.662, -0.882, -148.873 } } },
         },
         [16020] = {
-            { 'Ravenous Crawler', 110, 42, 43, 1 },
+            { 'Ravenous Crawler', 110, 42, 43, 1, { { -562.343, -16.082, -35.952 }, { -527.306, -16.432, -19.056 }, { -521.266, -15.929, -74.551 }, { -513.025, -16.239, -49.851 }, { -493.331, -15.787, -90.428 }, { -491.944, -15.695, -125.229 }, { -488.8, -8, -37.888 }, { -454.893, -8.368, -81.525 } } },
         },
         [16021] = {
-            { 'Eyegouger', 105, 46, 46, 1 },
+            { 'Eyegouger', 105, 46, 46, 1, { { 177.3, -2.1, -54.54 } } },
         },
         [16022] = {
-            { 'Donggu', 193, 42, 44, 1 },
+            { 'Donggu', 193, 42, 44, 1, { { -48.06, 31.996, 270.29 } } },
         },
         [16023] = {
-            { 'Slippery Sucker', 126, 41, 42, 1 },
+            { 'Slippery Sucker', 126, 41, 42, 1, { { 16.35, -21.3, -25.5 } } },
         },
         [16024] = {
-            { 'Thoon', 173, 42, 43, 1 },
+            { 'Thoon', 173, 42, 43, 1, { { 132, 0, 74 } } },
         },
         [16025] = {
-            { 'Nandi', 114, 48, 49, 1 },
+            { 'Nandi', 114, 48, 49, 1, { { -231.1, 0.36, -24 } } },
         },
         [16026] = {
-            { 'Tempest Tigon', 2, 42, 43, 1 },
+            { 'Tempest Tigon', 2, 42, 43, 1, { { -254.38, -8.773, -306.914 }, { -251.733, -8.944, -293.391 }, { -251.544, -9.268, -314.962 }, { -251.052, -8.156, -272.683 }, { -250.223, -9.045, -235.979 }, { -250.022, -8.847, -285.78 }, { -249.949, -7.348, -266.621 }, { -248.701, -7.55, -251.007 }, { -248.478, -7.322, -292.112 }, { -247.985, -7.002, -300.027 }, { -247.038, -8.093, -292.835 }, { -246.539, -6.583, -293.678 }, { -246.387, -8.815, -328.821 }, { -246.26, -6.904, -319.015 }, { -245.998, -5.927, -306.152 }, { -245.291, -6.506, -244.337 }, { -245.152, -6.488, -240.812 }, { -244.893, -6.209, -285.755 }, { -244.164, -5.474, -266.032 }, { -243.589, -5.945, -274.885 }, { -243.119, -6.312, -235.325 }, { -242.669, -6.587, -325.404 }, { -240.079, -5.527, -292.926 }, { -239.831, -5.162, -256.786 }, { -239.756, -5.427, -306.229 }, { -239.622, -5.96, -242.606 }, { -239.295, -5.044, -257.499 }, { -239.08, -5.751, -246.801 }, { -238.613, -4.859, -300.505 }, { -238.429, -5.81, -317.978 }, { -237.841, -5.374, -291.264 }, { -237.803, -5.733, -281.786 }, { -236.241, -5.327, -271.764 }, { -236.055, -4.653, -262.816 }, { -235.768, -8.443, -230.548 }, { -235.198, -7.664, -328.223 }, { -234.254, -4.99, -240.67 }, { -233.707, -4.883, -306.695 }, { -233.44, -5.777, -323.779 }, { -232.486, -3.338, -295.559 }, { -232.259, -4.369, -276.296 }, { -231.409, -2.838, -289.542 }, { -230.949, -4.208, -301.971 }, { -230.871, -2.74, -251.924 }, { -230.497, -4.05, -270.854 }, { -230.322, -3.887, -259.916 }, { -229.9, -3.537, -312.966 }, { -229.511, -3.265, -278.078 }, { -226.64, -1.801, -293.027 }, { -225.261, -1.919, -319.403 }, { -223.329, -1.595, -280.352 } } },
         },
         [16027] = {
-            { 'Sappy Sycamore', 104, 41, 42, 1 },
+            { 'Sappy Sycamore', 104, 41, 42, 1, { { 172, 0, 279 }, { 215, 0, 241 }, { 233, 0, 290 }, { 236, 0, 210 }, { 266, 0, 284 }, { 270, 0, 156 }, { 276, 0, 265 }, { 283, 0, 265 }, { 290, 0, 211 }, { 291, 0, 283 }, { 313, 0, 280 }, { 320, 0, 177 } } },
         },
         [16028] = {
-            { 'Thunderclaw Thuban', 120, 47, 48, 1 },
+            { 'Thunderclaw Thuban', 120, 47, 48, 1, { { 423.313, 16.568, -110.108 } } },
         },
         [16030] = {
-            { 'Agar Agar', 193, 64, 66, 1 },
+            { 'Agar Agar', 193, 64, 66, 1, { { -71.36, 31.975, 207.479 } } },
         },
         [16031] = {
-            { 'Bashe', 120, 54, 55, 1 },
+            { 'Bashe', 120, 54, 55, 1, { { 537.188, 6.167, -11.067 } } },
         },
         [16032] = {
-            { 'Ni\'Zho Bladebender', 109, 43, 45, 1 },
+            { 'Ni\'Zho Bladebender', 109, 43, 45, 1, { { -429.953, 24.5, -305.45 }, { 11.309, 23.904, -337.923 } } },
         },
         [16033] = {
-            { 'Qoofim', 126, 47, 48, 1 },
+            { 'Qoofim', 126, 47, 48, 1, { { -108.2, -21.82, 388.2 } } },
         },
         [16034] = {
-            { 'Hoar-knuckled Rimberry', 124, 73, 73, 1 },
+            { 'Hoar-knuckled Rimberry', 124, 73, 73, 1, { { 24.922, -5.023, -423.784 }, { 31.93, 0.201, -407.7 } } },
         },
         [16035] = {
-            { 'Goaftrap', 25, 50, 51, 1 },
+            { 'Goaftrap', 25, 50, 51, 1, { { 703.942, 0.162, -462.405 } } },
         },
         [16036] = {
-            { 'Goblintrap', 81, 60, 60, 1 },
+            { 'Goblintrap', 81, 60, 60, 1, { { 168, 0, -440 } } },
         },
         [16037] = {
-            { 'Eldritch Edge', 110, 55, 55, 1 },
+            { 'Eldritch Edge', 110, 55, 55, 1, { { 377.94, -29.295, -150.296 }, { 388, -37.859, -162.602 }, { 394.874, -23.888, -146.595 }, { 395, -24, -147 }, { 403.583, -24, -159.456 }, { 431.561, -20.44, -59.401 }, { 436.784, -22.906, -70.26 }, { 440.469, -28.826, -48.646 } } },
         },
         [16038] = {
-            { 'Blighting Brand', 120, 54, 55, 1 },
+            { 'Blighting Brand', 120, 54, 55, 1, { { -206.692, 8, 203.594 } } },
         },
         [16054] = {
             { 'Lamprey Lord', 106, 82, 82, 1 },
@@ -6469,33 +7388,33 @@ return {
             { 'Feuerunke', 137, 82, 82, 1 },
         },
         [16059] = {
-            { 'Bloodguzzler', 15, 85, 85, 1 },
+            { 'Bloodguzzler', 15, 85, 85, 1, { { -196.296, 65.566, 787.04 } } },
         },
         [16072] = {
-            { 'Crystal Eater', 68, 75, 75, 1 },
+            { 'Crystal Eater', 68, 75, 75, 1, { { -302.285, 36.716, -32.391 } } },
         },
         [16082] = {
-            { 'Devout Radol Ja', 65, 83, 83, 1 },
+            { 'Devout Radol Ja', 65, 83, 83, 1, { { 106.43, -3.784, -79.59 } } },
         },
         [16083] = {
-            { 'Lamie No.8', 54, 80, 82, 1 },
+            { 'Lamie No.8', 54, 80, 82, 1, { { 144.706, -2.687, 136.081 } } },
         },
         [16085] = {
-            { 'Gyroscopic Gears', 76, 80, 82, 1 },
+            { 'Gyroscopic Gears', 76, 80, 82, 1, { { -225.7, -4.5, -354.63 } } },
         },
         [16089] = {
             { 'Poroggo Madame', 73, 80, 80 },
         },
         [16091] = {
-            { 'Skirmish Pephredo', 75, 74, 75, 1 },
-            { 'Zebra Zachary', 75, 77, 77, 1 },
+            { 'Skirmish Pephredo', 75, 74, 75, 1, { { -340, -0.5, -242 } } },
+            { 'Zebra Zachary', 75, 77, 77, 1, { { 260, -0.5, 125 } } },
         },
         [16093] = {
-            { 'Archaic Gear', 74, 73, 74, 1 },
-            { 'Archaic Gears', 74, 74, 75, 1 },
+            { 'Archaic Gear', 74, 73, 74, 1, { { -440, -0.002, -537.16 }, { -439.7, -0.001, -539.18 }, { -426, -0.5, -540 }, { -410.7, 0.001, -71.164 }, { -409.7, 0.001, -119.67 }, { -391.7, -0.004, -554.43 }, { -382.5, -0.007, -548.8 }, { -375.3, 0.005, -14.42 }, { -368.7, -0.449, -536.28 }, { -365.6, 0.021, -12.71 }, { -365.2, -0.476, 211.47 }, { -359.8, -0.474, 211.024 }, { -343.7, -0.02, -226.64 }, { -340, -4.388, -32.248 }, { -340, 3.423, -166.51 }, { -339.8, -0.486, -210.72 }, { -335.7, -0.037, 28.803 }, { -333.2, -0.061, 31.15 }, { -331.5, -0.34, 18.63 }, { -326, -0.013, -215.98 }, { -322.5, -0.469, 218.257 }, { -311.2, -0.432, 182.477 }, { -305.3, 0.014, -525.63 }, { -298.3, 0.002, -182.49 }, { -293, -0.171, -533.36 }, { -292.3, 0.021, -181.77 }, { -292, -0.026, -541.42 }, { -263, 0.001, -122.39 }, { -250, -0.5, -540 }, { -249, -0.021, -537.01 }, { -248.8, -0.006, -544.81 }, { -245.4, 0.001, -79.817 } } },
+            { 'Archaic Gears', 74, 74, 75, 1, { { -415.2, 0.001, -73.176 }, { -400.1, 0.001, -119.61 }, { -359.5, -0.474, 178.126 }, { -317.2, -0.037, 155.333 }, { -316.8, -0.075, 166.942 }, { -316, -0.472, 235.759 }, { -287.1, 0.001, -79.47 }, { -257.1, 0.001, -118.89 } } },
         },
         [16095] = {
-            { 'Hammerblow Majanun', 76, 75, 75, 1 },
+            { 'Hammerblow Majanun', 76, 75, 75, 1, { { 286.5, 3.55, -500 } } },
         },
         [16099] = {
             { 'Poroggo Madame', 73, 80, 80 },
@@ -6507,7 +7426,7 @@ return {
             { 'Psycheflayer', 74, 78, 78 },
         },
         [16150] = {
-            { 'Scitalis', 89, 83, 83, 1 },
+            { 'Scitalis', 89, 83, 83, 1, { { -140.354, -92.095, 39.459 } } },
         },
         [16151] = {
             { 'Dawon', 108, 85, 85, 1 },
@@ -6515,13 +7434,13 @@ return {
             { 'Dawon', 117, 85, 85, 1 },
         },
         [16152] = {
-            { 'Wulgaru', 72, 80, 82, 1 },
+            { 'Wulgaru', 72, 80, 82, 1, { { -22.265, -4.449, 204.588 } } },
         },
         [16153] = {
-            { 'Lividroot Amooshah', 52, 85, 87, 1 },
+            { 'Lividroot Amooshah', 52, 85, 87, 1, { { 334, -10, 184 } } },
         },
         [16154] = {
-            { 'Vulpangue', 51, 78, 80, 1 },
+            { 'Vulpangue', 51, 78, 80, 1, { { -697, -7, -123 } } },
         },
         [16166] = {
             { 'Troll Targeteer', 62, 78, 83 },
@@ -6536,104 +7455,104 @@ return {
             { 'Mamool Ja Stabler', 65, 81, 83 },
         },
         [16173] = {
-            { 'Pallas', 83, 83, 83, 1 },
+            { 'Pallas', 83, 83, 83, 1, { { 366.79, -31.435, 419.763 } } },
         },
         [16174] = {
-            { 'Wulgaru', 72, 80, 82, 1 },
+            { 'Wulgaru', 72, 80, 82, 1, { { -22.265, -4.449, 204.588 } } },
         },
         [16175] = {
-            { 'Verdelet', 79, 85, 86, 1 },
+            { 'Verdelet', 79, 85, 86, 1, { { 417.02, -19.295, -69.99 } } },
         },
         [16178] = {
             { 'King Arthro', 86, 0, 0, 1 },
         },
         [16180] = {
-            { 'Vee Ladu the Titterer', 99, 83, 83, 1 },
+            { 'Vee Ladu the Titterer', 99, 83, 83, 1, { { -57.602, -0.823, -58.06 } } },
         },
         [16181] = {
-            { 'Ga\'Lhu Nevermolt', 92, 83, 83, 1 },
+            { 'Ga\'Lhu Nevermolt', 92, 83, 83, 1, { { 208.697, -3.353, -39.247 } } },
         },
         [16185] = {
-            { 'Duke Decapod', 116, 7, 8, 1 },
+            { 'Duke Decapod', 116, 7, 8, 1, { { -281, -26.101, 659 }, { -267, -22.101, 664 }, { -238.093, -22.999, 656.609 }, { -236, -24.101, 607 }, { -229, -22.101, 654 }, { -216, -22.101, 624 } } },
         },
         [16186] = {
-            { 'Mucoid Mass', 166, 45, 48, 1 },
+            { 'Mucoid Mass', 166, 45, 48, 1, { { 140, 20, -193 } } },
         },
         [16187] = {
-            { 'Shankha', 4, 52, 53, 1 },
+            { 'Shankha', 4, 52, 53, 1, { { -176.392, -3.776, -611.012 }, { -114, 0.001, -591 } } },
         },
         [16188] = {
             { 'Sentinel Crab', 132, 75, 90 },
         },
         [16190] = {
-            { 'Mielikki', 215, 0, 0, 1 },
+            { 'Mielikki', 215, 0, 0, 1, { { 481, 20, 39 } } },
         },
         [16203] = {
-            { 'Ironclad Severer', 216, 0, 0, 1 },
+            { 'Ironclad Severer', 216, 0, 0, 1, { { -468.874, -31.645, 361.382 } } },
         },
         [16204] = {
-            { 'Yaanei', 215, 95, 95, 1 },
+            { 'Yaanei', 215, 95, 95, 1, { { 322, -25, -33 } } },
         },
         [16205] = {
-            { 'Smok', 215, 0, 0, 1 },
+            { 'Smok', 215, 0, 0, 1, { { -547, -4, -12 }, { -539, -12, -75 }, { -530, -5, -39 } } },
         },
         [16206] = {
-            { 'Ironclad Pulverizer', 216, 0, 0, 1 },
+            { 'Ironclad Pulverizer', 216, 0, 0, 1, { { -214, -31, 160 }, { -199, -31, 145 }, { -198, -31, 160 }, { -192, -31, 145 } } },
         },
         [16207] = {
-            { 'Karkadann', 217, 85, 87, 1 },
+            { 'Karkadann', 217, 85, 87, 1, { { -158, -32, 118 }, { -157, -31, 88 }, { -157, -31, 104 } } },
         },
         [16208] = {
-            { 'Ironclad Cleaver', 215, 0, 0, 1 },
+            { 'Ironclad Cleaver', 215, 0, 0, 1, { { -276, -4, -159 } } },
         },
         [16209] = {
-            { 'Kutharei', 216, 95, 95, 1 },
+            { 'Kutharei', 216, 95, 95, 1, { { -146.279, -31.324, -316.425 } } },
         },
         [16210] = {
-            { 'Karkatakam', 216, 0, 0, 1 },
+            { 'Karkatakam', 216, 0, 0, 1, { { 200, -15, 519 } } },
         },
         [16222] = {
-            { 'Dorgerwor the Astute', 62, 81, 81, 1 },
+            { 'Dorgerwor the Astute', 62, 81, 81, 1, { { 111.05, -10.32, 166.533 } } },
         },
         [16237] = {
-            { 'Balam-Quitz', 98, 69, 75, 1 },
+            { 'Balam-Quitz', 98, 69, 75, 1, { { 446.853, 23.817, 72.982 } } },
         },
         [16238] = {
-            { 'Kinepikwa', 90, 57, 79, 1 },
+            { 'Kinepikwa', 90, 57, 79, 1, { { -106.472, 24.556, -251.792 } } },
         },
         [16239] = {
-            { 'Verdelet', 79, 85, 86, 1 },
+            { 'Verdelet', 79, 85, 86, 1, { { 417.02, -19.295, -69.99 } } },
         },
         [16240] = {
-            { 'Chamrosh', 65, 78, 80, 1 },
+            { 'Chamrosh', 65, 78, 80, 1, { { 206, 14, -285 } } },
         },
         [16242] = {
-            { 'Dark Ixion', 84, 85, 85, 1 },
-            { 'Dark Ixion', 81, 85, 85, 1 },
-            { 'Dark Ixion', 96, 85, 85, 1 },
-            { 'Dark Ixion', 89, 85, 85, 1 },
-            { 'Dark Ixion', 82, 85, 85, 1 },
-            { 'Dark Ixion', 91, 85, 85, 1 },
-            { 'Dark Ixion', 95, 85, 85, 1 },
+            { 'Dark Ixion', 84, 85, 85, 1, { { -83.03, -8.5, 35.26 } } },
+            { 'Dark Ixion', 81, 85, 85, 1, { { 236, -20, -323 } } },
+            { 'Dark Ixion', 96, 85, 85, 1, { { -237.169, -60.711, -237.419 } } },
+            { 'Dark Ixion', 89, 85, 85, 1, { { 344.419, 36.341, -442.948 } } },
+            { 'Dark Ixion', 82, 85, 85, 1, { { -191.51, -0.28, 91.963 } } },
+            { 'Dark Ixion', 91, 85, 85, 1, { { 25.225, -8.723, -346.82 } } },
+            { 'Dark Ixion', 95, 85, 85, 1, { { 231.823, -25.286, 258.575 } } },
         },
         [16246] = {
-            { 'Feeblescheme Bhogbigg', 85, 83, 83, 1 },
+            { 'Feeblescheme Bhogbigg', 85, 83, 83, 1, { { -176.207, -0.384, -298.763 } } },
         },
         [16247] = {
-            { 'Fleshgnasher', 99, 80, 85, 1 },
+            { 'Fleshgnasher', 99, 80, 85, 1, { { 174.37, -16.539, -141.226 } } },
         },
         [16259] = {
-            { 'Shinryu', 255, 90, 92, 1 },
-            { 'Shinryu', 255, 139, 139, 1 },
+            { 'Shinryu', 255, 90, 92, 1, { { -479, -1000, -471 }, { -477.491, -0.5, 515.33 }, { 519, -500, 519 } } },
+            { 'Shinryu', 255, 139, 139, 1, { { -477.922, -1000.5, -484.836 }, { -477.341, -0.5, 510.673 }, { 520, -500.5, 520 } } },
         },
         [16260] = {
-            { 'Orthrus', 218, 0, 0, 1 },
+            { 'Orthrus', 218, 0, 0, 1, { { -404, 0.001, 118 }, { -400, 0, 97 }, { -395, 0.001, 89 } } },
         },
         [16272] = {
-            { 'Duu Masa the Onecut', 99, 80, 80, 1 },
+            { 'Duu Masa the Onecut', 99, 80, 80, 1, { { -228, -0.68, 148 }, { -182.571, -0.689, 137.769 } } },
         },
         [16274] = {
-            { 'Claret', 61, 78, 80, 1 },
+            { 'Claret', 61, 78, 80, 1, { { 497, -9, 52 } } },
         },
         [16275] = {
             { 'Lambton Worm', 86 },
@@ -6641,31 +7560,31 @@ return {
             { 'Lambton Worm', 93 },
         },
         [16277] = {
-            { 'Coinbiter Cjaknokk', 85, 83, 83, 1 },
+            { 'Coinbiter Cjaknokk', 85, 83, 83, 1, { { -128.493, 3.745, 20.947 } } },
         },
         [16278] = {
-            { 'Observant Zekka', 92, 83, 83, 1 },
+            { 'Observant Zekka', 92, 83, 83, 1, { { 128.442, 0.495, 161.025 } } },
         },
         [16296] = {
-            { 'Tococo', 107, 4, 5, 1 },
+            { 'Tococo', 107, 4, 5, 1, { { -133, 7.84, -228 }, { -116, 0, -202 }, { -115, 0, -181 }, { -99, 12, -235 }, { -84, 0, -196 }, { -81, 1.9, -178 }, { -79, 0, -166 }, { -71, 10, -238 }, { -68, 0.9, -214 }, { -53, 0, -197 } } },
         },
         [16297] = {
-            { 'Okyupete', 25, 57, 60, 1 },
+            { 'Okyupete', 25, 57, 60, 1, { { -76.467, -24.484, 523.605 }, { -44.18, -24.518, 511.993 } } },
         },
         [16298] = {
-            { 'Splacknuck', 4, 69, 70, 1 },
+            { 'Splacknuck', 4, 69, 70, 1, { { 88, -45, 920 }, { 170.426, -44.934, 832.74 } } },
         },
         [16299] = {
-            { 'Mind Hoarder', 204, 61, 62, 1 },
+            { 'Mind Hoarder', 204, 61, 62, 1, { { 40, -15.5, -38 } } },
         },
         [16300] = {
-            { 'Gloom Eye', 166, 73, 74, 1 },
+            { 'Gloom Eye', 166, 73, 74, 1, { { -152.136, -5.216, -89.814 } } },
         },
         [16302] = {
-            { 'Tethra', 175, 80, 80, 1 },
+            { 'Tethra', 175, 80, 80, 1, { { 113.621, 8.584, -81.806 } } },
         },
         [16303] = {
-            { 'Brazen Bones', 169, 82, 83, 1 },
+            { 'Brazen Bones', 169, 82, 83, 1, { { 155.792, 8.334, -124.494 }, { 169.27, 8.028, -110.58 }, { 169.525, 11.964, -128.288 } } },
         },
         [16306] = {
             { 'Chesma', 108, 82, 82, 1 },
@@ -6678,25 +7597,25 @@ return {
             { 'Tammuz', 117, 82, 82, 1 },
         },
         [16308] = {
-            { 'Chillwing Hwitti', 253, 0, 0, 1 },
+            { 'Chillwing Hwitti', 253, 0, 0, 1, { { -484, -20, -85 } } },
         },
         [16309] = {
-            { 'Teekesselchen', 254, 0, 0, 1 },
+            { 'Teekesselchen', 254, 0, 0, 1, { { 319, 47, 643 } } },
         },
         [16319] = {
-            { 'Zhuu Buxu the Silent', 99, 80, 84, 1 },
+            { 'Zhuu Buxu the Silent', 99, 80, 84, 1, { { -103.22, -0.246, -159.507 } } },
         },
         [16320] = {
-            { 'Shatterskull Mippdapp', 85, 82, 82, 1 },
+            { 'Shatterskull Mippdapp', 85, 82, 82, 1, { { -25.695, 0.363, 51.234 } } },
         },
         [16338] = {
-            { 'Dextrose', 62, 80, 82, 1 },
+            { 'Dextrose', 62, 80, 82, 1, { { -144, 11, 464 } } },
         },
         [16339] = {
-            { 'Iriri Samariri', 65, 84, 84, 1 },
+            { 'Iriri Samariri', 65, 84, 84, 1, { { -118, 7, -80 } } },
         },
         [16340] = {
-            { 'Cheese Hoarder Gigiroon', 72, 80, 82, 1 },
+            { 'Cheese Hoarder Gigiroon', 72, 80, 82, 1, { { -184.112, -8.105, 24.555 } } },
         },
         [16344] = {
             { 'Lambton Worm', 86 },
@@ -6704,56 +7623,56 @@ return {
             { 'Lambton Worm', 93 },
         },
         [16354] = {
-            { 'Va\'Gho Bloodbasked', 92, 83, 83, 1 },
+            { 'Va\'Gho Bloodbasked', 92, 83, 83, 1, { { 48.226, -3.267, 41.63 } } },
         },
         [16355] = {
-            { 'Asterion', 99, 80, 85, 1 },
+            { 'Asterion', 99, 80, 85, 1, { { -18.05, -16.926, 18.064 } } },
         },
         [16374] = {
-            { 'Sekhmet', 7, 52, 53, 1 },
+            { 'Sekhmet', 7, 52, 53, 1, { { 199.96, 19.486, -44.082 }, { 307, 20, -186 }, { 316, 20, -141 }, { 322, 20, -199 }, { 359, 20, -158 }, { 360, 20, -202 } } },
         },
         [16375] = {
-            { 'Boompadu', 72, 82, 82, 1 },
+            { 'Boompadu', 72, 82, 82, 1, { { 111.669, -0.352, 144.457 } } },
             { 'Boodlix', 87, 75, 80 },
         },
         [16376] = {
-            { 'Ethniu', 175, 80, 80, 1 },
+            { 'Ethniu', 175, 80, 80, 1, { { 153.554, -15.375, 286.063 } } },
         },
         [16379] = {
-            { 'Briareus', 132, 90, 90, 1 },
+            { 'Briareus', 132, 90, 90, 1, { { -189, 7, 269 }, { -179, 7, 259 }, { -170, 7, 269 } } },
         },
         [16381] = {
-            { 'Megantereon', 132, 85, 85, 1 },
+            { 'Megantereon', 132, 85, 85, 1, { { -764, -8, 121 } } },
         },
         [16426] = {
-            { 'Bomb Queen', 205, 79, 81, 1 },
+            { 'Bomb Queen', 205, 79, 81, 1, { { 21.128, 19.687, -110.232 } } },
         },
         [16428] = {
-            { 'Carabosse', 132, 90, 90, 1 },
+            { 'Carabosse', 132, 90, 90, 1, { { -3, 17, 148 }, { 11, 17, 148 }, { 26, 19, 148 } } },
         },
         [16434] = {
-            { 'Daggerclaw Dracos', 119, 27, 28, 1 },
+            { 'Daggerclaw Dracos', 119, 27, 28, 1, { { 630.43, -16.372, -494.748 } } },
         },
         [16443] = {
-            { 'Tom Tit Tat', 115, 9, 10, 1 },
+            { 'Tom Tit Tat', 115, 9, 10, 1, { { 31.149, -20.045, 358.265 }, { 77.509, -20.719, 434.757 }, { 101.918, -21.267, 488.56 }, { 107.026, -20.757, 500.66 }, { 108.632, -20.682, 494.884 }, { 109.071, -20.5, 486.466 }, { 116.245, -20.702, 493.429 }, { 117.798, -20.169, 486.672 }, { 130.08, -20.723, 472.365 }, { 138.244, -21.596, 469.503 }, { 138.647, -21.167, 481.756 }, { 139.154, -21.418, 505.416 }, { 139.386, -21.5, 493.401 }, { 139.572, -21.508, 495.614 }, { 139.943, -35.719, 299.835 }, { 144.562, -20.937, 482.31 }, { 151.484, -21.133, 494.038 }, { 154.426, -20.229, 475.023 }, { 160.422, -20.744, 493.9 }, { 166.249, -20.166, 484.352 }, { 168.32, -20.272, 481.099 }, { 169.705, -21.256, 495.643 }, { 171.346, -20.863, 489.107 }, { 177.25, -20.924, 492.86 }, { 178.79, -21.192, 483.926 }, { 179.961, -19.5, 509.121 }, { 181.991, -21.156, 494.75 }, { 186.058, -21.373, 497.657 }, { 191.339, -19.5, 543.938 }, { 191.977, -21.003, 506.542 }, { 193.731, -20.29, 518.094 }, { 195.479, -20.407, 529.743 }, { 199.97, -20, 518.704 }, { 200.384, -20.532, 507.796 }, { 203.15, -20.825, 534.546 }, { 203.911, -20.406, 509.526 }, { 209.18, -21.05, 533.435 }, { 211.099, -20.673, 568.574 }, { 211.491, -20.833, 528.766 }, { 211.91, -19.944, 546.316 }, { 216.583, -20.965, 530.631 }, { 229.13, -20.928, 513.115 }, { 229.605, -20.806, 529.069 }, { 231.633, -21.25, 540.18 }, { 235.6, -20.19, 565.967 }, { 236.967, -21.21, 539.336 }, { 238.953, -21.008, 575.896 }, { 239.421, -19.659, 583.122 }, { 240.821, -20.406, 549.532 }, { 255.782, -26.431, 382.877 }, { 260.806, -21.5, 573.373 }, { 274.296, -20.357, 587.339 } } },
         },
         [16447] = {
             { 'Wendigo', 192, 25, 28 },
         },
         [16480] = {
-            { 'Sozu Rogberry', 159, 65, 66, 1 },
+            { 'Sozu Rogberry', 159, 65, 66, 1, { { 223, -8, 259 } } },
         },
         [16486] = {
-            { 'Stinging Sophie', 106, 9, 10, 1 },
+            { 'Stinging Sophie', 106, 9, 10, 1, { { 178.638, -40.846, 506.046 }, { 182.365, -41.14, 500.929 }, { 188.552, -39.822, 478.633 }, { 194.046, -40.087, 511.385 }, { 196.873, -40.415, 500.153 }, { 197.369, -40.612, 453.688 }, { 206.148, -40.509, 444.612 }, { 206.759, -39.875, 541.41 }, { 207.247, -40.366, 473.452 }, { 210.607, -40.478, 566.096 }, { 211.296, -40.958, 457.627 }, { 216.014, -40.313, 565.127 }, { 216.15, -41.182, 445.157 }, { 220.812, -40.101, 437.207 }, { 222.364, -40.747, 465.73 }, { 231.661, -39.227, 567.517 }, { 234.104, -40.332, 462.288 }, { 236.612, -40, 458.831 }, { 237.753, -40.5, 469.738 }, { 246.018, -40.617, 407.564 }, { 255.987, -39.942, 599.076 }, { 258.034, -41, 411.8 }, { 262.773, -40, 599.993 }, { 271.563, -40.084, 433.923 }, { 272.464, -39.788, 423.53 }, { 283.958, -60.926, 530.016 }, { 284.173, -40.278, 615.288 }, { 285.813, -60.784, 518.539 }, { 288.447, -40.842, 634.161 }, { 289.548, -39.632, 429.275 }, { 293.364, -41, 617.523 }, { 295.89, -41.593, 614.738 }, { 308.116, -60.352, 550.771 }, { 308.448, -40.925, 613.064 }, { 308.459, -39.78, 635.766 }, { 308.975, -61.082, 525.69 }, { 309.996, -40.918, 611.928 }, { 310.309, -60.634, 521.404 }, { 314.403, -39.996, 437.785 }, { 321.86, -40, 614.763 }, { 323.611, -40, 600.652 }, { 340.381, -40.473, 601.786 }, { 349.108, -39.789, 592.532 }, { 349.85, -39.793, 461.709 }, { 352.974, -40.359, 472.914 }, { 353.048, -40.574, 577.119 }, { 353.313, -40.347, 463.609 }, { 356.544, -40.528, 570.302 }, { 356.987, -40.006, 584.836 }, { 363.904, -40.556, 549.428 }, { 363.973, -40.774, 562.355 }, { 371.609, -41.586, 548.679 } } },
         },
         [16488] = {
             { 'Nahn', 132, 85, 85, 1 },
         },
         [16509] = {
-            { 'Eyy Mon the Ironbreaker', 145, 16, 16, 1 },
+            { 'Eyy Mon the Ironbreaker', 145, 16, 16, 1, { { -99, 18, 127 } } },
         },
         [16511] = {
-            { 'Ichorous Ire', 198, 35, 36, 1 },
+            { 'Ichorous Ire', 198, 35, 36, 1, { { -93, 16, -101 } } },
         },
         [16522] = {
             { 'Napalm', 193, 31, 33 },
@@ -6762,22 +7681,22 @@ return {
             { 'Karkinos', 132, 90, 90, 1 },
         },
         [16555] = {
-            { 'Fafnir', 154, 90, 90, 1 },
+            { 'Fafnir', 154, 90, 90, 1, { { 82.325, 6.876, 42.041 } } },
         },
         [16580] = {
-            { 'Lumber Jack', 105, 55, 55, 1 },
+            { 'Lumber Jack', 105, 55, 55, 1, { { -670, -23, 352 } } },
         },
         [16604] = {
-            { 'Antican Praefectus', 208, 65, 65, 1 },
+            { 'Antican Praefectus', 208, 65, 65, 1, { { 869.24, 1.045, -655.214 } } },
         },
         [16605] = {
-            { 'Bune', 212, 83, 83, 1 },
+            { 'Bune', 212, 83, 83, 1, { { -91.113, -9.807, -200.988 }, { -90.21, -9.579, -161.059 }, { -88.883, -9.5, -199.547 }, { -87.079, -9.622, -187.315 }, { -85.492, -10.147, -168.654 }, { -84.997, -9.68, -191.642 }, { -84.583, -9.596, -172.726 }, { -83.912, -9.052, -182.189 }, { -83.517, -9.585, -177.477 }, { -83.407, -10.177, -167.66 }, { -83.395, -9.312, -172.427 }, { -82.768, -9.368, -189.457 }, { -82.202, -10, -203.307 }, { -82.025, -9.672, -191.129 }, { -81.769, -9.699, -191.31 }, { -79.788, -9, -173.946 }, { -79.521, -9, -175.899 }, { -78.017, -9.194, -184.132 }, { -77.987, -10.012, -203.403 }, { -77.888, -10, -193.552 }, { -76.916, -9.852, -194.764 }, { -74.891, -10.23, -167.159 }, { -74.863, -10.465, -156.289 }, { -74.199, -10.18, -167.294 }, { -72.434, -10, -186.258 }, { -72, -10, -170 }, { -71.961, -9.602, -169.802 }, { -71.371, -9.739, -168.789 }, { -71.079, -10.059, -161.571 }, { -70.494, -10.116, -165.057 }, { -69.683, -9.449, -159.494 }, { -69.676, -10, -166.645 }, { -69.229, -10, -165.856 }, { -67.923, -10.061, -198.402 }, { -67.566, -9.052, -158.554 }, { -64.606, -10.099, -185.664 }, { -63.15, -9, -160.368 }, { -63.111, -9.632, -163.706 }, { -62.276, -10.015, -168.081 }, { -59.9, -10, -166.809 }, { -59.572, -9.341, -162.928 }, { -57.027, -9.597, -153.959 }, { -56.935, -10.109, -172.612 }, { -55.649, -9.109, -156.58 }, { -54.737, -9.353, -166.081 }, { -50.912, -9.966, -171.669 }, { -47.245, -9.644, -168.424 }, { -46.285, -9.805, -161.678 }, { -46.102, -9.995, -157.439 }, { -43.474, -10, -164.605 } } },
         },
         [16631] = {
             { 'Dancing Weapon', 126, 28, 29 },
         },
         [16654] = {
-            { 'Bakka', 15, 85, 85, 1 },
+            { 'Bakka', 15, 85, 85, 1, { { 440.581, 32.216, 524.624 } } },
         },
         [16656] = {
             { 'Orcish Fodder', 101, 3, 8 },
@@ -6787,7 +7706,7 @@ return {
             { 'Orcish Fodder', 100, 3, 7 },
         },
         [16657] = {
-            { 'Trickster Kinetix', 126, 35, 36, 1 },
+            { 'Trickster Kinetix', 126, 35, 36, 1, { { -159, -19, 244 } } },
         },
         [16675] = {
             { 'Bat Eye', 166, 42, 44 },
@@ -6796,56 +7715,56 @@ return {
             { 'Girtab', 169, 58, 60 },
         },
         [16679] = {
-            { 'Skull of Wrath', 195, 60, 60, 1 },
+            { 'Skull of Wrath', 195, 60, 60, 1, { { -348.13, 0, 338.15 } } },
         },
         [16681] = {
-            { 'Gerwitz\'s Axe', 193, 50, 50, 1 },
+            { 'Gerwitz\'s Axe', 193, 50, 50, 1, { { 13, 31.574, 165 } } },
         },
         [16686] = {
-            { 'Antican Magister', 208, 65, 66, 1 },
+            { 'Antican Magister', 208, 65, 66, 1, { { -77, -0.5, -56 } } },
         },
         [16701] = {
             { 'Orcish Wallbreacher', 140, 15, 16 },
         },
         [16711] = {
-            { 'Baronet Romwe', 162, 68, 68, 1 },
+            { 'Baronet Romwe', 162, 68, 68, 1, { { -340, -52, 3 } } },
         },
         [16714] = {
-            { 'Panzer Percival', 104, 25, 26, 1 },
+            { 'Panzer Percival', 104, 25, 26, 1, { { 239.541, -0.365, 559.722 }, { 585.027, 0.044, 203.418 } } },
         },
         [16721] = {
-            { 'Mimas', 158, 36, 36, 1 },
+            { 'Mimas', 158, 36, 36, 1, { { -293.419, -144.07, 53.648 } } },
         },
         [16723] = {
-            { 'Northern Shadow', 204, 63, 63, 1 },
+            { 'Northern Shadow', 204, 63, 63, 1, { { -168.635, -15.948, 166.821 }, { -162, -15, 154 }, { -154.83, -15.904, 169.081 }, { -150.543, -15.858, 156.672 } } },
         },
         [16727] = {
-            { 'Goblinsavior Heronox', 212, 51, 52, 1 },
+            { 'Goblinsavior Heronox', 212, 51, 52, 1, { { 166, -9, -83 } } },
         },
         [16728] = {
-            { 'Peg Powler', 213, 61, 62, 1 },
+            { 'Peg Powler', 213, 61, 62, 1, { { -128.471, 4.952, 0.489 }, { -125.035, 4.483, 22.277 }, { -123.058, 5.923, 16.132 }, { -121.533, 6, 12.873 }, { -121.187, 5.892, 21.123 }, { -118.996, 4.911, 32.143 }, { -118.126, 4.973, 4.085 }, { -116.159, 5.378, 17.424 }, { -113.402, 5.154, 16.41 }, { -111.183, 5.357, 44.411 }, { -108.592, 4.507, 20.323 }, { -108.265, 4.405, 18.198 }, { -107.402, 4.964, 14.114 }, { -107.185, 5, 25.409 }, { -106.93, 4.849, 28.139 }, { -104.795, 5.379, 45.296 }, { -104, 4, 28 }, { -100.912, 4.263, -21.983 }, { -100.376, 4.974, 46.484 }, { -89.209, 5.949, 36.472 }, { -88.618, 5.371, 53.156 }, { -85.799, 5.238, 60.992 }, { -85.452, 5.265, 62.933 }, { -82.48, 5.331, 59.373 }, { -82.307, 5.624, 51.571 }, { -81.99, 5, 34.787 }, { -81.567, 5.013, 37.186 }, { -81.203, 5.874, 61.703 }, { -78.124, 6, 58.109 }, { -77, 4, 58 }, { -75.891, 5.092, 66.345 }, { -75.848, 4.787, 35.149 }, { -72.956, 4.943, 39.293 }, { -70.914, 4.57, 66.863 }, { -66.556, 5.549, 43.566 }, { -65.401, 5.388, 76.408 }, { -65.089, 5.386, 81.363 }, { -64.269, 5.441, 72.382 }, { -62.868, 5.123, 30.981 }, { -62.3, 5.386, 76.543 }, { -61.656, 5.255, 58.971 }, { -61.229, 5.764, 77.796 }, { -56.906, 5.58, 28.932 }, { -55.668, 3.642, 66.386 }, { -54.692, 4.555, 71.387 }, { -54.1, 5.462, 81.68 }, { -52.125, 4.071, 67.9 }, { -51.745, 4.288, 46.295 }, { -49.498, 4.505, 44.242 }, { -42.206, 5.992, 54.144 }, { -33.112, 4.735, 34.742 } } },
         },
         [16729] = {
-            { 'Antican Consul', 208, 75, 75, 1 },
+            { 'Antican Consul', 208, 75, 75, 1, { { -304.72, -2.634, 380.664 } } },
         },
         [16734] = {
-            { 'Triarius X-XV', 208, 72, 74, 1 },
+            { 'Triarius X-XV', 208, 72, 74, 1, { { -815, -0.5, -340 } } },
         },
         [16753] = {
             { 'Magicked Bones', 192, 3, 8 },
         },
         [16757] = {
-            { 'Marquis Allocen', 161, 76, 76, 1 },
+            { 'Marquis Allocen', 161, 76, 76, 1, { { -46.856, -4, 37.937 }, { -46.06, -4, 41.147 }, { -45.587, -4, 44.461 }, { -45.529, -4, 50.184 }, { -44.981, -4, 55.805 }, { -44.697, -4, 37.971 }, { -44.116, -4.496, 37.549 }, { -44.069, -4, 46.024 }, { -43.564, -4, 53.843 }, { -42.931, -4, 50.644 }, { -42.611, -4, 36.112 }, { -42.55, -4, 45.172 }, { -41.898, -4, 56.042 }, { -41.605, -4, 55.35 }, { -41.128, -4, 42.839 }, { -40.524, -4, 35.199 }, { -40.179, -4, 37.523 }, { -39.958, -4, 32.519 }, { -38.545, -4, 57.59 }, { -37.015, -4, 36.686 }, { -36.502, -4, 46.858 }, { -36.089, -4, 34.967 }, { -35.975, -4, 49.437 }, { -35.931, -4, 55.033 }, { -34.023, -4, 49.767 }, { -33.853, -4, 47.095 }, { -33.77, -4, 50.779 }, { -32.779, -4, 36.492 }, { -32.637, -4, 49.257 }, { -31.144, -4, 34.182 }, { -31.121, -4, 50.88 }, { -31.021, -4, 44.052 }, { -30.943, -4, 56.809 }, { -30.175, -4, 37.415 }, { -29.703, -4, 52.586 }, { -27.895, -4, 39.197 }, { -27.296, -4, 38.243 }, { -26.795, -4, 40.714 }, { -26.174, -4, 41.675 }, { -26.153, -4, 58.288 }, { -25.545, -4, 48.679 }, { -25.411, -4, 52.437 }, { -25.233, -4, 33.51 }, { -25.149, -4, 34.194 }, { -25.052, -4, 34.312 }, { -24.819, -4, 33.248 }, { -24.652, -4, 35.945 }, { -22.826, -4, 40.63 }, { -22.466, -4, 49.179 }, { -20.371, -4, 56.349 } } },
         },
         [16765] = {
-            { 'Skull of Lust', 195, 60, 60, 1 },
+            { 'Skull of Lust', 195, 60, 60, 1, { { 99.89, 8.08, -103.65 } } },
         },
         [16767] = {
-            { 'Serket', 200, 70, 70, 1 },
+            { 'Serket', 200, 70, 70, 1, { { -167.192, 19.157, 235.746 }, { -165.16, 19.46, 220.486 }, { -165.156, 19.212, 230.02 }, { -164.159, 19.19, 235.805 }, { -160.123, 19.25, 205.139 }, { -160.077, 19, 197.804 }, { -159.937, 19.034, 237.676 }, { -159.629, 19.408, 211.318 }, { -159.615, 19.25, 233.174 }, { -155.791, 19.25, 199.302 }, { -155.492, 19.25, 200.878 }, { -155.056, 19.221, 242.651 }, { -155, 19, 244 }, { -154.83, 19.167, 195.725 }, { -148.803, 19.392, 240.088 }, { -148.529, 19.427, 198.422 }, { -147.583, 19.412, 245.273 }, { -143.935, 19.5, 240.142 }, { -143.7, 19.53, 240.467 }, { -143.11, 19.268, 193.103 }, { -141.367, 19.146, 247.842 }, { -139.063, 19.75, 198.544 }, { -139.057, 19.75, 199.46 }, { -138.278, 19.75, 240.786 }, { -138.026, 19.747, 241.748 }, { -136.678, 19.426, 244.692 }, { -133.576, 19.5, 200.166 }, { -132.043, 19.397, 244.589 }, { -131.474, 19.438, 242.54 }, { -131.077, 19.378, 240.586 }, { -129.743, 19.212, 201.519 }, { -127.813, 19.247, 240.123 }, { -126.718, 19.14, 246.689 }, { -126.28, 19.115, 246.072 }, { -125.611, 19.18, 193.884 }, { -123.968, 19.123, 196.309 }, { -121.567, 19, 245.373 }, { -121.338, 19, 200.745 }, { -121.179, 19, 197.685 }, { -119.536, 19.5, 212.511 }, { -119.397, 19.25, 209.755 }, { -119.085, 19.5, 225.52 }, { -117.685, 19, 239.765 }, { -117.266, 19, 202.293 }, { -117.164, 19, 200.375 }, { -116.376, 19.19, 205.379 }, { -116.267, 19.519, 224.755 }, { -114.963, 19.154, 204.267 }, { -114.685, 19.445, 218.52 }, { -114.629, 19.047, 237.23 } } },
             { 'Serket', 129, 0, 0, 1 },
         },
         [16773] = {
-            { 'Doppelganger Dio', 194, 23, 25, 1 },
+            { 'Doppelganger Dio', 194, 23, 25, 1, { { 310, 0, 710 }, { 509, -1, 709 }, { 549, -1, 769 } } },
         },
         [16783] = {
             { 'Mine Scorpion', 143, 14, 16 },
@@ -6858,120 +7777,120 @@ return {
             { 'Giant Scorpion', 166, 38, 40 },
         },
         [16786] = {
-            { 'Duke Haborym', 161, 76, 76, 1 },
+            { 'Duke Haborym', 161, 76, 76, 1, { { -100.166, -4, 38.231 }, { -99.137, -4, 48.229 }, { -98.741, -4, 47.952 }, { -98.063, -4, 48.223 }, { -97.799, -4, 55.399 }, { -97.74, -4, 47.258 }, { -97.475, -4, 54.316 }, { -96.179, -4, 48.946 }, { -95.447, -4, 47.594 }, { -94.653, -4, 46.078 }, { -93.769, -4.499, 34.776 }, { -93.236, -4, 47.716 }, { -91.231, -4, 54.904 }, { -90.232, -4, 59.11 }, { -90.196, -4, 57.541 }, { -90.12, -4, 38.297 }, { -89.883, -4, 42.737 }, { -89.632, -4, 36.528 }, { -89.63, -4, 53.27 }, { -89.02, -4, 50.009 }, { -88.618, -4, 52.425 }, { -86.178, -4, 60.332 }, { -86.154, -4, 46.506 }, { -85.431, -4, 40.2 }, { -85.429, -4, 55.021 }, { -84.932, -4, 38 }, { -84.422, -4, 50.222 }, { -84.411, -4, 61.898 }, { -84.243, -4, 34.578 }, { -84.165, -4, 58.622 }, { -83.653, -4, 48.851 }, { -82.795, -4, 37.228 }, { -82.792, -4, 37.386 }, { -80.63, -4, 41.076 }, { -80.467, -4, 41.014 }, { -80.276, -4, 48.213 }, { -80.05, -4, 35.323 }, { -79.884, -4, 48.083 }, { -79.153, -4, 47.92 }, { -79.111, -4, 43.844 }, { -78.779, -4, 47.111 }, { -78.002, -4, 40.362 }, { -77.605, -4, 54.588 }, { -76.847, -4, 41.022 }, { -76.259, -4, 58.982 }, { -76.079, -4, 39.661 }, { -76.062, -4, 48.924 }, { -75.336, -4, 45.551 }, { -74.743, -4, 43.741 }, { -74.228, -4, 51.451 } } },
         },
         [16787] = {
-            { 'Grand Duke Batym', 161, 76, 76, 1 },
+            { 'Grand Duke Batym', 161, 76, 76, 1, { { -99.765, -4, -16.407 }, { -99.69, -4, -0.093 }, { -97.803, -4, -18.198 }, { -97.706, -4, -2.414 }, { -97.623, -4, 3.297 }, { -96.68, -4, -13.712 }, { -96.616, -4, -11.441 }, { -94.966, -4, 6.514 }, { -94.948, -4, 3.443 }, { -94.602, -4, -1.419 }, { -94.442, -4, -12.632 }, { -93.873, -4, -11.325 }, { -92.577, -4, -15.753 }, { -91.976, -4, -11.12 }, { -91.147, -4, 1.775 }, { -91.006, -4, -1.435 }, { -90.451, -4, -4.216 }, { -90.053, -4, 6.087 }, { -89.863, -4, 1.327 }, { -89.712, -4, -18.195 }, { -89.634, -4, -16.589 }, { -88.349, -4, 3.165 }, { -86.462, -4, 0.844 }, { -86.071, -4, -19.344 }, { -85.634, -4, -0.25 }, { -85.265, -4, -11.511 }, { -84.769, -4, -17.758 }, { -84.199, -4, -5.215 }, { -83.591, -4, -19.229 }, { -83.52, -4, 1.644 }, { -82.133, -4, 1.375 }, { -81.149, -4, -8.92 }, { -79.723, -4, -18.266 }, { -79.338, -4, -12.368 }, { -79.246, -4, 2.357 }, { -79.08, -4, -3.112 }, { -78.599, -4, -12.779 }, { -78.175, -4, 3.555 }, { -78, -4, -15 }, { -77.628, -4, -16.071 }, { -77.482, -4, 4.662 }, { -77.281, -4, 0.192 }, { -77.211, -4, -5.77 }, { -77.095, -4, -13.986 }, { -76.682, -4, -1.974 }, { -75.614, -4, -1.859 }, { -75.554, -4, -1.731 }, { -75.448, -4, -2.352 }, { -75.108, -4, -11.319 }, { -73.396, -4, 3.381 } } },
         },
         [16792] = {
-            { 'Count Bifrons', 162, 68, 68, 1 },
+            { 'Count Bifrons', 162, 68, 68, 1, { { -199, -52, -99 } } },
         },
         [16822] = {
-            { 'Roc', 120, 55, 55, 1 },
+            { 'Roc', 120, 55, 55, 1, { { 153.669, 0.145, -226.129 }, { 173.726, 0.565, -244.018 }, { 188.566, -1.168, -296.794 }, { 191.796, 0.263, -250.968 }, { 195.317, 0.111, -287.885 }, { 196.563, 0.134, -273.294 }, { 197.226, 0.757, -295.616 }, { 197.31, 0.167, -272.637 }, { 198.305, 0.916, -258.35 }, { 199.956, 0, -278.615 }, { 202.205, 0.247, -271.049 }, { 203.876, 0, -236.865 }, { 205.831, -0.116, -243.033 }, { 206.695, -0.034, -267.38 }, { 209.015, 0.491, -224.618 }, { 212.596, -0.216, -249.303 }, { 213.997, -1.672, -255.685 }, { 215.711, 0.404, -312.421 }, { 232, -0.01, -327 } } },
         },
         [16830] = {
-            { 'Skull of Gluttony', 195, 60, 60, 1 },
+            { 'Skull of Gluttony', 195, 60, 60, 1, { { 17.45, -15.94, 339.67 } } },
         },
         [16831] = {
-            { 'Skull of Greed', 195, 60, 60, 1 },
+            { 'Skull of Greed', 195, 60, 60, 1, { { 140.12, -15.92, 303.91 } } },
         },
         [16838] = {
-            { 'Faust', 178, 83, 84, 1 },
+            { 'Faust', 178, 83, 84, 1, { { 740, -0.463, -99 } } },
         },
         [16843] = {
-            { 'Impervious Chariot', 253, 100, 100, 1 },
+            { 'Impervious Chariot', 253, 100, 100, 1, { { -328.71, -176.298, 3.881 } } },
         },
         [16854] = {
-            { 'Empousa', 253, 105, 105, 1 },
+            { 'Empousa', 253, 105, 105, 1, { { -617, -39, -15 } } },
         },
         [16855] = {
-            { 'Ocean Sahagin', 176, 75, 75, 1 },
+            { 'Ocean Sahagin', 176, 75, 75, 1, { { 99.034, 9.626, -250.518 } } },
         },
         [16857] = {
-            { 'Skewer Sam', 200, 54, 54, 1 },
+            { 'Skewer Sam', 200, 54, 54, 1, { { -181.705, 0, 222.294 }, { -181.655, 0, 205.768 }, { -180.972, 0, 223.016 }, { -180.672, 0, 229.957 }, { -180.534, 0, 192.821 }, { -180.434, 0, 204.863 }, { -180.426, 0, 195.975 }, { -180.389, 0, 248.235 }, { -179.534, 0, 215.395 }, { -179.51, 0, 258.896 }, { -179.133, 0, 241.122 }, { -179.037, 0, 258.07 }, { -174.182, 0, 179.269 }, { -172.498, 0, 261.626 }, { -163.311, 0, 259.346 }, { -156.094, 0, 260.06 }, { -142.597, 0, 221.395 }, { -140.418, 0, 166.103 }, { -140.286, 0, 192.882 }, { -140.219, 0, 170.706 }, { -140.154, 0, 240.837 }, { -140.129, 0, 184.359 }, { -139.391, 0, 192.369 }, { -139.322, 0, 252.693 }, { -139.241, 0, 245.323 }, { -138.746, 0, 248.537 }, { -132.983, 0, 178.993 }, { -127.769, 0, 263.463 }, { -126.144, 0, 179.746 }, { -126.117, 0, 178.4 }, { -120.08, 0, 261.638 }, { -114.87, 0, 178.196 }, { -109.464, 0, 176.008 }, { -109.396, 0, 260.783 }, { -108.248, 0, 261.342 }, { -108, -0.5, 177 }, { -107.555, 0, 177.034 }, { -100.409, 0, 211.322 }, { -100.267, 0, 237.876 }, { -100.192, 0, 199.083 }, { -100.052, 0, 190.925 }, { -99.488, 0, 257.311 }, { -99.485, -0.496, 186.128 }, { -99.292, 0, 185.171 }, { -99.11, 0, 249.248 }, { -98.831, 0, 203.132 }, { -98.729, 0, 222.232 }, { -98.018, 0, 208.463 }, { -94.201, 0, 217.742 }, { -92.879, 0, 218.895 } } },
         },
         [16863] = {
-            { 'Doppelganger Gog', 194, 23, 25, 1 },
+            { 'Doppelganger Gog', 194, 23, 25, 1, { { 310, 0, 710 }, { 509, -1, 709 }, { 549, -1, 769 } } },
         },
         [16867] = {
             { 'Abyssal Demon', 161, 64, 66 },
             { 'Stygian Demon', 161, 71, 73 },
         },
         [16868] = {
-            { 'Juggler Hecatomb', 196, 46, 48, 1 },
+            { 'Juggler Hecatomb', 196, 46, 48, 1, { { -163.992, 1.435, 346.388 }, { -162.24, 1, 360.272 }, { -161.672, 1.104, 322.891 }, { -138.821, 2.603, 337.125 }, { -138.687, 1.662, 316.979 }, { -138.198, 2.934, 335.708 }, { -137.27, 1.651, 361.399 }, { -120.535, 1.25, 325.704 }, { -117.567, 1, 359.403 } } },
         },
         [16870] = {
-            { 'Skull of Envy', 195, 60, 60, 1 },
+            { 'Skull of Envy', 195, 60, 60, 1, { { -657.49, 0, 213.27 } } },
         },
         [16882] = {
-            { 'Pahh the Gullcaller', 176, 56, 58, 1 },
+            { 'Pahh the Gullcaller', 176, 56, 58, 1, { { -4.827, 20.686, -14.35 }, { -2.462, 21.242, -22.502 }, { -2, 21, -19 }, { -1.53, 21.715, -14.659 } } },
         },
         [16883] = {
-            { 'Mouu the Waverider', 176, 64, 66, 1 },
+            { 'Mouu the Waverider', 176, 64, 66, 1, { { -82, 21, 62 } } },
         },
         [16884] = {
-            { 'Zuug the Shoreleaper', 176, 70, 70, 1 },
+            { 'Zuug the Shoreleaper', 176, 70, 70, 1, { { -252.213, 40, -304.562 }, { -251.968, 39.901, -294.697 }, { -243, 41, -298 }, { -231.845, 41.426, -300.867 } } },
         },
         [16885] = {
-            { 'Vouivre', 205, 79, 81, 1 },
+            { 'Vouivre', 205, 79, 81, 1, { { -38.587, 3.181, 259.578 }, { -38.587, 3.815, 259.578 }, { -37.041, 4, 273.736 }, { -18.305, 3.864, 243.227 }, { -17.929, 3.732, 284.44 }, { 0.868, 4, 261.133 } } },
         },
         [16899] = {
-            { 'Beryl-footed Molberry', 159, 61, 63, 1 },
+            { 'Beryl-footed Molberry', 159, 61, 63, 1, { { -66, -0.1, -0.1 } } },
         },
         [16904] = {
-            { 'Tonberry Decapitator', 160, 72, 74, 1 },
+            { 'Tonberry Decapitator', 160, 72, 74, 1, { { -165.51, 15.833, -116.849 }, { -149.044, 5.434, -176.297 } } },
         },
         [16911] = {
-            { 'Ogama', 160, 80, 82, 1 },
+            { 'Ogama', 160, 80, 82, 1, { { -34, 36, -358 }, { -32.223, 36.078, -369.741 } } },
         },
         [16912] = {
-            { 'Celeste-eyed Tozberry', 160, 67, 69, 1 },
+            { 'Celeste-eyed Tozberry', 160, 67, 69, 1, { { 146, 15.412, -102 } } },
         },
         [16913] = {
-            { 'Nightmare Vase', 122, 70, 73, 1 },
+            { 'Nightmare Vase', 122, 70, 73, 1, { { -108.575, -5.699, -5.432 }, { -105.634, -5.2, -7.916 }, { -102.526, -5.2, 3.657 }, { -93.556, -6, -0.131 }, { -71.796, -5.2, 21.319 }, { -65.535, -6, 15.072 }, { -55.255, -5.555, 24.697 }, { -42.628, -5.2, -9.417 }, { -38.892, -6, -0.706 }, { -31.029, -5.2, -7.555 }, { 33.296, -5.692, 0.8 }, { 37.619, -5.2, -10.822 }, { 44.904, -5.952, -4.392 }, { 54.403, -5.424, 18.799 }, { 62.997, -5.2, 24.771 }, { 68.198, -5.6, 17.087 }, { 69, -5, 21 }, { 93.207, -6, -0.404 }, { 104.359, -5.2, 6.807 }, { 105.164, -5.6, -4.998 } } },
         },
         [16924] = {
-            { 'Sozu Sarberry', 159, 66, 66, 1 },
+            { 'Sozu Sarberry', 159, 66, 66, 1, { { 65.848, 0, -29.772 }, { 68.699, 0, -10.828 }, { 69.782, 0, -35.072 }, { 70.533, 0, -20.88 }, { 74.462, 0, -26.719 }, { 74.658, 0, -21.304 }, { 74.895, 0, -14.012 }, { 79.437, 0, -6.995 }, { 79.882, 0, -31.421 }, { 83.668, 0, -21.268 }, { 84.892, 0, -5.982 }, { 90.956, 0, -33.977 }, { 92.406, 0, -16.127 }, { 94.33, 0, -14.457 }, { 99.397, 0, -21.299 } } },
         },
         [16937] = {
             { 'Morbol', 149, 37, 39 },
         },
         [16938] = {
-            { 'Orcish Overlord', 150, 75, 75, 1 },
+            { 'Orcish Overlord', 150, 75, 75, 1, { { 218.046, -3.017, -101.239 }, { 219, -2, -99 } } },
         },
         [16940] = {
-            { 'Gerwitz\'s Sword', 193, 52, 52, 1 },
+            { 'Gerwitz\'s Sword', 193, 52, 52, 1, { { -99.83, -28, -77.763 } } },
         },
         [16942] = {
-            { 'Fafnir', 154, 90, 90, 1 },
+            { 'Fafnir', 154, 90, 90, 1, { { 82.325, 6.876, 42.041 } } },
         },
         [16943] = {
-            { 'Phanduron the Condemned', 167, 72, 73, 1 },
+            { 'Phanduron the Condemned', 167, 72, 73, 1, { { -97.215, 0.25, -247.476 }, { -96.614, 0.052, -229.255 }, { -95.895, 0.346, -235.778 }, { -95.678, 0.25, -244.603 }, { -94.985, 0.358, -233.485 }, { -94.035, 0.25, -241.571 }, { -93.281, 0.048, -224.381 }, { -92.296, 0.232, -251.894 }, { -92.282, 0.25, -248.386 }, { -92.123, 0.244, -228.23 }, { -91.773, 0.239, -231.25 }, { -91.704, 0.344, -250.66 }, { -91.555, 0, -225.159 }, { -91.506, 0.361, -250.426 }, { -90.081, 0.386, -249.993 }, { -88.673, 0.342, -228.348 }, { -87.915, 0.238, -226.147 }, { -86.662, 0.292, -225.357 }, { -86.419, 0.236, -254.408 }, { -84, 1, -224 }, { -83.554, -0.5, -221.832 }, { -83.329, -0.007, -221.367 }, { -83.25, 0.306, -224.719 }, { -81.811, 0.25, -255.389 }, { -81.428, 0.25, -254.973 }, { -80.003, 0, -257.732 }, { -78.407, 0.25, -223.56 }, { -78.359, 0.25, -225.492 }, { -77.298, 0.25, -223.686 }, { -76.48, 0.104, -222.346 }, { -73.569, 0.25, -256.151 }, { -73.25, 0.25, -252.108 }, { -72.015, 0.197, -250.155 }, { -70.994, 0.25, -226.381 }, { -70.042, 0.384, -230.101 }, { -69.73, 0.36, -252.132 }, { -69.448, 0.342, -229.31 }, { -69.018, 0.321, -228.577 }, { -67.76, 0.28, -248.605 }, { -66.641, 0.25, -246.572 }, { -66.146, 0.25, -231.751 }, { -66.117, 0.25, -233.085 }, { -65.75, 0.287, -231.269 }, { -65.492, 0.25, -247.396 }, { -64.79, 0.381, -246.006 }, { -64.688, 0.361, -233.734 }, { -64.395, 0.311, -245.005 }, { -63.537, 0.25, -239.212 }, { -63.534, 0.25, -243.227 }, { -61.289, 0.015, -246.933 }, { -59.187, 0, -236.816 } } },
         },
         [16944] = {
-            { 'Frostmane', 113, 80, 80, 1 },
+            { 'Frostmane', 113, 80, 80, 1, { { -289.52, -1.163, 447.541 }, { -287.79, -0.301, 440.277 }, { -287.124, -0.279, 441.426 }, { -286.213, -0.168, 480.342 }, { -285.691, -0.295, 451.181 }, { -285.299, -0.176, 477.741 }, { -284.311, -0.219, 484.836 }, { -284.302, -0.047, 476.397 }, { -284.157, 0.106, 457.05 }, { -283.874, -0.66, 485.504 }, { -283.549, 0, 477.576 }, { -283.355, 0, 439.428 }, { -282.771, -0.226, 486.986 }, { -282.218, 0.001, 446.841 }, { -282.145, 0.085, 445.727 }, { -282.064, 0.458, 453.96 }, { -281.878, 0, 482.166 }, { -281.216, 0.193, 472.118 }, { -281, -0.5, 471 }, { -280.987, 0.789, 461.301 }, { -280.848, 0.176, 449.8 }, { -280.234, 0, 483.199 }, { -279.835, 0.081, 445.64 }, { -278.855, 0.931, 461.357 }, { -278.557, 0, 441.306 }, { -278.524, 0, 483.608 }, { -277.748, 0, 438.305 }, { -277.366, 0.497, 453.016 }, { -277.316, 0.741, 463.192 }, { -276.502, 0.817, 462.031 }, { -275.945, 0.257, 449.155 }, { -275.693, -0.025, 479.656 }, { -275.116, 0.257, 465.708 }, { -274.844, -0.089, 479.648 }, { -274.809, 0.784, 458.535 }, { -274.652, -0.015, 474.214 }, { -274.623, 0.068, 437.165 }, { -273.254, -0.22, 473.986 }, { -273.024, -0.253, 467.15 }, { -272.85, -0.308, 473.888 }, { -272.658, 0.432, 454.353 }, { -272.622, -0.45, 469.839 }, { -272.224, -0.942, 461.321 }, { -271.681, -0.615, 469.612 }, { -271.194, -0.44, 481.698 }, { -269.868, -0.769, 464.734 }, { -269.027, 0.374, 445.056 }, { -268, -0.558, 440 }, { -267.361, 0.414, 444.021 }, { -262, -0.7, 442 }, { -256.485, 0.823, 442.872 } } },
         },
         [16945] = {
-            { 'Cancer', 174, 65, 65, 1 },
+            { 'Cancer', 174, 65, 65, 1, { { -21.291, -10.899, -147.523 } } },
         },
         [16956] = {
-            { 'Olla Grande', 178, 85, 85, 1 },
+            { 'Olla Grande', 178, 85, 85, 1, { { 851, -1, 92 } } },
         },
         [16961] = {
-            { 'Ash Dragon', 205, 82, 82, 1 },
+            { 'Ash Dragon', 205, 82, 82, 1, { { -288.806, 40.083, 122.141 }, { -288.577, 40.211, 129.951 }, { -288.323, 40.304, 122.437 }, { -288.219, 40.123, 129.936 }, { -286.802, 40, 126.913 }, { -286.453, 40.092, 121.307 }, { -286.155, 40.207, 127.544 }, { -285.99, 39.623, 129.955 }, { -285.973, 40.156, 125.035 }, { -285.952, 39.973, 128.291 }, { -285.374, 40.268, 127.231 }, { -285.336, 40.264, 123.162 }, { -284.835, 40.359, 127.63 }, { -284.594, 40, 119.917 }, { -284.214, 40, 120.431 }, { -283.913, 40.201, 125.809 }, { -282.281, 39.772, 125.025 }, { -282.257, 39.941, 131.323 }, { -281.681, 39.817, 124.297 }, { -281.061, 40.312, 127.364 }, { -280.583, 40.245, 127.086 }, { -280.578, 39.983, 126.043 }, { -280.087, 40, 118.274 }, { -280.018, 39.995, 120.03 }, { -279.967, 40.184, 126.85 }, { -279.707, 40.379, 127.621 }, { -279.198, 40.283, 130.751 }, { -278.844, 40, 124.75 }, { -278.698, 40, 118.521 }, { -278.458, 40.124, 113.329 }, { -278.404, 39.804, 124.018 }, { -278.228, 40.446, 128.556 }, { -277.89, 40.423, 129.504 }, { -277.869, 39.765, 124.782 }, { -277.368, 40.196, 114.953 }, { -277.366, 40, 117.554 }, { -276.997, 40.237, 129.374 }, { -276.714, 39.92, 126.808 }, { -276.613, 40.27, 114.858 }, { -275.397, 39.787, 121.407 }, { -274.613, 40.22, 116.415 }, { -273.89, 40.006, 122.53 }, { -273.754, 40, 118.419 }, { -273.377, 40.016, 111.106 }, { -273.051, 40.231, 113.202 }, { -272.359, 40.098, 113.425 }, { -272.215, 40, 115.314 }, { -271.987, 39.989, 115.09 }, { -271.061, 40.311, 121.586 }, { -270.932, 40, 114.52 } } },
         },
         [16968] = {
-            { 'Amikiri', 212, 80, 82, 1 },
+            { 'Amikiri', 212, 80, 82, 1, { { -219, 0.332, 152 } } },
         },
         [16969] = {
-            { 'Oni Carcass', 169, 68, 70, 1 },
+            { 'Oni Carcass', 169, 68, 70, 1, { { -387.421, 22.5, -21.603 }, { -383.021, 22, -12.584 }, { -380.884, 22, -27.639 }, { -378.2, 21.997, -15.414 }, { -375.173, 22, -14.641 }, { -372.914, 22.5, -21.283 } } },
         },
         [16980] = {
-            { 'Shii', 167, 70, 71, 1 },
+            { 'Shii', 167, 70, 71, 1, { { -67.764, 0.011, -135.735 }, { -67.224, 0, -137.165 }, { -66.461, -0.01, -134.514 }, { -66.121, -0.003, -134.873 }, { -66.081, -0.002, -134.929 }, { -65.987, -0.001, -140.197 }, { -65.972, 0.011, -146.409 }, { -65.866, 0, -142.365 }, { -65.734, 0, -133.094 }, { -65.3, 0, -144.027 }, { -65.077, 0, -134.253 }, { -65.001, 0, -133.664 }, { -65, -1, -137 }, { -64.572, 0, -144.864 }, { -64.042, 0.025, -146.436 }, { -64, -0.5, -144 }, { -64, 0.95, -132 }, { -63.99, 0, -133.379 }, { -63.537, 0, -135.494 }, { -63.372, 0, -134.574 }, { -63.334, 0.022, -131.785 }, { -62.464, 0.028, -147.034 }, { -61.871, 0, -133.804 }, { -61.316, 0.023, -147.906 }, { -60.888, 0, -133.621 }, { -60.878, 0, -134.248 }, { -60.216, 0.031, -148.843 }, { -59.893, 0.049, -148.614 }, { -59.452, 0.042, -149.259 }, { -59, 0.941, -149 }, { -58.681, -0.5, -134.123 }, { -58.166, 0.006, -133.472 }, { -57.316, 0, -148.094 }, { -57.02, 0, -137.409 }, { -57, 0.998, -135 }, { -56.823, 0.07, -133.063 }, { -56.425, 0, -135.226 }, { -55.893, 0.125, -132.174 }, { -55.742, -0.028, -134.05 }, { -54.721, 0.018, -134.543 }, { -54.498, -0.003, -138.073 }, { -54.009, 0, -139.217 }, { -53.924, 0.031, -137.069 }, { -53.92, 0.017, -137.471 }, { -53.138, 0, -141.36 }, { -53.025, 0, -140.871 }, { -53, -0.5, -137 }, { -52.869, 0, -134.519 }, { -52.779, 0.021, -135.872 }, { -51.888, 0, -140.972 }, { -51.298, -0.019, -140.171 } } },
         },
         [16990] = {
-            { 'Ancient Goobbue', 153, 80, 80, 1 },
-            { 'Keeper of Halidom', 121, 56, 58, 1 },
+            { 'Ancient Goobbue', 153, 80, 80, 1, { { -134.491, 7.781, -212.219 }, { -133.79, 8.274, -246.496 }, { -133.7, 6.347, -230.29 }, { -129.664, 8.769, -200.913 }, { -123.168, 8.797, -238.819 }, { -118.875, 8.688, -210.279 }, { -116.964, 8.804, -191.322 }, { -116.133, 8.62, -224.748 }, { -113.924, 8.615, -244.987 }, { -106.853, 8.376, -204.923 }, { -103.469, 8.415, -219.308 }, { -102.345, 7.962, -231.227 } } },
+            { 'Keeper of Halidom', 121, 56, 58, 1, { { 303.48, 0.847, 169.473 }, { 304.815, 0.563, 141.717 }, { 312, -0.5, 159 }, { 321.489, 0.033, 195.306 }, { 325.957, 0.096, 157.485 }, { 352.304, 0.183, 198.403 } } },
         },
         [16995] = {
             { 'Antican Auxiliarius', 114, 35, 39 },
@@ -6997,7 +7916,7 @@ return {
             { 'Antican Secutor', 125, 54, 58 },
         },
         [17001] = {
-            { 'Dreadbug', 197, 52, 52, 1 },
+            { 'Dreadbug', 197, 52, 52, 1, { { -26.05, -10.932, 122.323 } } },
         },
         [17017] = {
             { 'Goblin Tamer', 174, 66, 69 },
@@ -7007,31 +7926,31 @@ return {
             { 'Garnet Quadav', 110, 32, 33 },
         },
         [17047] = {
-            { 'Hanuman', 217, 90, 90, 1 },
+            { 'Hanuman', 217, 90, 90, 1, { { -30.647, -31.732, 282.01 } } },
         },
         [17066] = {
-            { 'Cirein-croin', 216, 0, 0, 1 },
+            { 'Cirein-croin', 216, 0, 0, 1, { { 38, -15, 534 }, { 39, -15, 520 }, { 54, -15, 520 } } },
         },
         [17069] = {
-            { 'Lost Stcemqestcint', 39, 100, 100, 1 },
+            { 'Lost Stcemqestcint', 39, 100, 100, 1, { { -204, -8.5, 124 } } },
         },
         [17070] = {
-            { 'Cemetery Cherry', 190, 72, 73, 1 },
+            { 'Cemetery Cherry', 190, 72, 73, 1, { { 33, -0.6, -287 } } },
         },
         [17072] = {
             { 'Lich C Magnus', 195, 58, 58 },
         },
         [17073] = {
-            { 'Za\'Dha Adamantking', 148, 85, 85, 1 },
+            { 'Za\'Dha Adamantking', 148, 85, 85, 1, { { 281, 43, 96 } } },
         },
         [17077] = {
-            { 'Cuijatender', 218, 105, 105, 1 },
+            { 'Cuijatender', 218, 105, 105, 1, { { -635, 1.02, -299.202 } } },
         },
         [17078] = {
-            { 'Fleshflayer Killakriq', 254, 105, 105, 1 },
+            { 'Fleshflayer Killakriq', 254, 105, 105, 1, { { 484.582, 47.295, -440.789 } } },
         },
         [17079] = {
-            { 'Rencounter Chariot', 254, 100, 100, 1 },
+            { 'Rencounter Chariot', 254, 100, 100, 1, { { 814.939, 66.367, 639.932 } } },
         },
         [17088] = {
             { 'Goblin Shepherd', 113, 65, 68 },
@@ -7041,50 +7960,50 @@ return {
             { 'Goblin Veterinarian', 9, 63, 68 },
         },
         [17105] = {
-            { 'Hedjedjet', 218, 105, 105, 1 },
+            { 'Hedjedjet', 218, 105, 105, 1, { { -119.02, 0.949, 301.014 } } },
         },
         [17110] = {
             { 'Gamayun', 254, 0, 0, 1 },
         },
         [17113] = {
-            { 'Myrmecoleon', 45, 90, 90, 1 },
+            { 'Myrmecoleon', 45, 90, 90, 1, { { -224, 0.001, -337 } } },
         },
         [17132] = {
-            { 'Hoo Mjuu the Torrent', 145, 16, 17, 1 },
+            { 'Hoo Mjuu the Torrent', 145, 16, 17, 1, { { -90.28, -0.565, -84.597 }, { -81.423, 1, -71.308 }, { -79.258, 0.49, -85.936 }, { -78.692, -0.653, -92.499 }, { -70.482, 1.243, -69.38 }, { -69.216, 0.727, -84.936 }, { -64.949, -0.272, -88.724 }, { -63, -0.86, -91 }, { -62.358, 0.916, -77.275 }, { -62.342, 0.474, -86.003 }, { -61.027, -0.295, -89.536 }, { -58.354, 1, -80.969 }, { -57.961, 1, -81.284 }, { -57, -2, -119 }, { -55.364, -0.359, -90.817 }, { -50.829, 0.95, -83.587 }, { -50.083, -0.267, -120.731 }, { -50, 1, -75 }, { -48.812, -0.166, -106.726 }, { -47.804, 0.017, -112.115 }, { -47.404, 0.123, -101.495 }, { -46.897, 0.295, -97.197 }, { -46.852, 0.175, -91.316 }, { -46.65, 0.311, -102.442 }, { -46.02, 0.469, -101.926 }, { -45.738, 0.539, -100.449 }, { -43.103, 1, -112.137 }, { -42.943, 1, -97.089 }, { -42.81, 0.834, -91.884 }, { -42.389, 0.315, -130.93 }, { -41.118, 1, -93.202 }, { -40.48, 1, -118.954 }, { -39.073, 0.597, -115.279 }, { -37.128, 1, -118.051 }, { -37.1, 0.582, -127.259 }, { -36.586, 1.329, -104.497 }, { -36.325, 1, -95.533 }, { -36.316, 1.277, -111.276 }, { -35.367, 0.859, -90.359 }, { -35.23, 0.744, -91.412 }, { -34.975, 1.35, -111.613 }, { -32.032, 1.318, -87.061 }, { -32, 0.74, -105 }, { -31.958, 1.028, -71.971 }, { -31.715, 0.771, -93.257 }, { -28.083, 0.899, -73.763 }, { -28.026, 1.056, -64.385 }, { -27.974, 1.404, -88.717 }, { -27.194, 1.316, -84.194 }, { -26.922, 1.09, -83.896 }, { -21.61, 0.687, -70.378 } } },
         },
         [17134] = {
             { 'Slash Pine', 193, 27, 29 },
         },
         [17165] = {
-            { 'Cactrot Rapido', 114, 80, 81, 1 },
+            { 'Cactrot Rapido', 114, 80, 81, 1, { { -44.821, 0.04, -204.137 }, { -43.733, 0.029, -205.89 }, { -36.339, 0, -196.558 }, { -26.834, -2.92, -183.684 }, { -8.384, -9.174, -163.234 }, { -7.862, -14.669, 184.072 }, { -1.399, -15.415, 173.901 }, { -0.093, -16, 196.311 }, { 10.562, -7.763, -153.151 }, { 16.3, -16.153, 177.281 }, { 21.13, -20.765, 143.381 }, { 25.823, -15.431, 155.779 }, { 37.798, -22.609, 136.094 }, { 38.579, -8, -159.953 }, { 47.843, -21.39, 129.461 }, { 48.97, -9.183, -157.981 }, { 59.675, -14.091, -155.496 }, { 61.654, -7.113, -202.886 }, { 62.594, -18.367, 119.87 }, { 69.335, -19.906, -150.315 }, { 72.849, -7.547, -207.622 }, { 90.956, -14.351, 119.106 }, { 91.295, -22.441, -133.185 }, { 97.334, -13.89, -116.29 }, { 105.762, -11.687, -109.258 }, { 117.167, -15.802, 154.863 }, { 121.918, -8.169, -85.653 }, { 129.604, -8.359, -69.037 }, { 143.842, -11.473, 58.988 }, { 144.24, -12.902, 149.28 }, { 147.488, -7.989, 107.295 }, { 148.003, -9.46, 28.999 }, { 148.563, -9.651, 16.788 }, { 149.41, -10.013, -1.53 }, { 167.395, -7.425, -230.588 }, { 195.466, -2.154, -225.452 }, { 198.27, -7.032, -59.389 }, { 199.52, -0.495, -7.907 }, { 204.107, -8.062, 85.677 }, { 204.896, 0.044, 3.06 }, { 209.036, -8.379, -64.954 }, { 212.223, -5.971, -202.506 }, { 225.075, -5.462, -73.46 }, { 225.18, -4.675, 47.242 }, { 228.024, -9.949, 74.323 }, { 259.785, -1.055, -58.388 }, { 280.895, 0, -40.171 }, { 297.468, 0.181, -109.136 } } },
         },
         [17185] = {
-            { 'Chukwa', 45, 85, 85, 1 },
+            { 'Chukwa', 45, 85, 85, 1, { { -349.213, 15.946, 391.568 } } },
         },
         [17191] = {
-            { 'Antican Tribunus', 208, 65, 65, 1 },
+            { 'Antican Tribunus', 208, 65, 65, 1, { { -582, -0.5, -412 } } },
         },
         [17199] = {
-            { 'Sagittarius X-XIII', 208, 55, 57, 1 },
+            { 'Sagittarius X-XIII', 208, 55, 57, 1, { { 624, -16.5, -775 } } },
         },
         [17211] = {
-            { 'Fraelissa', 104, 34, 35, 1 },
+            { 'Fraelissa', 104, 34, 35, 1, { { 9.32, -0.493, -371.654 } } },
         },
         [17212] = {
-            { 'Black Coney', 5, 70, 72, 1 },
-            { 'White Coney', 5, 70, 72, 1 },
+            { 'Black Coney', 5, 70, 72, 1, { { 413.462, -0.353, -409.845 } } },
+            { 'White Coney', 5, 70, 72, 1, { { 404.04, -0.588, -445.81 } } },
         },
         [17232] = {
-            { 'Marquis Amon', 161, 76, 76, 1 },
+            { 'Marquis Amon', 161, 76, 76, 1, { { -45.451, -4, 2.691 }, { -44.664, -4, 0.671 }, { -44.337, -4, -18.642 }, { -44.096, -4, -1.129 }, { -43.779, -4, -3.345 }, { -43.04, -4, -7.677 }, { -42.501, -4, -1.566 }, { -42.356, -4, -12.358 }, { -41.793, -4, 5.527 }, { -41.741, -4, -1.07 }, { -41.575, -4, -15.19 }, { -40.77, -4, -16.928 }, { -40.749, -4, -11.079 }, { -40.119, -4, 2.191 }, { -39.398, -4, -18.995 }, { -39.063, -4, -15.999 }, { -38.143, -4, -12.759 }, { -37.941, -4, 1.472 }, { -37.871, -4, -12.995 }, { -37.208, -4, 7.541 }, { -36.064, -4, -17.204 }, { -35.742, -4, -18.005 }, { -35.299, -4, -7.573 }, { -34.922, -4, -5.554 }, { -34.245, -4, -0.117 }, { -34.191, -4, -4.037 }, { -34.15, -4, 1.973 }, { -34.147, -4, -17.818 }, { -33.959, -4, -16.539 }, { -33.601, -4, 3.087 }, { -31.919, -4, 6.051 }, { -31.659, -4, -11.285 }, { -30.845, -4, -3.526 }, { -30.757, -4, -12.312 }, { -30.715, -4.5, -20.455 }, { -29.845, -4, 4.826 }, { -28.994, -4, -2.958 }, { -28.56, -4, 3.923 }, { -28.253, -4, -13.785 }, { -27.26, -4, -13.595 }, { -27.089, -4, -8.732 }, { -26.348, -4, -8.1 }, { -25.805, -4, -1.42 }, { -25.566, -4, -18.922 }, { -24.693, -4, 3.786 }, { -22.554, -4, -2.814 }, { -22.415, -4, -10.492 }, { -21.648, -4, -5.49 }, { -21.092, -4, -6.196 }, { -19.697, -4, -5.593 } } },
         },
         [17234] = {
-            { 'Drexerion the Condemned', 167, 72, 73, 1 },
+            { 'Drexerion the Condemned', 167, 72, 73, 1, { { -98.18, 0, -232.368 }, { -97.704, 0, -238.452 }, { -97.215, 0.25, -247.476 }, { -96.782, 0.267, -237.648 }, { -96.614, 0.052, -229.255 }, { -94.985, 0.358, -233.485 }, { -94.484, -0.137, -234.021 }, { -94.054, 0.25, -244.819 }, { -94.035, 0.25, -241.571 }, { -94.03, 0.25, -246.363 }, { -93.281, 0.048, -224.381 }, { -92.296, 0.232, -251.894 }, { -92.282, 0.25, -248.386 }, { -92.123, 0.244, -228.23 }, { -91.704, 0.344, -250.66 }, { -91.506, 0.361, -250.426 }, { -91.215, 0.304, -251.98 }, { -90.375, 0.365, -251.145 }, { -88.673, 0.342, -228.348 }, { -88.118, -0.006, -220.579 }, { -86.662, 0.292, -225.357 }, { -86.153, 0.001, -221.867 }, { -85.749, 0.25, -252.823 }, { -83.971, 0.241, -256.454 }, { -83.329, -0.007, -221.367 }, { -83.25, 0.306, -224.719 }, { -80.003, 0, -257.732 }, { -77.801, 0.25, -256.915 }, { -77.298, 0.25, -223.686 }, { -76.484, 0.25, -256.314 }, { -73.569, 0.25, -256.151 }, { -73.25, 0.25, -252.108 }, { -72.015, 0.197, -250.155 }, { -71.238, 0.303, -250.93 }, { -70.994, 0.25, -226.381 }, { -70.677, 0.25, -253.664 }, { -70.042, 0.384, -230.101 }, { -69.73, 0.36, -252.132 }, { -69.018, 0.321, -228.577 }, { -67.616, 0.25, -232.389 }, { -66.757, 0.328, -249.517 }, { -66.146, 0.25, -231.751 }, { -64.79, 0.381, -246.006 }, { -64.688, 0.361, -233.734 }, { -64.19, 0.25, -237.946 }, { -63.927, 0.25, -243.011 }, { -63.537, 0.25, -239.212 }, { -63.526, 0.286, -235.65 }, { -62.027, 0, -240.789 }, { -62, 0.972, -238 }, { -59.187, 0, -236.816 } } },
         },
         [17244] = {
-            { 'Wyvernpoacher Drachlox', 212, 70, 72, 1 },
+            { 'Wyvernpoacher Drachlox', 212, 70, 72, 1, { { -63, 1, -61 } } },
         },
         [17247] = {
-            { 'Gyre-Carlin', 9, 50, 50, 1 },
+            { 'Gyre-Carlin', 9, 50, 50, 1, { { -6.283, -0.352, 46.882 }, { 34.057, -0.352, 165.306 } } },
         },
         [17255] = {
             { 'Orcish Stonelauncher', 140, 8, 10 },
@@ -7093,7 +8012,7 @@ return {
             { 'Orcish Firebelcher', 149, 39, 42 },
         },
         [17281] = {
-            { 'Helldiver', 118, 29, 30, 1 },
+            { 'Helldiver', 118, 29, 30, 1, { { 360.363, 0.26, -230.785 }, { 372.914, 0.487, -237.323 }, { 382.041, 2.538, -178.973 }, { 395.297, -0.037, -149.776 }, { 404.23, 0.887, -182.235 }, { 418.783, 0.574, -234.704 }, { 428.849, 0.293, -195.011 }, { 432.704, 0.182, -239.684 }, { 437.628, 0.519, -193.156 }, { 439.685, -0.2, -271.203 }, { 441.166, 0.029, -244.602 }, { 445.199, -0.323, -306.818 }, { 454.033, 1.118, -289.185 }, { 456.028, 0.798, -243.215 }, { 458.638, 3.286, -185.122 }, { 465.669, 0.163, -266 }, { 472.983, 1.102, -189.044 }, { 474.851, 0.07, -235.094 }, { 475, -0.5, -240 }, { 475.634, 0.899, -213.776 }, { 475.758, -0.017, -200.115 }, { 478.653, 0.484, -192.038 }, { 481.555, 0.386, -268.262 }, { 484.352, 0.28, -286.505 }, { 497.066, -0.655, -263.57 }, { 497.943, 2.485, -231.361 }, { 498.3, 0.914, -200.483 }, { 498.72, 1.592, -246.799 }, { 499.42, 2.166, -240.4 }, { 503.268, -0.981, -211.204 }, { 505.505, 2.591, -253.68 }, { 509.641, 0.151, -267.664 }, { 514.305, 0.084, -202.539 }, { 516.151, 0, -284.129 }, { 520.713, 2.206, -259.703 }, { 527.539, 0.176, -281.478 }, { 529.198, 0.174, -248.458 }, { 532.001, 1.123, -226.413 }, { 534.342, 2.069, -262.94 }, { 540.597, 1.811, -264.428 }, { 543.852, 0.669, -242.164 }, { 544.124, 0.205, -236.194 }, { 546.174, 0.578, -280.119 }, { 549.715, 1.779, -261.559 }, { 554.174, 0.129, -244.401 }, { 554.194, 0.73, -250.827 }, { 558.616, 0, -239.663 }, { 560.51, 0, -278.132 }, { 573.24, 0.52, -239.326 }, { 579.589, 0.978, -240.348 }, { 585.119, 0.684, -282.3 } } },
         },
         [17290] = {
             { 'Balloon', 194, 8, 10 },
@@ -7128,7 +8047,7 @@ return {
             { 'Qiqirn Poulterer', 65, 77, 77 },
             { 'Temple Opo-opo', 159, 51, 54 },
             { 'Young Opo-opo', 124, 40, 44 },
-            { 'Mischievous Micholas', 123, 53, 55, 1 },
+            { 'Mischievous Micholas', 123, 53, 55, 1, { { -279.575, 3.317, 16.011 } } },
             { 'Young Opo-opo', 123, 34, 36 },
         },
         [17301] = {
@@ -7143,10 +8062,10 @@ return {
         },
         [17303] = {
             { 'Yagudo Assassin', 151, 64, 72 },
-            { 'Tonberry Decapitator', 160, 72, 74, 1 },
+            { 'Tonberry Decapitator', 160, 72, 74, 1, { { -165.51, 15.833, -116.849 }, { -149.044, 5.434, -176.297 } } },
             { 'Tonberry Slasher', 160, 67, 71 },
             { 'Cryptonberry Cutter', 9, 53, 58 },
-            { 'Sozu Sarberry', 159, 66, 66, 1 },
+            { 'Sozu Sarberry', 159, 66, 66, 1, { { 65.848, 0, -29.772 }, { 68.699, 0, -10.828 }, { 69.782, 0, -35.072 }, { 70.533, 0, -20.88 }, { 74.462, 0, -26.719 }, { 74.658, 0, -21.304 }, { 74.895, 0, -14.012 }, { 79.437, 0, -6.995 }, { 79.882, 0, -31.421 }, { 83.668, 0, -21.268 }, { 84.892, 0, -5.982 }, { 90.956, 0, -33.977 }, { 92.406, 0, -16.127 }, { 94.33, 0, -14.457 }, { 99.397, 0, -21.299 } } },
             { 'Tonberry Cutter', 159, 51, 59 },
             { 'Tonberry Stabber', 159, 61, 69 },
             { 'Tonberry Chopper', 124, 61, 63 },
@@ -7161,7 +8080,7 @@ return {
             { 'Sweeping Cluster', 77, 66, 68 },
             { 'Atomic Cluster', 30, 45, 48 },
             { 'Nitro Cluster', 29, 55, 57 },
-            { 'Unstable Cluster', 29, 56, 57, 1 },
+            { 'Unstable Cluster', 29, 56, 57, 1, { { 309.5, -1.189, -706.5 } } },
         },
         [17306] = {
             { 'Snowflake', 253, 91, 93 },
@@ -7172,10 +8091,10 @@ return {
             { 'Snowball', 9, 43, 50 },
             { 'Agloolik', 5, 77, 80 },
             { 'Akselloak', 5, 71, 74 },
-            { 'Father Frost', 5, 74, 75, 1 },
+            { 'Father Frost', 5, 74, 75, 1, { { 379.47, -12.048, -82.365 } } },
             { 'Morozko', 5, 67, 70 },
             { 'Snoll', 5, 60, 63 },
-            { 'Snow Maiden', 5, 71, 72, 1 },
+            { 'Snow Maiden', 5, 71, 72, 1, { { 439.147, -20.27, -88.217 } } },
         },
         [17314] = {
             { 'Goblin Miner', 213, 51, 58 },
@@ -7195,7 +8114,7 @@ return {
             { 'Puroboros', 197, 45, 45 },
             { 'Puroboros', 171, 69, 70 },
             { 'Bifrons', 160, 68, 70 },
-            { 'Friar Rush', 160, 70, 70, 1 },
+            { 'Friar Rush', 160, 70, 70, 1, { { -86, 16, 2 } } },
             { 'Bomb', 101, 8, 10 },
             { 'Balloon', 116, 8, 10 },
             { 'Kaboom', 200, 94, 96 },
@@ -7204,7 +8123,7 @@ return {
             { 'Feu Follet', 196, 35, 38 },
             { 'Spunkie', 196, 28, 30 },
             { 'Friar\'s Lantern', 62, 72, 79 },
-            { 'Bomb Queen', 205, 79, 81, 1 },
+            { 'Bomb Queen', 205, 79, 81, 1, { { 21.128, 19.687, -110.232 } } },
             { 'Volcanic Bomb', 205, 71, 78 },
             { 'Volcanic Gas', 205, 62, 68 },
             { 'Balloon', 192, 8, 10 },
@@ -7223,7 +8142,7 @@ return {
             { 'Napalm', 193, 31, 33 },
             { 'Will-o\'-the-Wisp', 193, 23, 25 },
             { 'Balloon', 194, 8, 10 },
-            { 'Bomb King', 194, 16, 18, 1 },
+            { 'Bomb King', 194, 16, 18, 1, { { 310, 0, 710 }, { 509, -1, 709 }, { 549, -1, 769 } } },
             { 'Fox Fire', 109, 24, 25 },
             { 'Ignis Fatuus', 110, 34, 36 },
             { 'Cannonball', 122, 66, 70 },
@@ -7249,10 +8168,10 @@ return {
             { 'Mandragora', 115, 4, 5 },
         },
         [17358] = {
-            { 'Va\'Zhe Pummelsong', 186, 95, 95, 1 },
+            { 'Va\'Zhe Pummelsong', 186, 95, 95, 1, { { -104.509, 11.5, 73.066 } } },
         },
         [17366] = {
-            { 'Stray Mary', 108, 19, 20, 1 },
+            { 'Stray Mary', 108, 19, 20, 1, { { -257.465, -15.805, -117.638 }, { -212.268, 39.477, 329.581 } } },
         },
         [17383] = {
             { 'Goblin Fisher', 191, 5, 8 },
@@ -7309,104 +8228,104 @@ return {
             { 'Judicator Demon', 161, 71, 73 },
         },
         [17416] = {
-            { 'Simurgh', 110, 58, 58, 1 },
+            { 'Simurgh', 110, 58, 58, 1, { { -766.514, -32.804, -450.794 }, { -764.133, -31.467, -425.046 }, { -763.917, -31.391, -456.188 }, { -762.782, -32, -396.991 }, { -762.596, -31.872, -433.425 }, { -762.363, -31.715, -369.721 }, { -761.614, -31.683, -389.636 }, { -761.158, -31.248, -375.569 }, { -761.066, -31.122, -422.411 }, { -757.612, -31.638, -468.737 }, { -756.179, -31.152, -428.418 }, { -755.315, -30.373, -420.765 }, { -753.263, -30.658, -409.927 }, { -753.242, -31.516, -469.22 }, { -752.684, -31.514, -468.267 }, { -752.291, -30.438, -398.885 }, { -747.757, -30.22, -451.413 }, { -742.486, -31.125, -361.306 }, { -741.999, -31.101, -476.679 }, { -741.897, -31.5, -469.452 }, { -740.791, -31.196, -474.806 }, { -740.159, -30.523, -370.074 }, { -731.898, -31.067, -474.763 }, { -729.948, -30.918, -473.787 }, { -720.617, -31.932, -479.403 }, { -718.513, -32, -360.126 }, { -718.222, -31.61, -363.18 }, { -715.756, -31.205, -474.926 }, { -706.424, -31.1, -471.294 }, { -705.103, -31.291, -372.666 }, { -691.454, -31.628, -362.358 }, { -688.741, -29.117, -406.312 }, { -687.957, -30.687, -429.768 }, { -687.766, -31.201, -467.353 }, { -687.602, -30.415, -432.963 }, { -687.011, -30.96, -464.879 }, { -686.844, -30.652, -396.784 }, { -686.7, -30.714, -451.877 }, { -686.544, -29.245, -410.142 }, { -684.97, -31.566, -371.229 }, { -684.333, -31.075, -451.765 }, { -683.789, -31.83, -477.062 }, { -682.881, -31.647, -402.822 }, { -681.903, -31.171, -376.607 }, { -681.591, -31.441, -386.368 }, { -681.578, -31.431, -411.597 }, { -681, -31, -447 }, { -679.544, -31.819, -432.354 }, { -679.461, -31.114, -422.262 }, { -677.197, -32, -443.5 } } },
         },
         [17437] = {
-            { 'Dirtyhanded Gochakzuk', 149, 71, 71, 1 },
+            { 'Dirtyhanded Gochakzuk', 149, 71, 71, 1, { { 56.259, -12.073, -152.955 } } },
         },
         [17450] = {
-            { 'Zoredonite', 3, 61, 62, 1 },
+            { 'Zoredonite', 3, 61, 62, 1, { { -2.37, -3.492, -11.285 } } },
         },
         [17454] = {
-            { 'Carmine-tailed Janberry', 160, 66, 67, 1 },
+            { 'Carmine-tailed Janberry', 160, 66, 67, 1, { { 0.5, 36, -87 } } },
         },
         [17455] = {
-            { 'Bistre-hearted Malberry', 160, 71, 73, 1 },
+            { 'Bistre-hearted Malberry', 160, 71, 73, 1, { { -32, 16, -178 } } },
         },
         [17471] = {
-            { 'Big Bomb', 62, 83, 83, 1 },
+            { 'Big Bomb', 62, 83, 83, 1, { { -233.8, 13.612, 286.713 } } },
         },
         [17474] = {
-            { 'Climbpix Highrise', 120, 55, 55, 1 },
+            { 'Climbpix Highrise', 120, 55, 55, 1, { { 481, 23.461, 122.486 } } },
         },
         [17503] = {
-            { 'Qull the Shellbuster', 176, 49, 51, 1 },
+            { 'Qull the Shellbuster', 176, 49, 51, 1, { { 391, 9, -59 } } },
         },
         [17504] = {
-            { 'Worr the Clawfisted', 176, 60, 61, 1 },
+            { 'Worr the Clawfisted', 176, 60, 61, 1, { { -303.53, 18.439, -54.875 }, { -301, 20, -64 }, { -300.169, 21.24, -71.611 }, { -289.662, 19.52, -56.234 } } },
         },
         [17510] = {
-            { 'Tres Duendes', 27, 47, 49, 1 },
+            { 'Tres Duendes', 27, 47, 49, 1, { { -153.577, -0.245, 215.862 } } },
         },
         [17511] = {
-            { 'Steam Cleaner', 177, 81, 83, 1 },
+            { 'Steam Cleaner', 177, 81, 83, 1, { { 317, -1, 361 } } },
         },
         [17522] = {
-            { 'Skull of Pride', 195, 60, 60, 1 },
+            { 'Skull of Pride', 195, 60, 60, 1, { { 382.73, -32, -372.69 } } },
         },
         [17528] = {
-            { 'Tzee Xicu the Manifest', 151, 85, 85, 1 },
+            { 'Tzee Xicu the Manifest', 151, 85, 85, 1, { { -110.096, -72, 94.758 }, { -108.852, -72, 92.674 }, { -107.448, -72, 91.881 }, { -106.305, -72, 95.115 }, { -105.598, -72, 93.795 }, { -105.329, -72, 90.984 }, { -105.111, -72, 91.326 }, { -104.539, -72, 96.002 }, { -103.679, -72, 91.665 }, { -103.268, -72, 96.397 }, { -102.082, -72, 92.241 }, { -102.046, -72, 98.383 }, { -101.96, -72, 97.769 }, { -101.619, -72, 89.486 }, { -101.447, -72, 99.111 }, { -101.428, -72, 96.497 }, { -101.338, -72, 100.293 }, { -101.309, -72, 91.051 }, { -101.14, -72, 99.131 }, { -100.509, -72, 98.52 }, { -100.445, -72, 94.454 }, { -100.003, -72, 94.327 }, { -99.952, -72, 91.543 }, { -99.853, -72, 99.968 }, { -99.824, -72, 92.164 }, { -99.731, -72, 90.636 }, { -99.414, -72, 94.626 }, { -99.392, -72, 95.825 }, { -99, -72, 93 }, { -98.941, -72, 98.24 }, { -98.356, -72, 91.743 }, { -98.314, -72, 100.18 }, { -98.281, -72, 94.926 }, { -97.963, -72, 93.322 }, { -97.927, -72, 89.527 }, { -97.732, -72, 98.785 }, { -97.662, -72, 89.326 }, { -97.344, -72, 98.52 }, { -97.15, -72, 97.036 }, { -96.798, -72, 93.61 }, { -96.787, -72, 97.103 }, { -96.559, -72, 92.495 }, { -96.516, -73.255, 97.807 }, { -96.157, -72, 89.671 }, { -96.052, -72, 97.626 }, { -95.815, -72, 90.632 }, { -94.9, -72, 92.646 }, { -94.285, -72, 94.315 }, { -94.184, -72, 93.107 }, { -93.889, -72, 91.814 }, { -93.301, -72, 95.551 } } },
         },
         [17529] = {
-            { 'Woodland Sage', 124, 60, 61, 1 },
+            { 'Woodland Sage', 124, 60, 61, 1, { { 190.863, 0.308, 88.761 }, { 190.942, 0.345, 94.828 }, { 196.364, 0, 84.094 }, { 196.674, 0, 79.612 }, { 197.377, 0, 39.511 }, { 199.007, 0.459, 68.804 }, { 200.374, 0, 82.859 }, { 200.496, 0.455, 68.871 }, { 201, 0, 38.085 }, { 201.787, 0.6, 58.539 }, { 202.027, 0.571, 65.147 }, { 202.185, 0.482, 51.669 }, { 202.871, 0.6, 62.518 }, { 203.632, 0.6, 60.683 }, { 204.396, 0.457, 52.528 }, { 204.46, 0.032, 35.157 }, { 204.515, 0.423, 52.235 }, { 204.844, 0.333, 49.554 }, { 205.247, 0.393, 61.471 }, { 205.281, 0.288, 46.91 }, { 206.051, 0.044, 73.292 }, { 206.943, 0.218, 43.324 }, { 207.189, 0.161, 47.552 }, { 207.544, 0.288, 44.352 }, { 208.549, 0.048, 49.52 }, { 209.542, 0.025, 49.432 }, { 210.971, 0.276, 34.572 }, { 211.807, 0.289, 45.599 }, { 212.211, 0.282, 74.201 }, { 213.058, 0.234, 46.28 }, { 217.408, 0.13, 47.07 }, { 218.02, 0.6, 77.149 }, { 219.102, 0.43, 45.071 }, { 223.634, 0.6, 79.241 }, { 225.314, 0.567, 78.223 }, { 230.358, 0.043, 48.605 }, { 232.461, 0.218, 73.944 }, { 232.77, 0.116, 66.418 }, { 234.421, 0.116, 83.652 }, { 235.741, 0.552, 60.963 }, { 237.334, 0.159, 46.159 }, { 237.683, 0.38, 49.63 }, { 239.277, 0, 35.625 }, { 239.785, 0, 43.552 }, { 239.913, 0.59, 55.617 }, { 240.027, 0, 42.375 }, { 242.065, 0, 38.085 }, { 242.325, 0, 77.845 }, { 245.816, 0, 41.834 }, { 248.894, -0.01, 36.174 } } },
         },
         [17563] = {
-            { 'Foreseer Oramix', 205, 69, 72, 1 },
+            { 'Foreseer Oramix', 205, 69, 72, 1, { { -111.47, 3.764, 141.784 } } },
         },
         [17564] = {
-            { 'Taxim', 212, 78, 80, 1 },
+            { 'Taxim', 212, 78, 80, 1, { { -151, 0.048, 47 } } },
         },
         [17567] = {
-            { 'Kirin', 178, 92, 92, 1 },
+            { 'Kirin', 178, 92, 92, 1, { { -90.377, 32.575, 5.507 } } },
         },
         [17586] = {
-            { 'Jormungand', 5, 95, 95, 1 },
+            { 'Jormungand', 5, 95, 95, 1, { { -276.88, -176.729, 120.215 }, { -265.288, -176.729, 121.749 }, { -256.298, -176.729, 139.318 }, { -251.956, -176.729, 122.926 }, { -248.338, -176.729, 101.971 }, { -246.236, -176.729, 141.755 }, { -244.554, -176.729, 78.238 }, { -243.581, -176.729, 152.63 }, { -242.298, -176.729, 93.812 }, { -242.004, -176.729, 121.865 }, { -240.915, -176.729, 71.196 }, { -238.398, -176.729, 77.472 }, { -237.583, -176.729, 163.615 }, { -237.421, -176.729, 105.84 }, { -237.096, -176.729, 66.51 }, { -233.443, -176.729, 123.33 }, { -232.483, -176.729, 143.635 }, { -230.205, -176.729, 94.413 }, { -229.395, -176.729, 78.389 }, { -229.191, -176.729, 105.774 }, { -229.036, -176.729, 163.847 }, { -222.505, -176.729, 78.963 }, { -222.317, -176.729, 143.632 }, { -222.266, -176.729, 123.821 }, { -221.376, -176.729, 105.039 }, { -221.042, -176.729, 93.325 }, { -219.294, -176.729, 166.444 }, { -214.671, -176.729, 141.788 }, { -214.032, -176.729, 104.421 }, { -213.177, -176.729, 177.619 }, { -212.76, -176.729, 92.678 }, { -211.989, -176.729, 76.162 }, { -211.107, -176.729, 123.475 }, { -206.268, -176.729, 101.888 }, { -206.087, -176.729, 167.093 }, { -205.726, -176.729, 146.453 }, { -204.299, -176.74, 133.447 }, { -203.667, -176.028, 132.71 }, { -202.779, -176.729, 89.554 }, { -202.155, -176.729, 77.074 }, { -201.789, -176.729, 181.279 }, { -198.346, -176.729, 123.67 }, { -196.297, -176.729, 167.56 }, { -195.846, -176.729, 153.944 }, { -194.782, -176.729, 85.499 }, { -194.149, -176.729, 166.793 }, { -185.503, -176.729, 125.448 }, { -183.494, -176.729, 107.748 }, { -174.858, -176.729, 108.531 }, { -173.13, -176.729, 125.831 }, { -170.724, -176.729, 114.058 } } },
         },
         [17594] = {
-            { 'Swamfisk', 101, 11, 15, 1 },
+            { 'Swamfisk', 101, 11, 15, 1, { { 373.619, -37.093, 8.811 }, { 377.099, -16.5, -116.978 }, { 377.196, -26.5, -41.709 }, { 377.775, -21.14, -100.793 }, { 377.867, -25.844, -87.369 }, { 377.901, -36.5, 7.777 }, { 378.34, -16.5, -114.598 }, { 378.75, -16.5, -121.205 }, { 379.12, -27.898, -46.436 }, { 379.222, -16.5, -104.756 }, { 380.016, -26.5, -78.87 }, { 380.094, -36.063, -5.659 }, { 380.565, -26.5, -23.264 }, { 380.701, -26.5, -25.746 }, { 381.009, -32.946, -18.757 }, { 381.394, -33.607, -15.583 }, { 381.74, -16.5, -126.554 }, { 381.792, -16.5, -105.199 }, { 381.871, -16.5, -121.944 }, { 381.896, -16.5, -108.963 }, { 382.381, -16.51, -112.047 }, { 401.565, -16.5, -138.771 }, { 415.116, -16.513, -152.47 }, { 416.2, -16.5, -190.821 }, { 416.735, -16.5, -194.003 }, { 417.506, -16.5, -245.87 }, { 417.542, -17.21, -177.883 }, { 418.77, -16.5, -161.189 }, { 419.303, -16.5, -279.431 }, { 419.641, -16.5, -197.93 }, { 419.846, -16.5, -260.191 }, { 420.762, -16.5, -200.909 }, { 420.839, -16.5, -207.904 }, { 422.399, -16.5, -282.901 }, { 423, -16, -285 }, { 424.172, -16.503, -289.191 }, { 426.296, -16.506, -291.591 }, { 442.671, -16.5, -300.56 }, { 443.334, -17, -303.275 }, { 445.518, -16.5, -301.93 }, { 455.806, -16.5, -315.716 }, { 456.867, -6.502, -348.728 }, { 457.218, -15.228, -329.574 }, { 457.633, -6.51, -351.833 }, { 458, -16, -316 }, { 458.712, -6.5, -369.144 }, { 459.206, -6.5, -372.37 }, { 459.345, -6.686, -363.842 }, { 459.819, -12.172, -340.312 }, { 460.024, -6.5, -342.35 }, { 461, -6, -356 } } },
         },
         [17595] = {
-            { 'Jailer of Hope', 33, 85, 85, 1 },
+            { 'Jailer of Hope', 33, 85, 85, 1, { { -681.683, -0.5, -77.066 } } },
         },
         [17618] = {
-            { 'Mischievous Micholas', 123, 53, 55, 1 },
+            { 'Mischievous Micholas', 123, 53, 55, 1, { { -279.575, 3.317, 16.011 } } },
         },
         [17619] = {
-            { 'Tzee Xicu the Manifest', 151, 85, 85, 1 },
+            { 'Tzee Xicu the Manifest', 151, 85, 85, 1, { { -110.096, -72, 94.758 }, { -108.852, -72, 92.674 }, { -107.448, -72, 91.881 }, { -106.305, -72, 95.115 }, { -105.598, -72, 93.795 }, { -105.329, -72, 90.984 }, { -105.111, -72, 91.326 }, { -104.539, -72, 96.002 }, { -103.679, -72, 91.665 }, { -103.268, -72, 96.397 }, { -102.082, -72, 92.241 }, { -102.046, -72, 98.383 }, { -101.96, -72, 97.769 }, { -101.619, -72, 89.486 }, { -101.447, -72, 99.111 }, { -101.428, -72, 96.497 }, { -101.338, -72, 100.293 }, { -101.309, -72, 91.051 }, { -101.14, -72, 99.131 }, { -100.509, -72, 98.52 }, { -100.445, -72, 94.454 }, { -100.003, -72, 94.327 }, { -99.952, -72, 91.543 }, { -99.853, -72, 99.968 }, { -99.824, -72, 92.164 }, { -99.731, -72, 90.636 }, { -99.414, -72, 94.626 }, { -99.392, -72, 95.825 }, { -99, -72, 93 }, { -98.941, -72, 98.24 }, { -98.356, -72, 91.743 }, { -98.314, -72, 100.18 }, { -98.281, -72, 94.926 }, { -97.963, -72, 93.322 }, { -97.927, -72, 89.527 }, { -97.732, -72, 98.785 }, { -97.662, -72, 89.326 }, { -97.344, -72, 98.52 }, { -97.15, -72, 97.036 }, { -96.798, -72, 93.61 }, { -96.787, -72, 97.103 }, { -96.559, -72, 92.495 }, { -96.516, -73.255, 97.807 }, { -96.157, -72, 89.671 }, { -96.052, -72, 97.626 }, { -95.815, -72, 90.632 }, { -94.9, -72, 92.646 }, { -94.285, -72, 94.315 }, { -94.184, -72, 93.107 }, { -93.889, -72, 91.814 }, { -93.301, -72, 95.551 } } },
         },
         [17626] = {
-            { 'Cuelebre', 45, 85, 85, 1 },
+            { 'Cuelebre', 45, 85, 85, 1, { { -460.369, -39.828, -132.006 } } },
         },
         [17650] = {
-            { 'Cargo Crab Colin', 173, 34, 37, 1 },
+            { 'Cargo Crab Colin', 173, 34, 37, 1, { { -85, -0.5, -37 }, { -79.187, 0, -42.264 }, { -76.598, 0, -40.933 }, { -75.757, 0.452, -32.288 }, { -75.612, 0, -40.8 }, { -75.151, 0.309, -47.153 }, { -74.592, 0, -40.162 }, { -73.888, 0, -42.595 }, { -73.8, 0.049, -45.22 }, { -73.698, 0.407, -31.263 }, { -73.592, 0.067, -44.974 }, { -73.365, 0.131, -39.129 }, { -72.606, 0.322, -37.735 }, { -72.305, 0.724, -30.201 }, { -71.863, 0.916, -32.397 }, { -71.756, 0.277, -43.637 }, { -70.137, 0.482, -41.033 }, { -68.824, 0.613, -40.931 }, { -68.381, 0.86, -46.385 }, { -67.474, 0.769, -41.325 }, { -67.128, 1.155, -36.524 }, { -66.542, 1.042, -37.272 }, { -65.96, 1.182, -37.165 }, { -65.623, 1, -39.202 }, { -65.262, 1, -39.255 }, { -64.726, 1, -42.103 }, { -63.13, 1.102, -39.68 }, { -59.506, 1.25, -40.767 }, { -59.438, 1.25, -39.216 }, { -58.936, 1.25, -39.846 }, { -55.525, 1, -39.482 }, { -55.523, 1, -40.409 }, { -54.173, 1, -40.547 }, { -53.524, 0.919, -41.377 }, { -53.217, 0.873, -41.524 }, { -53.176, 1.441, -44.774 }, { -52, -0.5, -33 }, { -51.875, 0.672, -38.666 }, { -51.52, 0.783, -34.539 }, { -50.468, 0.75, -32.678 }, { -50.126, 0.5, -37.424 }, { -49.704, 0.5, -39.131 }, { -49.223, 0.496, -34.762 }, { -47.472, 0.767, -48.368 }, { -45.549, 0.413, -49.218 }, { -45.202, 0.417, -32.101 }, { -44.681, 0.095, -35.371 }, { -44.653, 0, -37.782 }, { -44.344, 0.1, -35.128 }, { -43.462, 0.305, -43.662 }, { -30.384, 1, -33.277 } } },
         },
         [17651] = {
-            { 'Proconsul XII', 208, 70, 72, 1 },
+            { 'Proconsul XII', 208, 70, 72, 1, { { -392.671, -0.181, 692.656 } } },
         },
         [17652] = {
-            { 'Charybdis', 176, 79, 81, 1 },
+            { 'Charybdis', 176, 79, 81, 1, { { -212.407, 38.538, -342.544 }, { -166.042, 48.34, -340.356 }, { -164.707, 48.33, -330.263 }, { -163.429, 48.46, -337.624 }, { -163.198, 48.327, -329.005 }, { -163.176, 48.323, -342.85 }, { -162.567, 48.465, -340.182 }, { -162.424, 48.375, -343.121 }, { -162.4, 48.474, -332.129 }, { -162.396, 48.436, -331.558 }, { -162.195, 48.46, -333.26 }, { -160.974, 48.453, -333.704 }, { -160.4, 48.477, -339.91 }, { -160.08, 48.457, -332.202 }, { -159.208, 48.246, -346.543 }, { -158.11, 48.448, -339.344 }, { -158.004, 48.441, -340.802 }, { -156.357, 48.451, -339.278 }, { -153.389, 48.438, -339.05 }, { -152.557, 48.309, -345.523 }, { -152, 48, -328 }, { -151.59, 48.434, -341.447 }, { -150.407, 48.46, -333.947 }, { -150.358, 48.291, -338.601 }, { -149.252, 48.33, -343.319 }, { -149.198, 48.475, -331.289 }, { -148.072, 48.484, -333.427 }, { -147.128, 48.343, -341.618 }, { -145.668, 48.405, -332.181 }, { -144.768, 48.291, -341.985 }, { -144.259, 48.485, -337.866 }, { -143.747, 48.389, -332.658 }, { -143.426, 48.267, -342.433 }, { -143.087, 48.271, -342.227 }, { -143.056, 48.276, -341.779 }, { -142.18, 48.271, -345.135 }, { -141.571, 48.426, -338.449 }, { -139.887, 48.47, -337.201 }, { -139.382, 48.414, -339.323 }, { -138.565, 48.477, -337.513 }, { -138.303, 48.42, -343.009 }, { -138.264, 48.466, -341.724 }, { -138.181, 48.389, -338.001 }, { -138.096, 48.493, -334.148 }, { -137.878, 48.355, -344.886 }, { -137.511, 48.474, -341.49 }, { -135.993, 48.497, -339.355 }, { -134.991, 48.422, -339.475 }, { -134.9, 48.415, -339.6 }, { -131.404, 48.213, -333.826 }, { -130.664, 48.315, -338.463 } } },
         },
         [17653] = {
-            { 'Fafnir', 154, 90, 90, 1 },
+            { 'Fafnir', 154, 90, 90, 1, { { 82.325, 6.876, 42.041 } } },
         },
         [17658] = {
             { 'Ouryu', 30, 0, 0, 1 },
-            { 'Ouryu', 30, 90, 90, 1 },
+            { 'Ouryu', 30, 90, 90, 1, { { 18.67, 76.18, -740.65 } } },
         },
         [17659] = {
-            { 'Seiryu', 130, 88, 90, 1 },
+            { 'Seiryu', 130, 88, 90, 1, { { 580.835, -70.22, -84.529 } } },
         },
         [17662] = {
-            { 'Antican Legatus', 208, 72, 74, 1 },
+            { 'Antican Legatus', 208, 72, 74, 1, { { -297.699, -2.414, 384.209 } } },
         },
         [17708] = {
-            { 'Chariotbuster Byakzak', 141, 23, 24, 1 },
+            { 'Chariotbuster Byakzak', 141, 23, 24, 1, { { 49, -44, -132 } } },
         },
         [17709] = {
-            { 'Cwn Cyrff', 195, 63, 63, 1 },
+            { 'Cwn Cyrff', 195, 63, 63, 1, { { -395.612, -0.102, 378.777 } } },
         },
         [17710] = {
-            { 'Jailer of Justice', 33, 85, 85, 1 },
+            { 'Jailer of Justice', 33, 85, 85, 1, { { -279.194, -0.5, -465.362 } } },
         },
         [17716] = {
             { 'Mamool Ja Lurker', 52, 81, 83 },
@@ -7415,16 +8334,16 @@ return {
             { 'Mamool Ja Mimer', 65, 81, 83 },
         },
         [17722] = {
-            { 'Proteus', 58, 79, 79, 1 },
+            { 'Proteus', 58, 79, 79, 1, { { -6.412, -7.163, 8.235 } } },
         },
         [17737] = {
-            { 'Lamie No.7', 54, 80, 82, 1 },
+            { 'Lamie No.7', 54, 80, 82, 1, { { -146.615, -3.912, 186.245 } } },
         },
         [17738] = {
-            { 'Khimaira', 79, 85, 85, 1 },
+            { 'Khimaira', 79, 85, 85, 1, { { 573.27, -19.806, 417.435 }, { 574.29, -19.406, 420.032 }, { 574.437, -19.764, 413.376 }, { 574.86, -19.789, 411.398 }, { 574.944, -20.25, 398.044 }, { 575.061, -20.024, 407.646 }, { 575.081, -20.212, 401.917 }, { 575.15, -20.193, 403.854 }, { 577.499, -18.565, 421.169 }, { 578.716, -18.258, 420.995 }, { 578.869, -19.463, 408.341 }, { 579.595, -18.665, 412.226 }, { 579.607, -18.103, 417.676 }, { 579.958, -18.266, 414.169 }, { 583.317, -17.946, 416.588 }, { 584.688, -17.619, 413.423 }, { 585.373, -17.456, 411.84 }, { 585.758, -17.501, 416.037 }, { 586.263, -17.534, 408.917 }, { 586.698, -17.777, 404.16 }, { 587.057, -17.693, 406.042 }, { 588.96, -16.903, 414.743 }, { 590.375, -16.657, 414.253 }, { 593.064, -16.349, 406.841 }, { 593.206, -16.164, 413.272 }, { 593.377, -16.228, 409.615 }, { 593.448, -16.318, 404.23 }, { 593.64, -16.302, 402.924 }, { 593.708, -16.131, 411.042 }, { 594.297, -16.22, 399.705 }, { 595.293, -16.128, 396.851 }, { 597.986, -15.99, 395.816 }, { 598.476, -15.75, 410.028 }, { 599.332, -15.921, 395.298 }, { 601.264, -15.8, 409.571 }, { 601.327, -15.944, 396.589 }, { 601.369, -15.9, 406.213 }, { 602.027, -15.916, 405.037 }, { 602.41, -15.722, 411.917 }, { 603.887, -16.14, 414.765 }, { 604.808, -15.665, 413.252 }, { 606.333, -15.641, 413.605 }, { 606.722, -15.664, 411.476 }, { 610.253, -15.74, 396.727 }, { 610.69, -15.612, 413.052 }, { 610.845, -15.621, 412.2 }, { 611.305, -15.711, 397.986 }, { 611.835, -15.628, 405.258 }, { 613.338, -15.598, 404.292 }, { 613.41, -15.652, 400.505 }, { 613.496, -15.615, 403.029 } } },
         },
         [17750] = {
-            { 'Jeduah', 95, 17, 18, 1 },
+            { 'Jeduah', 95, 17, 18, 1, { { 114.742, -1.007, -288.349 } } },
         },
         [17751] = {
             { 'Lambton Worm', 86 },
@@ -7432,68 +8351,68 @@ return {
             { 'Lambton Worm', 93 },
         },
         [17754] = {
-            { 'Vulpangue', 51, 78, 80, 1 },
+            { 'Vulpangue', 51, 78, 80, 1, { { -697, -7, -123 } } },
         },
         [17755] = {
-            { 'Cheese Hoarder Gigiroon', 72, 80, 82, 1 },
+            { 'Cheese Hoarder Gigiroon', 72, 80, 82, 1, { { -184.112, -8.105, 24.555 } } },
         },
         [17756] = {
-            { 'Ga\'Lhu Nevermolt', 92, 83, 83, 1 },
+            { 'Ga\'Lhu Nevermolt', 92, 83, 83, 1, { { 208.697, -3.353, -39.247 } } },
         },
         [17757] = {
-            { 'Coinbiter Cjaknokk', 85, 83, 83, 1 },
+            { 'Coinbiter Cjaknokk', 85, 83, 83, 1, { { -128.493, 3.745, 20.947 } } },
         },
         [17766] = {
-            { 'Graoully', 137, 90, 90, 1 },
+            { 'Graoully', 137, 90, 90, 1, { { 284, 0.001, -253 } } },
         },
         [17767] = {
-            { 'Lugh', 171, 80, 82, 1 },
+            { 'Lugh', 171, 80, 82, 1, { { -251.177, -0.848, 250.864 } } },
         },
         [17774] = {
-            { 'Mother Globe', 178, 83, 84, 1 },
+            { 'Mother Globe', 178, 83, 84, 1, { { 855.947, -99.924, -578.291 } } },
         },
         [17792] = {
-            { 'Orctrap', 2, 37, 38, 1 },
+            { 'Orctrap', 2, 37, 38, 1, { { 55.183, -5.286, -557.978 }, { 64.133, -8.694, -544.07 }, { 67.521, -7.25, -574.496 }, { 70.148, -8.429, -527.044 }, { 70.79, -6.853, -539.554 }, { 71.349, -7.935, -594.507 }, { 74.51, -7.215, -606.091 }, { 76.962, -5.935, -514.68 }, { 78.668, -5.044, -580.871 }, { 78.979, -6, -556.341 }, { 79.683, -5.683, -570.357 }, { 81.873, -5.138, -542.754 }, { 86.146, -6.743, -526.943 }, { 87.834, -7.597, -520.502 }, { 89.111, -6.283, -605.517 }, { 91.609, -6.222, -552.088 }, { 93.11, -6.669, -549.745 }, { 95.28, -5.276, -562.397 }, { 96.13, -8.346, -544.888 }, { 99.231, -5.38, -595.511 }, { 102.059, -5.104, -559.392 }, { 103.035, -5.152, -556.371 }, { 103.883, -7.184, -608.87 }, { 111.511, -6.951, -552.205 }, { 112.675, -6.123, -574.21 }, { 114.257, -5.913, -598.335 }, { 115.034, -7.826, -608.715 }, { 115.54, -5.978, -561.725 }, { 115.876, -5.46, -586.387 }, { 118.745, -5.128, -582.544 }, { 126.959, -5.853, -562.76 }, { 127.259, -8.54, -549.758 }, { 129.581, -7.781, -588.18 }, { 129.847, -7.358, -582.05 }, { 134.721, -7.024, -569.841 }, { 137.052, -9.105, -547.091 }, { 139.833, -9.229, -575.526 }, { 144.089, -5.213, -558.133 }, { 148.944, -9.235, -529.042 }, { 150.334, -7.799, -569.064 }, { 151.941, -7.748, -518.589 }, { 161.918, -5.59, -532.219 }, { 163.666, -5.566, -547.622 }, { 163.763, -8.363, -511.01 }, { 163.812, -6.01, -562.407 }, { 172.705, -6.989, -511.832 }, { 173.654, -5.44, -524.019 }, { 176.721, -5.672, -537.42 }, { 178.748, -5.863, -546.921 }, { 180.087, -5.484, -532.799 }, { 181.074, -5.068, -555.737 } } },
         },
         [17794] = {
-            { 'Tres Duendes', 27, 47, 49, 1 },
+            { 'Tres Duendes', 27, 47, 49, 1, { { -153.577, -0.245, 215.862 } } },
         },
         [17799] = {
             { 'Ouryu', 30, 0, 0, 1 },
-            { 'Ouryu', 30, 90, 90, 1 },
+            { 'Ouryu', 30, 90, 90, 1, { { 18.67, 76.18, -740.65 } } },
         },
         [17801] = {
-            { 'Orthrus', 218, 0, 0, 1 },
+            { 'Orthrus', 218, 0, 0, 1, { { -404, 0.001, 118 }, { -400, 0, 97 }, { -395, 0.001, 89 } } },
         },
         [17804] = {
-            { 'Zipacna', 177, 83, 85, 1 },
+            { 'Zipacna', 177, 83, 85, 1, { { -195, -0.5, 396 } } },
         },
         [17806] = {
-            { 'Jaculus', 254, 100, 100, 1 },
+            { 'Jaculus', 254, 100, 100, 1, { { 262.005, -48.969, 110.609 } } },
         },
         [17808] = {
-            { 'Fistule', 15, 90, 90, 1 },
+            { 'Fistule', 15, 90, 90, 1, { { -213.979, 67.18, 823.206 } } },
         },
         [17811] = {
-            { 'Carnero', 107, 11, 12, 1 },
+            { 'Carnero', 107, 11, 12, 1, { { 132.707, -39.971, -404.853 }, { 137.811, -39.808, -407.065 }, { 140.262, -40.02, -400.38 }, { 145.05, -39.677, -412.044 }, { 148.674, -40.01, -400.045 }, { 150.611, -39.688, -413.599 }, { 151.371, -39.39, -412.129 }, { 153.446, -40.422, -422.054 }, { 156.214, -39.905, -404.912 }, { 157.823, -40.138, -439.761 }, { 158.657, -39.96, -432.131 }, { 159.616, -39.97, -461.112 }, { 159.969, -40.04, -448.497 }, { 160.304, -39.99, -460.4 }, { 160.748, -40.01, -423.153 }, { 161.971, -40, -437.321 }, { 162.006, -40, -404.165 }, { 162.07, -40, -435.503 }, { 162.204, -40.022, -462.845 }, { 162.443, -40.027, -450.13 }, { 162.59, -40.078, -451.164 }, { 163.108, -39.948, -418.332 }, { 163.288, -40, -464.921 }, { 163.377, -39.933, -412.575 }, { 163.696, -39.957, -409.384 }, { 164.004, -40, -477.675 }, { 164.245, -39.9, -347.878 }, { 164.381, -39.96, -465.282 }, { 164.667, -40, -473.736 }, { 165.738, -40.397, -454.507 }, { 170.812, -39.731, -473.537 }, { 183.707, -39.389, -484.519 }, { 186.081, -39.99, -367.942 }, { 189.817, -39.965, -480.368 }, { 194.437, -39.859, -481.33 }, { 195.133, -39.993, -495.835 }, { 195.636, -39.623, -492.709 }, { 195.807, -39.672, -487.028 }, { 196.798, -40.168, -500.11 }, { 196.869, -39.687, -486.894 }, { 197.168, -40.198, -505.979 }, { 199.139, -39.91, -485.544 }, { 200.544, -39.964, -501.705 }, { 201.021, -39.904, -500.721 }, { 201.157, -40.059, -514.733 }, { 201.868, -40.094, -513.194 }, { 202.572, -40.13, -511.536 }, { 211.745, -59.938, -441.313 }, { 213.01, -59.983, -442.766 }, { 274.561, -39.972, -476.762 }, { 275.135, -39.977, -477.84 }, { 277.891, -39.854, -413.354 } } },
         },
         [17813] = {
-            { 'Unstable Cluster', 29, 56, 57, 1 },
+            { 'Unstable Cluster', 29, 56, 57, 1, { { 309.5, -1.189, -706.5 } } },
         },
         [17814] = {
-            { 'Dosetsu Tree', 126, 35, 35, 1 },
+            { 'Dosetsu Tree', 126, 35, 35, 1, { { -240, -20.795, 37 }, { -161.386, -20.19, 69.814 } } },
         },
         [17843] = {
-            { 'Meww the Turtlerider', 123, 47, 49, 1 },
+            { 'Meww the Turtlerider', 123, 47, 49, 1, { { -438.751, 17, -323.948 }, { -426.268, 17, -398.56 }, { -404.454, 17.021, -378.427 }, { -384, 17, -390 }, { -362.094, 17, -357.573 }, { -319.39, 17, -364.417 } } },
         },
         [17854] = {
-            { 'Kotan-kor Kamuy', 89, 80, 80, 1 },
+            { 'Kotan-kor Kamuy', 89, 80, 80, 1, { { -23.892, -24.139, 327.721 } } },
         },
         [17855] = {
-            { 'Drekavac', 215, 0, 0, 1 },
+            { 'Drekavac', 215, 0, 0, 1, { { -159, 0.001, 220 } } },
         },
         [17856] = {
-            { 'Seps', 217, 85, 87, 1 },
+            { 'Seps', 217, 85, 87, 1, { { -238, -39, -717 } } },
         },
         [17865] = {
             { 'Goblin Shepherd', 113, 65, 68 },
@@ -7513,197 +8432,197 @@ return {
             { 'Yhoator Mandragora', 124, 35, 37 },
         },
         [17924] = {
-            { 'Tribunus VII-I', 208, 60, 62, 1 },
+            { 'Tribunus VII-I', 208, 60, 62, 1, { { -47.41, -0.312, -139.298 } } },
         },
         [17926] = {
-            { 'Bloodthirster Madkix', 174, 70, 72, 1 },
+            { 'Bloodthirster Madkix', 174, 70, 72, 1, { { 252.08, 8.967, 41.676 }, { 253.555, 9.277, 48.394 }, { 255.024, 9.829, 47.49 }, { 255.762, 10.331, 52.259 }, { 256, 10, 34 }, { 256.678, 10.445, 44.551 }, { 258.128, 10.045, 33.171 }, { 258.401, 10.488, 44.293 }, { 258.539, 10.925, 35.496 }, { 258.695, 9.673, 31.994 }, { 259.258, 10.502, 44.815 }, { 259.681, 11.267, 38.51 }, { 259.891, 10.532, 49.413 }, { 259.913, 11.286, 36.542 }, { 260.1, 9.111, 29.894 }, { 260.115, 10.742, 49.49 }, { 260.509, 10.651, 47.113 }, { 260.526, 10.718, 45.083 }, { 260.716, 10.901, 35.79 }, { 260.789, 10.827, 49.23 }, { 260.988, 10.94, 42.108 }, { 261.032, 10.414, 35.721 }, { 261.136, 10.968, 42.986 }, { 262.517, 9.972, 32.379 }, { 262.586, 9.436, 29.72 }, { 262.73, 9.886, 31.649 }, { 262.798, 11.031, 46.88 }, { 263.522, 10.136, 33.162 }, { 263.941, 10.936, 51.621 }, { 264.408, 10.879, 43.901 }, { 264.482, 10.694, 41.365 }, { 264.804, 10.795, 37.025 }, { 264.844, 9.886, 30.795 }, { 264.846, 10.306, 33.532 }, { 264.895, 9.507, 29.617 }, { 264.91, 10.686, 51.76 }, { 265, 9, 30 }, { 265.009, 10.863, 45.673 }, { 265.033, 10.893, 46.094 }, { 265.041, 10.616, 42.175 }, { 265.267, 10.693, 35.492 }, { 265.339, 10.478, 53.706 }, { 266.175, 10.62, 45.806 }, { 266.193, 9.394, 29.491 }, { 266.537, 10.383, 42.137 }, { 267.03, 10.281, 38.054 }, { 267.645, 9.628, 31.464 }, { 267.693, 9.82, 32.948 }, { 268.008, 9.004, 36.19 }, { 269.249, 8.989, 44.566 }, { 269.313, 8.633, 37.707 } } },
         },
         [17927] = {
-            { 'Tyrannic Tunnok', 205, 74, 76, 1 },
+            { 'Tyrannic Tunnok', 205, 74, 76, 1, { { -119.79, 19.797, -106.198 } } },
         },
         [17928] = {
-            { 'Overlord Bakgodek', 150, 85, 85, 1 },
+            { 'Overlord Bakgodek', 150, 85, 85, 1, { { 225.168, -2.974, -110.339 } } },
         },
         [17947] = {
-            { 'Meteormauler Zhagtegg', 104, 37, 40, 1 },
+            { 'Meteormauler Zhagtegg', 104, 37, 40, 1, { { -232.3, -8.18, -571.66 }, { -229.1, -7.65, -556.17 }, { -218.12, -8, -566.11 }, { -217.61, -8.57, -551.96 }, { -205.58, -7.81, -553.79 } } },
         },
         [17948] = {
-            { 'Jailer of Temperance', 34, 85, 85, 1 },
+            { 'Jailer of Temperance', 34, 85, 85, 1, { { -426.739, -0.5, 687.728 }, { -262.373, -0.5, 49.059 } } },
         },
         [17952] = {
-            { 'Hydra', 51, 80, 80, 1 },
+            { 'Hydra', 51, 80, 80, 1, { { -282, -24, -1 } } },
         },
         [17953] = {
-            { 'Zoraal Ja\'s Pkuucha', 51, 75, 75, 1 },
+            { 'Zoraal Ja\'s Pkuucha', 51, 75, 75, 1, { { 170, -18, -21 }, { 181, -18, -42 }, { 193, -18, -65 }, { 207, -16, -77 }, { 208, -17, -93 }, { 221, -19, -75 } } },
         },
         [17959] = {
-            { 'Gloomanita', 88, 42, 53, 1 },
+            { 'Gloomanita', 88, 42, 53, 1, { { 49.65, 1.692, 630.371 } } },
         },
         [17961] = {
-            { 'Brass Borer', 61, 83, 83, 1 },
+            { 'Brass Borer', 61, 83, 83, 1, { { 399.386, -27.022, 120.479 } } },
         },
         [17962] = {
-            { 'Ra\'Dha Scarscute', 92, 83, 83, 1 },
+            { 'Ra\'Dha Scarscute', 92, 83, 83, 1, { { -22.51, -3.529, -57.955 } } },
         },
         [17963] = {
-            { 'Falsespinner Bhudbrodd', 85, 83, 83, 1 },
+            { 'Falsespinner Bhudbrodd', 85, 83, 83, 1, { { -221.122, -0.915, -96.614 } } },
         },
         [17967] = {
-            { 'Barbastelle', 190, 15, 17, 1 },
+            { 'Barbastelle', 190, 15, 17, 1, { { 133, -0.5, 220 } } },
         },
         [17969] = {
-            { 'Killer Jonny', 113, 85, 85, 1 },
+            { 'Killer Jonny', 113, 85, 85, 1, { { -90.636, -8.859, 152.899 }, { -80.809, -7.032, 147.464 }, { -77.167, -8, 156.316 }, { -61.131, -7.005, 151.069 }, { -54.285, -8.151, 165.535 }, { -35.874, -8.162, 166.132 } } },
         },
         [17970] = {
-            { 'Centipedal Centruroides', 97, 81, 83, 1 },
+            { 'Centipedal Centruroides', 97, 81, 83, 1, { { 133.834, 22.199, -208.7 } } },
         },
         [17971] = {
-            { 'Gharial', 51, 82, 83, 1 },
+            { 'Gharial', 51, 82, 83, 1, { { -536.144, -10.614, 44.758 }, { -531.255, -9.756, 42.421 } } },
         },
         [17980] = {
-            { 'Death from Above', 159, 57, 59, 1 },
+            { 'Death from Above', 159, 57, 59, 1, { { 53, 1, -62 } } },
         },
         [17981] = {
-            { 'Sabotender Mariachi', 174, 68, 70, 1 },
+            { 'Sabotender Mariachi', 174, 68, 70, 1, { { -84.721, -0.325, -2.861 }, { -83.818, 0, 0.745 }, { -82.26, 0, -3.803 }, { -82.074, -0.45, -0.738 }, { -80.201, 0, 4.608 }, { -73.786, 0.412, 7.445 }, { -71.861, 0.312, 8.733 }, { -70.231, 0, -5.691 }, { -68.434, 0.038, -10.282 }, { -62.178, 0, 8.761 }, { -60.718, 0.581, 3.455 }, { -58.807, -0.327, -8.531 }, { -56.767, -0.026, 14.866 }, { -56.081, -1.546, 21.705 }, { -55.152, -0.256, 16.03 }, { -54.912, 0.347, -1.681 }, { -54.868, 0.178, 4.089 }, { -53.27, -0.603, 17.775 }, { -52.063, -0.59, 18.69 }, { -50.903, 0, 26.114 }, { -49.404, 0.026, 17.894 }, { -48.92, 0, 27.265 }, { -48.509, 0.116, 29.248 }, { -48.381, 0.5, 40.53 }, { -48.005, -0.006, 22.456 }, { -47.584, 0, 28.471 }, { -46.737, -0.34, -5.031 }, { -45.168, 0.34, 24.419 }, { -45.096, 0, 38.272 }, { -45, -0.115, 39 }, { -44.785, 0, -12.403 }, { -43.815, 0.628, 20.362 }, { -43.57, 0.141, 8.711 }, { -42.088, -0.029, -3.996 }, { -42.018, 0.797, 24.783 }, { -41.902, 0.645, 27.768 }, { -41, -0.488, -31 }, { -41, 0.088, -3 }, { -39.419, 0.326, 9.41 }, { -39.391, 0.326, 30.587 }, { -39.019, 0, 33.954 }, { -38.791, 0.23, 26.579 }, { -38.632, 1, 17.886 }, { -38.605, 1, 13.136 }, { -37.809, 0.851, 25.235 }, { -36.626, 0.645, 22.122 }, { -34.971, 0.582, 21.415 }, { -34.263, -0.512, 30.437 }, { -33.717, -0.448, -43.478 }, { -23.543, -0.396, 59.578 }, { -17.217, -0.956, -57.647 } } },
         },
         [17982] = {
-            { 'Soulstealer Skullnix', 213, 69, 72, 1 },
+            { 'Soulstealer Skullnix', 213, 69, 72, 1, { { -12.154, 5.196, 179.741 }, { -4.04, 5.87, 178.165 }, { -2.016, 5.586, 181.63 }, { -1.666, 4.677, 164.201 }, { -0.308, 5, 156.127 }, { 0.356, 5, 157.963 }, { 2.633, 5.907, 177.665 }, { 2.651, 5.336, 186.46 }, { 3.018, 5.5, 151.834 }, { 3.115, 4.431, 167.534 }, { 3.429, 4.7, 192.22 }, { 5.096, 3.93, 166.865 }, { 5.362, 4.431, 165.531 }, { 5.447, 4.854, 190.6 }, { 7.124, 4.581, 173.092 }, { 8.225, 5.551, 151.919 }, { 9.982, 4.36, 177.286 }, { 13.258, 5.54, 151.087 }, { 13.729, 4.814, 166.295 }, { 16.071, 5.323, 183.93 }, { 16.536, 5.572, 203.888 }, { 16.745, 5.959, 202.097 }, { 18.929, 5.062, 189.397 }, { 19.538, 5.778, 197.512 }, { 20.416, 4.832, 189.654 }, { 21.833, 5.193, 193.164 }, { 22.365, 5.674, 202.914 }, { 24.384, 5.471, 197.938 }, { 25.342, 4.49, 190.97 }, { 26.012, 4.669, 192.468 }, { 26.672, 6, 159.843 }, { 28.559, 5.222, 196.991 }, { 29.577, 4.091, 182.754 }, { 30.351, 5.48, 157.129 }, { 31.891, 4.984, 202.098 }, { 33.197, 5.412, 208.225 }, { 36.808, 5, 200.014 }, { 38, 5, 159 }, { 38.347, 5.5, 178.05 }, { 38.95, 6, 183.656 }, { 39.093, 4.761, 167.379 }, { 39.434, 5, 157.759 }, { 40.123, 5.407, 190.266 }, { 41.15, 5.026, 204.483 }, { 42.669, 5.287, 178.122 }, { 43.103, 5.677, 181.977 }, { 43.496, 5.888, 181.453 }, { 44.463, 5.186, 151.789 }, { 45.141, 4.761, 165.555 }, { 47.518, 5.108, 157.538 }, { 51.751, 5.148, 179.754 } } },
         },
         [17983] = {
-            { 'Lindwurm', 205, 74, 76, 1 },
+            { 'Lindwurm', 205, 74, 76, 1, { { -279.284, 4, -117.433 }, { -277.875, 3.96, -149.239 }, { -271, 3.7, -129 }, { -249.902, 4, -119.366 }, { -238.112, 4, -143.615 } } },
         },
         [18001] = {
-            { 'Citipati', 7, 67, 70, 1 },
+            { 'Citipati', 7, 67, 70, 1, { { -398.931, -4.536, 79.64 }, { -381.284, -9.233, 40.054 }, { -364.014, -4.634, -2.627 }, { -328.973, -12.876, 67.481 }, { -327.763, -12.408, 40.206 } } },
         },
         [18002] = {
-            { 'Xolotl', 7, 80, 81, 1 },
+            { 'Xolotl', 7, 80, 81, 1, { { -483.789, -3.578, 258.435 } } },
         },
         [18007] = {
-            { 'Tres Duendes', 27, 47, 49, 1 },
+            { 'Tres Duendes', 27, 47, 49, 1, { { -153.577, -0.245, 215.862 } } },
         },
         [18018] = {
-            { 'Kreutzet', 113, 79, 80, 1 },
+            { 'Kreutzet', 113, 79, 80, 1, { { 193.197, 8.309, 25.924 }, { 193.963, 8.621, 23.393 }, { 193.966, 7.581, 1.438 }, { 194.765, 8.846, 20.23 }, { 195.346, 7.927, -3.773 }, { 195.826, 8.928, 20.979 }, { 196.589, 8.958, 19.674 }, { 196.715, 7.828, -5.807 }, { 199.051, 7.937, 6.562 }, { 199.508, 7.895, -5.253 }, { 199.78, 8.765, 16.027 }, { 200.336, 8.888, 22.221 }, { 200.441, 8.781, 15.856 }, { 200.606, 8.867, 22.649 }, { 201.074, 8.871, 22.568 }, { 201.21, 7.759, -6.282 }, { 202.704, 8.092, 28.186 }, { 204.147, 7.817, 32.244 }, { 204.687, 8.55, 25.036 }, { 206.815, 7.997, 30.988 }, { 207, 8, 1 }, { 210.19, 8.359, 18.49 }, { 210.313, 8.263, 34.996 }, { 210.586, 8.328, 0.311 }, { 211.166, 7.988, 25.686 }, { 216.624, 8.83, 38.086 }, { 217.593, 8.03, 23.653 }, { 218.173, 8.1, 26.092 }, { 219.439, 8.564, 33.017 }, { 220.09, 8.126, 9.681 }, { 220.577, 8.427, 30.107 }, { 221.894, 8.711, 5.048 }, { 222.503, 8.874, 3.716 }, { 222.966, 8.72, 41.007 }, { 227.246, 8.471, 2.083 }, { 229.327, 8.764, 28.575 }, { 229.661, 7.827, 15.166 }, { 231.18, 8.24, 43.909 }, { 232.415, 8.1, 19.069 }, { 234.765, 8.136, 10.814 }, { 236.722, 8, -0.087 }, { 237.159, 8, 43.954 }, { 239.461, 8, 36.764 }, { 240.067, 8, 1.721 }, { 240.48, 8.654, 25.099 }, { 243.57, 8.34, 19.768 }, { 244.047, 8.146, 26.193 }, { 244.466, 8.016, 28.147 }, { 244.884, 7.931, 40.973 }, { 246.034, 7.608, 45.278 } } },
         },
         [18040] = {
-            { 'Falcatus Aranei', 173, 32, 32, 1 },
+            { 'Falcatus Aranei', 173, 32, 32, 1, { { -94.545, -6.095, 136.48 }, { -82.472, -5.5, 143.515 }, { -81.383, -5.5, 142.45 }, { -81.255, -5.5, 138.037 }, { -80.854, -5.5, 136.215 }, { -80.597, -5.5, 140.416 }, { -80.338, -5.5, 135.474 }, { -79.827, -6.046, 133.982 }, { -79.169, -5.5, 139.693 }, { -78.57, -5.5, 139.072 }, { -78.241, -5.515, 140.841 }, { -78.206, -5.513, 141.575 }, { -78.109, -5.507, 141.212 }, { -76.937, -5.327, 138.895 }, { -75.922, -5.353, 134.489 }, { -75.346, -5.218, 134.944 }, { -73.321, -5.113, 139.462 }, { -72.896, -5.058, 138.936 }, { -72.737, -5.019, 137.35 }, { -72.706, -5.143, 139.896 }, { -70.117, -4.411, 136.235 }, { -68.852, -5.029, 141.069 }, { -68.049, -4.442, 139.991 }, { -68.041, -4.366, 138.776 }, { -67.301, -4.296, 139.569 }, { -66.961, -4.747, 145.079 }, { -66.742, -4.188, 139.273 }, { -65.178, -4.256, 145.132 }, { -65.148, -4.191, 144.151 }, { -64.774, -4.152, 144.677 }, { -62.904, -4, 139.769 }, { -62.565, -4.04, 138.745 }, { -61.878, -4.042, 139.366 }, { -61.372, -4.016, 139.711 }, { -59.904, -4.08, 139.14 }, { -58.996, -4.126, 139.594 }, { -58.657, -4.217, 138.525 }, { -56.387, -4.273, 140.186 }, { -55.274, -4.842, 138.336 }, { -55.008, -5.58, 134.392 }, { -53, -4.418, 139 }, { -51.905, -4.744, 143.289 }, { -51.245, -5.325, 144.618 }, { -50.336, -5.435, 143.767 }, { -49.857, -5.628, 141.205 }, { -49.681, -5.971, 137.163 }, { -49.464, -5.577, 143.707 }, { -49.192, -5.573, 139.478 }, { -48.057, -5.614, 139.647 }, { -33.446, -6.038, 141.987 }, { -25.445, -6.073, 142.192 } } },
         },
         [18041] = {
-            { 'Hellion', 213, 66, 66, 1 },
+            { 'Hellion', 213, 66, 66, 1, { { 89.113, 14.437, 61.137 }, { 97.454, 14.882, 58.474 }, { 98.482, 14.868, 64.923 }, { 102.868, 15.368, 61.308 }, { 109.078, 15.216, 61.308 } } },
         },
         [18042] = {
-            { 'Tarasque', 205, 72, 74, 1 },
+            { 'Tarasque', 205, 72, 74, 1, { { 118, 19, 163 } } },
         },
         [18043] = {
-            { 'Suzaku', 130, 88, 90, 1 },
+            { 'Suzaku', 130, 88, 90, 1, { { -520.836, -70.22, -271.516 } } },
         },
         [18044] = {
-            { 'Despot', 130, 80, 82, 1 },
+            { 'Despot', 130, 80, 82, 1, { { -0.1, -42, -291 } } },
         },
         [18052] = {
-            { 'Bonnacon', 5, 69, 69, 1 },
+            { 'Bonnacon', 5, 69, 69, 1, { { -615.121, -40.062, 6.126 }, { -578.888, -38.507, -67.605 } } },
         },
         [18066] = {
-            { 'Bloody Bones', 54, 83, 83, 1 },
+            { 'Bloody Bones', 54, 83, 83, 1, { { 136, -6, 476 } } },
         },
         [18096] = {
-            { 'Imdugud', 29, 60, 60, 1 },
+            { 'Imdugud', 29, 60, 60, 1, { { 635.831, 20.273, 674.376 }, { 641.52, 20.508, 666.251 }, { 643.327, 20, 679.882 }, { 649.756, 20.716, 668.265 }, { 653.482, 20.489, 681.112 }, { 655.263, 20.664, 651.32 }, { 656.838, 20.625, 637.497 }, { 657.848, 20.819, 645.714 }, { 657.944, 20.81, 671.623 }, { 660.726, 19.047, 625.931 }, { 661.009, 20.879, 652.272 }, { 665.231, 20.74, 659.081 }, { 665.78, 20.526, 677.529 }, { 667.421, 20.055, 630.375 }, { 669.828, 19.936, 619.412 }, { 669.946, 20.706, 664.967 }, { 671.364, 20.282, 607.727 }, { 671.445, 20.188, 628.691 }, { 671.639, 20.312, 638.307 }, { 674.868, 20, 672.169 }, { 675.915, 20.07, 681.807 }, { 676.018, 20.232, 644.848 }, { 676.838, 20.605, 587.767 }, { 677.218, 20.961, 580.758 }, { 678.136, 20.084, 634.284 }, { 678.202, 20.848, 619.218 }, { 680.646, 20.477, 651.844 }, { 681.175, 20, 601.959 }, { 683.17, 20.751, 613.054 }, { 683.664, 20.956, 573.85 }, { 684.952, 20.04, 640.073 }, { 686.531, 20.867, 623.026 }, { 686.637, 21.54, 656.963 }, { 687.905, 20.817, 590.311 }, { 688.608, 21.759, 580.093 }, { 690.96, 20.414, 599.396 }, { 692.255, 21.138, 648.318 }, { 692.468, 20.777, 627.513 }, { 693.978, 20.776, 616.487 }, { 693.982, 22.835, 657.701 }, { 699.179, 20.808, 631.822 }, { 701.306, 20.947, 605.691 }, { 702.733, 22.215, 589.615 }, { 705.144, 20.767, 620.58 }, { 708.53, 20.173, 635.787 }, { 711.063, 20.301, 600.986 }, { 712.158, 20.413, 611.097 }, { 713.438, 21.454, 591.4 }, { 714.995, 20.846, 618.203 }, { 718.516, 20.353, 628.741 }, { 720.089, 20.002, 604.068 } } },
         },
         [18100] = {
-            { 'Jailer of Love', 33, 90, 90, 1 },
+            { 'Jailer of Love', 33, 90, 90, 1, { { 437.76, -1.643, -598.571 } } },
         },
         [18127] = {
-            { 'Dextrose', 62, 80, 82, 1 },
+            { 'Dextrose', 62, 80, 82, 1, { { -144, 11, 464 } } },
         },
         [18128] = {
-            { 'Draketrader Zlodgodd', 85, 83, 83, 1 },
+            { 'Draketrader Zlodgodd', 85, 83, 83, 1, { { -17.291, 0.243, -57.281 } } },
         },
         [18136] = {
-            { 'Morion Worm', 173, 28, 28, 1 },
+            { 'Morion Worm', 173, 28, 28, 1, { { 255.652, -6.039, 20.878 } } },
         },
         [18137] = {
-            { 'Wuur the Sandcomber', 176, 42, 44, 1 },
+            { 'Wuur the Sandcomber', 176, 42, 44, 1, { { 16, -0.5, 120 } } },
         },
         [18138] = {
-            { 'Sabotender Bailarin', 208, 59, 61, 1 },
+            { 'Sabotender Bailarin', 208, 59, 61, 1, { { 595.735, -6.42, -680.738 } } },
         },
         [18139] = {
-            { 'Friar Rush', 160, 70, 70, 1 },
+            { 'Friar Rush', 160, 70, 70, 1, { { -86, 16, 2 } } },
             { 'Peallaidh', 77, 75, 80, 1 },
             { 'Tumbling Truffle', 77, 75, 80, 1 },
         },
         [18140] = {
-            { 'Phantom Worm', 174, 70, 72, 1 },
+            { 'Phantom Worm', 174, 70, 72, 1, { { 76.943, 29.916, 118.854 } } },
         },
         [18141] = {
-            { 'Ungur', 212, 81, 83, 1 },
+            { 'Ungur', 212, 81, 83, 1, { { -316, -9, 3 } } },
         },
         [18161] = {
-            { 'Genbu', 130, 88, 90, 1 },
+            { 'Genbu', 130, 88, 90, 1, { { 261.868, -70.219, 526.413 } } },
         },
         [18162] = {
-            { 'Seiryu', 130, 88, 90, 1 },
+            { 'Seiryu', 130, 88, 90, 1, { { 580.835, -70.22, -84.529 } } },
         },
         [18163] = {
-            { 'Byakko', 130, 88, 90, 1 },
+            { 'Byakko', 130, 88, 90, 1, { { -419.403, -70.2, 410.956 } } },
         },
         [18164] = {
-            { 'Suzaku', 130, 88, 90, 1 },
+            { 'Suzaku', 130, 88, 90, 1, { { -520.836, -70.22, -271.516 } } },
         },
         [18198] = {
-            { 'Byakko', 130, 88, 90, 1 },
+            { 'Byakko', 130, 88, 90, 1, { { -419.403, -70.2, 410.956 } } },
         },
         [18199] = {
-            { 'Ullikummi', 178, 85, 87, 1 },
+            { 'Ullikummi', 178, 85, 87, 1, { { 739, -99, -581 } } },
         },
         [18222] = {
-            { 'Jailer of Fortitude', 35, 79, 80, 1 },
+            { 'Jailer of Fortitude', 35, 79, 80, 1, { { -434.1, -0.5, 697.849 } } },
         },
         [18246] = {
-            { 'Bendigeit Vran', 108, 14, 14, 1 },
-            { 'Haty', 108, 14, 14, 1 },
+            { 'Bendigeit Vran', 108, 14, 14, 1, { { -2.11, 24.44, 105.396 } } },
+            { 'Haty', 108, 14, 14, 1, { { -204.271, 8.118, 36.959 } } },
         },
         [18254] = {
-            { 'Demonic Tiphia', 197, 60, 60, 1 },
+            { 'Demonic Tiphia', 197, 60, 60, 1, { { -109.486, -0.642, 347.509 }, { -106.887, -0.385, 345.743 }, { -106.866, -0.481, 344.518 }, { -105.581, -0.312, 346.714 }, { -105.026, -0.328, 343.467 }, { -104.912, -0.341, 349.042 }, { -104.753, -0.454, 308.572 }, { -104.369, -0.329, 342.025 }, { -104.253, -0.329, 342.561 }, { -104.003, -0.348, 309.727 }, { -103.453, -0.363, 298.791 }, { -103.386, -0.387, 309.294 }, { -103.23, -0.396, 299.398 }, { -103.159, -0.348, 305.169 }, { -103, -1, 311 }, { -102.97, -0.329, 340.621 }, { -102.908, -0.451, 294.955 }, { -102.879, -0.329, 339.055 }, { -102.78, -0.231, 287.089 }, { -102.387, -0.329, 339.974 }, { -102.123, -0.329, 339.204 }, { -101.906, -0.192, 276.08 }, { -101.868, -1.381, 354.176 }, { -101.775, -0.11, 274.42 }, { -101.493, -0.114, 289.381 }, { -101.478, -0.261, 284.203 }, { -101, -1, 285 }, { -100.727, -0.097, 319.89 }, { -100.632, -0.329, 337.527 }, { -100.393, -0.274, 316.377 }, { -100.14, -0.353, 330 }, { -100.105, -0.349, 333.388 }, { -99.623, -0.054, 279.536 }, { -98.736, -0.174, 320.885 }, { -98.725, -0.202, 321.931 }, { -98.186, -0.243, 323.211 }, { -98, -0.637, 324 }, { -97.993, -0.173, 326.615 }, { -97.393, -0.392, 328.757 }, { -97.195, -0.329, 298.861 }, { -96.758, -0.422, 298.326 }, { -96.145, -0.416, 299.108 }, { -95.98, -0.496, 298.313 }, { -94.959, -0.357, 299.738 }, { -90.133, -0.329, 300.983 }, { -89, -1, 301 }, { -82.802, -0.299, 299.108 }, { -82.704, -0.18, 300.032 }, { -81.061, -0.214, 301.46 }, { -76.258, -1.102, 301.931 }, { -75, -1, 299 } } },
         },
         [18255] = {
-            { 'King Vinegarroon', 125, 80, 80, 1 },
+            { 'King Vinegarroon', 125, 80, 80, 1, { { -262.421, 0.478, -629.148 }, { -261.63, 0.518, -630.288 }, { -261.324, 0.933, -637.908 }, { -260.26, 0.986, -640.404 }, { -256.645, 0.468, -626.716 }, { -256.311, 0.815, -642.751 }, { -255.686, 0.602, -628.061 }, { -252.847, 0.235, -646.125 }, { -250.837, 0.417, -630.897 }, { -248.542, -0.021, -649.309 }, { -246.296, 0.036, -634.473 }, { -245.28, 0.461, -655.033 }, { -245.207, 0.059, -641.675 }, { -245.147, 0.599, -626.252 }, { -244.574, 0.071, -646.048 }, { -244.369, 0.02, -635.194 }, { -243.049, 0.613, -654.179 }, { -242.678, 0.092, -645.864 }, { -242.659, 0.955, -660.882 }, { -242.145, 0.827, -656.544 }, { -240.441, 0.402, -652.088 }, { -240.234, 0.303, -650.101 }, { -240.012, 0.808, -656.175 }, { -239, -0.226, -650 }, { -238.658, 0.817, -663.646 }, { -238.409, 0.703, -664.933 }, { -237.494, 0.577, -613.816 }, { -237.054, 0.964, -660.702 }, { -233.937, 0.767, -655.708 }, { -233.545, 0.121, -639.868 }, { -232.802, 0.158, -640.158 }, { -232.252, 0.787, -661.674 }, { -232.115, 0.192, -637.89 }, { -229.016, 0.222, -648.687 }, { -228.974, 0.349, -641.211 }, { -228.641, 0.365, -644.196 }, { -227.448, 0.165, -650.454 }, { -227.395, 0.704, -661.855 }, { -226.979, 1, -665.418 }, { -226.952, 0.226, -652.052 }, { -225.576, 0.548, -659.382 }, { -224.005, 0.594, -648.294 }, { -223.5, 0.605, -656.289 }, { -221.848, 0.602, -655.343 }, { -216.112, 0.144, -663.042 }, { -213.032, 0.493, -658.491 }, { -209.696, 0.602, -656.084 }, { -208.925, 0.517, -661.646 }, { -206.68, 0.424, -651.336 }, { -203.942, 0.728, -655.32 } } },
         },
         [18343] = {
-            { 'Pantokrator', 253, 0, 0, 1 },
+            { 'Pantokrator', 253, 0, 0, 1, { { -199, -175, 155 }, { -199, -175, 170 }, { -198, -175, 140 } } },
         },
         [18359] = {
-            { 'Kirata', 111, 41, 41, 1 },
+            { 'Kirata', 111, 41, 41, 1, { { 36.534, 0.317, -330.371 }, { 36.725, 0, -322.039 }, { 37.772, 0.206, -311.851 }, { 38.08, 0.101, -353.966 }, { 38.097, 0.447, -347.487 }, { 38.33, 0.83, -336.624 }, { 38.862, 0.757, -304.386 }, { 39.346, 0.979, -339.61 }, { 39.789, 0, -356.348 }, { 41.307, 0.201, -288.035 }, { 41.446, 0.221, -288.445 }, { 41.481, 0.997, -339.959 }, { 42.166, 0.17, -327.43 }, { 43.833, 0.018, -324.375 }, { 45.225, 0.105, -284.489 }, { 46.045, 0.05, -310.803 }, { 47.656, 0.182, -357.738 }, { 47.698, 0.184, -357.435 }, { 50.735, 0.336, -319.303 }, { 50.826, 0.34, -359.367 }, { 51.553, 0.377, -279.491 }, { 54.029, 0.599, -281.554 }, { 56.34, 0.816, -361.954 }, { 59.29, 0.963, -278.091 }, { 63, -0.5, -303 }, { 64.176, 0.778, -362.089 }, { 65.255, 0.27, -291.157 }, { 65.305, 0.46, -286.005 }, { 67.641, 0.308, -304.685 }, { 67.952, 0.401, -359.616 }, { 68.281, 0.413, -296.512 }, { 69.336, -0.234, -276.561 }, { 70.432, 0, -289.457 }, { 70.822, 0.258, -359.772 }, { 72.158, 0.134, -285.113 }, { 73.143, 0.533, -303.728 }, { 74.626, 0.893, -299.667 }, { 75.797, -0.335, -323.659 }, { 75.958, 0, -357.495 }, { 76.542, -0.012, -323.788 }, { 77.494, 0, -358.318 }, { 77.55, 0, -321.921 }, { 77.65, 0.182, -312.348 }, { 79.042, 0.212, -328.271 }, { 79.526, 0.273, -329.49 }, { 80.695, 0, -317.772 }, { 81.186, 0.923, -338.489 }, { 82.048, 0.264, -350.703 }, { 82.346, 0.795, -344.007 }, { 82.45, 0.227, -328.571 }, { 83.144, 0.185, -312.276 } } },
         },
         [18360] = {
-            { 'Jailer of Faith', 35, 85, 85, 1 },
+            { 'Jailer of Faith', 35, 85, 85, 1, { { -272.831, -0.5, -703.309 } } },
         },
         [18385] = {
-            { 'Cerberus', 61, 85, 85, 1 },
+            { 'Cerberus', 61, 85, 85, 1, { { 310.427, -24.142, -86.671 }, { 313.39, -23.871, -78.151 }, { 316, -23, -84 }, { 318.662, -23.89, -73.773 }, { 319.374, -24.007, -88.509 }, { 319.599, -23.992, -82.799 }, { 323.058, -23.995, -90.231 }, { 323.565, -24, -84.583 }, { 323.935, -24, -80.289 }, { 324.362, -24.269, -75.149 }, { 328.67, -23.984, -90.623 }, { 329.868, -24.109, -76.046 }, { 330.292, -24, -79.809 }, { 330.609, -24.054, -84.279 }, { 331.835, -23.889, -89.472 } } },
         },
         [18386] = {
-            { 'Emergent Elm', 52, 77, 78, 1 },
+            { 'Emergent Elm', 52, 77, 78, 1, { { 53.502, -36.25, 643.045 }, { 54.38, -36.334, 636.165 }, { 55.477, -34.969, 627.564 }, { 56.988, -35.349, 609.919 }, { 57.441, -34.461, 618.68 }, { 65.536, -33.814, 628.49 }, { 65.786, -34, 619.123 }, { 66.353, -35.129, 609.604 }, { 66.826, -34, 636.625 }, { 67.882, -34.089, 643.794 }, { 71, -33, 627 }, { 79.049, -32, 642.263 }, { 79.15, -36.027, 617.262 }, { 81.29, -33.569, 629.307 }, { 81.527, -32.127, 635.03 }, { 86.597, -32.33, 636.408 }, { 89.406, -33.943, 630.1 }, { 89.76, -36.25, 616.662 }, { 93.696, -35.5, 624.091 }, { 95.099, -34, 642.372 }, { 96.366, -35.5, 628.378 }, { 97.686, -35.5, 625.171 }, { 103.465, -35.5, 627.737 }, { 103.856, -35.5, 632.055 }, { 104.481, -36.25, 638.963 } } },
         },
         [18390] = {
-            { 'Zikko', 79, 80, 80, 1 },
+            { 'Zikko', 79, 80, 80, 1, { { -613.174, 13.337, -180.725 } } },
         },
         [18394] = {
-            { 'Nunyenunc', 115, 12, 12, 1 },
+            { 'Nunyenunc', 115, 12, 12, 1, { { -95, -17, 383 }, { -74.126, -16.838, 378.245 }, { -61.658, -14.214, 359.306 }, { -43.177, -15.81, 394.43 }, { -25, -15, 385 }, { -9.555, -16.146, 412.291 }, { -7.194, -17.288, 431.604 }, { 1.532, -22.119, 500.898 }, { 2.729, -19.637, 473.044 }, { 3.259, -22, 495.847 }, { 5.143, -20.799, 489.371 }, { 6.107, -20.546, 488.599 }, { 7.254, -22.889, 506.781 }, { 7.336, -20.21, 477.338 }, { 9.496, -20.345, 486.073 }, { 12.111, -23.124, 513.962 }, { 15.431, -24.174, 540.848 }, { 16.011, -22.506, 519.622 }, { 16.643, -22.817, 530.225 }, { 17.634, -20.067, 469.047 }, { 21.565, -23.172, 538.833 }, { 23.741, -21.018, 476.485 }, { 25.001, -21.671, 527.393 }, { 25.647, -23.138, 540.841 }, { 26.928, -20.641, 476.519 }, { 28.631, -19.085, 443.794 }, { 29.077, -21.261, 520.012 }, { 32.751, -20.205, 477.97 }, { 35.297, -21.311, 499.776 }, { 39.197, -21.145, 458.296 }, { 42.433, -20.55, 507.656 }, { 44.224, -20.553, 491.913 }, { 44.367, -22.054, 536.775 }, { 46.701, -20.893, 495.09 }, { 49.05, -20.317, 483.42 }, { 50.18, -23.229, 547.382 }, { 51.622, -20.826, 498.811 }, { 53.159, -24.54, 554.652 }, { 53.749, -20.725, 521.768 }, { 56.429, -21.029, 520.954 }, { 60.029, -21.25, 509.194 }, { 72.83, -24.2, 557.85 }, { 94.579, -22.084, 534.622 }, { 96.3, -21.391, 529.079 }, { 107.55, -20.702, 500.509 }, { 113.74, -20.495, 512.805 }, { 119.191, -20.015, 515.931 }, { 122.459, -20, 520.062 }, { 124.999, -20.518, 510.648 }, { 134.793, -20.856, 516.479 }, { 159.501, -20.117, 485.528 } } },
         },
         [18395] = {
-            { 'Silverhook', 228, 68, 70, 1 },
+            { 'Silverhook', 228, 68, 70, 1, { { 7.77, -7.45, 17.19 } } },
         },
         [18396] = {
-            { 'Blackbeard', 227, 67, 68, 1 },
+            { 'Blackbeard', 227, 67, 68, 1, { { -0.725, -7.312, 23.111 } } },
         },
         [18397] = {
-            { 'Jailer of Prudence', 33, 85, 85, 1 },
+            { 'Jailer of Prudence', 33, 85, 85, 1, { { 706.114, -1.021, 24.11 }, { 709.324, -1.289, 22.126 } } },
         },
         [18409] = {
             { 'Troll Targeteer', 62, 78, 83 },
             { 'Hilltroll Paladin', 61, 79, 83 },
         },
         [18412] = {
-            { 'Chocoboleech', 191, 24, 25, 1 },
+            { 'Chocoboleech', 191, 24, 25, 1, { { -430.33, 4.4, 115.1 } } },
         },
         [18418] = {
             { 'Northern Piranu', 46, 81, 81 },
@@ -7712,168 +8631,168 @@ return {
             { 'Southern Piranu', 47, 81, 81 },
         },
         [18422] = {
-            { 'Hundredfaced Hapool Ja', 65, 75, 90, 1 },
+            { 'Hundredfaced Hapool Ja', 65, 75, 90, 1, { { -160.301, 14.121, -157.572 } } },
         },
         [18428] = {
-            { 'Kirtimukha', 96, 65, 65, 1 },
+            { 'Kirtimukha', 96, 65, 65, 1, { { 24.01, -67.138, -240.132 } } },
         },
         [18437] = {
-            { 'Zizzy Zillah', 65, 83, 83, 1 },
+            { 'Zizzy Zillah', 65, 83, 83, 1, { { 83, 14.5, -222 } } },
         },
         [18445] = {
-            { 'La Velue', 84, 62, 67, 1 },
+            { 'La Velue', 84, 62, 67, 1, { { -153.108, -10.397, 15.353 } } },
         },
         [18447] = {
-            { 'Pandemonium Lamp', 68, 86, 88, 1 },
-            { 'Pandemonium Warden', 68, 86, 88, 1 },
+            { 'Pandemonium Lamp', 68, 86, 88, 1, { { 206.11, 33.936, -140.64 }, { 206.11, 33.936, -140.47 }, { 206.5, 33.842, -141.13 }, { 206.51, 33.861, -140.04 }, { 206.61, 33.84, -140.08 }, { 206.64, 33.812, -141.14 }, { 206.93, 33.776, -140.15 }, { 207.17, 33.707, -140.46 }, { 207.74, 33.382, -140.3 } } },
+            { 'Pandemonium Warden', 68, 86, 88, 1, { { 208.16, 33.75, -138.61 } } },
         },
         [18448] = {
-            { 'Anantaboga', 61, 85, 87, 1 },
+            { 'Anantaboga', 61, 85, 87, 1, { { -368.341, -13.742, 366.448 } } },
         },
         [18449] = {
-            { 'All-seeing Onyx Eye', 85, 83, 83, 1 },
+            { 'All-seeing Onyx Eye', 85, 83, 83, 1, { { 173.407, 3.171, -374.932 } } },
         },
         [18450] = {
-            { 'Loo Kutto the Pensive', 99, 83, 83, 1 },
+            { 'Loo Kutto the Pensive', 99, 83, 83, 1, { { 7.99, -16.5, -187.812 } } },
         },
         [18453] = {
-            { 'Grand\'Goule', 136, 83, 83, 1 },
+            { 'Grand\'Goule', 136, 83, 83, 1, { { -242, -80.3, -127 } } },
         },
         [18454] = {
-            { 'Bukhis', 217, 85, 87, 1 },
+            { 'Bukhis', 217, 85, 87, 1, { { -202, -40, -280 }, { -201, -39, -295 }, { -201, -39, -265 } } },
         },
         [18455] = {
-            { 'Ulhuadshi', 215, 0, 0, 1 },
+            { 'Ulhuadshi', 215, 0, 0, 1, { { 340.193, 20.005, 220.34 }, { 360, 20, 199 }, { 361.193, 20.005, 199.34 } } },
         },
         [18456] = {
-            { 'Gieremund', 215, 90, 90, 1 },
+            { 'Gieremund', 215, 90, 90, 1, { { -393, -4, -340 } } },
         },
         [18473] = {
             { 'Brulo', 218, 0, 0, 1 },
         },
         [18474] = {
-            { 'Bennu', 218, 0, 0, 1 },
+            { 'Bennu', 218, 0, 0, 1, { { 88, 0.001, -128 }, { 95, -1, -140 }, { 103, 0.001, -155 } } },
         },
         [18475] = {
-            { 'Fuath', 254, 105, 105, 1 },
+            { 'Fuath', 254, 105, 105, 1, { { -186.621, -13.922, 559.248 } } },
         },
         [18476] = {
-            { 'Dragua', 218, 0, 0, 1 },
+            { 'Dragua', 218, 0, 0, 1, { { -226, 0.001, -330 }, { -225, 0.001, -339 }, { -213, 0.001, -360 } } },
         },
         [18477] = {
-            { 'Cuijatender', 218, 105, 105, 1 },
+            { 'Cuijatender', 218, 105, 105, 1, { { -635, 1.02, -299.202 } } },
         },
         [18478] = {
-            { 'Amphitrite', 254, 0, 0, 1 },
+            { 'Amphitrite', 254, 0, 0, 1, { { -162, -31, -220 }, { -147, -31, -220 }, { -136, -31, -231 } } },
         },
         [18479] = {
-            { 'Resheph', 253, 0, 0, 1 },
+            { 'Resheph', 253, 0, 0, 1, { { 409, -51, 163 }, { 422, -51, 163 }, { 433, -51, 145 } } },
         },
         [18480] = {
-            { 'Azdaja', 254, 100, 100, 1 },
+            { 'Azdaja', 254, 100, 100, 1, { { -582, -167, 138 }, { -568, -167, 138 }, { -552, -169, 138 } } },
         },
         [18499] = {
-            { 'Asterion', 99, 80, 85, 1 },
+            { 'Asterion', 99, 80, 85, 1, { { -18.05, -16.926, 18.064 } } },
         },
         [18500] = {
-            { 'Agrios', 85, 83, 83, 1 },
+            { 'Agrios', 85, 83, 83, 1, { { 101.244, -0.57, 60.608 } } },
         },
         [18507] = {
-            { 'Autarch', 158, 83, 85, 1 },
+            { 'Autarch', 158, 83, 85, 1, { { -287, -175.6, 85 } } },
         },
         [18508] = {
-            { 'Vasiliceratops', 89, 88, 89, 1 },
+            { 'Vasiliceratops', 89, 88, 89, 1, { { 276.142, 25.332, -453.541 } } },
         },
         [18510] = {
-            { 'Minhocao', 45, 85, 85, 1 },
+            { 'Minhocao', 45, 85, 85, 1, { { 79.764, 39.258, 278.157 } } },
         },
         [18513] = {
-            { 'Titlacauan', 215, 0, 0, 1 },
+            { 'Titlacauan', 215, 0, 0, 1, { { -404.436, -4, 246 }, { -396.937, -3, 259.001 }, { -396, -3, 256 } } },
         },
         [18514] = {
-            { 'Gukumatz', 216, 90, 90, 1 },
+            { 'Gukumatz', 216, 90, 90, 1, { { 443, 23, -369 } } },
         },
         [18515] = {
-            { 'Alfard', 254, 105, 105, 1 },
+            { 'Alfard', 254, 105, 105, 1, { { 309, -39, 189 }, { 309, -33, 158 }, { 309, -32, 173 } } },
         },
         [18516] = {
-            { 'Deelgeed', 254, 0, 0, 1 },
+            { 'Deelgeed', 254, 0, 0, 1, { { -128.666, -89.223, 43.91 } } },
         },
         [18519] = {
-            { 'Arch Gu\'Dha Effigy', 186, 99, 99, 1 },
+            { 'Arch Gu\'Dha Effigy', 186, 99, 99, 1, { { -16.149, -2, -130.5 } } },
         },
         [18532] = {
-            { 'Amhuluk', 216, 0, 0, 1 },
+            { 'Amhuluk', 216, 0, 0, 1, { { 0, -16, -50 }, { 0, -15, -34 }, { 14, -16, -50 } } },
         },
         [18533] = {
-            { 'Tunga', 215, 90, 90, 1 },
+            { 'Tunga', 215, 90, 90, 1, { { 511.266, 19.337, -162.986 } } },
         },
         [18534] = {
-            { 'Dragua', 218, 0, 0, 1 },
+            { 'Dragua', 218, 0, 0, 1, { { -226, 0.001, -330 }, { -225, 0.001, -339 }, { -213, 0.001, -360 } } },
         },
         [18535] = {
-            { 'Resheph', 253, 0, 0, 1 },
+            { 'Resheph', 253, 0, 0, 1, { { 409, -51, 163 }, { 422, -51, 163 }, { 433, -51, 145 } } },
         },
         [18536] = {
-            { 'Melo Melo', 254, 100, 100, 1 },
+            { 'Melo Melo', 254, 100, 100, 1, { { -45.507, -32.055, -241.948 } } },
         },
         [18541] = {
-            { 'Lost Aitvaras', 40, 100, 100, 1 },
+            { 'Lost Aitvaras', 40, 100, 100, 1, { { -358.98, -0.5, -322.883 } } },
         },
         [18552] = {
             { 'Brulo', 218, 0, 0, 1 },
         },
         [18553] = {
-            { 'Fuath', 254, 105, 105, 1 },
+            { 'Fuath', 254, 105, 105, 1, { { -186.621, -13.922, 559.248 } } },
         },
         [18554] = {
-            { 'Hazhdiha', 218, 100, 100, 1 },
+            { 'Hazhdiha', 218, 100, 100, 1, { { -267.509, 0.477, -321.101 } } },
         },
         [18584] = {
-            { 'Energetic Eruca', 61, 80, 80, 1 },
+            { 'Energetic Eruca', 61, 80, 80, 1, { { 176.743, -14.21, -180.926 } } },
         },
         [18587] = {
-            { 'Roc', 120, 55, 55, 1 },
+            { 'Roc', 120, 55, 55, 1, { { 153.669, 0.145, -226.129 }, { 173.726, 0.565, -244.018 }, { 188.566, -1.168, -296.794 }, { 191.796, 0.263, -250.968 }, { 195.317, 0.111, -287.885 }, { 196.563, 0.134, -273.294 }, { 197.226, 0.757, -295.616 }, { 197.31, 0.167, -272.637 }, { 198.305, 0.916, -258.35 }, { 199.956, 0, -278.615 }, { 202.205, 0.247, -271.049 }, { 203.876, 0, -236.865 }, { 205.831, -0.116, -243.033 }, { 206.695, -0.034, -267.38 }, { 209.015, 0.491, -224.618 }, { 212.596, -0.216, -249.303 }, { 213.997, -1.672, -255.685 }, { 215.711, 0.404, -312.421 }, { 232, -0.01, -327 } } },
         },
         [18594] = {
-            { 'Pandemonium Lamp', 68, 86, 88, 1 },
-            { 'Pandemonium Warden', 68, 86, 88, 1 },
+            { 'Pandemonium Lamp', 68, 86, 88, 1, { { 206.11, 33.936, -140.64 }, { 206.11, 33.936, -140.47 }, { 206.5, 33.842, -141.13 }, { 206.51, 33.861, -140.04 }, { 206.61, 33.84, -140.08 }, { 206.64, 33.812, -141.14 }, { 206.93, 33.776, -140.15 }, { 207.17, 33.707, -140.46 }, { 207.74, 33.382, -140.3 } } },
+            { 'Pandemonium Warden', 68, 86, 88, 1, { { 208.16, 33.75, -138.61 } } },
         },
         [18596] = {
-            { 'Observant Zekka', 92, 83, 83, 1 },
+            { 'Observant Zekka', 92, 83, 83, 1, { { 128.442, 0.495, 161.025 } } },
         },
         [18597] = {
-            { 'Feeblescheme Bhogbigg', 85, 83, 83, 1 },
+            { 'Feeblescheme Bhogbigg', 85, 83, 83, 1, { { -176.207, -0.384, -298.763 } } },
         },
         [18604] = {
-            { 'Ankou', 190, 21, 22, 1 },
+            { 'Ankou', 190, 21, 22, 1, { { 111.96, -1.4, 68.75 } } },
         },
         [18605] = {
-            { 'Wake Warder Wanda', 118, 22, 23, 1 },
+            { 'Wake Warder Wanda', 118, 22, 23, 1, { { -113, 20, -317 }, { -111, 16, -246 }, { -80, 20, -324 }, { -73, 16, -270 }, { -64, 19, -306 }, { -59, 16, -232 }, { -44, 20, -314 }, { -42, 16, -267 }, { -4, 16, -212 } } },
         },
         [18607] = {
-            { 'Lii Jixa the Somnolist', 151, 43, 43, 1 },
+            { 'Lii Jixa the Somnolist', 151, 43, 43, 1, { { -23, -15, -21 } } },
         },
         [18608] = {
-            { 'Hemodrosophila', 97, 0, 0, 1 },
+            { 'Hemodrosophila', 97, 0, 0, 1, { { -247.246, -8.446, 136.097 } } },
         },
         [18609] = {
-            { 'Tikbalang', 137, 83, 83, 1 },
+            { 'Tikbalang', 137, 83, 83, 1, { { -65, -23, -85 } } },
         },
         [18610] = {
-            { 'Ah Puch', 194, 29, 30, 1 },
+            { 'Ah Puch', 194, 29, 30, 1, { { -419, -1, 570 }, { -419, -1, 581 }, { -419, -1, 615 }, { -418, -1, 590 }, { -418, -1, 597 }, { -418, -1, 629 }, { -418, 0, 633 }, { -417, -1, 640 }, { -417, -1, 661 } } },
         },
         [18617] = {
-            { 'Tethra', 175, 80, 80, 1 },
+            { 'Tethra', 175, 80, 80, 1, { { 113.621, 8.584, -81.806 } } },
         },
         [18619] = {
-            { 'Bukhis', 217, 85, 87, 1 },
+            { 'Bukhis', 217, 85, 87, 1, { { -202, -40, -280 }, { -201, -39, -295 }, { -201, -39, -265 } } },
         },
         [18620] = {
-            { 'Aggressor Antlion', 215, 90, 90, 1 },
+            { 'Aggressor Antlion', 215, 90, 90, 1, { { -487.932, -4.492, 118.977 } } },
         },
         [18623] = {
-            { 'Arch Angra Mainyu', 134, 95, 95, 1 },
+            { 'Arch Angra Mainyu', 134, 95, 95, 1, { { 280, 19.899, 468 } } },
         },
         [18688] = {
             { 'Lamia Toxophilite', 54, 81, 83 },
@@ -7881,13 +8800,13 @@ return {
             { 'Lamia Toxophilite', 79, 82, 83 },
         },
         [18706] = {
-            { 'Bluestreak Gyugyuroon', 68, 80, 80, 1 },
+            { 'Bluestreak Gyugyuroon', 68, 80, 80, 1, { { -219.199, 13.483, -340.343 } } },
         },
         [18707] = {
-            { 'Big Bomb', 62, 83, 83, 1 },
+            { 'Big Bomb', 62, 83, 83, 1, { { -233.8, 13.612, 286.713 } } },
         },
         [18714] = {
-            { 'Eastern Shadow', 204, 63, 63, 1 },
+            { 'Eastern Shadow', 204, 63, 63, 1, { { -92.12, -16.52, 160.277 }, { -86, -15, 154 }, { -83, -15, 171 }, { -75, -15, 154 }, { -73, -15, 166 } } },
         },
         [18729] = {
             { 'Stygian Djinn', 254, 86, 87 },
@@ -7901,345 +8820,345 @@ return {
             { 'Harum-scarum', 137, 80, 83 },
         },
         [18741] = {
-            { 'Jaded Jody', 51, 80, 80, 1 },
+            { 'Jaded Jody', 51, 80, 80, 1, { { -572, -8.5, -335 } } },
         },
         [18752] = {
-            { 'Western Shadow', 204, 63, 63, 1 },
+            { 'Western Shadow', 204, 63, 63, 1, { { -206.6, -16.19, 111.26 }, { -202, -15, 127 }, { -201, -15, 113 }, { -200, -15, 125 }, { -189, -15, 116 } } },
         },
         [18759] = {
-            { 'Pandemonium Lamp', 68, 86, 88, 1 },
-            { 'Pandemonium Warden', 68, 86, 88, 1 },
+            { 'Pandemonium Lamp', 68, 86, 88, 1, { { 206.11, 33.936, -140.64 }, { 206.11, 33.936, -140.47 }, { 206.5, 33.842, -141.13 }, { 206.51, 33.861, -140.04 }, { 206.61, 33.84, -140.08 }, { 206.64, 33.812, -141.14 }, { 206.93, 33.776, -140.15 }, { 207.17, 33.707, -140.46 }, { 207.74, 33.382, -140.3 } } },
+            { 'Pandemonium Warden', 68, 86, 88, 1, { { 208.16, 33.75, -138.61 } } },
         },
         [18760] = {
-            { 'Bres', 92, 83, 83, 1 },
+            { 'Bres', 92, 83, 83, 1, { { 179.322, 39.503, 13.407 } } },
         },
         [18761] = {
-            { 'Falsespinner Bhudbrodd', 85, 83, 83, 1 },
+            { 'Falsespinner Bhudbrodd', 85, 83, 83, 1, { { -221.122, -0.915, -96.614 } } },
         },
         [18767] = {
-            { 'Chaneque', 84, 56, 57, 1 },
+            { 'Chaneque', 84, 56, 57, 1, { { 79, 0.001, -243 } } },
         },
         [18768] = {
-            { 'Olgoi-Khorkhoi', 88, 53, 54, 1 },
+            { 'Olgoi-Khorkhoi', 88, 53, 54, 1, { { 284.162, -20.243, 1055.865 }, { 306.609, -27.978, 1076.948 }, { 309.911, -28.852, 1073.993 }, { 313.41, -30.97, 1058.78 }, { 318.836, -30.032, 1059.678 }, { 321.457, -30, 1078.293 }, { 325.058, -30.335, 1070.703 } } },
         },
         [18770] = {
-            { 'Magnotaur', 5, 83, 83, 1 },
+            { 'Magnotaur', 5, 83, 83, 1, { { -265.12, -183.817, 435.911 }, { -254.694, -185.189, 454.681 }, { -250.987, -184.423, 446.01 } } },
         },
         [18771] = {
-            { 'Voirloup', 82, 89, 89, 1 },
+            { 'Voirloup', 82, 89, 89, 1, { { -197.795, -0.346, -119.842 } } },
         },
         [18776] = {
-            { 'Itzpapalotl', 215, 90, 93, 1 },
+            { 'Itzpapalotl', 215, 90, 93, 1, { { 424.94, 20.22, -194.227 }, { 436, 20, -184 }, { 439.94, 21.02, -179.227 } } },
         },
         [18778] = {
-            { 'Abyssic Cluster', 216, 90, 90, 1 },
+            { 'Abyssic Cluster', 216, 90, 90, 1, { { -268, -31, 188 } } },
         },
         [18779] = {
-            { 'Indrik', 253, 105, 105, 1 },
+            { 'Indrik', 253, 105, 105, 1, { { 354.514, 0.721, -375.945 } } },
         },
         [18780] = {
-            { 'Ogopogo', 253, 84, 86, 1 },
+            { 'Ogopogo', 253, 84, 86, 1, { { -16.737, -175.496, 70.529 } } },
         },
         [18781] = {
-            { 'Ansherekh', 218, 100, 100, 1 },
+            { 'Ansherekh', 218, 100, 100, 1, { { -514.005, 0.545, -63.118 } } },
         },
         [18801] = {
-            { 'Sirrush', 216, 0, 0, 1 },
+            { 'Sirrush', 216, 0, 0, 1, { { 346, 15, -437 } } },
         },
         [18802] = {
-            { 'Maahes', 215, 0, 0, 1 },
+            { 'Maahes', 215, 0, 0, 1, { { 214, 20, -94 } } },
         },
         [18803] = {
-            { 'Armillaria', 217, 82, 85, 1 },
+            { 'Armillaria', 217, 82, 85, 1, { { -396.886, -31.991, 196.054 } } },
         },
         [18804] = {
-            { 'Rani', 218, 90, 92, 1 },
+            { 'Rani', 218, 90, 92, 1, { { -801, -7.801, -366 }, { -801, -7.8, -368 }, { 102, 0, -151 } } },
         },
         [18805] = {
             { 'Anemic Aloysius', 253, 87, 88 },
         },
         [18811] = {
-            { 'Arch Goblin Golem', 188, 99, 99, 1 },
+            { 'Arch Goblin Golem', 188, 99, 99, 1, { { 0, -0.5, -101 } } },
         },
         [18833] = {
-            { 'Amun', 215, 90, 90, 1 },
+            { 'Amun', 215, 90, 90, 1, { { 19.968, 10.003, 11.928 } } },
         },
         [18834] = {
-            { 'Blazing Eruca', 215, 0, 0, 1 },
+            { 'Blazing Eruca', 215, 0, 0, 1, { { 233, 19, -243 } } },
         },
         [18841] = {
-            { 'Lamia No.19', 54, 78, 78, 1 },
+            { 'Lamia No.19', 54, 78, 78, 1, { { -138, -7.6, 132 } } },
         },
         [18847] = {
-            { 'Khimaira', 79, 85, 85, 1 },
+            { 'Khimaira', 79, 85, 85, 1, { { 573.27, -19.806, 417.435 }, { 574.29, -19.406, 420.032 }, { 574.437, -19.764, 413.376 }, { 574.86, -19.789, 411.398 }, { 574.944, -20.25, 398.044 }, { 575.061, -20.024, 407.646 }, { 575.081, -20.212, 401.917 }, { 575.15, -20.193, 403.854 }, { 577.499, -18.565, 421.169 }, { 578.716, -18.258, 420.995 }, { 578.869, -19.463, 408.341 }, { 579.595, -18.665, 412.226 }, { 579.607, -18.103, 417.676 }, { 579.958, -18.266, 414.169 }, { 583.317, -17.946, 416.588 }, { 584.688, -17.619, 413.423 }, { 585.373, -17.456, 411.84 }, { 585.758, -17.501, 416.037 }, { 586.263, -17.534, 408.917 }, { 586.698, -17.777, 404.16 }, { 587.057, -17.693, 406.042 }, { 588.96, -16.903, 414.743 }, { 590.375, -16.657, 414.253 }, { 593.064, -16.349, 406.841 }, { 593.206, -16.164, 413.272 }, { 593.377, -16.228, 409.615 }, { 593.448, -16.318, 404.23 }, { 593.64, -16.302, 402.924 }, { 593.708, -16.131, 411.042 }, { 594.297, -16.22, 399.705 }, { 595.293, -16.128, 396.851 }, { 597.986, -15.99, 395.816 }, { 598.476, -15.75, 410.028 }, { 599.332, -15.921, 395.298 }, { 601.264, -15.8, 409.571 }, { 601.327, -15.944, 396.589 }, { 601.369, -15.9, 406.213 }, { 602.027, -15.916, 405.037 }, { 602.41, -15.722, 411.917 }, { 603.887, -16.14, 414.765 }, { 604.808, -15.665, 413.252 }, { 606.333, -15.641, 413.605 }, { 606.722, -15.664, 411.476 }, { 610.253, -15.74, 396.727 }, { 610.69, -15.612, 413.052 }, { 610.845, -15.621, 412.2 }, { 611.305, -15.711, 397.986 }, { 611.835, -15.628, 405.258 }, { 613.338, -15.598, 404.292 }, { 613.41, -15.652, 400.505 }, { 613.496, -15.615, 403.029 } } },
         },
         [18852] = {
-            { 'Lord of Onzozo', 213, 74, 77, 1 },
+            { 'Lord of Onzozo', 213, 74, 77, 1, { { -49.601, 14.065, -64.565 }, { -49.069, 14.049, -63.596 }, { -48.591, 13.67, -62.263 }, { -47.256, 14.195, -60.468 }, { -47.2, 14.111, -61.794 }, { -46.956, 14.285, -60.829 }, { -46.133, 14.723, -58.024 }, { -45.711, 14.864, -58.371 }, { -45.563, 14.874, -58.5 }, { -45.355, 14.945, -63.082 }, { -45.304, 14.946, -62.563 }, { -45.193, 14.955, -60.006 }, { -45.161, 14.976, -62.846 }, { -44.787, 14.938, -58.249 }, { -44.736, 14.932, -58.965 }, { -44.667, 14.892, -63.163 }, { -44.647, 15.059, -60.604 }, { -44.62, 14.929, -58.605 }, { -44.116, 14.974, -58.091 }, { -44, 14, -58 }, { -43.851, 14.419, -56.093 }, { -43.684, 14.866, -57.263 }, { -43.535, 14.512, -56.305 }, { -43.524, 15.119, -62.085 }, { -43.377, 15.11, -62.059 }, { -43.278, 15.144, -61.741 }, { -42.62, 14.884, -62.945 }, { -42.25, 14.591, -56.363 }, { -42.177, 15.083, -61.268 }, { -42.04, 15.119, -59.413 }, { -41.968, 15.106, -59.468 }, { -41.9, 14.829, -62.887 }, { -41.899, 14.99, -58.209 }, { -41.809, 15.014, -61.388 }, { -41.782, 14.828, -62.819 }, { -41.55, 14.499, -63.605 }, { -41.322, 14.998, -60.555 }, { -41.119, 14.902, -62.313 }, { -41.023, 14.673, -63.246 }, { -40.948, 14.825, -62.632 }, { -40.679, 14.138, -64.338 }, { -40.315, 15, -61.106 }, { -39.933, 14.947, -62.122 }, { -39.356, 14.265, -60.406 }, { -39.356, 14.726, -56.944 }, { -39.329, 15, -60.935 }, { -39.077, 15, -59.959 }, { -38.414, 14.75, -60.096 }, { -37.471, 14.464, -58.49 }, { -36.114, 13.989, -57.724 }, { -35.559, 13.641, -60.284 } } },
         },
         [18856] = {
-            { 'Aa Xalmo the Savage', 99, 80, 84, 1 },
+            { 'Aa Xalmo the Savage', 99, 80, 84, 1, { { 50, -0.7, -148 } } },
         },
         [18859] = {
-            { 'Claret', 61, 78, 80, 1 },
+            { 'Claret', 61, 78, 80, 1, { { 497, -9, 52 } } },
         },
         [18861] = {
-            { 'Dee Zelko the Esoteric', 99, 83, 83, 1 },
+            { 'Dee Zelko the Esoteric', 99, 83, 83, 1, { { -91.983, -40.245, -62.989 }, { -76.862, -40.277, -58.23 } } },
         },
         [18862] = {
-            { 'Maa Illmu the Bestower', 99, 83, 83, 1 },
+            { 'Maa Illmu the Bestower', 99, 83, 83, 1, { { -17.176, -16.25, -16.468 } } },
         },
         [18872] = {
-            { 'Fahrafahr the Bloodied', 61, 80, 80, 1 },
+            { 'Fahrafahr the Bloodied', 61, 80, 80, 1, { { 38.967, -14.478, 115.574 } } },
         },
         [18891] = {
-            { 'Cirein-croin', 216, 0, 0, 1 },
+            { 'Cirein-croin', 216, 0, 0, 1, { { 38, -15, 534 }, { 39, -15, 520 }, { 54, -15, 520 } } },
         },
         [18892] = {
             { 'Tristitia', 216, 0, 0, 1 },
         },
         [18893] = {
-            { 'Lord Varney', 217, 90, 90, 1 },
+            { 'Lord Varney', 217, 90, 90, 1, { { -111.359, -40.169, -274.851 } } },
         },
         [18894] = {
-            { 'Ayravata', 217, 90, 90, 1 },
+            { 'Ayravata', 217, 90, 90, 1, { { 125.204, -31.541, 106.923 } } },
         },
         [18895] = {
-            { 'Amphitrite', 254, 0, 0, 1 },
+            { 'Amphitrite', 254, 0, 0, 1, { { -162, -31, -220 }, { -147, -31, -220 }, { -136, -31, -231 } } },
         },
         [18896] = {
-            { 'Bennu', 218, 0, 0, 1 },
+            { 'Bennu', 218, 0, 0, 1, { { 88, 0.001, -128 }, { 95, -1, -140 }, { 103, 0.001, -155 } } },
         },
         [18897] = {
-            { 'Isgebind', 253, 0, 0, 1 },
+            { 'Isgebind', 253, 0, 0, 1, { { 145, -117, 471 }, { 161, -115, 472 }, { 175, -113, 472 } } },
         },
         [18898] = {
-            { 'Waugyl', 218, 0, 0, 1 },
+            { 'Waugyl', 218, 0, 0, 1, { { -409, 0.001, -295 } } },
         },
         [18899] = {
-            { 'Refitted Chariot', 253, 100, 100, 1 },
+            { 'Refitted Chariot', 253, 100, 100, 1, { { -266.179, -176.137, -69.295 } } },
         },
         [18900] = {
-            { 'Ironclad Smiter', 218, 0, 0, 1 },
+            { 'Ironclad Smiter', 218, 0, 0, 1, { { -740, -15, -696 } } },
         },
         [18947] = {
-            { 'Ba\'Tho Mercifulheart', 92, 80, 81, 1 },
+            { 'Ba\'Tho Mercifulheart', 92, 80, 81, 1, { { -93.112, -3.5, 179.625 } } },
         },
         [18949] = {
-            { 'Zareehkl the Jubilant', 54, 85, 86, 1 },
+            { 'Zareehkl the Jubilant', 54, 85, 86, 1, { { 177.64, -5.159, 181.399 } } },
         },
         [18950] = {
-            { 'Velionis', 54, 78, 80, 1 },
+            { 'Velionis', 54, 78, 80, 1, { { 313.17, -4.089, 26.211 } } },
         },
         [18951] = {
-            { 'Rugaroo', 85, 83, 83, 1 },
+            { 'Rugaroo', 85, 83, 83, 1, { { 17.596, -0.289, -259.902 } } },
         },
         [18952] = {
-            { 'Marquis Forneus', 99, 80, 85, 1 },
+            { 'Marquis Forneus', 99, 80, 85, 1, { { -343.345, -16.984, 141.193 } } },
         },
         [18961] = {
-            { 'Megamaw Mikey', 132, 85, 85, 1 },
+            { 'Megamaw Mikey', 132, 85, 85, 1, { { 613.82, 25.669, -67.938 } } },
         },
         [18966] = {
-            { 'Durinn', 217, 85, 87, 1 },
+            { 'Durinn', 217, 85, 87, 1, { { -571, -47, -570 }, { -571, -47, -554 }, { -555, -47, -564 } } },
         },
         [18967] = {
-            { 'Asanbosam', 216, 90, 90, 1 },
+            { 'Asanbosam', 216, 90, 90, 1, { { -75.481, -15.825, 37.568 } } },
         },
         [18968] = {
-            { 'Quasimodo', 217, 85, 87, 1 },
+            { 'Quasimodo', 217, 85, 87, 1, { { -278, -40, -367 } } },
         },
         [19028] = {
-            { 'Reacton', 62, 81, 83, 1 },
+            { 'Reacton', 62, 81, 83, 1, { { 18, -9, 213 } } },
         },
         [19031] = {
-            { 'Dea', 52, 82, 84, 1 },
-            { 'Mahjlaef the Paintorn', 79, 83, 85, 1 },
+            { 'Dea', 52, 82, 84, 1, { { -34, -32, 481 } } },
+            { 'Mahjlaef the Paintorn', 79, 83, 85, 1, { { 695.369, -7.147, 527.646 } } },
         },
         [19032] = {
-            { 'Experimental Lamia', 79, 82, 84, 1 },
-            { 'Gotoh Zha the Redolent', 51, 83, 85, 1 },
+            { 'Experimental Lamia', 79, 82, 84, 1, { { -773.369, -11.824, 322.298 } } },
+            { 'Gotoh Zha the Redolent', 51, 83, 85, 1, { { -337, -31, 676 } } },
         },
         [19033] = {
-            { 'Nuhn', 54, 86, 86, 1 },
-            { 'Nosferatu', 68, 87, 88, 1 },
+            { 'Nuhn', 54, 86, 86, 1, { { -451, -7, 389 } } },
+            { 'Nosferatu', 68, 87, 88, 1, { { -198.6, 8.387, -60.832 } } },
         },
         [19034] = {
-            { 'Achamoth', 62, 86, 88, 1 },
-            { 'Khromasoul Bhurborlor', 61, 82, 84, 1 },
+            { 'Achamoth', 62, 86, 88, 1, { { -13.17, 9.699, 339.54 } } },
+            { 'Khromasoul Bhurborlor', 61, 82, 84, 1, { { 88, -22.029, 70 } } },
         },
         [19035] = {
-            { 'Armed Gears', 72, 86, 88, 1 },
-            { 'Mahjlaef the Paintorn', 79, 83, 85, 1 },
-            { 'Achamoth', 62, 86, 88, 1 },
+            { 'Armed Gears', 72, 86, 88, 1, { { -19.957, -4, -182.656 } } },
+            { 'Mahjlaef the Paintorn', 79, 83, 85, 1, { { 695.369, -7.147, 527.646 } } },
+            { 'Achamoth', 62, 86, 88, 1, { { -13.17, 9.699, 339.54 } } },
         },
         [19036] = {
-            { 'Armed Gears', 72, 86, 88, 1 },
-            { 'Nosferatu', 68, 87, 88, 1 },
-            { 'Experimental Lamia', 79, 82, 84, 1 },
+            { 'Armed Gears', 72, 86, 88, 1, { { -19.957, -4, -182.656 } } },
+            { 'Nosferatu', 68, 87, 88, 1, { { -198.6, 8.387, -60.832 } } },
+            { 'Experimental Lamia', 79, 82, 84, 1, { { -773.369, -11.824, 322.298 } } },
         },
         [19037] = {
-            { 'Nuhn', 54, 86, 86, 1 },
-            { 'Gotoh Zha the Redolent', 51, 83, 85, 1 },
+            { 'Nuhn', 54, 86, 86, 1, { { -451, -7, 389 } } },
+            { 'Gotoh Zha the Redolent', 51, 83, 85, 1, { { -337, -31, 676 } } },
         },
         [19038] = {
-            { 'Dea', 52, 82, 84, 1 },
-            { 'Khromasoul Bhurborlor', 61, 82, 84, 1 },
+            { 'Dea', 52, 82, 84, 1, { { -34, -32, 481 } } },
+            { 'Khromasoul Bhurborlor', 61, 82, 84, 1, { { 88, -22.029, 70 } } },
         },
         [19039] = {
-            { 'Draketrader Zlodgodd', 85, 83, 83, 1 },
+            { 'Draketrader Zlodgodd', 85, 83, 83, 1, { { -17.291, 0.243, -57.281 } } },
         },
         [19040] = {
-            { 'Marquis Forneus', 99, 80, 85, 1 },
+            { 'Marquis Forneus', 99, 80, 85, 1, { { -343.345, -16.984, 141.193 } } },
         },
         [19043] = {
-            { 'Amanita', 100, 5, 6, 1 },
+            { 'Amanita', 100, 5, 6, 1, { { -237, -40.6, 91 } } },
         },
         [19044] = {
-            { 'Nocuous Weapon', 192, 25, 27, 1 },
+            { 'Nocuous Weapon', 192, 25, 27, 1, { { -237.426, 0.5, -23.412 }, { -236.855, 0.476, -51.263 }, { -234, 0.476, -52 }, { -230.732, -0.025, -52.324 } } },
         },
         [19045] = {
-            { 'Teporingo', 191, 20, 20, 1 },
+            { 'Teporingo', 191, 20, 20, 1, { { -203, 4, 81 }, { -189, 3, 79 } } },
         },
         [19052] = {
-            { 'Wherwetrice', 215, 0, 0, 1 },
+            { 'Wherwetrice', 215, 0, 0, 1, { { 206, 20, 109 } } },
         },
         [19053] = {
-            { 'Nehebkau', 216, 0, 0, 1 },
+            { 'Nehebkau', 216, 0, 0, 1, { { 321, 23, -355 } } },
         },
         [19054] = {
-            { 'Chhir Batti', 217, 85, 87, 1 },
+            { 'Chhir Batti', 217, 85, 87, 1, { { -367, -31, 301 } } },
         },
         [19055] = {
-            { 'Nonno', 216, 0, 0, 1 },
+            { 'Nonno', 216, 0, 0, 1, { { 719, 1, -486 } } },
         },
         [19056] = {
-            { 'Kharon', 215, 0, 0, 1 },
+            { 'Kharon', 215, 0, 0, 1, { { -389, -3, 245 } } },
         },
         [19057] = {
-            { 'Iku-Turso', 217, 85, 87, 1 },
+            { 'Iku-Turso', 217, 85, 87, 1, { { 244, -32, 240 } } },
         },
         [19058] = {
-            { 'Khalkotaur', 217, 85, 87, 1 },
+            { 'Khalkotaur', 217, 85, 87, 1, { { -240, -39, -166 } } },
         },
         [19059] = {
-            { 'Npfundlwa', 216, 0, 0, 1 },
+            { 'Npfundlwa', 216, 0, 0, 1, { { 412, -7, 50 } } },
         },
         [19107] = {
-            { 'Dark Ixion', 84, 85, 85, 1 },
-            { 'Dark Ixion', 81, 85, 85, 1 },
-            { 'Dark Ixion', 96, 85, 85, 1 },
-            { 'Dark Ixion', 89, 85, 85, 1 },
-            { 'Dark Ixion', 82, 85, 85, 1 },
-            { 'Dark Ixion', 91, 85, 85, 1 },
-            { 'Dark Ixion', 95, 85, 85, 1 },
+            { 'Dark Ixion', 84, 85, 85, 1, { { -83.03, -8.5, 35.26 } } },
+            { 'Dark Ixion', 81, 85, 85, 1, { { 236, -20, -323 } } },
+            { 'Dark Ixion', 96, 85, 85, 1, { { -237.169, -60.711, -237.419 } } },
+            { 'Dark Ixion', 89, 85, 85, 1, { { 344.419, 36.341, -442.948 } } },
+            { 'Dark Ixion', 82, 85, 85, 1, { { -191.51, -0.28, 91.963 } } },
+            { 'Dark Ixion', 91, 85, 85, 1, { { 25.225, -8.723, -346.82 } } },
+            { 'Dark Ixion', 95, 85, 85, 1, { { 231.823, -25.286, 258.575 } } },
         },
         [19108] = {
-            { 'Zareehkl the Jubilant', 54, 85, 86, 1 },
+            { 'Zareehkl the Jubilant', 54, 85, 86, 1, { { 177.64, -5.159, 181.399 } } },
         },
         [19109] = {
-            { 'Anantaboga', 61, 85, 87, 1 },
+            { 'Anantaboga', 61, 85, 87, 1, { { -368.341, -13.742, 366.448 } } },
         },
         [19111] = {
-            { 'Suu Xicu the Cantabile', 99, 83, 83, 1 },
+            { 'Suu Xicu the Cantabile', 99, 83, 83, 1, { { -252.7, -0.382, 115.5 }, { -214.77, -0.681, 96.357 } } },
         },
         [19112] = {
-            { 'Mu\'Nhi Thimbletail', 92, 83, 83, 1 },
+            { 'Mu\'Nhi Thimbletail', 92, 83, 83, 1, { { 240.284, -3.717, 119.684 } } },
         },
         [19120] = {
-            { 'Emela-ntouka', 96, 52, 52, 1 },
+            { 'Emela-ntouka', 96, 52, 52, 1, { { 22.341, -27.762, 481.013 } } },
         },
         [19121] = {
-            { 'Hovering Hotpot', 200, 58, 60, 1 },
+            { 'Hovering Hotpot', 200, 58, 60, 1, { { 158, 0, 20 }, { 158, 2, 20 } } },
         },
         [19122] = {
-            { 'Erle', 91, 62, 62, 1 },
+            { 'Erle', 91, 62, 62, 1, { { -298.487, 3.637, 54.586 } } },
         },
         [19123] = {
-            { 'Aynu-kaysey', 79, 82, 83, 1 },
+            { 'Aynu-kaysey', 79, 82, 83, 1, { { -567.318, -5.544, 50.588 }, { -566.648, -6, 54.309 }, { -565.609, -4.555, 47.226 }, { -565.162, -6.94, 58.342 }, { -564.912, -4.12, 43.842 }, { -564.867, -4.115, 40.408 }, { -563.163, -4, 36.976 }, { -560.409, -4, 36.531 }, { -560.04, -7.146, 58.897 }, { -557.228, -6, 54.256 }, { -557.17, -4.004, 36.04 }, { -554.502, -4.202, 34.629 }, { -554.375, -5.4, 57.406 }, { -552.972, -5.25, 50.819 }, { -552.939, -5.31, 52.927 }, { -552.158, -5.276, 54.783 }, { -552.144, -5.291, 57.165 }, { -551.838, -5.241, 59.897 }, { -551.793, -5.238, 59.134 }, { -551.657, -4.674, 34.013 }, { -551.48, -5.25, 48.397 }, { -549.695, -4.551, 60.388 }, { -549.438, -5.519, 34.609 }, { -549.19, -5.25, 47.35 }, { -547.942, -4.513, 55.903 }, { -547.096, -6, 35.024 }, { -547.018, -5.693, 45.713 }, { -546.507, -4.139, 56.823 }, { -545.419, -4.321, 54.366 }, { -545.113, -6, 34.082 }, { -544.215, -5.878, 44.727 }, { -543.9, -7.282, 45.774 }, { -543.752, -3.952, 56.33 }, { -542.736, -6.435, 33.606 }, { -542.274, -3.654, 57.49 }, { -541.609, -6.825, 44.649 }, { -541.146, -2.807, 61.593 }, { -540.569, -4.242, 55.373 }, { -539.636, -7.429, 33.511 }, { -538.885, -7.724, 43.718 }, { -538.583, -7.218, 46.353 }, { -537.521, -7.885, 34.476 }, { -536.543, -8.163, 42.577 }, { -536.379, -5.666, 54.635 }, { -535.147, -8.214, 35.663 }, { -534.618, -7.928, 46.11 }, { -534.518, -6.746, 51.792 }, { -534.383, -8.25, 41.666 }, { -533.115, -8.25, 36.587 }, { -532.262, -8.25, 38.567 }, { -532.192, -8.25, 40.793 } } },
         },
         [19124] = {
-            { 'Judgmental Julika', 83, 82, 82, 1 },
+            { 'Judgmental Julika', 83, 82, 82, 1, { { -241.488, -39.708, -697.695 } } },
         },
         [19125] = {
-            { 'Euryale', 54, 87, 87, 1 },
+            { 'Euryale', 54, 87, 87, 1, { { 477.97, -4.256, 378.003 } } },
         },
         [19126] = {
-            { 'Scylla', 136, 85, 85, 1 },
+            { 'Scylla', 136, 85, 85, 1, { { 281.795, -0.397, 233.704 } } },
         },
         [19128] = {
-            { 'Ethniu', 175, 80, 80, 1 },
+            { 'Ethniu', 175, 80, 80, 1, { { 153.554, -15.375, 286.063 } } },
         },
         [19129] = {
-            { 'Amhuluk', 216, 0, 0, 1 },
+            { 'Amhuluk', 216, 0, 0, 1, { { 0, -16, -50 }, { 0, -15, -34 }, { 14, -16, -50 } } },
         },
         [19130] = {
             { 'Lusca', 215, 0, 0, 1 },
         },
         [19131] = {
-            { 'Hrosshvalur', 217, 90, 90, 1 },
+            { 'Hrosshvalur', 217, 90, 90, 1, { { 374.919, -30.995, 390.599 } } },
         },
         [19133] = {
-            { 'Isgebind', 253, 0, 0, 1 },
+            { 'Isgebind', 253, 0, 0, 1, { { 145, -117, 471 }, { 161, -115, 472 }, { 175, -113, 472 } } },
         },
         [19134] = {
-            { 'Azdaja', 254, 100, 100, 1 },
+            { 'Azdaja', 254, 100, 100, 1, { { -582, -167, 138 }, { -568, -167, 138 }, { -552, -169, 138 } } },
         },
         [19135] = {
             { 'Maere', 254, 0, 0, 1 },
         },
         [19136] = {
-            { 'Apademak', 253, 100, 100, 1 },
+            { 'Apademak', 253, 100, 100, 1, { { -332, -156, 346 }, { -332, -156, 377 }, { -332, -155, 361 } } },
         },
         [19137] = {
-            { 'Awahondo', 253, 100, 100, 1 },
+            { 'Awahondo', 253, 100, 100, 1, { { 441.022, -84, 323.353 } } },
         },
         [19141] = {
-            { 'Arch Goblin Golem', 188, 99, 99, 1 },
+            { 'Arch Goblin Golem', 188, 99, 99, 1, { { 0, -0.5, -101 } } },
         },
         [19154] = {
-            { 'Iriz Ima', 51, 87, 88, 1 },
+            { 'Iriz Ima', 51, 87, 88, 1, { { 253, -23, 116 } } },
         },
         [19155] = {
-            { 'Maa Illmu the Bestower', 99, 83, 83, 1 },
+            { 'Maa Illmu the Bestower', 99, 83, 83, 1, { { -17.176, -16.25, -16.468 } } },
         },
         [19156] = {
-            { 'Di\'Zho Spongeshell', 92, 83, 83, 1 },
+            { 'Di\'Zho Spongeshell', 92, 83, 83, 1, { { -288.203, -3.567, -162.998 } } },
         },
         [19160] = {
-            { 'Ghillie Dhu', 108, 16, 18, 1 },
+            { 'Ghillie Dhu', 108, 16, 18, 1, { { 349, -16, -444 }, { 381, -10, -331 }, { 387, -8.873, -338.999 }, { 393, -9, -359 }, { 400, -8, -342 }, { 401, -9, -369 }, { 403, -9, -362 } } },
         },
         [19161] = {
-            { 'Prince Orobas', 137, 87, 87, 1 },
+            { 'Prince Orobas', 137, 87, 87, 1, { { 15.392, -23.847, -159.152 } } },
         },
         [19162] = {
-            { 'Elatha', 164, 80, 81, 1 },
+            { 'Elatha', 164, 80, 81, 1, { { -137.193, -0.5, -100 } } },
         },
         [19167] = {
             { 'Lusca', 215, 0, 0, 1 },
         },
         [19169] = {
-            { 'Sisyphus', 253, 100, 100, 1 },
+            { 'Sisyphus', 253, 100, 100, 1, { { -234.454, -176.203, 338.367 } } },
         },
         [19187] = {
             { 'Tristitia', 216, 0, 0, 1 },
         },
         [19189] = {
-            { 'Titlacauan', 215, 0, 0, 1 },
+            { 'Titlacauan', 215, 0, 0, 1, { { -404.436, -4, 246 }, { -396.937, -3, 259.001 }, { -396, -3, 256 } } },
         },
         [19190] = {
-            { 'Whiro', 215, 90, 90, 1 },
+            { 'Whiro', 215, 90, 90, 1, { { 405.882, 20, 156.087 } } },
         },
         [19191] = {
             { 'Ketea', 217, 85, 87, 1 },
         },
         [19193] = {
-            { 'Heqet', 216, 90, 90, 1 },
+            { 'Heqet', 216, 90, 90, 1, { { 256.6, -15.799, 366.718 } } },
         },
         [19194] = {
-            { 'Ayravata', 217, 90, 90, 1 },
+            { 'Ayravata', 217, 90, 90, 1, { { 125.204, -31.541, 106.923 } } },
         },
         [19208] = {
-            { 'Hawkeyed Dnatbat', 85, 81, 81, 1 },
+            { 'Hawkeyed Dnatbat', 85, 81, 81, 1, { { 358.667, -0.5, -181.406 } } },
         },
         [19210] = {
             { 'Sprite', 105, 51, 54 },
@@ -8275,7 +9194,7 @@ return {
             { 'Pixie', 95, 51, 54 },
         },
         [19211] = {
-            { 'Reacton', 62, 81, 83, 1 },
+            { 'Reacton', 62, 81, 83, 1, { { 18, -9, 213 } } },
         },
         [19212] = {
             { 'Guivre', 93, 0, 0, 1 },
@@ -8284,49 +9203,49 @@ return {
             { 'Serket', 129, 0, 0, 1 },
         },
         [19215] = {
-            { 'Blifnix Oilycheeks', 92, 83, 83, 1 },
+            { 'Blifnix Oilycheeks', 92, 83, 83, 1, { { -132.78, 23.532, 97.215 } } },
         },
         [19216] = {
-            { 'Suu Xicu the Cantabile', 99, 83, 83, 1 },
+            { 'Suu Xicu the Cantabile', 99, 83, 83, 1, { { -252.7, -0.382, 115.5 }, { -214.77, -0.681, 96.357 } } },
         },
         [19217] = {
-            { 'Fleshgnasher', 99, 80, 85, 1 },
+            { 'Fleshgnasher', 99, 80, 85, 1, { { 174.37, -16.539, -141.226 } } },
         },
         [19218] = {
-            { 'Cogtooth Skagnogg', 85, 83, 83, 1 },
+            { 'Cogtooth Skagnogg', 85, 83, 83, 1, { { 142.595, -0.377, -176.132 } } },
         },
         [19219] = {
-            { 'Agrios', 85, 83, 83, 1 },
+            { 'Agrios', 85, 83, 83, 1, { { 101.244, -0.57, 60.608 } } },
         },
         [19220] = {
-            { 'Blifnix Oilycheeks', 92, 83, 83, 1 },
+            { 'Blifnix Oilycheeks', 92, 83, 83, 1, { { -132.78, 23.532, 97.215 } } },
         },
         [19230] = {
-            { 'Patripatan', 119, 27, 30, 1 },
+            { 'Patripatan', 119, 27, 30, 1, { { 541, -32, 618 }, { 548, -32, 600 }, { 559, -31, 590 }, { 645, -27, 658 } } },
         },
         [19232] = {
-            { 'Ignamoth', 61, 84, 84, 1 },
+            { 'Ignamoth', 61, 84, 84, 1, { { -557.152, -14, 278.249 } } },
         },
         [19233] = {
-            { 'Cookieduster Lipiroon', 72, 80, 82, 1 },
+            { 'Cookieduster Lipiroon', 72, 80, 82, 1, { { -105, -8, 94 } } },
         },
         [19234] = {
-            { 'Firedance Magmaal Ja', 65, 80, 82, 1 },
+            { 'Firedance Magmaal Ja', 65, 80, 82, 1, { { -209, 19, -388 } } },
         },
         [19235] = {
-            { 'Mahishasura', 52, 80, 80, 1 },
+            { 'Mahishasura', 52, 80, 80, 1, { { 183.842, -15.5, 358.673 }, { 184.508, -15.544, 361.913 }, { 185.699, -15.714, 355.744 }, { 187.088, -16.5, 352.352 }, { 188.999, -16.667, 348.534 }, { 193.535, -16.487, 352.149 }, { 195.396, -17.01, 369.291 }, { 195.547, -15.973, 363.126 }, { 195.647, -19.231, 340.745 }, { 196.885, -20.25, 333.92 }, { 197.738, -16, 358.015 }, { 198.457, -18, 373.081 }, { 200.116, -17.096, 350.583 }, { 200.183, -18, 345.025 }, { 200.873, -19.42, 340.371 }, { 200.946, -20.504, 331.376 }, { 201.515, -19.578, 339.896 }, { 201.907, -20.25, 334.709 }, { 202.406, -17.199, 369.695 }, { 202.651, -19.527, 339.946 }, { 205.105, -18.012, 373.118 }, { 205.192, -16.154, 361.77 }, { 205.707, -19.293, 379.792 }, { 206.51, -16.32, 357.724 }, { 207.554, -18, 375.283 }, { 207.671, -16.593, 365.18 }, { 207.694, -19.138, 386.147 }, { 210.907, -19, 386.046 }, { 212.654, -17.961, 365.08 }, { 212.9, -18, 356.692 }, { 213.098, -18, 357.059 }, { 214.264, -18, 379.866 }, { 216.35, -18.196, 360.474 }, { 216.934, -19.256, 352.868 }, { 217.174, -19.5, 349.82 }, { 218.245, -19.5, 346.316 }, { 218.424, -18, 373.809 }, { 218.436, -19.5, 351.55 }, { 218.766, -18.472, 368.404 }, { 219.036, -19.179, 356.224 }, { 220.578, -19.5, 351.152 }, { 220.615, -19.174, 366.502 }, { 220.65, -19.5, 353.628 }, { 223.605, -19.5, 349.228 }, { 224.295, -19.72, 345.83 }, { 226.754, -19.169, 383.488 }, { 227.714, -18.489, 372.084 }, { 227.759, -18.476, 375.141 }, { 227.94, -19.396, 368.624 }, { 228, -18.519, 379.404 }, { 228.222, -20.342, 364.298 } } },
         },
         [19236] = {
-            { 'Zirnitra', 137, 85, 85, 1 },
+            { 'Zirnitra', 137, 85, 85, 1, { { 133, -36, 139 } } },
         },
         [19237] = {
-            { 'Bayawak', 123, 67, 70, 1 },
+            { 'Bayawak', 123, 67, 70, 1, { { 199.614, 4, 240.307 }, { 240.919, 4, 202.68 }, { 277.882, 3.476, 289.117 }, { 291.329, 4, 283.012 }, { 302.803, 4.251, 211.679 }, { 347.081, 3.983, 187.811 }, { 361.05, 4, 158.976 } } },
         },
         [19238] = {
-            { 'Timeworn Warrior', 112, 57, 58, 1 },
+            { 'Timeworn Warrior', 112, 57, 58, 1, { { 47.21, -24.02, -367.51 } } },
         },
         [19239] = {
-            { 'Marquis Sabnock', 161, 73, 75, 1 },
+            { 'Marquis Sabnock', 161, 73, 75, 1, { { 63.285, -8, -102.54 }, { 68.494, -8, -117.972 }, { 70.8, -8, -119.5 }, { 74.301, -8, -131.159 }, { 77.088, -8, -113.123 }, { 80.141, -8, -99.397 }, { 84.099, -8, -121.188 }, { 91.07, -8, -138.734 }, { 96.419, -8, -118.788 } } },
         },
         [19244] = {
             { 'Verthandi', 105, 85, 85, 1 },
@@ -8373,133 +9292,133 @@ return {
             { 'Yilbegan', 137, 90, 92, 1 },
         },
         [19249] = {
-            { 'Gancanagh', 45, 85, 85, 1 },
+            { 'Gancanagh', 45, 85, 85, 1, { { 74, 11, -51 } } },
         },
         [19250] = {
-            { 'Lachrymater', 45, 85, 85, 1 },
+            { 'Lachrymater', 45, 85, 85, 1, { { -220, -1, -299 } } },
         },
         [19253] = {
-            { 'Sippoy', 217, 95, 95, 1 },
+            { 'Sippoy', 217, 95, 95, 1, { { -494.686, -39.097, 161.897 } } },
         },
         [19254] = {
-            { 'Ironclad Cleaver', 215, 0, 0, 1 },
+            { 'Ironclad Cleaver', 215, 0, 0, 1, { { -276, -4, -159 } } },
         },
         [19255] = {
-            { 'Ironclad Executioner', 217, 95, 95, 1 },
+            { 'Ironclad Executioner', 217, 95, 95, 1, { { 88, -32, 73 } } },
         },
         [19256] = {
-            { 'Ironclad Executioner', 217, 95, 95, 1 },
+            { 'Ironclad Executioner', 217, 95, 95, 1, { { 88, -32, 73 } } },
         },
         [19257] = {
-            { 'Pallid Percy', 215, 0, 0, 1 },
+            { 'Pallid Percy', 215, 0, 0, 1, { { 281.063, 20.376, 174.011 } } },
         },
         [19258] = {
-            { 'Kadraeth the Hatespawn', 217, 85, 87, 1 },
+            { 'Kadraeth the Hatespawn', 217, 85, 87, 1, { { -475, -40, -280 } } },
         },
         [19259] = {
-            { 'Gnawtooth Gary', 217, 85, 87, 1 },
+            { 'Gnawtooth Gary', 217, 85, 87, 1, { { -343, -39, -644 } } },
         },
         [19260] = {
-            { 'Kutharei', 216, 95, 95, 1 },
+            { 'Kutharei', 216, 95, 95, 1, { { -146.279, -31.324, -316.425 } } },
         },
         [19261] = {
-            { 'Gaizkin', 215, 0, 0, 1 },
+            { 'Gaizkin', 215, 0, 0, 1, { { -130, 0, 2 } } },
         },
         [19271] = {
-            { 'Va\'Gho Bloodbasked', 92, 83, 83, 1 },
+            { 'Va\'Gho Bloodbasked', 92, 83, 83, 1, { { 48.226, -3.267, 41.63 } } },
         },
         [19272] = {
-            { 'Vee Ladu the Titterer', 99, 83, 83, 1 },
+            { 'Vee Ladu the Titterer', 99, 83, 83, 1, { { -57.602, -0.823, -58.06 } } },
         },
         [19277] = {
-            { 'Ankabut', 88, 50, 53, 1 },
+            { 'Ankabut', 88, 50, 53, 1, { { 678.599, -10.219, 532.811 } } },
         },
         [19278] = {
-            { 'Calchas', 125, 74, 75, 1 },
+            { 'Calchas', 125, 74, 75, 1, { { -442.7, -8, -317.073 }, { -441.01, 0, -278.406 }, { -419.1, -1.44, -293.2 }, { -411.475, -1.169, -316.227 }, { -403.524, -0.067, -275.723 } } },
         },
         [19280] = {
-            { 'Oupire', 72, 85, 85, 1 },
+            { 'Oupire', 72, 85, 85, 1, { { 90, 0.1, -100 } } },
         },
         [19282] = {
-            { 'Ruminator', 132, 90, 90, 1 },
+            { 'Ruminator', 132, 90, 90, 1, { { 512.529, 23.999, -183.839 } } },
         },
         [19287] = {
-            { 'Sobek', 216, 0, 0, 1 },
+            { 'Sobek', 216, 0, 0, 1, { { 388.81, 21.489, -418.133 }, { 428, 23, -376 }, { 443, 23, -369 } } },
         },
         [19288] = {
-            { 'Sedna', 217, 85, 87, 1 },
+            { 'Sedna', 217, 85, 87, 1, { { 402, -31, 406 }, { 403, -31, 375 }, { 403, -31, 390 } } },
         },
         [19289] = {
-            { 'Warbler', 215, 90, 90, 1 },
+            { 'Warbler', 215, 90, 90, 1, { { -481.353, -4, 237.475 } } },
         },
         [19291] = {
-            { 'Fleshflayer Killakriq', 254, 105, 105, 1 },
+            { 'Fleshflayer Killakriq', 254, 105, 105, 1, { { 484.582, 47.295, -440.789 } } },
         },
         [19292] = {
-            { 'Ouzelum', 218, 100, 100, 1 },
+            { 'Ouzelum', 218, 100, 100, 1, { { 136.641, 1.6, -73.459 } } },
         },
         [19295] = {
-            { 'Arch Tzee Xicu Idol', 187, 99, 99, 1 },
+            { 'Arch Tzee Xicu Idol', 187, 99, 99, 1, { { 94.944, -3.171, -147.77 } } },
         },
         [19305] = {
-            { 'Numbing Norman', 115, 12, 13, 1 },
+            { 'Numbing Norman', 115, 12, 13, 1, { { -433, -28, 332 }, { -409, -28, 351 }, { -405, -29, 381 }, { -383, -29, 435 }, { -347, -29, 465 } } },
         },
         [19306] = {
-            { 'Nommo', 90, 88, 88, 1 },
+            { 'Nommo', 90, 88, 88, 1, { { -173.471, 24.475, 447.102 } } },
         },
         [19307] = {
-            { 'Buarainech', 164, 80, 81, 1 },
+            { 'Buarainech', 164, 80, 81, 1, { { 114.154, 6.388, -131.777 } } },
         },
         [19312] = {
-            { 'Sobek', 216, 0, 0, 1 },
+            { 'Sobek', 216, 0, 0, 1, { { 388.81, 21.489, -418.133 }, { 428, 23, -376 }, { 443, 23, -369 } } },
         },
         [19313] = {
             { 'Flame Skimmer', 216, 90, 90 },
         },
         [19314] = {
-            { 'Ironclad Observer', 216, 0, 0, 1 },
+            { 'Ironclad Observer', 216, 0, 0, 1, { { -198.742, -32.659, 77.43 } } },
         },
         [19315] = {
-            { 'Minax Bugard', 216, 0, 0, 1 },
+            { 'Minax Bugard', 216, 0, 0, 1, { { 520, 15, -268 } } },
         },
         [19316] = {
-            { 'Rakshas', 217, 85, 87, 1 },
+            { 'Rakshas', 217, 85, 87, 1, { { -203, -39, -26 } } },
         },
         [19324] = {
-            { 'Poroggo Dom Juan', 132, 85, 85, 1 },
+            { 'Poroggo Dom Juan', 132, 85, 85, 1, { { 275, 24, -558 } } },
         },
         [19730] = {
-            { 'Kur', 253, 100, 100, 1 },
+            { 'Kur', 253, 100, 100, 1, { { 224.82, -115.389, 404.609 } } },
         },
         [19731] = {
-            { 'Battlerigged Chariot', 218, 100, 100, 1 },
+            { 'Battlerigged Chariot', 218, 100, 100, 1, { { -676.528, -7.988, -564.241 } } },
         },
         [19732] = {
-            { 'Ironclad Sunderer', 254, 0, 0, 1 },
+            { 'Ironclad Sunderer', 254, 0, 0, 1, { { 501, 25, 503 } } },
         },
         [19738] = {
-            { 'Lost Suttung', 41, 100, 100, 1 },
+            { 'Lost Suttung', 41, 100, 100, 1, { { -6, -20.75, 328 } } },
         },
         [19762] = {
-            { 'Feralox Honeylips', 188, 95, 95, 1 },
+            { 'Feralox Honeylips', 188, 95, 95, 1, { { -23, 1.5, 64 } } },
         },
         [19763] = {
-            { 'Arch Angra Mainyu', 134, 95, 95, 1 },
+            { 'Arch Angra Mainyu', 134, 95, 95, 1, { { 280, 19.899, 468 } } },
         },
         [19764] = {
-            { 'Marquis Caim', 135, 95, 95, 1 },
+            { 'Marquis Caim', 135, 95, 95, 1, { { 579.552, -10, 224.746 } } },
         },
         [19765] = {
-            { 'Count Haagenti', 135, 95, 95, 1 },
+            { 'Count Haagenti', 135, 95, 95, 1, { { -107.596, -40.309, 35.88 } } },
         },
         [19767] = {
-            { 'Bu\'Bho Truesteel', 186, 95, 95, 1 },
+            { 'Bu\'Bho Truesteel', 186, 95, 95, 1, { { 74.671, 6.5, -34.801 } } },
         },
         [19790] = {
-            { 'Arch Overlord Tombstone', 185, 99, 99, 1 },
+            { 'Arch Overlord Tombstone', 185, 99, 99, 1, { { 0, -2.5, 43 } } },
         },
         [27456] = {
-            { 'Tiamat', 7, 95, 95, 1 },
+            { 'Tiamat', 7, 95, 95, 1, { { -566.766, -12.674, -41.782 }, { -565.689, -12.42, -79.477 }, { -563.587, -12.005, -43.905 }, { -563.552, -12, -39.131 }, { -563.436, -12.14, -48.995 }, { -563.185, -12.002, -46.441 }, { -562.449, -12.202, -84.5 }, { -560.512, -12.042, -51.924 }, { -560.329, -12, -37.608 }, { -560.106, -4.234, -5.819 }, { -559.911, -11.622, -67.839 }, { -559.868, -4, -1.305 }, { -558.361, -12.178, -84.656 }, { -557.823, -4, 3.232 }, { -556.672, -11.939, -66.284 }, { -556.14, -4.988, -8.711 }, { -555.466, -11.945, -50.986 }, { -553.738, -12.191, -83.898 }, { -553.611, -11.488, -36.44 }, { -553.009, -3.918, 4.2 }, { -552.43, -5.316, -11.979 }, { -551.477, -11.58, -48.592 }, { -551.187, -12.342, -67.364 }, { -550.252, -11.713, -81.462 }, { -549.802, -8.944, -24.848 }, { -547.924, -9.652, -32.699 }, { -547.407, -11.494, -56.208 }, { -547.281, -11.188, -46.117 }, { -547.04, -4.759, -13.895 }, { -546.247, -11.653, -78.959 }, { -545.911, -11.48, -53.302 }, { -545.686, -11.851, -64.526 }, { -545.229, -9.139, -26.835 }, { -543.347, -11.08, -49.358 }, { -541.642, -11.083, -80.879 }, { -540.775, -4.301, -13.786 }, { -540.688, -12.42, -61.299 }, { -539.781, -6.688, -24.802 }, { -537.228, -6.278, -21.546 }, { -537.182, -11.317, -79.414 }, { -536.608, -4.329, -16.014 }, { -531.459, -12.028, -75.823 }, { -529.519, -5.811, -43.413 }, { -525.511, -11.937, -79.784 }, { -520.644, -12.033, -84.04 }, { -516.567, -11.228, -71.118 }, { -516.266, -12.074, -82.299 }, { -516.019, -12.018, -77.012 }, { -513.979, -9.972, -66.404 }, { -511.114, -8.854, -61.3 }, { -509.612, -7.883, -57.162 } } },
         },
     },
     recipes = {

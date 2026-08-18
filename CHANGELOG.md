@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.12.2
+
+- Added verified map grids and exact `!pos` values to NM monster sources when
+  LandSandBoat provides a fixed spawn position.
+- Multi-spawn and lottery NMs show a rough multi-grid area and expose up to
+  eight exact known positions in a hover tooltip.
+- Added script-derived lottery instructions for supported NMs, including the
+  specific placeholder family, chance per qualifying despawn, and minimum
+  respawn window. Guidance explicitly warns that clearing every monster of
+  that family is unnecessary.
+- Retained `Grid unavailable` for spawn records on ambiguous multi-map pages
+  instead of guessing the wrong dungeon floor.
+
 ## 0.12.1
 
 - Added regional Outposts from Driftwood's `dwport` catalog as fallbacks when

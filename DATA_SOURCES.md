@@ -16,8 +16,11 @@ build. It is not a substitute for the upstream projects' license files.
   `sql/synth_recipes.sql`
 - Additional generated output: `data/acquisition.lua`, containing normalized
   item-to-monster locations, the non-vendor weapon/armor browser subset, and
-  synthesis recipes. Monster drop rates are not copied. Locations and recipes
-  reflect standard LandSandBoat data and may differ from Driftwood
+  synthesis recipes. Known NM spawn coordinates are retained for grid and
+  `!pos` guidance; dynamic coordinate sentinels are discarded. Script-exposed
+  `phOnDespawn` relationships supply lottery placeholder, chance, and window
+  guidance. Monster drop rates are not copied. Locations, spawn mechanics, and
+  recipes reflect standard LandSandBoat data and may differ from Driftwood
   customizations or current progression.
 
 ## DriftwoodXI local addons
