@@ -52,25 +52,28 @@ so hidden modules can be restored at any time.
 
 ### Spells
 
-The Spells tab searches purchasable scrolls by spell name, vendor, or zone.
+The Spells tab searches vendor and monster-dropped scrolls by spell name,
+vendor, monster, or zone.
 Use the learned-state buttons to show missing or learned spells, restrict the
 list to the current job and level, or enable **Show all jobs / levels** to see
 every job requirement. Results can be sorted by name or level and filtered by
 magic family, including White Magic, Black Magic, Songs, Ninjutsu, and other
 supported types.
 
-Selecting a spell shows every known vendor, the vendor's exact area, price or
-requirements, and a **Port** button for the closest destination to that NPC.
+Selecting a spell shows every known vendor or monster source. Vendor entries
+include the NPC's exact area, price or requirements, and a **Port** button for
+the closest destination. Drop-only scrolls identify the monster, zone, level
+range, known NM area, and closest supported port.
 Tenshodo shops that require membership are clearly marked and
 point to the membership quest in Lower Jeuno. Conquest restrictions, merchant
 hours, quest acquisition, and special-currency unlocks remain listed on their
 individual vendor rows.
-When a scroll also drops from monsters, its collapsible drop section lists the
-monster, zone, level range, and closest supported port. Searching for a monster
-or drop zone finds matching scrolls as well.
+When a vendor scroll also drops from monsters, the same collapsible source
+section lists those alternatives. Searching for a monster or drop zone finds
+matching scrolls as well.
 The filter-aware **Moogle's missing-scroll bill** totals each missing spell at
 its cheapest listed Gil vendor and identifies entries that require another
-currency or have no fixed Gil price.
+currency or have no fixed Gil price. Drop-only scrolls do not affect the bill.
 
 ![VanaCompass Spells tab showing spell filters, job requirements, vendor details, price, and nearest port](docs/images/spells-tab.png)
 

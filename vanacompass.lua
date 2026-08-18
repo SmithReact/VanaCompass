@@ -2,7 +2,7 @@
 
 addon.name    = 'vanacompass';
 addon.author  = 'Elcatrin (Spacedandy)';
-addon.version = '0.14.0';
+addon.version = '0.14.1';
 addon.desc    = 'Find spells, crafting materials, gear, NMs, quests, missions, and ports.';
 
 require('common');
@@ -695,10 +695,14 @@ local function rebuildCatalogs()
     for id = 1, 1299 do
         local resource = resources:GetSpellById(id);
         if resource ~= nil and resource.Name ~= nil and resource.Name[1] ~= nil and resource.Name[1] ~= '' then
-            local rows = spellVendorsByName[normalizeName(resource.Name[1])];
-            if rows ~= nil and #rows > 0 then
+            local normalizedName = normalizeName(resource.Name[1]);
+            local rows = spellVendorsByName[normalizedName] or {};
+            local itemId = acquisition.spellItems[normalizedName];
+            local dropRows = itemId ~= nil and acquisition.drops[itemId] or nil;
+            if #rows > 0 or (dropRows ~= nil and #dropRows > 0) then
                 local entry = {
                     id = id,
+                    itemId = itemId,
                     name = resource.Name[1],
                     description = resource.Description and resource.Description[1] or '',
                     vendors = rows,
@@ -1388,8 +1392,7 @@ local function spellVisible(spell, ignoreLearnedState, jobId, jobLevel)
     for _, vendor in ipairs(spell.vendors) do
         if lower(vendor.npc):find(query, 1, true) or lower(vendor.zone):find(query, 1, true) then return true; end
     end
-    local itemId = acquisition.spellItems[normalizeName(spell.name)];
-    for _, source in ipairs(itemId ~= nil and acquisition.drops[itemId] or {}) do
+    for _, source in ipairs(spell.itemId ~= nil and acquisition.drops[spell.itemId] or {}) do
         if lower(sourceMonsterName(source)):find(query, 1, true) or
             lower(sourceZoneSearchName(source)):find(query, 1, true) then return true; end
     end
@@ -1435,7 +1438,9 @@ local function getSpellView()
             view.spells[#view.spells + 1] = spell;
             view.visibleIds[spell.id] = true;
         end
-        if not spell.learned and spellVisible(spell, true, jobId, jobLevel) then
+        -- The shopping bill covers spells that can actually be purchased.
+        -- Drop-only scrolls remain visible but do not inflate the Gil estimate.
+        if not spell.learned and #spell.vendors > 0 and spellVisible(spell, true, jobId, jobLevel) then
             view.billMissing = view.billMissing + 1;
             if spell.cheapestGil ~= nil then
                 view.billTotal = view.billTotal + spell.cheapestGil;
@@ -1485,6 +1490,8 @@ local function spellTooltip(spell)
     lines[#lines + 1] = string.format('MP: %d   Cast: %.2fs   Recast: %.2fs',
         spell.manaCost, spell.castTime / 4.0, spell.recastDelay / 4.0);
     lines[#lines + 1] = string.format('Known vendors: %d', #spell.vendors);
+    lines[#lines + 1] = string.format('Known monster sources: %d',
+        #(spell.itemId ~= nil and acquisition.drops[spell.itemId] or {}));
     if spell.cheapestGil ~= nil then
         lines[#lines + 1] = 'Cheapest listed price: ' .. formatNumber(spell.cheapestGil) .. ' Gil';
     end
@@ -1536,7 +1543,7 @@ end
 
 local function renderSpells()
     local toolbarWidth = imgui.GetWindowWidth();
-    searchHeader(state.spellSearch, 'spell, vendor, or zone');
+    searchHeader(state.spellSearch, 'spell, vendor, monster, or zone');
     if toolbarWidth >= 720 then imgui.SameLine(); end
     for index, label in ipairs({ 'All states', 'Missing', 'Learned' }) do
         if index > 1 then imgui.SameLine(); end
@@ -1569,12 +1576,12 @@ local function renderSpells()
     browserListToggle();
     local player = AshitaCore:GetMemoryManager():GetPlayer();
     if state.showAllSpells[1] then
-        imgui.TextWrapped('Showing vendor spells for every job and level.');
+        imgui.TextWrapped('Showing vendor and monster-dropped spells for every job and level.');
     elseif player ~= nil then
         local jobName = AshitaCore:GetResourceManager():GetString('jobs.names_abbr', player:GetMainJob()) or '?';
-        imgui.TextWrapped(string.format('Showing vendor spells usable by %s %d.', jobName, player:GetMainJobLevel()));
+        imgui.TextWrapped(string.format('Showing vendor and monster-dropped spells usable by %s %d.', jobName, player:GetMainJobLevel()));
     else
-        imgui.TextWrapped('Character job is unavailable; showing the vendor spell catalog.');
+        imgui.TextWrapped('Character job is unavailable; showing the known spell-acquisition catalog.');
     end
     local spellView = getSpellView();
     renderMissingSpellBill(spellView);
@@ -1604,8 +1611,12 @@ local function renderSpells()
             imgui.TextDisabled('Job requirements:');
             imgui.TextWrapped(spell.levels ~= '' and spell.levels or 'No valid job requirements');
             imgui.Separator();
-            vendorTable(spell.vendors, 'spell_' .. spell.id);
-            renderAcquisitionSources(acquisition.spellItems[normalizeName(spell.name)], 'spell_' .. spell.id);
+            if #spell.vendors > 0 then
+                vendorTable(spell.vendors, 'spell_' .. spell.id);
+            else
+                imgui.TextDisabled('No known vendor. This scroll is obtained from monsters.');
+            end
+            renderAcquisitionSources(spell.itemId, 'spell_' .. spell.id);
         end
         imgui.EndChild();
         imgui.EndTable();
@@ -1625,8 +1636,13 @@ local function renderSpells()
             imgui.TextColored(spell.learned and theme.colors.ok or theme.colors.warn, spell.learned and 'Learned' or 'Missing');
             imgui.TextDisabled('Magic type:'); imgui.SameLine(); imgui.Text(spell.typeName);
             imgui.TextDisabled('Job requirements:'); imgui.TextWrapped(spell.levels ~= '' and spell.levels or 'No valid job requirements');
-            imgui.Separator(); vendorTable(spell.vendors, 'spell_full_' .. spell.id);
-            renderAcquisitionSources(acquisition.spellItems[normalizeName(spell.name)], 'spell_full_' .. spell.id);
+            imgui.Separator();
+            if #spell.vendors > 0 then
+                vendorTable(spell.vendors, 'spell_full_' .. spell.id);
+            else
+                imgui.TextDisabled('No known vendor. This scroll is obtained from monsters.');
+            end
+            renderAcquisitionSources(spell.itemId, 'spell_full_' .. spell.id);
         else imgui.TextDisabled('Select a spell from the list.'); end
         imgui.EndChild();
     end
@@ -2690,7 +2706,7 @@ local function renderWelcome()
     end
     imgui.Separator();
 
-    imgui.BulletText(string.format('%d purchasable spells with learned/missing state.', #state.spells));
+    imgui.BulletText(string.format('%d vendor and monster-dropped spells with learned/missing state.', #state.spells));
     imgui.BulletText(string.format('%d weapons and %d armor pieces sold by standard vendors.', #state.items.weapon, #state.items.armor));
     imgui.BulletText(string.format('%d other vendor supplies.', #state.items.supply));
     imgui.BulletText(string.format('%d searchable crafting-related items with NPC and synthesis sources.', #state.materials));

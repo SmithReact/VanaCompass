@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.14.1
+
+- Added monster-only scrolls to the Spells catalog, including Refresh from
+  Taisaijin, with monster, zone, level, NM area, and closest-port details.
+- Retained grouped treasure-pool spell drops while continuing to exclude
+  steal, despoil, and other special acquisition records.
+- Excluded drop-only scrolls from the missing-spell Gil estimate.
+
 ## 0.14.0
 
 - Added an optional NMs tab containing every LandSandBoat-marked notorious

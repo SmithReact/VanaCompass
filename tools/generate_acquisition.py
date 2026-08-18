@@ -286,7 +286,8 @@ def parse_spawn_methods(
     return {zone_id: dict(rows) for zone_id, rows in methods.items()}
 
 
-def parse_spell_items(vendors: Path, items: dict[int, tuple[str, str]]) -> dict[str, int]:
+def parse_spell_items(vendors: Path, items: dict[int, tuple[str, str]],
+                      item_rows: dict[int, list[object]]) -> dict[str, int]:
     vendor_text = vendors.read_text(encoding='utf-8')
     spell_names = {
         name_key(value.replace("\\'", "'"))
@@ -297,6 +298,13 @@ def parse_spell_items(vendors: Path, items: dict[int, tuple[str, str]]) -> dict[
         item_names.setdefault(name_key(sort_name), item_id)
         if internal.startswith('scroll_of_'):
             item_names.setdefault(name_key(internal.removeprefix('scroll_of_')), item_id)
+        # Drop-only scrolls do not appear in the vendor catalog. Retain their
+        # normalized item names so the runtime spell resource can still join
+        # them to monster sources.
+        if '@FLAG_SCROLL' in str(item_rows[item_id][7]):
+            spell_names.add(name_key(sort_name))
+            if internal.startswith('scroll_of_'):
+                spell_names.add(name_key(internal.removeprefix('scroll_of_')))
     spell_items = {key: item_names[key] for key in spell_names if key in item_names}
     return spell_items
 
@@ -312,7 +320,7 @@ def build_catalog(server: Path, shops: Path, vendors: Path):
     item_rows = sql_rows(server / 'sql/item_basic.sql', 'item_basic')
     items = {int(row[0]): (str(row[2]), str(row[3])) for row in item_rows}
     item_rows_by_id = {int(row[0]): row for row in item_rows}
-    spell_items = parse_spell_items(vendors, items)
+    spell_items = parse_spell_items(vendors, items, item_rows_by_id)
     vendor_ids = parse_vendor_items(shops)
     weapon_ids = {int(row[0]) for row in sql_rows(server / 'sql/item_weapon.sql', 'item_weapon')}
     armor_ids = {int(row[0]) for row in sql_rows(server / 'sql/item_equipment.sql', 'item_equipment')}
@@ -353,9 +361,15 @@ def build_catalog(server: Path, shops: Path, vendors: Path):
     script_spawn_positions = parse_script_spawn_positions(server, zone_folders)
 
     drops_by_list: dict[int, set[int]] = defaultdict(set)
+    spell_item_ids = set(spell_items.values())
     for row in sql_rows(server / 'sql/mob_droplist.sql', 'mob_droplist'):
         drop_id, drop_type, item_id = int(row[0]), int(row[1]), int(row[4])
-        if drop_type == 0 and item_id in items and item_id > 0:
+        # Type 0 is an ordinary treasure-pool drop. Spell scrolls also use
+        # type 1 grouped drops, so retain those without expanding the existing
+        # equipment catalog to every grouped material. Steal, despoil, and
+        # other special acquisition types remain excluded.
+        is_retained_drop = drop_type == 0 or (drop_type == 1 and item_id in spell_item_ids)
+        if is_retained_drop and item_id in items and item_id > 0:
             drops_by_list[drop_id].add(item_id)
 
     drops: dict[int, list[dict[str, object]]] = defaultdict(list)
