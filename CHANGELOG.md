@@ -21,9 +21,6 @@
   begin collapsed, while active searches automatically expose matching areas.
 - Opened each NM's tracked-loot section by default and changed its item names
   into hover-highlighted rows for clearer visual tracking.
-- Kept image support out of this release so a future optional screenshot pack
-  can use original, properly attributed captures without adding network access.
-
 ## 0.13.1
 
 - Expanded the NEW PLAYER guide with `/quests`, daily and weekly Drift Board

@@ -138,9 +138,6 @@ in VanaCompass. Drop rates are intentionally omitted. Timed, forced,
 battlefield, event, and other spawn types are identified as having no parsed
 placeholder instructions rather than being guessed.
 
-NM screenshots are not downloaded at runtime. A future optional image pack can
-use original captures while keeping the main addon lightweight and offline.
-
 ### Quests, Artifact quests, and Job Unlocks
 
 The Quests tab shows level-appropriate entries by default, with toggles for
