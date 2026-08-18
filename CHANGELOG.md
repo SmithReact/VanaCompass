@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.12.5
+
+- Added a prominent Tenshodo membership requirement to every Amalasanda and
+  Jabbar vendor row. The note points players to the Tenshodo Membership quest
+  in Lower Jeuno while leaving unrestricted alternate vendors distinct.
+
 ## 0.12.4
 
 - Changed the fresh-install tab layout to Welcome and Spells only. Existing

@@ -2,7 +2,7 @@
 
 addon.name    = 'vanacompass';
 addon.author  = 'Elcatrin (Spacedandy)';
-addon.version = '0.12.4';
+addon.version = '0.12.5';
 addon.desc    = 'Find purchases, level-appropriate quests, story missions, job unlocks, and ports.';
 
 require('common');
@@ -173,6 +173,14 @@ local SPELL_TYPES = {
 local DROP_CATEGORY_NAMES = {
     [2] = 'Weapons',
     [3] = 'Armor',
+};
+
+-- These shops explicitly reject players who lack the key item. Keep the
+-- warning on the vendor row because many scrolls have an unrestricted
+-- alternate source.
+local VENDOR_ACCESS_REQUIREMENTS = {
+    Amalasanda = 'Requires Tenshodo membership. Complete Tenshodo Membership in Lower Jeuno.',
+    Jabbar = 'Requires Tenshodo membership. Complete Tenshodo Membership in Lower Jeuno.',
 };
 
 -- FFXI's labeled town-map cells are usually 40 world units wide. Vendor
@@ -897,6 +905,21 @@ local function portButton(destination, id)
     imgui.PopStyleColor();
 end
 
+local function renderVendorPriceAndRequirements(vendor)
+    if vendor.notes ~= nil then
+        imgui.TextWrapped(vendor.notes ~= '' and vendor.notes or '-');
+    else
+        imgui.TextWrapped(string.format('%d gil%s', vendor.price or 0,
+            vendor.tier and string.format(' (shop tier %d)', vendor.tier) or ''));
+    end
+    local requirement = VENDOR_ACCESS_REQUIREMENTS[vendor.npc];
+    if requirement ~= nil then
+        imgui.PushStyleColor(ImGuiCol_Text, theme.colors.warn);
+        imgui.TextWrapped(requirement);
+        imgui.PopStyleColor();
+    end
+end
+
 local function vendorTable(rows, idPrefix)
     if imgui.GetWindowWidth() < 620 then
         for index, vendor in ipairs(rows) do
@@ -904,12 +927,7 @@ local function vendorTable(rows, idPrefix)
             local location = vendor.location or '';
             imgui.TextWrapped(vendor.zone .. (location ~= '' and
                 (' (' .. location:gsub('^%(', ''):gsub('%)$', '') .. ')') or ''));
-            if vendor.notes ~= nil then
-                imgui.TextWrapped(vendor.notes ~= '' and vendor.notes or '-');
-            else
-                imgui.TextDisabled(string.format('%d gil%s', vendor.price or 0,
-                    vendor.tier and string.format(' (shop tier %d)', vendor.tier) or ''));
-            end
+            renderVendorPriceAndRequirements(vendor);
             portButton(closestTeleport(vendor.zone, vendor.x, vendor.y), idPrefix .. '_' .. index);
             if index < #rows then imgui.Separator(); end
         end
@@ -929,12 +947,7 @@ local function vendorTable(rows, idPrefix)
         local location = vendor.location or '';
         imgui.TextWrapped(vendor.zone .. (location ~= '' and (' (' .. location:gsub('^%(', ''):gsub('%)$', '') .. ')') or ''));
         imgui.TableNextColumn();
-        if vendor.notes ~= nil then
-            imgui.TextWrapped(vendor.notes ~= '' and vendor.notes or '-');
-        else
-            imgui.TextWrapped(string.format('%d gil%s', vendor.price or 0,
-                vendor.tier and string.format(' (shop tier %d)', vendor.tier) or ''));
-        end
+        renderVendorPriceAndRequirements(vendor);
         imgui.TableNextColumn();
         portButton(closestTeleport(vendor.zone, vendor.x, vendor.y), idPrefix .. '_' .. index);
     end

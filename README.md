@@ -63,6 +63,10 @@ supported types.
 
 Selecting a spell shows every known vendor, the vendor's exact area, price or
 requirements, and a **Port** button for the closest destination to that NPC.
+Tenshodo shops that require membership are clearly marked and
+point to the membership quest in Lower Jeuno. Conquest restrictions, merchant
+hours, quest acquisition, and special-currency unlocks remain listed on their
+individual vendor rows.
 When a scroll also drops from monsters, its collapsible drop section lists the
 monster, zone, level range, and closest supported port. Searching for a monster
 or drop zone finds matching scrolls as well.
