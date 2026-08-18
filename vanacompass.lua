@@ -1117,6 +1117,29 @@ local function portButton(destination, id)
     imgui.PopStyleColor();
 end
 
+local function renderGuideLocation(location, id)
+    local grid, hasPosition = guidePositionGrid(location);
+    local zone = zoneFromText(location);
+    local destination = zone and closestTeleport(zone) or nil;
+    local narrow = imgui.GetWindowWidth() < 620;
+
+    if grid ~= nil then
+        imgui.TextDisabled('Grid: ' .. grid); imgui.SameLine();
+    elseif hasPosition then
+        imgui.TextDisabled('Grid: unavailable'); imgui.SameLine();
+    end
+
+    if narrow then
+        textDisabledWrapped(location);
+        imgui.TextDisabled('Closest port:'); imgui.SameLine();
+        portButton(destination, id);
+        return;
+    end
+
+    imgui.TextDisabled(location); imgui.SameLine();
+    portButton(destination, id);
+end
+
 local function renderVendorPriceAndRequirements(vendor)
     if vendor.shopType == 'Guild shop' then
         imgui.TextWrapped(string.format('Guild shop, variable stock and price; up to %d gil.', vendor.buyMax or 0));
@@ -2508,15 +2531,7 @@ local function renderGuideSteps(entry, prefix, firstIsStart, progress)
         imgui.TextWrapped(step.text or '');
         if isCurrent or isDone then imgui.PopStyleColor(); end
         if step.pos ~= nil and step.pos ~= '' then
-            local grid, hasPosition = guidePositionGrid(step.pos);
-            if grid ~= nil then
-                imgui.TextDisabled('Grid: ' .. grid); imgui.SameLine();
-            elseif hasPosition then
-                imgui.TextDisabled('Grid: unavailable'); imgui.SameLine();
-            end
-            imgui.TextDisabled(step.pos); imgui.SameLine();
-            local zone = zoneFromText(step.pos);
-            portButton(zone and closestTeleport(zone) or nil, prefix .. '_' .. index);
+            renderGuideLocation(step.pos, prefix .. '_' .. index);
         end
         if index < #entry.steps then imgui.Separator(); end
     end
@@ -2774,6 +2789,7 @@ local function renderWelcome()
     end
     imgui.Text('VanaCompass');
     imgui.TextWrapped('A searchable in-game guide for finding useful purchases and figuring out where to go next. Every Port button uses Driftwood\'s normal travel command; the server still checks unlocks and travel rules.');
+    imgui.TextWrapped('/vana toggles this window; /vana <text> searches all purchase tabs.');
     imgui.Separator();
 
     imgui.TextColored(theme.colors.hint, 'TAB VISIBILITY');
@@ -2845,7 +2861,6 @@ local function renderWindow()
     renderCurrentLocation();
     imgui.Separator();
     if imgui.Button('Refresh character state') then rebuildCatalogs(); end
-    imgui.SameLine(); imgui.TextWrapped('/vana toggles this window; /vana <text> searches all purchase tabs.');
     imgui.Separator();
     if imgui.BeginTabBar('##vanacompass_tabs') then
         if imgui.BeginTabItem('Welcome') then renderWelcome(); imgui.EndTabItem(); end

@@ -11,6 +11,10 @@
   and walkthrough steps; ambiguous multi-map coordinates remain unavailable.
 - Added generated quest-reward sources to the Spells tab, including Drain from
   The Rumor, with quest start, completion state, grid, location, and port details.
+- Made quest walkthrough locations responsive so narrow windows wrap the exact
+  location and place the closest-port control on its own readable row.
+- Moved the `/vana` command reminder to Welcome while keeping Refresh character
+  state available above every module.
 
 ## 0.14.1
 
