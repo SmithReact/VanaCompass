@@ -2425,35 +2425,37 @@ local function renderStartCard(entry, idPrefix)
 end
 
 local function renderQuests()
-    searchHeader(state.questSearch, 'quest, region, NPC, item, or zone');
-    imgui.SameLine();
-    if imgui.Button('Open active tracker') then AshitaCore:GetChatManager():QueueCommand(1, '/tracker'); end
-    if imgui.IsItemHovered() then imgui.SetTooltip('Open Driftwood\'s authoritative active/completed quest tracker.'); end
-    imgui.SameLine(); imgui.Checkbox('Show quests above my level', state.showAboveLevel);
-    imgui.SameLine(); imgui.Checkbox('Show completed', state.showCompletedQuests);
-    imgui.SameLine();
-    if imgui.Button('Sync completion##quests') then requestMissionSync(); end
-    for index, label in ipairs({ 'All quests', 'Artifact quests', 'Job unlocks' }) do
-        if index > 1 then imgui.SameLine(); end
-        local selected = pushSelectedButton(state.questMode == index);
-        if imgui.Button(label .. '##questmode_' .. index) then state.questMode = index; end
-        if selected then imgui.PopStyleColor(); end
+    if state.showBrowserList[1] then
+        searchHeader(state.questSearch, 'quest, region, NPC, item, or zone');
+        imgui.SameLine();
+        if imgui.Button('Open active tracker') then AshitaCore:GetChatManager():QueueCommand(1, '/tracker'); end
+        if imgui.IsItemHovered() then imgui.SetTooltip('Open Driftwood\'s authoritative active/completed quest tracker.'); end
+        imgui.SameLine(); imgui.Checkbox('Show quests above my level', state.showAboveLevel);
+        imgui.SameLine(); imgui.Checkbox('Show completed', state.showCompletedQuests);
+        imgui.SameLine();
+        if imgui.Button('Sync completion##quests') then requestMissionSync(); end
+        for index, label in ipairs({ 'All quests', 'Artifact quests', 'Job unlocks' }) do
+            if index > 1 then imgui.SameLine(); end
+            local selected = pushSelectedButton(state.questMode == index);
+            if imgui.Button(label .. '##questmode_' .. index) then state.questMode = index; end
+            if selected then imgui.PopStyleColor(); end
+        end
+        if state.questMode == 2 then
+            imgui.SameLine(); imgui.Checkbox('Show other jobs', state.showOtherArtifactJobs);
+        end
+        imgui.SameLine();
+        local player = AshitaCore:GetMemoryManager():GetPlayer();
+        if player then
+            local jobName = AshitaCore:GetResourceManager():GetString('jobs.names_abbr', player:GetMainJob()) or '?';
+            imgui.TextDisabled(string.format('Current job: %s %d', jobName, player:GetMainJobLevel()));
+        else
+            imgui.TextDisabled('Current job unavailable');
+        end
+        if state.questMode == 3 then
+            imgui.TextWrapped('Advanced-job unlock chains are listed in prerequisite order. Reach level 30 on any job before starting the final unlock steps.');
+        end
+        imgui.TextWrapped('Level-appropriate entries are shown by default. Fame, job, nation, prior quests and other prerequisites still apply. ' .. state.missionSyncStatus);
     end
-    if state.questMode == 2 then
-        imgui.SameLine(); imgui.Checkbox('Show other jobs', state.showOtherArtifactJobs);
-    end
-    imgui.SameLine();
-    local player = AshitaCore:GetMemoryManager():GetPlayer();
-    if player then
-        local jobName = AshitaCore:GetResourceManager():GetString('jobs.names_abbr', player:GetMainJob()) or '?';
-        imgui.TextDisabled(string.format('Current job: %s %d', jobName, player:GetMainJobLevel()));
-    else
-        imgui.TextDisabled('Current job unavailable');
-    end
-    if state.questMode == 3 then
-        imgui.TextWrapped('Advanced-job unlock chains are listed in prerequisite order. Reach level 30 on any job before starting the final unlock steps.');
-    end
-    imgui.TextWrapped('Level-appropriate entries are shown by default. Fame, job, nation, prior quests and other prerequisites still apply. ' .. state.missionSyncStatus);
     browserListToggle();
     imgui.Separator();
     local questStacked = imgui.GetWindowWidth() < 760;

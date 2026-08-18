@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Made the Quests tab's Hide list mode suppress its search, filters, tracker
+  controls, and explanatory text so only the selected quest guide remains.
+
 ## 0.14.1
 
 - Added monster-only scrolls to the Spells catalog, including Refresh from
