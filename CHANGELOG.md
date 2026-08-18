@@ -8,6 +8,8 @@
   cells and separate entrance, north, and south/apparatus coordinate regions.
 - Virtualized the spell browser so the complete catalog only renders visible
   rows instead of submitting hundreds of wrapped controls every frame.
+- Cached the filtered spell view and missing-scroll bill so the complete
+  catalog is no longer scanned, allocated, and sorted every rendered frame.
 - Added a 74-zone, 103-map-page calibration catalog, enabling safe single-map
   coverage while retaining safeguards for unverified internal dungeon pages.
 

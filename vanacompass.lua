@@ -224,6 +224,9 @@ local state = {
     spellSort = 1,
     spellTypeFilter = '',
     showAllSpells = { false },
+    spellCatalogVersion = 0,
+    spellTypeNames = {},
+    spellViewCache = nil,
     itemMode = 'weapon',
     itemSorts = { weapon = 2, armor = 2, supply = 1 },
     itemTypeFilters = { weapon = '', armor = '' },
@@ -594,6 +597,17 @@ local function rebuildCatalogs()
     end
 
     table.sort(state.spells, function (a, b) return lower(a.name) < lower(b.name); end);
+    local seenSpellTypes = {};
+    state.spellTypeNames = {};
+    for _, spell in ipairs(state.spells) do
+        if not seenSpellTypes[spell.typeName] then
+            seenSpellTypes[spell.typeName] = true;
+            state.spellTypeNames[#state.spellTypeNames + 1] = spell.typeName;
+        end
+    end
+    table.sort(state.spellTypeNames, function (a, b) return lower(a) < lower(b); end);
+    state.spellCatalogVersion = state.spellCatalogVersion + 1;
+    state.spellViewCache = nil;
     for category, rows in pairs(state.items) do
         table.sort(rows, function (a, b)
             if a.level ~= b.level then return a.level < b.level; end
@@ -802,10 +816,14 @@ local function searchHeader(buffer, hint)
     imgui.PopItemWidth();
 end
 
-local function spellRequiredLevel(spell)
-    local player = AshitaCore:GetMemoryManager():GetPlayer();
-    if player == nil or spell.jobLevels == nil then return nil; end
-    return spell.jobLevels[player:GetMainJob() + 1];
+local function spellRequiredLevel(spell, jobId)
+    if spell.jobLevels == nil then return nil; end
+    if jobId == nil then
+        local player = AshitaCore:GetMemoryManager():GetPlayer();
+        if player == nil then return nil; end
+        jobId = player:GetMainJob();
+    end
+    return spell.jobLevels[jobId + 1];
 end
 
 local function spellMinimumLevel(spell)
@@ -817,21 +835,26 @@ local function spellMinimumLevel(spell)
     return minimum;
 end
 
-local function spellSortLevel(spell)
+local function spellSortLevel(spell, jobId)
     if state.showAllSpells[1] then return spellMinimumLevel(spell); end
-    local required = spellRequiredLevel(spell);
+    local required = spellRequiredLevel(spell, jobId);
     return required ~= nil and required > 0 and required < 100 and required or math.huge;
 end
 
-local function spellVisible(spell, ignoreLearnedState)
+local function spellVisible(spell, ignoreLearnedState, jobId, jobLevel)
     if not ignoreLearnedState and state.spellMode == 2 and spell.learned then return false; end
     if not ignoreLearnedState and state.spellMode == 3 and not spell.learned then return false; end
     if state.spellTypeFilter ~= '' and spell.typeName ~= state.spellTypeFilter then return false; end
     if not state.showAllSpells[1] then
-        local player = AshitaCore:GetMemoryManager():GetPlayer();
-        if player ~= nil then
-            local required = spellRequiredLevel(spell);
-            if required == nil or required <= 0 or required >= 100 or required > player:GetMainJobLevel() then return false; end
+        if jobId == nil or jobLevel == nil then
+            local player = AshitaCore:GetMemoryManager():GetPlayer();
+            if player ~= nil then
+                jobId, jobLevel = player:GetMainJob(), player:GetMainJobLevel();
+            end
+        end
+        if jobId ~= nil and jobLevel ~= nil then
+            local required = spellRequiredLevel(spell, jobId);
+            if required == nil or required <= 0 or required >= 100 or required > jobLevel then return false; end
         end
     end
     local query = lower(state.spellSearch[1]);
@@ -842,32 +865,76 @@ local function spellVisible(spell, ignoreLearnedState)
     return false;
 end
 
+-- Filtering and sorting the complete spell catalog every present frame creates
+-- short-lived tables and eventually visible garbage-collection hitches. Cache
+-- one view for both responsive layouts and rebuild it only when an input changes.
+local function getSpellView()
+    local player = AshitaCore:GetMemoryManager():GetPlayer();
+    local jobId = player ~= nil and player:GetMainJob() or nil;
+    local jobLevel = player ~= nil and player:GetMainJobLevel() or nil;
+    local cached = state.spellViewCache;
+    if cached ~= nil and
+        cached.catalogVersion == state.spellCatalogVersion and
+        cached.query == state.spellSearch[1] and
+        cached.typeFilter == state.spellTypeFilter and
+        cached.mode == state.spellMode and
+        cached.sort == state.spellSort and
+        cached.showAll == state.showAllSpells[1] and
+        cached.jobId == jobId and cached.jobLevel == jobLevel then
+        return cached;
+    end
+
+    local view = {
+        catalogVersion = state.spellCatalogVersion,
+        query = state.spellSearch[1],
+        typeFilter = state.spellTypeFilter,
+        mode = state.spellMode,
+        sort = state.spellSort,
+        showAll = state.showAllSpells[1],
+        jobId = jobId,
+        jobLevel = jobLevel,
+        spells = {},
+        visibleIds = {},
+        billTotal = 0,
+        billMissing = 0,
+        billPriced = 0,
+    };
+    for _, spell in ipairs(state.spells) do
+        if spellVisible(spell, false, jobId, jobLevel) then
+            view.spells[#view.spells + 1] = spell;
+            view.visibleIds[spell.id] = true;
+        end
+        if not spell.learned and spellVisible(spell, true, jobId, jobLevel) then
+            view.billMissing = view.billMissing + 1;
+            if spell.cheapestGil ~= nil then
+                view.billTotal = view.billTotal + spell.cheapestGil;
+                view.billPriced = view.billPriced + 1;
+            end
+        end
+    end
+    table.sort(view.spells, function (a, b)
+        if state.spellSort == 2 then
+            local aLevel, bLevel = spellSortLevel(a, jobId), spellSortLevel(b, jobId);
+            if aLevel ~= bLevel then return aLevel < bLevel; end
+        end
+        return lower(a.name) < lower(b.name);
+    end);
+    state.spellViewCache = view;
+    return view;
+end
+
 local function formatNumber(value)
     local reversed = tostring(math.floor(value or 0)):reverse():gsub('(%d%d%d)', '%1,');
     local formatted = reversed:reverse():gsub('^,', '');
     return formatted;
 end
 
-local function renderMissingSpellBill()
-    local total, missingCount, pricedCount = 0, 0, 0;
-    for _, spell in ipairs(state.spells) do
-        -- The learned-state buttons do not change the bill; the search, magic
-        -- family, job, and level filters do. This keeps the total visible even
-        -- while someone briefly inspects their learned scrolls.
-        if not spell.learned and spellVisible(spell, true) then
-            missingCount = missingCount + 1;
-            if spell.cheapestGil ~= nil then
-                total = total + spell.cheapestGil;
-                pricedCount = pricedCount + 1;
-            end
-        end
-    end
-
-    local suffix = pricedCount < missingCount and
-        string.format(' + %d without a Gil price', missingCount - pricedCount) or '';
+local function renderMissingSpellBill(view)
+    local suffix = view.billPriced < view.billMissing and
+        string.format(' + %d without a Gil price', view.billMissing - view.billPriced) or '';
     imgui.PushStyleColor(ImGuiCol_Text, theme.colors.warn);
     imgui.TextWrapped(string.format("Moogle's missing-scroll bill: %s Gil for %d spell%s%s.",
-        formatNumber(total), missingCount, missingCount == 1 and '' or 's', suffix));
+        formatNumber(view.billTotal), view.billMissing, view.billMissing == 1 and '' or 's', suffix));
     imgui.PopStyleColor();
     if imgui.IsItemHovered() then
         imgui.SetTooltip('Uses the cheapest listed Gil vendor once per missing spell. Search, magic type, job, and level filters apply; non-Gil currencies are excluded.');
@@ -936,19 +1003,11 @@ local function renderSpells()
         if imgui.SmallButton(label .. '##spell_sort_' .. index) then state.spellSort = index; end
         if selected then imgui.PopStyleColor(); end
     end
-    local typeNames, seenTypes = {}, {};
-    for _, spell in ipairs(state.spells) do
-        if not seenTypes[spell.typeName] then
-            seenTypes[spell.typeName] = true;
-            typeNames[#typeNames + 1] = spell.typeName;
-        end
-    end
-    table.sort(typeNames, function (a, b) return lower(a) < lower(b); end);
     imgui.TextDisabled('Magic type:'); imgui.SameLine();
     imgui.PushItemWidth(170);
     if imgui.BeginCombo('##spell_type_filter', state.spellTypeFilter ~= '' and state.spellTypeFilter or 'All magic types') then
         if imgui.Selectable('All magic types', state.spellTypeFilter == '') then state.spellTypeFilter = ''; end
-        for _, typeName in ipairs(typeNames) do
+        for _, typeName in ipairs(state.spellTypeNames) do
             if imgui.Selectable(typeName, state.spellTypeFilter == typeName) then state.spellTypeFilter = typeName; end
         end
         imgui.EndCombo();
@@ -964,7 +1023,8 @@ local function renderSpells()
     else
         imgui.TextWrapped('Character job is unavailable; showing the vendor spell catalog.');
     end
-    renderMissingSpellBill();
+    local spellView = getSpellView();
+    renderMissingSpellBill(spellView);
     imgui.Separator();
     if state.showBrowserList[1] and imgui.GetWindowWidth() >= 760 and
         imgui.BeginTable('##spell_layout', 2, ImGuiTableFlags_SizingStretchProp) then
@@ -972,22 +1032,12 @@ local function renderSpells()
         imgui.TableSetupColumn('Details', ImGuiTableColumnFlags_WidthStretch, 2.25);
         imgui.TableNextRow(); imgui.TableNextColumn();
         imgui.BeginChild('##spell_list', { 0, 0 }, ImGuiChildFlags_Borders);
-        local visibleSpells = {};
-        for _, spell in ipairs(state.spells) do
-            if spellVisible(spell) then visibleSpells[#visibleSpells + 1] = spell; end
-        end
-        table.sort(visibleSpells, function (a, b)
-            if state.spellSort == 2 then
-                local aLevel, bLevel = spellSortLevel(a), spellSortLevel(b);
-                if aLevel ~= bLevel then return aLevel < bLevel; end
-            end
-            return lower(a.name) < lower(b.name);
-        end);
+        local visibleSpells = spellView.spells;
         renderVirtualSpellRows(visibleSpells, 's', true);
         if #visibleSpells == 0 then
             imgui.TextDisabled('No matching spells. Change the magic type, job/level, learned state, or search filter.');
             state.selectedSpell = nil;
-        elseif state.selectedSpell == nil or not spellVisible(state.selectedSpell) then
+        elseif state.selectedSpell == nil or not spellView.visibleIds[state.selectedSpell.id] then
             state.selectedSpell = visibleSpells[1];
         end
         imgui.EndChild();
@@ -1008,18 +1058,10 @@ local function renderSpells()
     else
         if state.showBrowserList[1] then
             imgui.BeginChild('##spell_list_stacked', { 0, 180 }, ImGuiChildFlags_Borders);
-            local visibleSpells = {};
-            for _, spell in ipairs(state.spells) do if spellVisible(spell) then visibleSpells[#visibleSpells + 1] = spell; end end
-            table.sort(visibleSpells, function (a, b)
-                if state.spellSort == 2 then
-                    local aLevel, bLevel = spellSortLevel(a), spellSortLevel(b);
-                    if aLevel ~= bLevel then return aLevel < bLevel; end
-                end
-                return lower(a.name) < lower(b.name);
-            end);
+            local visibleSpells = spellView.spells;
             renderVirtualSpellRows(visibleSpells, 'ss', false);
             if #visibleSpells == 0 then state.selectedSpell = nil;
-            elseif state.selectedSpell == nil or not spellVisible(state.selectedSpell) then state.selectedSpell = visibleSpells[1]; end
+            elseif state.selectedSpell == nil or not spellView.visibleIds[state.selectedSpell.id] then state.selectedSpell = visibleSpells[1]; end
             imgui.EndChild();
         end
         imgui.BeginChild('##spell_details_full', { 0, 0 }, ImGuiChildFlags_Borders);
