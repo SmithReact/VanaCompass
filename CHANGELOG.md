@@ -11,6 +11,9 @@
   and equipment drops.
 - Virtualized the 3,511-row NM list and cached filtered views so only visible
   rows are submitted to ImGui each frame.
+- Added hover tooltips to spell-list rows with the spell description, magic
+  type, job requirements, learned state, MP cost, cast and recast times,
+  vendor count, and cheapest listed Gil price.
 - Kept image support out of this release so a future optional screenshot pack
   can use original, properly attributed captures without adding network access.
 

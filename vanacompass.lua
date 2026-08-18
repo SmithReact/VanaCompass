@@ -700,11 +700,15 @@ local function rebuildCatalogs()
                 local entry = {
                     id = id,
                     name = resource.Name[1],
+                    description = resource.Description and resource.Description[1] or '',
                     vendors = rows,
                     learned = player ~= nil and player:HasSpell(id) or false,
                     levels = spellLevels(resource),
                     jobLevels = resource.LevelRequired,
                     typeName = SPELL_TYPES[resource.Type] or 'Other magic',
+                    manaCost = resource.ManaCost or 0,
+                    castTime = resource.CastTime or 0,
+                    recastDelay = resource.RecastDelay or 0,
                     cheapestGil = cheapestVendorGil(rows),
                 };
                 state.spells[#state.spells + 1] = entry;
@@ -1452,6 +1456,26 @@ local function renderMissingSpellBill(view)
     end
 end
 
+local function spellTooltip(spell)
+    local lines = { spell.name };
+    if spell.description ~= nil and spell.description ~= '' then
+        lines[#lines + 1] = spell.description;
+    end
+    lines[#lines + 1] = '';
+    lines[#lines + 1] = 'Type: ' .. spell.typeName;
+    lines[#lines + 1] = 'Requirements: ' ..
+        (spell.levels ~= '' and spell.levels or 'No valid job requirements');
+    lines[#lines + 1] = 'Status: ' .. (spell.learned and 'Learned' or 'Missing');
+    lines[#lines + 1] = string.format('MP: %d   Cast: %.2fs   Recast: %.2fs',
+        spell.manaCost, spell.castTime / 4.0, spell.recastDelay / 4.0);
+    lines[#lines + 1] = string.format('Known vendors: %d', #spell.vendors);
+    if spell.cheapestGil ~= nil then
+        lines[#lines + 1] = 'Cheapest listed price: ' .. formatNumber(spell.cheapestGil) .. ' Gil';
+    end
+    -- ImGui tooltip strings are printf-style format strings.
+    return (table.concat(lines, '\n'):gsub('%%', '%%%%'));
+end
+
 -- Ashita's Lua ImGui binding does not expose ImGuiListClipper.  Keep a fixed
 -- row height and perform the same viewport calculation here so opening the
 -- complete catalog does not submit hundreds of Selectable/Text commands on
@@ -1477,14 +1501,17 @@ local function renderVirtualSpellRows(spells, idPrefix, showRequirements)
             '##' .. idPrefix .. spell.id, state.selectedSpell == spell) then
             state.selectedSpell = spell;
         end
+        local hovered = imgui.IsItemHovered();
         if showRequirements then
             imgui.Indent(12);
             imgui.PushStyleColor(ImGuiCol_Text, theme.colors.dim);
             imgui.Text(spell.typeName .. '  |  ' ..
                 (spell.levels ~= '' and spell.levels or 'No valid job requirements'));
+            hovered = hovered or imgui.IsItemHovered();
             imgui.PopStyleColor();
             imgui.Unindent(12);
         end
+        if hovered then imgui.SetTooltip(spellTooltip(spell)); end
         imgui.SetCursorPosY(rowY + rowHeight);
     end
 
