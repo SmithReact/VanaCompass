@@ -17,6 +17,8 @@
   state available above every module.
 - Hid the Main Story ordering and synchronization note when its mission list is
   collapsed, leaving more room for the selected guide.
+- Removed the Open active tracker button from the Quests toolbar to reduce
+  clutter without changing completion synchronization.
 
 ## 0.14.1
 

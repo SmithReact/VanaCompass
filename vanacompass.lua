@@ -2562,9 +2562,6 @@ end
 local function renderQuests()
     if state.showBrowserList[1] then
         searchHeader(state.questSearch, 'quest, region, NPC, item, or zone');
-        imgui.SameLine();
-        if imgui.Button('Open active tracker') then AshitaCore:GetChatManager():QueueCommand(1, '/tracker'); end
-        if imgui.IsItemHovered() then imgui.SetTooltip('Open Driftwood\'s authoritative active/completed quest tracker.'); end
         imgui.SameLine(); imgui.Checkbox('Show quests above my level', state.showAboveLevel);
         imgui.SameLine(); imgui.Checkbox('Show completed', state.showCompletedQuests);
         imgui.SameLine();
