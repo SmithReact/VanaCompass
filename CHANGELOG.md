@@ -4,6 +4,9 @@
 
 - Made the Quests tab's Hide list mode suppress its search, filters, tracker
   controls, and explanatory text so only the selected quest guide remains.
+- Expanded the Summoner unlock guide with practical early leech-family sources
+  for Carbuncle's Ruby, all eligible weather zones, and the seven required
+  weather elements without changing the tracker-aligned step count.
 
 ## 0.14.1
 

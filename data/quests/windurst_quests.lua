@@ -978,12 +978,12 @@ return {
             name = "I Can Hear a Rainbow",
             steps = {
                 {
-                    text = "Bring a Carbuncle's Ruby to the House of the Hero in Windurst Walls. You need the levels for an advanced job and the ruby actually in your inventory.",
+                    text = "First obtain a Carbuncle's Ruby from leech-family monsters. Early options include Thread Leeches in Valkurm Dunes, Poison Leeches in Buburimu Peninsula, Rolanberry Fields, Ordelle's Caves, or Maze of Shakhrami, and Acrophies on Qufim Island. Once eligible for an advanced job, bring the ruby in your inventory to the House of the Hero in Windurst Walls.",
                     pos  = "Windurst Walls (!pos -26 -13 260)",
                     done = { status = 1 },
                 },
                 {
-                    text = "Carry the ruby to the markers standing in the open zones across the three continents. Each one feeds it a different element's light, and the stone wants the full set.",
+                    text = "Keep the Carbuncle's Ruby in your inventory and enter eligible outdoor zones during seven different weather elements: clear or sunshine, hot spell or heat wave, rain or squall, dust or sand storm, wind or gales, snow or blizzard, and thunder or thunderstorm. A zone-entry cutscene records each new light; you need every weather element once, not every zone. Eligible zones: West or East Ronfaure; North or South Gustaberg; West or East Sarutabaruta; La Theine Plateau; Konschtat Highlands; Tahrongi Canyon; Valkurm Dunes; Buburimu Peninsula; Jugner Forest; Batallia Downs; Pashhow Marshlands; Rolanberry Fields; Meriphataud Mountains; Sauromugue Champaign; Beaucedine Glacier; Xarcabard; Yuhtunga or Yhoator Jungle; The Sanctuary of Zi'Tah; Eastern or Western Altepa Desert; and Cape Teriggan.",
                     done = { var = 'Prog', gte = 1 },
                 },
                 {
