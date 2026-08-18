@@ -2,7 +2,7 @@
 
 addon.name    = 'vanacompass';
 addon.author  = 'Elcatrin (Spacedandy)';
-addon.version = '0.12.3';
+addon.version = '0.12.4';
 addon.desc    = 'Find purchases, level-appropriate quests, story missions, job unlocks, and ports.';
 
 require('common');
@@ -23,8 +23,7 @@ local acquisition = require('data.acquisition');
 -- used to restore any optional tab that a player has hidden.
 local TAB_DEFINITIONS = {
     { key = 'spells', label = 'Spells' },
-    { key = 'weapons', label = 'Weapons' },
-    { key = 'armor', label = 'Armor' },
+    { key = 'vendorGear', label = 'Vendor Gear' },
     { key = 'supplies', label = 'Supplies' },
     { key = 'drops', label = 'Drops' },
     { key = 'quests', label = 'Quests' },
@@ -34,12 +33,11 @@ local TAB_DEFINITIONS = {
 local defaultConfig = T{
     tabs = T{
         spells = true,
-        weapons = true,
-        armor = true,
-        supplies = true,
-        drops = true,
-        quests = true,
-        mainStory = true,
+        vendorGear = false,
+        supplies = false,
+        drops = false,
+        quests = false,
+        mainStory = false,
     },
 };
 
@@ -49,11 +47,25 @@ if okSettings and loadedSettings ~= nil then
     config = loadedSettings;
 end
 
+-- v0.12.3 stored Weapons and Armor separately. Migrate either visible choice
+-- into Vendor Gear, then remove the legacy keys so the migration runs once.
+local function migrateLegacyGearTabs()
+    if type(config.tabs) ~= 'table' or
+        (type(config.tabs.weapons) ~= 'boolean' and type(config.tabs.armor) ~= 'boolean') then
+        return false;
+    end
+    config.tabs.vendorGear = config.tabs.weapons == true or config.tabs.armor == true;
+    config.tabs.weapons = nil;
+    config.tabs.armor = nil;
+    return true;
+end
+local migratedLegacyGearTabs = migrateLegacyGearTabs();
+
 local function normalizeConfig()
     if type(config.tabs) ~= 'table' then config.tabs = T{}; end
     for _, tab in ipairs(TAB_DEFINITIONS) do
         if type(config.tabs[tab.key]) ~= 'boolean' then
-            config.tabs[tab.key] = true;
+            config.tabs[tab.key] = defaultConfig.tabs[tab.key];
         end
     end
 end
@@ -277,7 +289,10 @@ local state = {
     spellTypeNames = {},
     spellViewCache = nil,
     itemMode = 'weapon',
+    vendorGearCategory = 'weapon',
     dropCategory = 0,
+    dropTypeFilter = '',
+    dropTypeNames = { [0] = {}, [2] = {}, [3] = {} },
     dropSort = 1,
     dropItems = {},
     dropViewCache = nil,
@@ -339,9 +354,12 @@ end
 pcall(settings.register, 'settings', 'vanacompass_settings_update', function(s)
     if s ~= nil then
         config = s;
+        local migrated = migrateLegacyGearTabs();
         applyConfiguredTabs();
+        if migrated then pcall(settings.save); end
     end
 end);
+if migratedLegacyGearTabs then pcall(settings.save); end
 
 local lower;
 
@@ -700,8 +718,9 @@ local function rebuildCatalogs()
     if state.selectedSpell == nil then state.selectedSpell = state.spells[1]; end
 
     if #state.dropItems == 0 then
+        local seenDropTypes = { [0] = {}, [2] = {}, [3] = {} };
         for itemId, category in pairs(acquisition.dropItems) do
-                local resource = resources:GetItemById(itemId);
+            local resource = resources:GetItemById(itemId);
             if resource ~= nil and resource.Name ~= nil and resource.Name[1] ~= nil and resource.Name[1] ~= '' then
                 local sources = acquisition.drops[itemId] or {};
                 local minimumDropLevel = math.huge;
@@ -709,15 +728,32 @@ local function rebuildCatalogs()
                     local level = source.minLevel or source[3];
                     if level ~= nil and level > 0 and level < minimumDropLevel then minimumDropLevel = level; end
                 end
+                local typeName;
+                if category == 2 then
+                    typeName = WEAPON_TYPES[resource.Skill or 0] or 'Other weapon';
+                else
+                    local slotNames = slotsText(resource.Slots or 0);
+                    typeName = slotNames ~= '' and slotNames or 'Other armor';
+                end
                 state.dropItems[#state.dropItems + 1] = {
                     id = itemId,
                     name = resource.Name[1],
                     description = resource.Description and resource.Description[1] or '',
                     category = category,
+                    typeName = typeName,
                     sources = sources,
                     minimumDropLevel = minimumDropLevel,
                 };
+                for _, typeCategory in ipairs({ 0, category }) do
+                    if not seenDropTypes[typeCategory][typeName] then
+                        seenDropTypes[typeCategory][typeName] = true;
+                        state.dropTypeNames[typeCategory][#state.dropTypeNames[typeCategory] + 1] = typeName;
+                    end
+                end
             end
+        end
+        for _, typeCategory in ipairs({ 0, 2, 3 }) do
+            table.sort(state.dropTypeNames[typeCategory], function(a, b) return lower(a) < lower(b); end);
         end
         table.sort(state.dropItems, function (a, b) return lower(a.name) < lower(b.name); end);
         state.selectedDropItem = state.dropItems[1];
@@ -1574,22 +1610,44 @@ local function renderItems(category)
     end
 end
 
+local function renderVendorGear()
+    imgui.TextDisabled('Gear category:'); imgui.SameLine();
+    imgui.PushItemWidth(130);
+    local currentLabel = state.vendorGearCategory == 'armor' and 'Armor' or 'Weapons';
+    if imgui.BeginCombo('##vendor_gear_category', currentLabel) then
+        if imgui.Selectable('Weapons', state.vendorGearCategory == 'weapon') then
+            state.vendorGearCategory = 'weapon';
+        end
+        if imgui.Selectable('Armor', state.vendorGearCategory == 'armor') then
+            state.vendorGearCategory = 'armor';
+        end
+        imgui.EndCombo();
+    end
+    imgui.PopItemWidth();
+    imgui.Separator();
+    renderItems(state.vendorGearCategory);
+end
+
 local function getDropView()
     local query = lower(state.dropSearch[1]);
     local cached = state.dropViewCache;
     if cached ~= nil and cached.query == query and cached.category == state.dropCategory and
-        cached.sort == state.dropSort then
+        cached.typeFilter == state.dropTypeFilter and cached.sort == state.dropSort then
         return cached;
     end
     local view = {
         query = query,
         category = state.dropCategory,
+        typeFilter = state.dropTypeFilter,
         sort = state.dropSort,
         items = {},
         visibleIds = {},
     };
     for _, item in ipairs(state.dropItems) do
         local visible = state.dropCategory == 0 or item.category == state.dropCategory;
+        if visible and state.dropTypeFilter ~= '' then
+            visible = item.typeName == state.dropTypeFilter;
+        end
         if visible and query ~= '' then
             visible = lower(item.name):find(query, 1, true) ~= nil or
                 lower(item.description):find(query, 1, true) ~= nil or
@@ -1664,19 +1722,38 @@ local function renderDrops()
     local toolbarWidth = imgui.GetWindowWidth();
     searchHeader(state.dropSearch, 'item, monster, or zone');
     if toolbarWidth >= 1050 then imgui.SameLine(); end
-    local filters = {
+    local categories = {
         { label = 'All', category = 0 },
         { label = 'Weapons', category = 2 },
         { label = 'Armor', category = 3 },
     };
-    for index, filter in ipairs(filters) do
-        if index > 1 then imgui.SameLine(); end
-        local category = filter.category;
-        local selected = pushSelectedButton(state.dropCategory == category);
-        if imgui.SmallButton(filter.label .. '##drop_category_' .. category) then state.dropCategory = category; end
-        if selected then imgui.PopStyleColor(); end
+    local categoryLabel = DROP_CATEGORY_NAMES[state.dropCategory] or 'All';
+    imgui.TextDisabled('Category:'); imgui.SameLine();
+    imgui.PushItemWidth(110);
+    if imgui.BeginCombo('##drop_category', categoryLabel) then
+        for _, category in ipairs(categories) do
+            if imgui.Selectable(category.label, state.dropCategory == category.category) then
+                state.dropCategory = category.category;
+                state.dropTypeFilter = '';
+            end
+        end
+        imgui.EndCombo();
     end
-    if toolbarWidth >= 720 then imgui.SameLine(); end
+    imgui.PopItemWidth();
+    if toolbarWidth >= 700 then imgui.SameLine(); end
+    imgui.TextDisabled('Type:'); imgui.SameLine();
+    imgui.PushItemWidth(160);
+    if imgui.BeginCombo('##drop_type_filter', state.dropTypeFilter ~= '' and state.dropTypeFilter or 'All types') then
+        if imgui.Selectable('All types', state.dropTypeFilter == '') then state.dropTypeFilter = ''; end
+        for _, typeName in ipairs(state.dropTypeNames[state.dropCategory] or {}) do
+            if imgui.Selectable(typeName, state.dropTypeFilter == typeName) then
+                state.dropTypeFilter = typeName;
+            end
+        end
+        imgui.EndCombo();
+    end
+    imgui.PopItemWidth();
+    if toolbarWidth >= 920 then imgui.SameLine(); end
     imgui.TextDisabled('Sort:');
     for index, label in ipairs({ 'Name', 'Level' }) do
         imgui.SameLine();
@@ -2101,8 +2178,7 @@ local function renderWindow()
     if imgui.BeginTabBar('##vanacompass_tabs') then
         if imgui.BeginTabItem('Welcome') then renderWelcome(); imgui.EndTabItem(); end
         if state.visibleTabs.spells[1] and imgui.BeginTabItem('Spells') then renderSpells(); imgui.EndTabItem(); end
-        if state.visibleTabs.weapons[1] and imgui.BeginTabItem('Weapons') then renderItems('weapon'); imgui.EndTabItem(); end
-        if state.visibleTabs.armor[1] and imgui.BeginTabItem('Armor') then renderItems('armor'); imgui.EndTabItem(); end
+        if state.visibleTabs.vendorGear[1] and imgui.BeginTabItem('Vendor Gear') then renderVendorGear(); imgui.EndTabItem(); end
         if state.visibleTabs.supplies[1] and imgui.BeginTabItem('Supplies') then renderItems('supply'); imgui.EndTabItem(); end
         if state.visibleTabs.drops[1] and imgui.BeginTabItem('Drops') then renderDrops(); imgui.EndTabItem(); end
         if state.visibleTabs.quests[1] and imgui.BeginTabItem('Quests') then renderQuests(); imgui.EndTabItem(); end

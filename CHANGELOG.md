@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.12.4
+
+- Changed the fresh-install tab layout to Welcome and Spells only. Existing
+  saved tab visibility choices remain unchanged, and Show all tabs restores
+  the complete interface at any time.
+- Added Category and Type dropdown filters to Drops. Type choices adapt to the
+  selected category and include weapon classes and armor equipment slots.
+- Combined the separate Weapons and Armor tabs into Vendor Gear with its own
+  category selector. Existing visibility settings migrate automatically.
+
 ## 0.12.3
 
 - Turned the Welcome tab into the addon's settings page with persistent

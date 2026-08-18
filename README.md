@@ -17,7 +17,7 @@ current map position without leaving the game.
 ## Highlights
 
 - Purchasable spell scrolls filtered by job, level, learned state, and magic type
-- Weapons and armor filtered by equipment type, job, and level
+- Vendor Gear with weapons and armor filtered by equipment type, job, and level
 - Standard vendor supplies with NPC, location, price, and nearest teleport
 - Monster-drop locations and synthesis recipes for listed purchases
 - Searchable non-vendor weapon and armor drop browser
@@ -72,30 +72,32 @@ currency or have no fixed Gil price.
 
 ![VanaCompass Spells tab showing spell filters, job requirements, vendor details, price, and nearest port](docs/images/spells-tab.png)
 
-### Weapons, Armor, and Supplies
+### Vendor Gear and Supplies
 
-The three purchase tabs share the same searchable vendor browser. Weapons can
-be narrowed to categories such as Axe, Great Axe, Dagger, or Great Sword;
-Armor can be filtered by equipment slot; and Supplies collects other ordinary
-vendor goods. Job/level usability, item level, combat statistics, vendor,
-location, and price requirements remain visible in the detail pane. Every
-vendor row includes its closest available **Port** destination.
+Vendor Gear combines weapons and armor into one searchable vendor browser with
+a category selector. Weapons can be narrowed to classes such as Axe, Great
+Axe, Dagger, or Great Sword, while armor can be filtered by equipment slot.
+Supplies remains a separate tab for other ordinary vendor goods. Job and level
+usability, item level, combat statistics, vendor, location, and price
+requirements remain visible in the detail pane. Every vendor row includes its
+closest available **Port** destination.
 The selected item's collapsible source sections also show available monster
 locations and synthesis recipes. Recipes include craft levels,
 crystal, ingredients, yield, and a warning when a synthesis key item is needed.
 Drop rates are intentionally omitted, and Driftwood-specific changes may differ
 from the standard LandSandBoat source data.
 
-![VanaCompass Weapons tab using the weapon-type dropdown and showing the selected vendor's nearest port](docs/images/weapons-tab.png)
+![VanaCompass weapon vendor view using the weapon-type dropdown and showing the selected vendor's nearest port](docs/images/weapons-tab.png)
 
 ### Monster Drops
 
 The Drops tab lists weapons and armor obtained from monsters rather than
-vendors. Results show the monster's level, zone, grid location, and closest
-supported port. For lottery NMs, VanaCompass also identifies the specific
-placeholder monster to defeat and displays the available spawn guidance.
-Drop rates are intentionally omitted, and Driftwood customizations may differ
-from the standard source data.
+vendors. Category and Type dropdowns filter the list by weapons, armor, weapon
+class, or equipment slot. Results show the monster's level, zone, grid
+location, and closest supported port. For lottery NMs, VanaCompass also
+identifies the specific placeholder monster to defeat and displays the
+available spawn guidance. Drop rates are intentionally omitted, and Driftwood
+customizations may differ from the standard source data.
 
 ![VanaCompass Drops tab showing non-vendor equipment, Leaping Lizzy spawn guidance, monster level, map area, and nearest Outpost](docs/images/drops-tab.png)
 
@@ -142,7 +144,8 @@ The Welcome settings page can also hide any optional guide tab. This allows a
 player to keep only the features they use, for example Welcome and Spells, so
 the tab bar remains compact. Choices persist across addon reloads, and Welcome
 always remains visible so every hidden tab can be restored. **Show all tabs**
-and **Spells only** provide quick presets.
+and **Spells only** provide quick presets. Fresh installations begin with only
+Spells enabled; existing saved choices are preserved when updating.
 
 ![VanaCompass Welcome settings showing a compact Spells-only layout and persistent tab visibility toggles](docs/images/tab-visibility.png)
 
