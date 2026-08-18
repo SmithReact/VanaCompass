@@ -19,6 +19,8 @@
   collapsed, leaving more room for the selected guide.
 - Removed the Open active tracker button from the Quests toolbar to reduce
   clutter without changing completion synchronization.
+- Added verified exterior entrance grids and nearest-port fallbacks for guide
+  objectives inside Chateau d'Oraguille, Heavens Tower, and Qu'Bia Arena.
 
 ## 0.14.1
 

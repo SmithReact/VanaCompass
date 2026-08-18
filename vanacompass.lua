@@ -154,6 +154,33 @@ local PORT_ZONE_ALIASES = {
     ['Windurst Waters South'] = 'Windurst Waters',
 };
 
+-- Some guide destinations are interior zones with no port of their own. These
+-- verified access points let the guide route players to the nearest useful
+-- exterior port while preserving the actual interior objective above it.
+local GUIDE_ACCESS_POINTS = {
+    {
+        target = "Chateau d'Oraguille",
+        zone = "Northern San d'Oria",
+        grid = 'I/J-6',
+        x = 9.5,
+        y = 6,
+    },
+    {
+        target = 'Heavens Tower',
+        zone = 'Windurst Walls',
+        grid = 'H-7',
+        x = 8,
+        y = 7,
+    },
+    {
+        target = "Qu'Bia Arena",
+        zone = "Fei'Yin",
+        grid = 'K-8',
+        x = 11,
+        y = 8,
+    },
+};
+
 local SLOT_NAMES = {
     [1] = 'Main', [2] = 'Sub', [3] = 'Ranged', [4] = 'Ammo',
     [5] = 'Head', [6] = 'Body', [7] = 'Hands', [8] = 'Legs', [9] = 'Feet',
@@ -1029,6 +1056,14 @@ local function zoneFromText(value)
     return nil;
 end
 
+local function guideAccessPointFromText(value)
+    local normalized = lower(normalizeZone(value or ''));
+    for _, access in ipairs(GUIDE_ACCESS_POINTS) do
+        if normalized:find(lower(normalizeZone(access.target)), 1, true) ~= nil then return access; end
+    end
+    return nil;
+end
+
 local guideZoneNames = nil;
 
 local function guideZoneIdFromText(value)
@@ -1121,6 +1156,7 @@ local function renderGuideLocation(location, id)
     local grid, hasPosition = guidePositionGrid(location);
     local zone = zoneFromText(location);
     local destination = zone and closestTeleport(zone) or nil;
+    local access = destination == nil and guideAccessPointFromText(location) or nil;
     local narrow = imgui.GetWindowWidth() < 620;
 
     if grid ~= nil then
@@ -1129,7 +1165,14 @@ local function renderGuideLocation(location, id)
         imgui.TextDisabled('Grid: unavailable'); imgui.SameLine();
     end
 
-    if narrow then
+    if access ~= nil then
+        textDisabledWrapped(location);
+        imgui.TextDisabled('Entrance:'); imgui.SameLine();
+        textDisabledWrapped(access.zone .. '  Grid: ' .. access.grid);
+        imgui.TextDisabled('Nearest port:'); imgui.SameLine();
+        portButton(closestTeleport(access.zone, access.x, access.y), id);
+        return;
+    elseif narrow then
         textDisabledWrapped(location);
         imgui.TextDisabled('Closest port:'); imgui.SameLine();
         portButton(destination, id);
