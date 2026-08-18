@@ -6,7 +6,7 @@
   monster in the generated server catalog.
 - Pinned NMs from the player's current zone above the remaining results and
   added Name, Level, and Zone sorting plus name, placeholder, and zone search.
-- Added NM detail guides with levels, known grid and `!pos` areas, closest
+- Added NM detail guides with levels, known grid and world-coordinate areas, closest
   ports, script-exposed placeholder instructions, and already-tracked spell
   and equipment drops.
 - Virtualized the 3,511-row NM list and cached filtered views so only visible
@@ -23,9 +23,9 @@
   into hover-highlighted rows for clearer visual tracking.
 ## 0.13.1
 
-- Expanded the NEW PLAYER guide with `/quests`, daily and weekly Drift Board
-  contracts, Drift Coin rewards, the augment Exchange, and account-binding
-  warnings. Added an Open Drift Board button.
+- Expanded the NEW PLAYER guide with daily and weekly quest-board
+  contracts, server rewards, the augment Exchange, and account-binding
+  warnings. Added an Open quest-board button.
 
 ## 0.13.0
 
@@ -68,7 +68,7 @@
 
 ## 0.12.2
 
-- Added verified map grids and exact `!pos` values to NM monster sources when
+- Added verified map grids and exact world coordinates to NM monster sources when
   LandSandBoat provides a fixed spawn position.
 - Multi-spawn and lottery NMs show a rough multi-grid area and expose up to
   eight exact known positions in a hover tooltip.
@@ -81,7 +81,7 @@
 
 ## 0.12.1
 
-- Added regional Outposts from Driftwood's `dwport` catalog as fallbacks when
+- Added regional Outposts from the bundled port catalog as fallbacks when
   a field zone has no direct Home Point or Survival Guide destination.
 - South Gustaberg drop sources now offer Gustaberg Outpost instead of showing
   `No direct port`; East Ronfaure and East Sarutabaruta receive their regional

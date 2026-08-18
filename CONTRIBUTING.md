@@ -4,7 +4,7 @@ Thanks for helping make VanaCompass more useful and accurate.
 
 ## Good contributions
 
-- Reproducible vendor or price corrections from the current DriftwoodXI era
+- Reproducible vendor or price corrections from the current supported era
 - Exact NPC positions accompanied by zone and map-grid information
 - Quest-step corrections confirmed against current server behavior
 - Ashita 4 compatibility and layout fixes
@@ -18,7 +18,7 @@ Please include:
 2. Zone and character context
 3. The affected spell, item, quest, mission, vendor, or teleport
 4. Expected and actual behavior
-5. Exact `!pos`, grid, screenshot, or Ashita log excerpt when relevant
+5. Exact world coordinates, grid, screenshot, or Ashita log excerpt when relevant
 
 ## Generated data
 

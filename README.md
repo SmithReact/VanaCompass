@@ -4,15 +4,15 @@
 
 # VanaCompass
 
-An in-game discovery guide for **DriftwoodXI** running on **Ashita 4**.
+An in-game FINAL FANTASY XI discovery guide for **Ashita 4**.
 VanaCompass helps new and returning players find spell scrolls, ordinary shop
 equipment, quest starters, story missions, job unlocks, teleports, and their
 current map position without leaving the game.
 
 **Author:** Elcatrin (Spacedandy)
 
-> Community project. Not affiliated with or endorsed by Square Enix, Ashita,
-> or the DriftwoodXI team. FINAL FANTASY XI is a trademark of Square Enix.
+> Community project. Not affiliated with or endorsed by Square Enix or
+> Ashita. FINAL FANTASY XI is a trademark of Square Enix.
 
 ## Highlights
 
@@ -24,23 +24,23 @@ current map position without leaving the game.
 - Monster-drop locations and synthesis recipes for listed purchases
 - Searchable non-vendor weapon and armor drop browser
 - Searchable NM guide with current-zone priority, spawn areas, and placeholders
-- Quest and main-story guides with START NPCs, map grids, exact `!pos`, and ports
+- Quest and main-story guides with START NPCs, map grids, world coordinates, and ports
 - Server-synced active, completed, and current-step quest status
 - Artifact and advanced-job unlock filtering, including prerequisite chains
-- Live zone, map grid, and `!pos` display with multi-map safeguards
+- Live zone, map grid, and world-coordinate display with multi-map safeguards
 - Collapsible results browser, responsive layout, and scrollable guide panes
-- Driftwood launcher palette integration through the bundled theme adapter
+- Launcher palette integration through the bundled theme adapter
 - New-player Signet, Conquest Point, and EXP-ring walkthrough
 
 ## Guided tabs and nearest travel
 
 VanaCompass is designed to answer both **what do I need?** and **how do I get
 there?** Across Spells, Vendor Gear, Supplies, Materials, Drops, NMs, Quests, and Main Story, the
-detail pane pairs an NPC or objective location with the closest safe Driftwood
-teleport it can identify. Home Points and Survival Guides are preferred for the
+detail pane pairs an NPC or objective location with the closest safe teleport
+it can identify. Home Points and Survival Guides are preferred for the
 requested zone, with regional Outposts used as field-zone fallbacks. Clicking
-**Port** sends the normal `!port` request;
-the server still enforces unlocks and travel rules. If a map is ambiguous or
+**Port** selects the nearest supported destination while normal travel unlocks
+and rules still apply. If a map is ambiguous or
 has no suitable destination, VanaCompass shows **No direct port** instead of
 guessing.
 
@@ -51,9 +51,9 @@ checkboxes choose which guide tabs appear, with **Show all tabs** and **Spells
 only** shortcuts for common layouts. Welcome itself always stays visible so
 hidden tabs can be restored. The collapsed **NEW PLAYER** bar explains Signet,
 Conquest Points, and the EXP rings sold under **Common rewards** by home-nation
-Conquest guards, and includes a **Cast Signet now** button for Driftwood's
-`!signet` command. The persistent header reports your current zone, safe map
-grid when known, and exact `!pos` coordinates.
+Conquest guards, and includes a **Cast Signet now** button. The persistent
+header reports your current zone, safe map grid when known, and exact world
+coordinates.
 
 ### Spells
 
@@ -91,14 +91,14 @@ closest available **Port** destination.
 The selected item's collapsible source sections also show available monster
 locations and synthesis recipes. Recipes include craft levels,
 crystal, ingredients, yield, and a warning when a synthesis key item is needed.
-Drop rates are intentionally omitted, and Driftwood-specific changes may differ
+Drop rates are intentionally omitted, and server-specific changes may differ
 from the standard LandSandBoat source data.
 
 ![VanaCompass Vendor Gear tab showing the weapon-type dropdown and selected vendor's nearest port](docs/images/weapons-tab.png)
 
 ### Materials
 
-The optional Materials tab complements Driftwood's `/craft` recommendations.
+The optional Materials tab helps locate ingredients for crafting recommendations.
 Search for a crafting-related item such as **Bronze Ingot** to see every known
 ordinary or guild-shop NPC, exact zone and grid, closest **Port**, shop hours,
 guild holiday, and variable-stock warning. If the item can be synthesized,
@@ -118,7 +118,7 @@ vendors. Category and Type dropdowns filter the list by weapons, armor, weapon
 class, or equipment slot. Results show the monster's level, zone, grid
 location, and closest supported port. For lottery NMs, VanaCompass also
 identifies the specific placeholder monster to defeat and displays the
-available spawn guidance. Drop rates are intentionally omitted, and Driftwood
+available spawn guidance. Drop rates are intentionally omitted, and server
 customizations may differ from the standard source data.
 
 ![VanaCompass Drops tab showing non-vendor equipment, Leaping Lizzy spawn guidance, monster level, map area, and nearest Outpost](docs/images/drops-tab.png)
@@ -131,7 +131,7 @@ zone are always pinned above the remaining results and marked **[Here]**. The
 full list can be sorted by name, level, or zone without submitting thousands
 of rows to ImGui every frame.
 
-Selecting an NM shows its level range, known grid or `!pos` area, closest
+Selecting an NM shows its level range, known grid or world-coordinate area, closest
 supported **Port**, and script-exposed lottery instructions when available.
 The detail pane also lists equipment and spell drops already tracked elsewhere
 in VanaCompass. Drop rates are intentionally omitted. Timed, forced,
@@ -144,7 +144,7 @@ The Quests tab shows level-appropriate entries by default, with toggles for
 quests above the current level and already-completed quests. A tracker sync
 adds active/completed status and highlights the current walkthrough step when
 the server reports one. Each guide begins with a clearly labeled **START** NPC,
-zone, grid coordinate, exact `!pos`, and nearest port; individual objectives
+zone, grid coordinate, exact world coordinates, and nearest port; individual objectives
 also receive Port buttons wherever safe travel data exists.
 
 Three filters make the larger quest catalog easier to use:
@@ -175,7 +175,7 @@ At wider sizes, the result list and detail guide sit side by side. At narrower
 sizes, they stack automatically. **Hide list** collapses the browser after you
 select a destination, leaving more room for the walkthrough, while independent
 scrollbars keep long lists and instructions usable. The current zone, grid,
-and `!pos` header remains available as the content layout changes.
+and world-coordinate header remains available as the content layout changes.
 
 The Welcome settings page can also hide any optional guide tab. This allows a
 player to keep only the features they use, for example Welcome and Spells, so
@@ -218,36 +218,14 @@ bundled here.
 | `/vana refresh` | Refresh character, catalog, and tracker state |
 | `/vana help` | Print the command summary |
 
-## DriftwoodXI integration
-
-VanaCompass is designed for DriftwoodXI and uses its server interfaces:
-
-- `!port` powers destination buttons.
-- `!signet` powers the Welcome-page Signet button.
-- `!dwt sync` supplies active/completed quests and current objectives.
-- `/tracker` opens DWTracker when its optional client addon is installed.
-
-The window may load on another Ashita 4 server, but these integrations require
-compatible server commands and data.
-
 ## New-player essentials
 
 Keep Signet active while fighting eligible enemies in conquest regions so you
-earn Conquest Points. On DriftwoodXI, `!signet` casts the buff anywhere.
+earn Conquest Points.
 
 Return to a Conquest guard in your home nation, choose the option to spend
 Conquest Points, open **Common rewards**, and look for a Chariot Band, Empress
 Band, or Emperor Band. Equip and use the ring to activate its EXP bonus.
-
-Type `/quests` anywhere to open DriftwoodXI's Drift Board. Accept daily or
-weekly contracts for your current level band, complete their objectives, and
-participate in the server-wide community contract to earn **DC**, meaning
-Drift Coins. The board tracks progress and shows each contract's reward.
-
-Open the **Exchange** tab inside `/quests` to spend DC on rotating augment
-offers. Choose an augment and eligible unequipped gear, review the slot and
-server-quoted price, then confirm. Augmented equipment becomes account-bound
-and cannot be traded, auctioned, or bazaared.
 
 ## Data accuracy
 
@@ -257,7 +235,7 @@ prices may also vary with nation rank, conquest standing, fame, era, or custom
 server rules.
 
 If a vendor, teleport, quest step, or grid is wrong, please open a bug report
-with the zone, entry name, expected result, and a screenshot or exact `!pos`.
+with the zone, entry name, expected result, and a screenshot or exact world coordinates.
 
 ## Related projects
 
@@ -272,8 +250,8 @@ derived from LandSandBoat. BSD attribution for FFXIMissingSpells is retained in
 [`THIRD_PARTY_LICENSE.txt`](THIRD_PARTY_LICENSE.txt). Detailed provenance is in
 [`DATA_SOURCES.md`](DATA_SOURCES.md) and [`NOTICE.md`](NOTICE.md).
 
-DriftwoodXI-derived teleport identifiers, theme integration, and guide data
-are included with permission. Full source and license details are recorded in
+Third-party teleport identifiers, theme integration, and guide data are
+included with permission. Full source and license details are recorded in
 [`DATA_SOURCES.md`](DATA_SOURCES.md), [`NOTICE.md`](NOTICE.md), and
 [`THIRD_PARTY_LICENSE.txt`](THIRD_PARTY_LICENSE.txt).
 
