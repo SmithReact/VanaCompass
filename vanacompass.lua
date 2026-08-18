@@ -1507,7 +1507,6 @@ local function renderVirtualSpellRows(spells, idPrefix, showRequirements)
             imgui.PushStyleColor(ImGuiCol_Text, theme.colors.dim);
             imgui.Text(spell.typeName .. '  |  ' ..
                 (spell.levels ~= '' and spell.levels or 'No valid job requirements'));
-            hovered = hovered or imgui.IsItemHovered();
             imgui.PopStyleColor();
             imgui.Unindent(12);
         end
