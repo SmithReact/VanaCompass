@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.15.0
 
 - Made the Quests tab's Hide list mode suppress its search, filters, tracker
   controls, and explanatory text so only the selected quest guide remains.
