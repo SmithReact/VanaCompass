@@ -7,6 +7,10 @@
 - Expanded the Summoner unlock guide with practical early leech-family sources
   for Carbuncle's Ruby, all eligible weather zones, and the seven required
   weather elements without changing the tracker-aligned step count.
+- Added safe grid calculations beside exact `!pos` locations in quest starts
+  and walkthrough steps; ambiguous multi-map coordinates remain unavailable.
+- Added generated quest-reward sources to the Spells tab, including Drain from
+  The Rumor, with quest start, completion state, grid, location, and port details.
 
 ## 0.14.1
 

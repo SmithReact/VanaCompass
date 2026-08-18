@@ -19,6 +19,7 @@ local questStarts = require('data.quest_starts');
 local missionStarts = require('data.mission_starts');
 local gridPages = require('data.grid_calibrations');
 local acquisition = require('data.acquisition');
+local spellQuestSources = require('data.spell_quests');
 
 -- Welcome is intentionally omitted: it is the permanent settings surface
 -- used to restore any optional tab that a player has hidden.
@@ -699,13 +700,16 @@ local function rebuildCatalogs()
             local rows = spellVendorsByName[normalizedName] or {};
             local itemId = acquisition.spellItems[normalizedName];
             local dropRows = itemId ~= nil and acquisition.drops[itemId] or nil;
-            if #rows > 0 or (dropRows ~= nil and #dropRows > 0) then
+            local questRows = itemId ~= nil and spellQuestSources[itemId] or nil;
+            if #rows > 0 or (dropRows ~= nil and #dropRows > 0) or
+                (questRows ~= nil and #questRows > 0) then
                 local entry = {
                     id = id,
                     itemId = itemId,
                     name = resource.Name[1],
                     description = resource.Description and resource.Description[1] or '',
                     vendors = rows,
+                    questSources = questRows or {},
                     learned = player ~= nil and player:HasSpell(id) or false,
                     levels = spellLevels(resource),
                     jobLevels = resource.LevelRequired,
@@ -1025,6 +1029,67 @@ local function zoneFromText(value)
     return nil;
 end
 
+local guideZoneNames = nil;
+
+local function guideZoneIdFromText(value)
+    if guideZoneNames == nil then
+        guideZoneNames = {};
+        local resources = AshitaCore:GetResourceManager();
+        for zoneId = 0, 299 do
+            local name = resources:GetString('zones.names', zoneId);
+            if name ~= nil and name ~= '' then
+                guideZoneNames[#guideZoneNames + 1] = {
+                    id = zoneId,
+                    search = lower(normalizeZone(name)),
+                };
+            end
+        end
+        table.sort(guideZoneNames, function (a, b) return #a.search > #b.search; end);
+    end
+
+    local normalized = lower(normalizeZone(value or ''));
+    local matched = {};
+    local matchedId = nil;
+    local matchedSearch = nil;
+    for _, zone in ipairs(guideZoneNames) do
+        if normalized:find(zone.search, 1, true) ~= nil and not matched[zone.id] then
+            matched[zone.id] = true;
+            if matchedId == nil then
+                matchedId = zone.id;
+                matchedSearch = zone.search;
+            elseif matchedId ~= zone.id and
+                matchedSearch:find(zone.search, 1, true) == nil and
+                zone.search:find(matchedSearch, 1, true) == nil then
+                return nil;
+            end
+        end
+    end
+    return matchedId;
+end
+
+local function guidePositionGrid(value)
+    local coordinates = {};
+    local number = '([%+%-]?%d+%.?%d*)';
+    for x, height, groundY in (value or ''):gmatch(
+        '!pos%s+' .. number .. '%s+' .. number .. '%s+' .. number) do
+        coordinates[#coordinates + 1] = { tonumber(x), tonumber(height), tonumber(groundY) };
+    end
+    if #coordinates == 0 then return nil, false; end
+
+    local zoneId = guideZoneIdFromText(value);
+    if zoneId == nil then return nil, true; end
+    local grids, seen = {}, {};
+    for _, coordinate in ipairs(coordinates) do
+        local grid = currentGrid(zoneId, coordinate[1], coordinate[3], coordinate[2], nil);
+        if grid ~= nil and not seen[grid] then
+            seen[grid] = true;
+            grids[#grids + 1] = grid;
+        end
+    end
+    if #grids == 0 then return nil, true; end
+    return table.concat(grids, ' / '), true;
+end
+
 local function issuePort(destination)
     local player = AshitaCore:GetMemoryManager():GetPlayer();
     if player == nil or player:GetLoginStatus() ~= 2 then
@@ -1318,6 +1383,42 @@ local function renderCraftingSources(rows, idPrefix)
     end
 end
 
+local function renderSpellQuestSources(rows, idPrefix)
+    if rows == nil or #rows == 0 then return; end
+    imgui.Separator();
+    if not imgui.CollapsingHeader(string.format('Quest rewards (%d)###spell_quests_%s', #rows, idPrefix),
+        ImGuiTreeNodeFlags_DefaultOpen) then return; end
+
+    for index, quest in ipairs(rows) do
+        local start = questStarts[quest.log] and questStarts[quest.log][quest.id] or nil;
+        imgui.TextWrapped(quest.name .. '  ' .. quest.area);
+        if activeQuest(quest.log, quest.id) then
+            imgui.SameLine(); imgui.TextColored(theme.colors.info, 'Active');
+        elseif completedQuest(quest.log, quest.id) then
+            imgui.SameLine(); imgui.TextColored(theme.colors.ok, 'Completed');
+        elseif state.questCompletionKnown then
+            imgui.SameLine(); imgui.TextDisabled('Not completed');
+        end
+        if start ~= nil then
+            imgui.TextDisabled('START ' .. start.kind .. ':'); imgui.SameLine(); imgui.TextWrapped(start.contact);
+            local grid, hasPosition = guidePositionGrid(start.location);
+            if start.grid ~= nil and start.grid ~= '' then grid = start.grid; end
+            if grid ~= nil then
+                imgui.TextDisabled('Grid: ' .. grid); imgui.SameLine();
+            elseif hasPosition then
+                imgui.TextDisabled('Grid: unavailable'); imgui.SameLine();
+            end
+            imgui.TextWrapped(start.location);
+            local zone = zoneFromText(start.location);
+            portButton(zone and closestTeleport(zone) or nil,
+                'spell_quest_' .. idPrefix .. '_' .. tostring(index));
+        else
+            imgui.TextDisabled('Quest start information is unavailable.');
+        end
+        if index < #rows then imgui.Separator(); end
+    end
+end
+
 local function renderAcquisitionSources(itemId, idPrefix)
     if itemId == nil then return; end
     local drops = acquisition.drops[itemId];
@@ -1391,6 +1492,12 @@ local function spellVisible(spell, ignoreLearnedState, jobId, jobLevel)
     if query == '' or lower(spell.name):find(query, 1, true) or lower(spell.typeName):find(query, 1, true) then return true; end
     for _, vendor in ipairs(spell.vendors) do
         if lower(vendor.npc):find(query, 1, true) or lower(vendor.zone):find(query, 1, true) then return true; end
+    end
+    for _, quest in ipairs(spell.questSources) do
+        if lower(quest.name):find(query, 1, true) or lower(quest.area):find(query, 1, true) then return true; end
+        local start = questStarts[quest.log] and questStarts[quest.log][quest.id] or nil;
+        if start ~= nil and (lower(start.contact):find(query, 1, true) or
+            lower(start.location):find(query, 1, true)) then return true; end
     end
     for _, source in ipairs(spell.itemId ~= nil and acquisition.drops[spell.itemId] or {}) do
         if lower(sourceMonsterName(source)):find(query, 1, true) or
@@ -1492,6 +1599,7 @@ local function spellTooltip(spell)
     lines[#lines + 1] = string.format('Known vendors: %d', #spell.vendors);
     lines[#lines + 1] = string.format('Known monster sources: %d',
         #(spell.itemId ~= nil and acquisition.drops[spell.itemId] or {}));
+    lines[#lines + 1] = string.format('Known quest rewards: %d', #spell.questSources);
     if spell.cheapestGil ~= nil then
         lines[#lines + 1] = 'Cheapest listed price: ' .. formatNumber(spell.cheapestGil) .. ' Gil';
     end
@@ -1543,7 +1651,7 @@ end
 
 local function renderSpells()
     local toolbarWidth = imgui.GetWindowWidth();
-    searchHeader(state.spellSearch, 'spell, vendor, monster, or zone');
+    searchHeader(state.spellSearch, 'spell, vendor, quest, monster, or zone');
     if toolbarWidth >= 720 then imgui.SameLine(); end
     for index, label in ipairs({ 'All states', 'Missing', 'Learned' }) do
         if index > 1 then imgui.SameLine(); end
@@ -1576,10 +1684,10 @@ local function renderSpells()
     browserListToggle();
     local player = AshitaCore:GetMemoryManager():GetPlayer();
     if state.showAllSpells[1] then
-        imgui.TextWrapped('Showing vendor and monster-dropped spells for every job and level.');
+        imgui.TextWrapped('Showing vendor, quest-reward, and monster-dropped spells for every job and level.');
     elseif player ~= nil then
         local jobName = AshitaCore:GetResourceManager():GetString('jobs.names_abbr', player:GetMainJob()) or '?';
-        imgui.TextWrapped(string.format('Showing vendor and monster-dropped spells usable by %s %d.', jobName, player:GetMainJobLevel()));
+        imgui.TextWrapped(string.format('Showing vendor, quest-reward, and monster-dropped spells usable by %s %d.', jobName, player:GetMainJobLevel()));
     else
         imgui.TextWrapped('Character job is unavailable; showing the known spell-acquisition catalog.');
     end
@@ -1614,8 +1722,9 @@ local function renderSpells()
             if #spell.vendors > 0 then
                 vendorTable(spell.vendors, 'spell_' .. spell.id);
             else
-                imgui.TextDisabled('No known vendor. This scroll is obtained from monsters.');
+                imgui.TextDisabled('No known vendor. See the quest and monster sources below.');
             end
+            renderSpellQuestSources(spell.questSources, 'spell_' .. spell.id);
             renderAcquisitionSources(spell.itemId, 'spell_' .. spell.id);
         end
         imgui.EndChild();
@@ -1640,8 +1749,9 @@ local function renderSpells()
             if #spell.vendors > 0 then
                 vendorTable(spell.vendors, 'spell_full_' .. spell.id);
             else
-                imgui.TextDisabled('No known vendor. This scroll is obtained from monsters.');
+                imgui.TextDisabled('No known vendor. See the quest and monster sources below.');
             end
+            renderSpellQuestSources(spell.questSources, 'spell_full_' .. spell.id);
             renderAcquisitionSources(spell.itemId, 'spell_full_' .. spell.id);
         else imgui.TextDisabled('Select a spell from the list.'); end
         imgui.EndChild();
@@ -2398,6 +2508,12 @@ local function renderGuideSteps(entry, prefix, firstIsStart, progress)
         imgui.TextWrapped(step.text or '');
         if isCurrent or isDone then imgui.PopStyleColor(); end
         if step.pos ~= nil and step.pos ~= '' then
+            local grid, hasPosition = guidePositionGrid(step.pos);
+            if grid ~= nil then
+                imgui.TextDisabled('Grid: ' .. grid); imgui.SameLine();
+            elseif hasPosition then
+                imgui.TextDisabled('Grid: unavailable'); imgui.SameLine();
+            end
             imgui.TextDisabled(step.pos); imgui.SameLine();
             local zone = zoneFromText(step.pos);
             portButton(zone and closestTeleport(zone) or nil, prefix .. '_' .. index);
@@ -2414,8 +2530,12 @@ local function renderStartCard(entry, idPrefix)
         return;
     end
     imgui.TextDisabled(start.kind .. ':'); imgui.SameLine(); imgui.TextWrapped(start.contact);
-    if start.grid ~= nil and start.grid ~= '' then
-        imgui.TextDisabled('Map grid:'); imgui.SameLine(); imgui.Text(start.grid);
+    local grid, hasPosition = guidePositionGrid(start.location);
+    if start.grid ~= nil and start.grid ~= '' then grid = start.grid; end
+    if grid ~= nil then
+        imgui.TextDisabled('Map grid:'); imgui.SameLine(); imgui.Text(grid);
+    elseif hasPosition then
+        imgui.TextDisabled('Map grid: unavailable');
     end
     imgui.TextDisabled('Exact location:'); imgui.SameLine(); imgui.TextWrapped(start.location);
     local zone = zoneFromText(start.location);
@@ -2708,7 +2828,7 @@ local function renderWelcome()
     end
     imgui.Separator();
 
-    imgui.BulletText(string.format('%d vendor and monster-dropped spells with learned/missing state.', #state.spells));
+    imgui.BulletText(string.format('%d vendor, quest-reward, and monster-dropped spells with learned/missing state.', #state.spells));
     imgui.BulletText(string.format('%d weapons and %d armor pieces sold by standard vendors.', #state.items.weapon, #state.items.armor));
     imgui.BulletText(string.format('%d other vendor supplies.', #state.items.supply));
     imgui.BulletText(string.format('%d searchable crafting-related items with NPC and synthesis sources.', #state.materials));

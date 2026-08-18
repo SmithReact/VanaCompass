@@ -27,6 +27,8 @@ build. It is not a substitute for the upstream projects' license files.
   guidance. Monster drop rates are not copied. Locations, spawn mechanics, and
   recipes reflect standard LandSandBoat data and may differ from Driftwood
   customizations or current progression.
+- `data/spell_quests.lua` links static spell-scroll rewards from implemented
+  quest scripts to the matching bundled quest guides.
 
 ## DriftwoodXI local addons
 

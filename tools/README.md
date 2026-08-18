@@ -19,6 +19,8 @@ target server's era and rules before release.
 - `generate_catalog.py` builds spell-vendor and teleport catalogs.
 - `generate_quest_starts.py` derives quest start records from the bundled
   quest guide data.
+- `generate_spell_quests.py` joins static spell-scroll quest rewards from the
+  server scripts to the corresponding bundled quest guides.
 - `generate_shops.py` builds the general vendor inventory and dynamic guild
   shop material catalog from a local LandSandBoat checkout.
 - `generate_acquisition.py` builds normalized non-vendor equipment,

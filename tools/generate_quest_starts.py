@@ -116,6 +116,12 @@ LOCATION_OVERRIDES = {
 for quest_id in range(102, 122):
     LOCATION_OVERRIDES[(3, quest_id)] = "Lower Jeuno (!pos -33 6 -117)"
 
+# Verified map-grid labels for starts whose zones have multiple map layers and
+# therefore cannot be resolved safely from coordinates alone.
+GRID_OVERRIDES = {
+    (0, 61): "G-8",  # The Rumor: Novalmauge, Bostaunieux Oubliette map 1.
+}
+
 
 NAME = r"([A-Z][A-Za-z'\- ]+?)"
 STOP = r"(?:,|;|:| and | with | in | at | for | about | to | --|$)"
@@ -177,6 +183,7 @@ for source in sorted(QUEST_DIR.glob("*.lua")):
             "location": LOCATION_OVERRIDES.get((log, int(quest_id)))
             or first.get("pos", "")
             or "Not identified by the installed guide",
+            "grid": GRID_OVERRIDES.get((log, int(quest_id))),
         }
 
 lines = ["-- Generated from Driftwood quest guide introductions; do not hand-edit.", "return {"]
@@ -184,9 +191,10 @@ for log in sorted(rows):
     lines.append(f"    [{log}] = {{")
     for quest_id in sorted(rows[log]):
         row = rows[log][quest_id]
+        grid = f", grid = {quote(row['grid'])}" if row["grid"] else ""
         lines.append(
             f"        [{quest_id}] = {{ contact = {quote(row['contact'])}, "
-            f"kind = {quote(row['kind'])}, location = {quote(row['location'])} }},"
+            f"kind = {quote(row['kind'])}, location = {quote(row['location'])}{grid} }},"
         )
     lines.append("    },")
 lines.append("}")

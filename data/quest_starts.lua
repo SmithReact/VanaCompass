@@ -23,7 +23,7 @@ return {
         [31] = { contact = 'Hanaa Punaa', kind = 'NPC', location = 'Southern San d\'Oria (!pos -179 -8 27)' },
         [58] = { contact = 'Kuu Mohzolhi', kind = 'NPC', location = 'Northern San d\'Oria (!pos -123 0 80)' },
         [60] = { contact = 'Curilla', kind = 'NPC', location = 'Chateau d\'Oraguille (!pos 27 0 0)' },
-        [61] = { contact = 'Novalmauge', kind = 'NPC', location = 'Bostaunieux Oubliette (!pos 70 -24 21)' },
+        [61] = { contact = 'Novalmauge', kind = 'NPC', location = 'Bostaunieux Oubliette (!pos 70 -24 21)', grid = 'G-8' },
         [62] = { contact = 'Chalvatot', kind = 'NPC', location = 'Chateau d\'Oraguille (!pos -105 0 72)' },
         [63] = { contact = 'Vilatroire', kind = 'NPC', location = 'West Ronfaure (!pos -260 -70 423)' },
         [64] = { contact = 'Vilatroire', kind = 'NPC', location = 'West Ronfaure (!pos -260 -70 423)' },
