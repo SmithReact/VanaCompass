@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.13.1
+
+- Expanded the NEW PLAYER guide with `/quests`, daily and weekly Drift Board
+  contracts, Drift Coin rewards, the augment Exchange, and account-binding
+  warnings. Added an Open Drift Board button.
+
 ## 0.13.0
 
 - Added an optional Materials tab that searches synthesis results,

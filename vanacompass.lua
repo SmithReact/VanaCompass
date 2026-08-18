@@ -2,7 +2,7 @@
 
 addon.name    = 'vanacompass';
 addon.author  = 'Elcatrin (Spacedandy)';
-addon.version = '0.13.0';
+addon.version = '0.13.1';
 addon.desc    = 'Find spells, crafting materials, gear, quests, missions, and ports.';
 
 require('common');
@@ -2349,6 +2349,16 @@ local function renderWelcome()
         imgui.Spacing();
         imgui.TextColored(theme.colors.hint, '3. Use the ring while leveling');
         imgui.TextWrapped('Equip the ring and use it from the item menu to activate its EXP bonus. These rings have limited charges and reuse restrictions, so keep one ready and refresh or replace it through a Conquest guard when allowed.');
+        imgui.Spacing();
+        imgui.TextColored(theme.colors.hint, '4. Earn Drift Coins with /quests');
+        imgui.TextWrapped('Type /quests anywhere to open the Drift Board. It offers three daily and three weekly contracts for your current level band, tracks their progress as you fight, and also shows the server-wide community contract. Accept contracts before working on their objectives; completed contracts pay DC, which means Drift Coins.');
+        if imgui.Button('Open Drift Board##welcome_quests') then
+            AshitaCore:GetChatManager():QueueCommand(1, '/quests');
+        end
+        if imgui.IsItemHovered() then imgui.SetTooltip('Runs /quests to open DriftwoodXI\'s Drift Board.'); end
+        imgui.Spacing();
+        imgui.TextColored(theme.colors.hint, '5. Spend DC on augments');
+        imgui.TextWrapped('Open the Exchange tab inside /quests to see the current rotating augment offers and their DC prices. Choose an augment, select eligible unequipped gear, review the destination slot and quoted price, then confirm the purchase. Augmented equipment becomes bound to your account and cannot be traded, auctioned, or bazaared.');
     end
     imgui.Separator();
 

@@ -223,6 +223,16 @@ Return to a Conquest guard in your home nation, choose the option to spend
 Conquest Points, open **Common rewards**, and look for a Chariot Band, Empress
 Band, or Emperor Band. Equip and use the ring to activate its EXP bonus.
 
+Type `/quests` anywhere to open DriftwoodXI's Drift Board. Accept daily or
+weekly contracts for your current level band, complete their objectives, and
+participate in the server-wide community contract to earn **DC**, meaning
+Drift Coins. The board tracks progress and shows each contract's reward.
+
+Open the **Exchange** tab inside `/quests` to spend DC on rotating augment
+offers. Choose an augment and eligible unequipped gear, review the slot and
+server-quoted price, then confirm. Augmented equipment becomes account-bound
+and cannot be traded, auctioned, or bazaared.
+
 ## Data accuracy
 
 VanaCompass deliberately reports `Grid: unavailable` when a map cannot be
