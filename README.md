@@ -213,15 +213,6 @@ bundled here.
 | `/vana refresh` | Refresh character, catalog, and tracker state |
 | `/vana help` | Print the command summary |
 
-## New-player essentials
-
-Keep Signet active while fighting eligible enemies in conquest regions so you
-earn Conquest Points.
-
-Return to a Conquest guard in your home nation, choose the option to spend
-Conquest Points, open **Common rewards**, and look for a Chariot Band, Empress
-Band, or Emperor Band. Equip and use the ring to activate its EXP bonus.
-
 ## Data accuracy
 
 VanaCompass deliberately reports `Grid: unavailable` when a map cannot be
