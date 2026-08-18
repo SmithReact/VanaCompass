@@ -39,3 +39,13 @@ build. It is not a substitute for the upstream projects' license files.
 - Inputs: map-grid coordinates from relevant zone and Home Point pages
 - Generated outputs: map coordinates in `data/shops.lua` and
   `data/teleports.lua`
+
+## HorizonXI interactive map
+
+- Site: https://horizonffxi.wiki/Interactive_Map
+- Inputs: numeric in-game map bounds for pages marked complete by the map
+  project
+- Generated output: `data/grid_calibrations.lua`
+- VanaCompass derives only coordinate origins and cell sizes from those
+  numeric bounds; it does not redistribute map images or map implementation
+  code.

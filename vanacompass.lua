@@ -2,7 +2,7 @@
 
 addon.name    = 'vanacompass';
 addon.author  = 'Unofficial DriftwoodXI community addon';
-addon.version = '0.11.1';
+addon.version = '0.11.2';
 addon.desc    = 'Find purchases, level-appropriate quests, story missions, job unlocks, and ports.';
 
 require('common');
@@ -15,6 +15,7 @@ local shops      = require('data.shops');
 local teleports  = require('data.teleports');
 local questStarts = require('data.quest_starts');
 local missionStarts = require('data.mission_starts');
+local gridPages = require('data.grid_calibrations');
 
 local QUEST_AREAS = {
     require('data.quests.sandoria_quests'),
@@ -114,11 +115,11 @@ local SPELL_TYPES = {
     [7] = 'Geomancy',
 };
 
--- FFXI's labeled town-map cells are 40 world units wide. Vendor records pair
--- verified grid cells with exact world positions, letting us solve each map's
--- origin without hard-coding offsets. A calibration is accepted only when at
--- least two independent anchors agree on both axes; split/multi-map zones fail
--- that test and intentionally report their grid as unavailable.
+-- FFXI's labeled town-map cells are usually 40 world units wide. Vendor
+-- records pair verified grid cells with exact world positions, letting us
+-- solve each map's origin without hard-coding offsets. A calibration is
+-- accepted only when at least two independent anchors agree on both axes;
+-- split/multi-map zones fail that test and need a verified override below.
 local GRID_CELL_SIZE = 40;
 
 local function buildGridCalibrations()
@@ -178,6 +179,28 @@ local WINDURST_WATERS_GRIDS = {
     north = { originX = -280, originZ = 400 },
     south = { originX = -360, originZ = 120 },
 };
+
+-- Crawler's Nest (zone 197) has separate entrance, north, and
+-- south/apparatus map images. Unlike the town maps, their labeled cells are
+-- 80 world units wide. Floor height separates the entrance map; the two
+-- deeper maps occupy distinct coordinate regions around their connections.
+-- These transforms are cross-checked against the Survival Guide, both
+-- Grounds Tomes, Awd Goggie, Queen Crawler, and the Strange Apparatus.
+local CRAWLERS_NEST_GRIDS = {
+    entrance = { originX = -600, originZ = 600, cellSize = 80 },
+    north = { originX = -600, originZ = 800, cellSize = 80 },
+    south = { originX = -600, originZ = 280, cellSize = 80 },
+};
+
+local function crawlersNestGrid(x, groundY, height)
+    if height < -15 then
+        return CRAWLERS_NEST_GRIDS.entrance;
+    end
+    if groundY < -100 or (groundY <= 180 and x < -100) then
+        return CRAWLERS_NEST_GRIDS.south;
+    end
+    return CRAWLERS_NEST_GRIDS.north;
+end
 
 -- Explicit single-map origins for zones whose published NPC grid labels land
 -- on opposite sides of a sub-unit boundary.  Lower Jeuno's shop anchors miss
@@ -272,16 +295,32 @@ local function pushSelectedButton(selected)
     return true;
 end
 
-local function currentGrid(zoneId, x, groundY)
+local function pageGridCalibration(zoneId, subMapNum)
+    local pages = gridPages[zoneId];
+    if pages == nil then return nil; end
+    if #pages == 1 then return pages[1]; end
+    -- Ashita exposes the client's internal map-DAT key here, not a sequential
+    -- page number. Multi-page zones must provide an explicit key mapping; an
+    -- ordered page list is not enough to select a floor safely.
+    return nil;
+end
+
+local function currentGrid(zoneId, x, groundY, height, subMapNum)
     local calibration;
     if zoneId == 238 or zoneId == 94 then
         calibration = groundY < -80 and WINDURST_WATERS_GRIDS.south or WINDURST_WATERS_GRIDS.north;
+    elseif zoneId == 197 then
+        -- Keep the independently verified positional selector as a fallback
+        -- for private servers that do not populate the client sub-map field.
+        calibration = crawlersNestGrid(x, groundY, height);
     else
-        calibration = GRID_OVERRIDES[zoneId] or GRID_CALIBRATIONS[zoneId];
+        calibration = GRID_OVERRIDES[zoneId] or pageGridCalibration(zoneId, subMapNum) or
+            GRID_CALIBRATIONS[zoneId];
     end
     if calibration == nil then return nil; end
-    local column = math.floor((x - calibration.originX) / GRID_CELL_SIZE) + 1;
-    local row = math.floor((calibration.originZ - groundY) / GRID_CELL_SIZE) + 1;
+    local cellSize = calibration.cellSize or GRID_CELL_SIZE;
+    local column = math.floor((x - calibration.originX) / cellSize) + 1;
+    local row = math.floor((calibration.originZ - groundY) / cellSize) + 1;
     if column < 1 or column > 26 or row < 1 or row > 99 then return nil; end
     return string.char(64 + column) .. '-' .. tostring(row);
 end
@@ -307,11 +346,13 @@ local function refreshCurrentLocation()
         local x = entity:GetLocalPositionX(index);
         local groundY = entity:GetLocalPositionY(index);
         local height = entity:GetLocalPositionZ(index);
+        local subMapNum = player:GetSubMapNum();
         local zone = AshitaCore:GetResourceManager():GetString('zones.names', zoneId) or
             ('Zone ' .. tostring(zoneId));
         return {
             zone = zone,
-            grid = currentGrid(zoneId, x, groundY),
+            grid = currentGrid(zoneId, x, groundY, height, subMapNum),
+            subMap = subMapNum,
             pos = string.format('!pos %.1f %.1f %.1f', x, height, groundY),
         };
     end);
@@ -334,6 +375,9 @@ local function renderCurrentLocation()
     imgui.TextDisabled('Grid:'); imgui.SameLine();
     if location.grid ~= nil then
         imgui.Text(location.grid);
+        if imgui.IsItemHovered() then
+            imgui.SetTooltip('Ashita client sub-map index: ' .. tostring(location.subMap or 'unavailable'));
+        end
     else
         imgui.TextDisabled('unavailable');
         if imgui.IsItemHovered() then
@@ -830,17 +874,62 @@ local function renderMissingSpellBill()
     end
 end
 
+-- Ashita's Lua ImGui binding does not expose ImGuiListClipper.  Keep a fixed
+-- row height and perform the same viewport calculation here so opening the
+-- complete catalog does not submit hundreds of Selectable/Text commands on
+-- every frame.  The final Dummy preserves the full scrollable content height.
+local function renderVirtualSpellRows(spells, idPrefix, showRequirements)
+    if #spells == 0 then return; end
+    local rowHeight = imgui.GetFrameHeightWithSpacing();
+    if showRequirements then
+        rowHeight = rowHeight + imgui.GetTextLineHeightWithSpacing();
+    end
+
+    local originY = imgui.GetCursorPosY();
+    local scrollY = imgui.GetScrollY();
+    local viewportHeight = imgui.GetWindowHeight();
+    local first = math.max(1, math.floor(scrollY / rowHeight) + 1);
+    local last = math.min(#spells, math.ceil((scrollY + viewportHeight) / rowHeight) + 2);
+    imgui.SetCursorPosY(originY + (first - 1) * rowHeight);
+
+    for index = first, last do
+        local spell = spells[index];
+        local rowY = imgui.GetCursorPosY();
+        if imgui.Selectable((spell.learned and '[+] ' or '[-] ') .. spell.name ..
+            '##' .. idPrefix .. spell.id, state.selectedSpell == spell) then
+            state.selectedSpell = spell;
+        end
+        if showRequirements then
+            imgui.Indent(12);
+            imgui.PushStyleColor(ImGuiCol_Text, theme.colors.dim);
+            imgui.Text(spell.typeName .. '  |  ' ..
+                (spell.levels ~= '' and spell.levels or 'No valid job requirements'));
+            imgui.PopStyleColor();
+            imgui.Unindent(12);
+        end
+        imgui.SetCursorPosY(rowY + rowHeight);
+    end
+
+    imgui.SetCursorPosY(originY + #spells * rowHeight);
+    imgui.Dummy({ 1, 1 });
+end
+
 local function renderSpells()
+    local toolbarWidth = imgui.GetWindowWidth();
     searchHeader(state.spellSearch, 'spell, vendor, or zone');
-    imgui.SameLine();
+    if toolbarWidth >= 720 then imgui.SameLine(); end
     for index, label in ipairs({ 'All states', 'Missing', 'Learned' }) do
         if index > 1 then imgui.SameLine(); end
         local selected = pushSelectedButton(state.spellMode == index);
         if imgui.Button(label .. '##spellmode_' .. index) then state.spellMode = index; end
         if selected then imgui.PopStyleColor(); end
     end
-    imgui.SameLine(); imgui.Checkbox('Show all jobs / levels', state.showAllSpells);
-    imgui.SameLine(); imgui.TextDisabled('Sort:');
+    if toolbarWidth >= 900 then imgui.SameLine(); end
+    imgui.Checkbox('##show_all_spells', state.showAllSpells);
+    imgui.SameLine(); imgui.TextWrapped('Show all jobs / levels');
+    if imgui.IsItemClicked() then state.showAllSpells[1] = not state.showAllSpells[1]; end
+    if toolbarWidth >= 1080 then imgui.SameLine(); end
+    imgui.TextDisabled('Sort:');
     for index, label in ipairs({ 'Name', 'Level' }) do
         imgui.SameLine();
         local selected = pushSelectedButton(state.spellSort == index);
@@ -894,23 +983,12 @@ local function renderSpells()
             end
             return lower(a.name) < lower(b.name);
         end);
-        local firstVisible = nil;
-        for _, spell in ipairs(visibleSpells) do
-            firstVisible = firstVisible or spell;
-            if imgui.Selectable((spell.learned and '[+] ' or '[-] ') .. spell.name .. '##s' .. spell.id,
-                state.selectedSpell == spell) then state.selectedSpell = spell; end
-            imgui.Indent(12);
-            imgui.PushStyleColor(ImGuiCol_Text, theme.colors.dim);
-            imgui.TextWrapped(spell.typeName .. '  |  ' ..
-                (spell.levels ~= '' and spell.levels or 'No valid job requirements'));
-            imgui.PopStyleColor();
-            imgui.Unindent(12);
-        end
-        if firstVisible == nil then
+        renderVirtualSpellRows(visibleSpells, 's', true);
+        if #visibleSpells == 0 then
             imgui.TextDisabled('No matching spells. Change the magic type, job/level, learned state, or search filter.');
             state.selectedSpell = nil;
         elseif state.selectedSpell == nil or not spellVisible(state.selectedSpell) then
-            state.selectedSpell = firstVisible;
+            state.selectedSpell = visibleSpells[1];
         end
         imgui.EndChild();
         imgui.TableNextColumn();
@@ -939,10 +1017,7 @@ local function renderSpells()
                 end
                 return lower(a.name) < lower(b.name);
             end);
-            for _, spell in ipairs(visibleSpells) do
-                if imgui.Selectable((spell.learned and '[+] ' or '[-] ') .. spell.name .. '##ss' .. spell.id,
-                    state.selectedSpell == spell) then state.selectedSpell = spell; end
-            end
+            renderVirtualSpellRows(visibleSpells, 'ss', false);
             if #visibleSpells == 0 then state.selectedSpell = nil;
             elseif state.selectedSpell == nil or not spellVisible(state.selectedSpell) then state.selectedSpell = visibleSpells[1]; end
             imgui.EndChild();
