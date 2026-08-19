@@ -2,7 +2,7 @@
 
 addon.name    = 'vanacompass';
 addon.author  = 'Elcatrin (Spacedandy)';
-addon.version = '0.15.0';
+addon.version = '0.16.0';
 addon.desc    = 'Find spells, crafting materials, gear, NMs, quests, missions, and ports.';
 
 require('common');

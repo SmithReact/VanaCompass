@@ -24,7 +24,8 @@ current map position without leaving the game.
 - Monster-drop locations and synthesis recipes for listed purchases
 - Searchable non-vendor weapon and armor drop browser
 - Searchable NM guide with current-zone priority, spawn areas, and placeholders
-- Quest and main-story guides with START NPCs, map grids, world coordinates, and ports
+- Quest and main-story guides with collapsible regions, START NPCs, map grids,
+  world coordinates, and unlock-aware ports
 - Server-synced active, completed, and current-step quest status
 - Artifact and advanced-job unlock filtering, including prerequisite chains
 - Live zone, map grid, and world-coordinate display with multi-map safeguards

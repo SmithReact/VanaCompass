@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.16.0
+
 - Removed the Open active tracker button from the Main Story toolbar to match
   the simplified Quests view.
 - Replaced the Quests browser's plain area labels with collapsible, counted
