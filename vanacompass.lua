@@ -2686,34 +2686,63 @@ local function renderQuests()
                 return a.chainStep < b.chainStep;
             end);
         end
-        local lastGroup = nil;
-        local firstVisible = nil;
+        local firstVisible = visibleQuests[1];
+        local selectedVisible = false;
         for _, quest in ipairs(visibleQuests) do
-            firstVisible = firstVisible or quest;
-            local group = state.questMode == 3 and quest.jobName or quest.area;
-            if lastGroup ~= group then imgui.TextDisabled(group); lastGroup = group; end
-            local levelLabel = quest.minLevel and ('[Lv.' .. quest.minLevel .. '] ') or '';
-            local chainLabel = state.questMode == 3 and
-                string.format('[%d/%d] ', quest.chainStep, quest.chainCount) or '';
-            local progress = questProgress(quest.log, quest.id);
-            local statusLabel;
-            if progress ~= nil and not progress.unclear and progress.step > 0 then
-                statusLabel = string.format('[Active %d/%d] ', progress.step, progress.n);
-            elseif activeQuest(quest.log, quest.id) then
-                statusLabel = '[Active] ';
-            else
-                statusLabel = completedQuest(quest.log, quest.id) and '[Done] ' or '';
-            end
-            if imgui.Selectable(statusLabel .. chainLabel .. levelLabel .. quest.name .. '##q' .. quest.log .. '_' .. quest.id,
-                state.selectedQuest == quest) then
-                state.selectedQuest = quest;
-            end
+            if state.selectedQuest == quest then selectedVisible = true; break; end
         end
         if firstVisible == nil then
             imgui.TextDisabled('No matching quests. Enable Show completed or change the job, level, or search filter.');
             state.selectedQuest = nil;
-        elseif state.selectedQuest == nil or not questVisible(state.selectedQuest) then
+        elseif state.selectedQuest == nil or not selectedVisible then
             state.selectedQuest = firstVisible;
+        end
+
+        local sections, sectionOrder = {}, {};
+        for _, quest in ipairs(visibleQuests) do
+            -- Job Unlocks retain their prerequisite-friendly job grouping. All
+            -- other modes group by the quest-log region shown in the guide.
+            local group = state.questMode == 3 and quest.jobName or quest.area;
+            if sections[group] == nil then
+                sections[group] = {};
+                sectionOrder[#sectionOrder + 1] = group;
+            end
+            sections[group][#sections[group] + 1] = quest;
+        end
+
+        local queryActive = state.questSearch[1] ~= '';
+        for _, group in ipairs(sectionOrder) do
+            local rows = sections[group];
+            local containsSelected = false;
+            for _, quest in ipairs(rows) do
+                if state.selectedQuest == quest then containsSelected = true; break; end
+            end
+            if queryActive then
+                imgui.SetNextItemOpen(true, ImGuiCond_Always);
+            end
+            local heading = string.format('%s (%d)###quest_group_%d_%s',
+                group, #rows, state.questMode, group);
+            local flags = containsSelected and ImGuiTreeNodeFlags_DefaultOpen or 0;
+            if imgui.CollapsingHeader(heading, flags) then
+                for _, quest in ipairs(rows) do
+                    local levelLabel = quest.minLevel and ('[Lv.' .. quest.minLevel .. '] ') or '';
+                    local chainLabel = state.questMode == 3 and
+                        string.format('[%d/%d] ', quest.chainStep, quest.chainCount) or '';
+                    local progress = questProgress(quest.log, quest.id);
+                    local statusLabel;
+                    if progress ~= nil and not progress.unclear and progress.step > 0 then
+                        statusLabel = string.format('[Active %d/%d] ', progress.step, progress.n);
+                    elseif activeQuest(quest.log, quest.id) then
+                        statusLabel = '[Active] ';
+                    else
+                        statusLabel = completedQuest(quest.log, quest.id) and '[Done] ' or '';
+                    end
+                    if imgui.Selectable(statusLabel .. chainLabel .. levelLabel .. quest.name ..
+                        '##q' .. quest.log .. '_' .. quest.id, state.selectedQuest == quest) then
+                        state.selectedQuest = quest;
+                    end
+                end
+            end
         end
         imgui.EndChild();
         if questStacked then imgui.TableNextRow(); end

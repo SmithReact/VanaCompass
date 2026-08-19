@@ -4,6 +4,9 @@
 
 - Removed the Open active tracker button from the Main Story toolbar to match
   the simplified Quests view.
+- Replaced the Quests browser's plain area labels with collapsible, counted
+  region sections; searches expand matching sections automatically, while Job
+  Unlock mode retains its job-chain grouping.
 - Added unlock-aware quest-guide ports using the server's Home Point, Survival
   Guide, and Outpost masks, while retaining the old behavior until sync data is
   available.
