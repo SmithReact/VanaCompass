@@ -4,6 +4,11 @@
 
 - Removed the Open active tracker button from the Main Story toolbar to match
   the simplified Quests view.
+- Added unlock-aware quest-guide ports using the server's Home Point, Survival
+  Guide, and Outpost masks, while retaining the old behavior until sync data is
+  available.
+- Fixed Ordelle's Caves guide locations so they resolve to the Ordelles Caves
+  Survival Guide instead of incorrectly reporting no direct port.
 
 ## 0.15.0
 

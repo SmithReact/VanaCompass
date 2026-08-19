@@ -192,6 +192,10 @@ def parse_dwport(path: Path, hp_coords: dict[tuple[str, int], tuple[int, int]]) 
             'name': name,
             'x': x,
             'y': y,
+            'group': (int(re.search(r'group =\s*(\d+)', line).group(1))
+                      if section == 'sg' and re.search(r'group =\s*(\d+)', line) else None),
+            'bit': (int(re.search(r'bit =\s*(\d+)', line).group(1))
+                    if section == 'sg' and re.search(r'bit =\s*(\d+)', line) else None),
         })
 
     return result
@@ -228,6 +232,8 @@ def write_teleport_catalog(path: Path, teleports: dict[str, list[dict[str, objec
             ]
             if entry['x'] is not None:
                 values.extend([f"x = {entry['x']}", f"y = {entry['y']}"])
+            if entry.get('group') is not None:
+                values.extend([f"group = {entry['group']}", f"bit = {entry['bit']}"])
             lines.append('        { ' + ', '.join(values) + ' },')
         lines.append('    },')
     lines.extend(['}', ''])

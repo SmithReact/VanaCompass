@@ -150,6 +150,7 @@ end
 
 local PORT_ZONE_ALIASES = {
     ['Al Zahbi'] = 'Aht Urhgan Whitegate',
+    ["Ordelle's Caves"] = 'Ordelles Caves',
     ['Windurst Waters North'] = 'Windurst Waters',
     ['Windurst Waters South'] = 'Windurst Waters',
 };
@@ -370,6 +371,9 @@ local state = {
     activeMissionSteps = {},
     missionSyncInbound = false,
     missionSyncStatus = 'Completion status not synced.',
+    travelSyncInbound = false,
+    travelUnlockKnown = false,
+    travelMasks = { hp = { 0, 0, 0, 0 }, sg = { 0, 0, 0, 0 }, op = 0 },
     selectedSpell = nil,
     selectedItems = { weapon = nil, armor = nil, supply = nil },
     selectedQuest = nil,
@@ -620,6 +624,12 @@ local function requestMissionSync()
     end
     state.missionSyncStatus = 'Syncing completion status...';
     AshitaCore:GetChatManager():QueueCommand(1, '!dwt sync');
+end
+
+local function requestTravelSync()
+    local player = AshitaCore:GetMemoryManager():GetPlayer();
+    if player == nil or player:GetLoginStatus() ~= 2 then return; end
+    AshitaCore:GetChatManager():QueueCommand(1, '!dwp sync');
 end
 
 local function normalizeName(value)
@@ -1018,6 +1028,21 @@ local function rebuildMissions()
     if state.selectedMission == nil then state.selectedMission = state.missions[1]; end
 end
 
+local function destinationUnlocked(destination)
+    if destination == nil or not state.travelUnlockKnown then return nil; end
+    if destination.kind == 'hp' then
+        local index = destination.id;
+        return bit.band(state.travelMasks.hp[math.floor(index / 32) + 1] or 0,
+            bit.lshift(1, index % 32)) ~= 0;
+    elseif destination.kind == 'sg' and destination.group ~= nil and destination.bit ~= nil then
+        return bit.band(state.travelMasks.sg[destination.group] or 0,
+            bit.lshift(1, destination.bit)) ~= 0;
+    elseif destination.kind == 'op' then
+        return bit.band(state.travelMasks.op or 0, bit.lshift(1, destination.id)) ~= 0;
+    end
+    return nil;
+end
+
 local function closestTeleport(zone, x, y)
     local requestedZone = (zone or ''):gsub('%[S%]', '(S)'):gsub('%s+', ' '):gsub('^%s+', ''):gsub('%s+$', '');
     local choices = teleports[normalizeZone(requestedZone)];
@@ -1028,7 +1053,8 @@ local function closestTeleport(zone, x, y)
     -- Home Point #3 is the only Home Point on the South map.
     if requestedZone == 'Windurst Waters South' then
         for _, destination in ipairs(choices) do
-            if destination.kind == 'hp' and destination.id == 103 then return destination; end
+            if destination.kind == 'hp' and destination.id == 103 and
+                destinationUnlocked(destination) ~= false then return destination; end
         end
     end
 
@@ -1043,6 +1069,9 @@ local function closestTeleport(zone, x, y)
         else
             distance = 2000000 + destination.id;
         end
+        -- Once the /port sync has arrived, an unlocked destination always wins
+        -- over a locked one. Unknown state preserves the original ordering.
+        if destinationUnlocked(destination) == false then distance = distance + 10000000; end
         if distance < bestDistance then best, bestDistance = destination, distance; end
     end
     return best;
@@ -1144,8 +1173,16 @@ local function portButton(destination, id)
         textDisabledWrapped('No direct port');
         return;
     end
-    if imgui.SmallButton('Port##' .. id) then issuePort(destination); end
-    if imgui.IsItemHovered() then imgui.SetTooltip('Travel to ' .. destination.name .. ' using !port.'); end
+    local unlocked = destinationUnlocked(destination);
+    if unlocked == false then
+        imgui.TextDisabled('Locked');
+        if imgui.IsItemHovered() then imgui.SetTooltip(destination.name .. ' is not unlocked for this character.'); end
+    elseif imgui.SmallButton('Port##' .. id) then
+        issuePort(destination);
+    end
+    if unlocked ~= false and imgui.IsItemHovered() then
+        imgui.SetTooltip('Travel to ' .. destination.name .. ' using !port.');
+    end
     imgui.SameLine();
     imgui.PushStyleColor(ImGuiCol_Text, theme.colors.dim);
     imgui.TextWrapped(destination.name);
@@ -2900,7 +2937,10 @@ end
 local function renderWindow()
     renderCurrentLocation();
     imgui.Separator();
-    if imgui.Button('Refresh character state') then rebuildCatalogs(); end
+    if imgui.Button('Refresh character state') then
+        rebuildCatalogs();
+        requestTravelSync();
+    end
     imgui.Separator();
     if imgui.BeginTabBar('##vanacompass_tabs') then
         if imgui.BeginTabItem('Welcome') then renderWelcome(); imgui.EndTabItem(); end
@@ -3027,6 +3067,35 @@ local function handleTrackerRecord(line)
     end
 end
 
+local function handleTravelRecord(line)
+    local parts = splitFields(line, '|');
+    local kind = parts[1];
+    if kind == 'd' then
+        state.travelSyncInbound = tonumber(parts[2]) == 1 and parts[3] == 'sync';
+        if state.travelSyncInbound then
+            state.travelMasks = { hp = { 0, 0, 0, 0 }, sg = { 0, 0, 0, 0 }, op = 0 };
+        end
+        return;
+    end
+    if not state.travelSyncInbound then return; end
+    if kind == 'u' then
+        local set = parts[2];
+        if set == 'hp' or set == 'sg' then
+            state.travelMasks[set] = {
+                tonumber(parts[3] or '', 16) or 0,
+                tonumber(parts[4] or '', 16) or 0,
+                tonumber(parts[5] or '', 16) or 0,
+                tonumber(parts[6] or '', 16) or 0,
+            };
+        elseif set == 'op' then
+            state.travelMasks.op = tonumber(parts[3] or '', 16) or 0;
+        end
+    elseif kind == 'z' then
+        state.travelUnlockKnown = true;
+        state.travelSyncInbound = false;
+    end
+end
+
 ashita.events.register('packet_in', 'vanacompass_tracker_packet', function (e)
     if e.id ~= 0x0017 then return; end
     local sender = e.data_modified:sub(0x09, 0x17):gsub('%z.*$', '');
@@ -3037,9 +3106,19 @@ ashita.events.register('packet_in', 'vanacompass_tracker_packet', function (e)
     if not ok then state.missionSyncStatus = 'Completion sync error: ' .. tostring(err); end
 end);
 
+ashita.events.register('packet_in', 'vanacompass_travel_packet', function (e)
+    if e.id ~= 0x0017 then return; end
+    local sender = e.data_modified:sub(0x09, 0x17):gsub('%z.*$', '');
+    if sender ~= '_DWPDATA' then return; end
+    e.blocked = true;
+    local message = e.data_modified:sub(0x18, e.size):gsub('%z.*$', '');
+    pcall(handleTravelRecord, message);
+end);
+
 ashita.events.register('load', 'vanacompass_load', function ()
     rebuildCatalogs(); rebuildQuests(); rebuildMissions();
     requestMissionSync();
+    requestTravelSync();
     print(chat.header('vanacompass'):append(chat.message('/vana opens VanaCompass. ScrollFinder remains available separately with /scrolls.')));
 end);
 
@@ -3053,6 +3132,7 @@ ashita.events.register('command', 'vanacompass_command', function (e)
     elseif #args >= 2 and lower(args[2]) == 'refresh' then
         rebuildCatalogs(); rebuildQuests(); rebuildMissions();
         requestMissionSync();
+        requestTravelSync();
         print(chat.header('vanacompass'):append(chat.message('Catalog and character state refreshed.')));
         return;
     elseif #args >= 2 then
