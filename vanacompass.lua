@@ -2741,8 +2741,6 @@ end
 
 local function renderMainStory()
     searchHeader(state.missionSearch, 'mission, NPC, objective, or zone');
-    imgui.SameLine();
-    if imgui.Button('Open active tracker##missions') then AshitaCore:GetChatManager():QueueCommand(1, '/tracker'); end
     imgui.SameLine(); imgui.Checkbox('Show completed', state.showCompletedMissions);
     imgui.SameLine();
     if imgui.Button('Sync completion') then requestMissionSync(); end

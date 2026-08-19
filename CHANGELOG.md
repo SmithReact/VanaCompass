@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Removed the Open active tracker button from the Main Story toolbar to match
+  the simplified Quests view.
+
 ## 0.15.0
 
 - Made the Quests tab's Hide list mode suppress its search, filters, tracker
